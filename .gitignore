@@ -1,0 +1,20 @@
+# Local Netlify folder
+.netlify
+
+# Environment variables (contains secrets)
+.env
+
+# Payment records (contains customer data)
+payment_records.json
+.vercel
+node_modules/
+**/dist/
+admin_dist/
+build/
+.env*
+!.env.example
+.DS_Store
+*.zip
+*.pdf
+*.docx
+*.pptx

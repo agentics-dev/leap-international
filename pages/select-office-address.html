@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Select Registered Office Address Hong Kong | Tsim Sha Tsui District — Leap International</title>
+    <meta content="Choose your registered office address in Tsim Sha Tsui. Get secure digital mailroom access." name="description"/>
+    <meta content="select registered office address Hong Kong, Tsim Sha Tsui HK office address, company registered address, virtual office Hong Kong, business address HK" name="keywords"/>
+    <link href="https://www.leapcorpser.com/pages/select-office-address.html" rel="canonical"/>
+    <meta content="Select Office Address - Access Your Business Mail Anytime | Leap International" property="og:title"/>
+    <meta content="Choose your registered office address in Tsim Sha Tsui. Get secure digital mailroom access." property="og:description"/>
+    <meta content="../images/Register a new business.png" property="og:image"/>
+    <meta content="website" property="og:type"/>
+    <meta content="https://www.leapcorpser.com/pages/select-office-address.html" property="og:url"/>
+    <meta content="Leap International Corporate Service Limited" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Select Registered Office Address — Tsim Sha Tsui | Leap International" name="twitter:title"/>
+<meta content="Choose your registered office address in Hong Kong. Prestigious Tsim Sha Tsui district locations for your company registration. Professional business image." name="twitter:description"/>    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"nav-bg":"#F0F4F8","coral":"#E8713B","nav-text":"#193B30","nav-divider":"#DDE3EA","tertiary":"#0057ce","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","on-surface-variant":"#57423b","primary":"#a43c12","error":"#ba1a1a"},"spacing":{"container-max":"1280px","gutter":"24px"},"fontFamily":{"headline-sm":["DM Sans"],"label-sm":["Inter"],"label-md":["Inter"],"body-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-sm":["24px",{"lineHeight":"32px","fontWeight":"600"}]}}}}</script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'DM Sans', sans-serif; }
+        .lang-zh { display: none; }
+        html[data-lang="en"] .lang-zh { display: none !important; }
+        html[data-lang="zh"] .lang-zh { display: inline !important; }
+        html[data-lang="zh"] .lang-en { display: none !important; }
+    
+        #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
+        #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
+    
+        .check-icon {
+            color: #10B981;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+    
+        .radio-option {
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 2px solid #E5E7EB;
+        }
+    
+        .radio-option:hover {
+            border-color: #D1D5DB;
+        }
+    
+        .radio-option.selected {
+            border-color: #165DFF;
+            background: #EBF4FF;
+        }
+    
+        .radio-circle {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #D1D5DB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+    
+        .radio-option.selected .radio-circle {
+            border-color: #165DFF;
+        }
+    
+        .radio-circle-inner {
+            width: 10px;
+            height: 10px;
+            background: #165DFF;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+    
+        .radio-option.selected .radio-circle-inner {
+            opacity: 1;
+        }
+    
+        .info-box {
+            background: #F9FAFB;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+    
+        .info-box:hover {
+            background: #F3F4F6;
+        }
+    
+        .map-container {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+    
+        .map-placeholder {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #E0F2FE 0%, #DBEAFE 50%, #E0E7FF 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .map-pin {
+            position: absolute;
+            top: 45%;
+            left: 55%;
+            transform: translate(-50%, -100%);
+        }
+    
+        .map-pin-icon {
+            width: 36px;
+            height: 36px;
+            background: #EF4444;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+    
+        .map-pin-inner {
+            width: 14px;
+            height: 14px;
+            background: white;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+    
+        .map-label {
+            position: absolute;
+            top: 35%;
+            left: 60%;
+            background: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #111827;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+    
+        .open-maps-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #165DFF;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+    
+        .map-details {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    
+        .map-thumb {
+            width: 60px;
+            height: 45px;
+            background: #10B981;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        .map-credits {
+            font-size: 10px;
+            color: #6B7280;
+            text-align: right;
+        }
+    
+/* Mega menu - show on click for touch/keyboard */
+        .mega-group.show .mega-dropdown { opacity: 1 !important; visibility: visible !important; }
+        /* Pricing scroll */
+        .pricing-scroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+        .pricing-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
+        .pricing-scroll::-webkit-scrollbar { display: none; }
+        /* Button loading */
+        .btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+        .btn-loading::after { content: ""; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        /* Form validation */
+        .input-error { border-color: #ba1a1a !important; }
+        .input-success { border-color: #059669 !important; }
+        .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
+        .validation-msg.show { display: block; }
+        /* Success toast */
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); }
+    
+        #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
+        #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
+    
+        /* Mega menu - show on hover */
+        @media (min-width: 1024px) {
+            .mega-group:hover .mega-dropdown { opacity: 1 !important; visibility: visible !important; transform: translate(0, 0) !important; }
+            .mega-group:hover .mega-toggle .material-symbols-outlined { transform: rotate(180deg); }
+            .mega-dropdown { transform: translateY(10px); transition: all 0.2s ease; }
+            /* Add a bridge to prevent losing hover */
+            .mega-group::after { content: ""; position: absolute; top: 100%; left: 0; width: 100%; height: 20px; }
+/* Mobile Menu */
+
+        /* Scale navigation bar by 15% */
+        header { zoom: 1.38; }
+
+        /* Floating WhatsApp button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+        @media (max-width: 640px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 48px;
+                height: 48px;
+            }
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+
+        /* Phone tooltip */
+        .phone-tooltip { position: relative; }
+        .phone-tooltip::after {
+            content: attr(data-phone);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            padding: 6px 12px;
+            background: #111827;
+            color: #fff;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            white-space: nowrap;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .phone-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .mobile-overlay.open { opacity: 1; visibility: visible; }
+        
+/* ── Responsive: Mobile menu wider ── */
+        @media (max-width: 480px) {
+            .mobile-menu { width: 85vw; }
+        }
+        /* ── Responsive: Section padding ── */
+        @media (max-width: 640px) {
+            section { padding-left: 16px; padding-right: 16px; }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.leapcorpser.com/pages/select-office-address.html",
+  "name": "Select Office Address - Access Your Business Mail Anytime | Leap International",
+  "description": "Choose your registered office address in Tsim Sha Tsui. Get secure digital mailroom access.",
+  "url": "https://www.leapcorpser.com/pages/select-office-address.html"
+}
+</script>
+
+<!-- Google tag (gtag.js) - Replace G-WMMZZ1F6X0 with your actual Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WMMZZ1F6X0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WMMZZ1F6X0');
+</script>
+</head>
+<body class="bg-[#FAFAFA] text-[#111827] min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-nav-bg fixed top-0 w-full z-50 shadow-none">
+<div class="flex justify-center items-center px-gutter py-3 max-w-container-max mx-auto gap-8">
+<div class="flex items-center gap-4">
+<a class="text-headline-sm font-headline-sm text-tertiary flex items-center gap-2 shrink-0" href="../index.html">
+<img alt="FOI Logo" class="h-12 w-auto object-contain" src="../FOI_logo.png"/ loading="lazy">
+            </a>
+<nav class="hidden lg:flex items-center gap-1">
+<!-- Incorporation -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span class="lang-en">Incorporation</span><span class="lang-zh">公司註冊</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Start your company -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Start your company</span><span class="lang-zh">開設您的公司</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="incorporation-locals.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">business_center</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Incorporation for Hong Kong Residents</span><span class="lang-zh">香港人公司註冊</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Set up your Hong Kong company quickly as a local resident.</span><span class="lang-zh">作為香港居民快速開設公司。</span></p>
+                </div>
+            </a>
+            <a href="registered-office-address.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">domain</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Use a prestigious, compliant registered address in Tsim Sha Tsui.</span><span class="lang-zh">使用尖沙咀尊貴合規的註冊地址。</span></p>
+                </div>
+            </a>
+            <a href="incorporation-foreigners.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">public</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Incorporation for Non-Hong Kong Residents</span><span class="lang-zh">非香港人公司註冊</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Register your Hong Kong company online as a non-Hong Kong entrepreneur.</span><span class="lang-zh">作為非香港企業家在線註冊香港公司。</span></p>
+                </div>
+            </a>
+            </div>
+    </div>
+    
+<!-- Accounting -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span class="lang-en">Accounting</span><span class="lang-zh">會計</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Run & Grow your business -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Run & Grow your business</span><span class="lang-zh">營運與發展您的業務</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="accounting.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">finance</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Accounting</span><span class="lang-zh">會計服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Full-service accounting for your business.</span><span class="lang-zh">為您的企業提供全方位會計服務。</span></p>
+                </div>
+            </a>
+            <a href="bookkeeping.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">menu_book</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Bookkeeping</span><span class="lang-zh">記帳服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Monthly bookkeeping services.</span><span class="lang-zh">月度記帳服務。</span></p>
+                </div>
+            </a>
+            <a href="sales-invoice.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">receipt_long</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Sales Invoice</span><span class="lang-zh">銷售發票</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Professional invoicing solutions.</span><span class="lang-zh">專業發票解決方案。</span></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+<!-- Corporate Secretary -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Stay Compliant -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Stay Compliant</span><span class="lang-zh">保持合規</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="corporate-secretary.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">gavel</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Essential secretarial support for your company.</span><span class="lang-zh">為您的公司提供必要的秘書支援。</span></p>
+                </div>
+            </a>
+            <a href="annual-return-filing.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">assignment_turned_in</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Annual Return Filing</span><span class="lang-zh">年度申報</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Quick, accurate annual filing services.</span><span class="lang-zh">快速準確的年度申報服務。</span></p>
+                </div>
+            </a>
+            <a href="registered-office-address.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">domain</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Prestigious registered address in Tsim Sha Tsui.</span><span class="lang-zh">尖沙咀尊貴註冊辦公地址。</span></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+<a href="faqs.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span></a>
+<a href="our-culture.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span></a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative" id="langSwitcher">
+  <button id="langBtn" class="flex items-center gap-1.5 px-2.5 py-2 text-nav-text font-label-sm text-[13px] border border-nav-divider rounded-md bg-white hover:text-coral transition-colors duration-200" aria-label="Language" aria-expanded="false" aria-haspopup="listbox">
+    <span id="langFlag">🇬🇧</span>
+    <span id="langLabel">EN</span>
+    <span class="material-symbols-outlined text-[16px] transition-transform duration-200">expand_more</span>
+  </button>
+  <div id="langDropdown" class="absolute top-full right-0 mt-1 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50 min-w-[100px]" role="listbox">
+    <button data-lang="en" class="w-full flex items-center gap-2 px-4 py-2.5 text-left text-[13px] text-nav-text hover:bg-gray-50 rounded-t-md transition-colors" role="option">
+      <span>🇬🇧</span> <span>EN</span>
+    </button>
+    <button data-lang="zh" class="w-full flex items-center gap-2 px-4 py-2.5 text-left text-[13px] text-nav-text hover:bg-gray-50 rounded-b-md transition-colors" role="option">
+      <span>🇨🇳</span> <span>中文</span>
+    </button>
+  </div>
+</div>
+<a href="get-started.html" class="hidden sm:inline-block bg-tertiary text-on-tertiary font-label-sm text-[13px] px-4 py-2 rounded-DEFAULT hover:bg-opacity-90 transition-colors duration-200"><span class="lang-en">Get Started</span><span class="lang-zh">立即開始</span></a>
+<a href="contact.html" class="hidden sm:inline-flex phone-tooltip text-nav-text hover:text-coral transition-colors duration-200" data-phone="+852 65550943" aria-label="Phone +852 65550943">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+</div>
+<button class="lg:hidden text-nav-text" id="menuToggle" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay fixed inset-0 bg-black/40 z-40 lg:hidden" id="mobileOverlay"></div>
+<!-- Mobile Menu Panel -->
+<div class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl lg:hidden overflow-y-auto" id="mobileMenu">
+<div class="flex justify-between items-center p-4 border-b">
+<span class="font-headline-sm text-nav-text"><span class="lang-en">Menu</span><span class="lang-zh">選單</span></span>
+<button class="text-nav-text" id="menuClose" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="p-4 space-y-1">
+<div class="py-2"><a href="faqs.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span></a></div>
+<div class="py-2"><a href="our-culture.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span></a></div>
+<div class="pt-4 border-t space-y-2">
+<a href="get-started.html" class="w-full bg-tertiary text-on-tertiary py-3 rounded-DEFAULT font-label-md block text-center"><span class="lang-en">Get Started</span><span class="lang-zh">立即開始</span></a>
+<a href="contact.html" class="block text-center py-2 text-nav-text font-label-md"><span class="lang-en">Contact Sales</span><span class="lang-zh">聯繫銷售</span></a>
+</div>
+</div>
+</div>
+<main class="pt-[110px] flex-1 px-6 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Hero Section -->
+            <div class="mb-8">
+                <h1 class="text-[24px] sm:text-[28px] font-bold mb-3">
+                    <span class="lang-en">Access your business mail anytime, anywhere – securely and compliantly</span>
+                    <span class="lang-zh">隨時隨地安全合規地存取您的商業郵件</span>
+                </h1>
+                <p class="text-[15px] text-gray-600">
+                    <span class="lang-en">Your <strong>Tsim Sha Tsui registered office address</strong> and <strong>digital mailroom</strong> in one seamless solution.</span>
+                    <span class="lang-zh">您的<strong>尖沙咀註冊辦事處地址</strong>和<strong>數位郵件室</strong>一站式解決方案。</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Left Content -->
+                <div class="md:col-span-2">
+                    <!-- Benefits -->
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#165DFF]">check_circle</span>
+                            <span class="text-[14px] text-gray-700">
+                                <span class="lang-en">Prestigious Tsim Sha Tsui address</span>
+                                <span class="lang-zh">尊貴的尖沙咀地址</span>
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#165DFF]">check_circle</span>
+                            <span class="text-[14px] text-gray-700">
+                                <span class="lang-en">Government and bank mail handled digitally</span>
+                                <span class="lang-zh">政府和銀行郵件數位化處理</span>
+                            </span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-[#165DFF]">check_circle</span>
+                            <span class="text-[14px] text-gray-700">
+                                <span class="lang-en">Keep your home address off public record</span>
+                                <span class="lang-zh">保護您的家庭地址不被公開</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- What's included -->
+                    <div class="mb-8">
+                        <h2 class="text-[16px] font-bold mb-4">
+                            <span class="lang-en">What's included</span>
+                            <span class="lang-zh">包含內容</span>
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+                                <span class="material-symbols-outlined check-icon">check</span>
+                                <span class="text-[14px] text-gray-700">
+                                    <span class="lang-en">Hong Kong local registered office address (legal requirement)</span>
+                                    <span class="lang-zh">香港本地註冊辦事處地址（法律要求）</span>
+                                </span>
+                            </div>
+                            <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+                                <span class="material-symbols-outlined check-icon">check</span>
+                                <span class="text-[14px] text-gray-700">
+                                    <span class="lang-en">Secure digital mailroom access anytime</span>
+                                    <span class="lang-zh">隨時安全的數位郵件室存取</span>
+                                </span>
+                            </div>
+                            <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+                                <span class="material-symbols-outlined check-icon">check</span>
+                                <span class="text-[14px] text-gray-700">
+                                    <span class="lang-en">Mail scanning and upload within 7 days</span>
+                                    <span class="lang-zh">7 天內郵件掃描和上傳</span>
+                                </span>
+                            </div>
+                            <div class="flex items-start gap-3 pb-4 border-b border-gray-100">
+                                <span class="material-symbols-outlined check-icon">check</span>
+                                <span class="text-[14px] text-gray-700">
+                                    <span class="lang-en">Government and bank mail received on your behalf</span>
+                                    <span class="lang-zh">代您接收政府和銀行郵件</span>
+                                </span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="material-symbols-outlined check-icon">check</span>
+                                <span class="text-[14px] text-gray-700">
+                                    <span class="lang-en">Digital storage of scanned mail and key company documents</span>
+                                    <span class="lang-zh">掃描郵件和重要公司文件的數位存儲</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Did you know -->
+                    <div class="info-box p-4 mb-6" id="infoBox" onclick="toggleInfo()">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px] text-[#0066FF]">info</span>
+                                <span class="text-[14px] font-bold">
+                                    <span class="lang-en">Did you know?</span>
+                                    <span class="lang-zh">您知道嗎？</span>
+                                </span>
+                            </div>
+                            <span class="material-symbols-outlined text-[20px] text-gray-400" id="infoArrow">expand_more</span>
+                        </div>
+                        <div class="hidden mt-3 text-[14px] text-gray-600" id="infoContent">
+                            <p class="mb-2"><span class="lang-en"><strong>A Hong Kong local registered office address is mandatory</strong> for every company. If you do not reside in Hong Kong, you will need a local address to incorporate.</span><span class="lang-zh"><strong>香港本地註冊辦事處地址是強制性的</strong>，適用於每家公司。如果您不在香港居住，則需要一個本地地址來註冊公司。</span></p>
+                            <p class="mb-2"><span class="lang-en">For residents, using a home address makes your details <strong>publicly visible</strong> on Companies Registry records.</span><span class="lang-zh">對於居民而言，使用住宅地址會使您的詳細資料在公司註冊處記錄中<strong>公開可見</strong>。</span></p>
+                            <p><span class="lang-en">With Leap, you get a <strong>compliant Tsim Sha Tsui address</strong> and secure digital mail access, so you stay compliant without using your home address.</span><span class="lang-zh">使用 Leap，您將獲得<strong>合規的尖沙咀地址</strong>和安全的數位郵件訪問，讓您在不使用住宅地址的情況下保持合規。</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Radio Options -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <!-- Yes Option -->
+                        <div class="radio-option rounded-xl p-5 bg-white" id="yesOption" onclick="selectOption('yes')">
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="radio-circle">
+                                    <div class="radio-circle-inner"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-[14px] font-semibold">
+                                        <span class="lang-en">Yes, I want a compliant Tsim Sha Tsui address with digital mail access</span>
+                                        <span class="lang-zh">是的，我想要合規的尖沙咀地址及數位郵件存取</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="ml-[28px]">
+                                <span class="inline-block bg-gray-100 text-[14px] font-bold px-3 py-1 rounded-full">HK$2500/year</span>
+                            </div>
+                        </div>
+
+                        <!-- No Option -->
+                        <div class="radio-option selected rounded-xl p-5 bg-[#EBF4FF]" id="noOption" onclick="selectOption('no')">
+                            <div class="flex items-start gap-3">
+                                <div class="radio-circle">
+                                    <div class="radio-circle-inner"></div>
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-[14px] font-semibold">
+                                        <span class="lang-en">No, I'll use my own address and manage my own mail</span>
+                                        <span class="lang-zh">不，我將使用自己的地址並自行管理郵件</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="hidden lg:block mb-8">
+                        <div class="map-container">
+                            <div class="map-placeholder">
+                                <div class="open-maps-btn">
+                                    <span class="lang-en">Open in Maps</span>
+                                    <span class="lang-zh">在地圖中開啟</span>
+                                    <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                                </div>
+                                <div class="map-pin">
+                                    <div class="map-pin-icon">
+                                        <div class="map-pin-inner"></div>
+                                    </div>
+                                </div>
+                                <div class="map-label">Leap</div>
+                                <div class="map-details">
+                                    <div class="map-thumb">
+                                        <span class="material-symbols-outlined text-white text-[24px]">landscape</span>
+                                    </div>
+                                    <div class="map-credits">
+                                        <div>Keyboard shortcuts Map data ©2026</div>
+                                        <div>Terms Report a map error</div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-14 left-14 flex items-center gap-1">
+                                    <span class="text-[12px] font-bold" style="color: #4285F4;">G</span>
+                                    <span class="text-[12px] font-bold" style="color: #EA4335;">o</span>
+                                    <span class="text-[12px] font-bold" style="color: #FBBC05;">o</span>
+                                    <span class="text-[12px] font-bold" style="color: #4285F4;">g</span>
+                                    <span class="text-[12px] font-bold" style="color: #34A853;">l</span>
+                                    <span class="text-[12px] font-bold" style="color: #EA4335;">e</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex items-center justify-between gap-4">
+                        <button onclick="history.back()" class="flex items-center gap-1.5 text-[16px] font-semibold text-gray-600 hover:text-[#165DFF] py-3 px-2 transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+                            <span class="lang-en">Back</span>
+                            <span class="lang-zh">返回</span>
+                        </button>
+                        <button onclick="handleNext()" class="bg-[#165DFF] text-white text-[16px] font-semibold py-3 px-6 rounded-lg hover:bg-[#0F4FD8] transition-colors">
+                            <span class="lang-en">Next</span>
+                            <span class="lang-zh">下一步</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right - Summary Sidebar -->
+                <div class="md:col-span-1">
+                    <div class="bg-white rounded-xl p-6 border border-gray-200 sticky top-8" id="summarySidebar">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-[14px] font-semibold text-gray-900">
+                                <span class="lang-en">Summary</span>
+                                <span class="lang-zh">摘要</span>
+                            </span>
+                            <span class="material-symbols-outlined text-[18px] text-gray-400 cursor-pointer" id="summaryToggle" onclick="toggleSummary()">expand_less</span>
+                        </div>
+                        <div id="summaryContent">
+                            <div id="summaryLineItems" class="space-y-3 mb-4">
+                            </div>
+                            <div class="border-t border-gray-200 pt-3 mb-3">
+                                <div class="flex justify-between text-[13px]">
+                                    <span class="text-gray-600">
+                                        <span class="lang-en">Sub total</span>
+                                        <span class="lang-zh">小計</span>
+                                    </span>
+                                    <span class="font-semibold" id="summarySubtotal">HK$0</span>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200 pt-3">
+                                <div class="flex justify-between">
+                                    <span class="font-bold text-[15px]">
+                                        <span class="lang-en">Total due</span>
+                                        <span class="lang-zh">應付總額</span>
+                                    </span>
+                                    <span class="font-bold text-[18px]" id="summaryTotal">HKD 0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+(function() {
+  var LANG_KEY = 'leap-lang';
+  function normaliseLang(v) { return v === 'zh' ? 'zh' : 'en'; }
+  function setLang(lang) {
+    var html = document.documentElement;
+    var v = normaliseLang(lang);
+    html.setAttribute('data-lang', v);
+    html.setAttribute('lang', v === 'zh' ? 'zh-Hant' : 'en');
+    var flag = document.getElementById('langFlag');
+    var label = document.getElementById('langLabel');
+    if (flag && label) {
+      if (v === 'zh') { flag.textContent = '🇨🇳'; label.textContent = '中文'; }
+      else { flag.textContent = '🇬🇧'; label.textContent = 'EN'; }
+    }
+    try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
+  }
+  var savedLang = 'en';
+  try { savedLang = normaliseLang(localStorage.getItem(LANG_KEY)); } catch (e) {}
+  setLang(savedLang);
+  var langBtn = document.getElementById('langBtn');
+  var langDropdown = document.getElementById('langDropdown');
+  if (langBtn) {
+    langBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      langDropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', function() { langDropdown.classList.remove('show'); });
+  }
+  if (langDropdown) {
+    langDropdown.querySelectorAll('button[data-lang]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setLang(btn.getAttribute('data-lang'));
+        langDropdown.classList.remove('show');
+      });
+    });
+  }
+})();
+
+// Radio Option Selection
+var selectedOption = 'no';
+function selectOption(option) {
+  selectedOption = option;
+  var yesOption = document.getElementById('yesOption');
+  var noOption = document.getElementById('noOption');
+  
+  if (option === 'yes') {
+    yesOption.classList.add('selected');
+    yesOption.style.borderColor = '#165DFF';
+    yesOption.style.background = '#EBF4FF';
+    noOption.classList.remove('selected');
+    noOption.style.borderColor = '#E5E7EB';
+    noOption.style.background = '#FFFFFF';
+  } else {
+    noOption.classList.add('selected');
+    noOption.style.borderColor = '#165DFF';
+    noOption.style.background = '#EBF4FF';
+    yesOption.classList.remove('selected');
+    yesOption.style.borderColor = '#E5E7EB';
+    yesOption.style.background = '#FFFFFF';
+  }
+  
+  saveAndUpdateSummary();
+}
+
+// ========== Shared Summary Engine ==========
+var SUMMARY_KEY = 'leap-package-cs';
+
+function getPackageData() {
+  try { var d = JSON.parse(localStorage.getItem(SUMMARY_KEY)); if (!d) d = {}; } catch(e) { d = {}; }
+  try { var inc = JSON.parse(localStorage.getItem('leap-package-inc') || '{}'); } catch(e) { var inc = {}; }
+  if (inc.incorporationPlan) d.incorporationPlan = inc.incorporationPlan;
+  if (inc.incorporationPrice) d.incorporationPrice = inc.incorporationPrice;
+  if (inc.secretaryPlan) d.secretaryPlan = inc.secretaryPlan;
+  if (inc.secretaryPrice) d.secretaryPrice = inc.secretaryPrice;
+  if (inc.secretaryDiscount) d.secretaryDiscount = inc.secretaryDiscount;
+  return d;
+}
+
+function savePackageData(data) {
+  try { localStorage.setItem(SUMMARY_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function saveAndUpdateSummary() {
+  var data = getPackageData();
+  data.hasOfficeAddress = (selectedOption === 'yes');
+  savePackageData(data);
+  renderSummary();
+}
+
+function renderSummary() {
+  var data = getPackageData();
+  var items = [];
+  
+  var incPlanPrices = { 'Starter': 6500, 'Compliance': 8473, 'Full Compliance': 12428 };
+  var incPrice = data.incorporationPrice || (data.incorporationPlan ? (incPlanPrices[data.incorporationPlan] || 0) : 0);
+  
+  if (incPrice) {
+    var incName = data.incorporationPlan || 'Incorporation Package';
+    var incPlanMap = { 'Starter': '\u5275\u696d\u7248', 'Compliance': '\u5408\u898f\u7248', 'Full Compliance': '\u5168\u9762\u5408\u898f\u7248' };
+    var incNameZh = incPlanMap[data.incorporationPlan] || (data.incorporationPlan || '\u516c\u53f8\u8a3b\u518a\u5957\u9910');
+    items.push({ labelEn: incName, labelZh: incNameZh, price: incPrice, note: 'one time', noteZh: '一次性' });
+  }
+  
+  if (data.secretaryPrice) {
+    var secLabel = data.secretaryPlan === 'standard' ? 'Company Secretary (Standard)' : 'Company Secretary (Premium)';
+    var secLabelZh = data.secretaryPlan === 'standard' ? '公司秘書（標準）' : '公司秘書（高級）';
+    items.push({ labelEn: secLabel, labelZh: secLabelZh, price: data.secretaryPrice, note: '/ year', noteZh: '/ 年' });
+    if (data.secretaryDiscount) {
+      items.push({ labelEn: 'Discount', labelZh: '折扣', price: -data.secretaryDiscount, isDiscount: true });
+    }
+  }
+  
+  if (data.hasOfficeAddress) {
+    items.push({ labelEn: 'Registered Address & Virtual Mailroom', labelZh: '註冊地址與虛擬郵件室', price: 2500, note: '/ year', noteZh: '/ 年' });
+  }
+  
+  if (data.accountingPlan && data.accountingPrice) {
+    var planNames = { annual: 'Annual Filing & Bookkeeping', payroll: 'Accounting & Payroll', premium: 'Accounting Premium' };
+    var planNamesZh = { annual: '年度申報與簿記', payroll: '會計與薪酬', premium: '會計高級版' };
+    var expenseLabels = { '15000': '≤ HK$15K', '50000': '≤ HK$50K', '100000': '≤ HK$100K', '200000': '≤ HK$200K', '400000': '≤ HK$400K', '>400000': '> HK$400K' };
+    var planLabel = (planNames[data.accountingPlan] || 'Accounting Plan') + ' (' + (expenseLabels[data.expenseLevel] || '') + ' mth)';
+    var planLabelZh = (planNamesZh[data.accountingPlan] || '會計方案') + ' (' + (expenseLabels[data.expenseLevel] || '') + ' 每月)';
+    items.push({ labelEn: planLabel, labelZh: planLabelZh, price: data.accountingPrice, note: '/ financial year', noteZh: '/ 財政年度' });
+    if (data.xeroIncluded) {
+      if (data.xeroPrice && data.xeroPrice > 0) {
+        items.push({ labelEn: 'XERO Subscription (1 Year)', labelZh: 'XERO 訂閱（1 年）', price: data.xeroPrice, note: '/ year', noteZh: '/ 年' });
+      } else {
+        items.push({ labelEn: 'XERO Subscription (1 Year)', labelZh: 'XERO 訂閱（1 年）', price: 0, note: 'FREE', noteZh: '免費', isFree: true });
+      }
+    }
+  }
+  
+  var lang = document.documentElement.getAttribute('data-lang') || 'en';
+  var isEn = lang === 'en';
+  var lineItemsEl = document.getElementById('summaryLineItems');
+  var subtotalEl = document.getElementById('summarySubtotal');
+  var totalEl = document.getElementById('summaryTotal');
+  if (!lineItemsEl || !totalEl) return;
+  
+  var subtotal = 0;
+  var html = '';
+  
+  items.forEach(function(item) {
+    var label = isEn ? item.labelEn : item.labelZh;
+    var note = item.note;
+    if (note && !isEn && item.noteZh) note = item.noteZh;
+    subtotal += item.price;
+    
+    if (item.isDiscount) {
+      html += '<div class="flex justify-between text-[13px]">' +
+        '<span class="text-[#165DFF]">' + label + '</span>' +
+        '<span class="font-semibold text-[#165DFF]">-HK$' + Math.abs(item.price).toLocaleString() + '</span>' +
+        '</div>';
+    } else if (item.isFree) {
+      html += '<div class="flex justify-between text-[13px]">' +
+        '<span class="text-gray-700">' + label + '</span>' +
+        '<div class="text-right"><div class="font-semibold text-[#10B981]">' + note + '</div></div>' +
+        '</div>';
+    } else {
+      html += '<div class="flex justify-between text-[13px]">' +
+        '<span class="text-gray-700">' + label + '</span>' +
+        '<div class="text-right"><div class="font-semibold">HK$' + item.price.toLocaleString() + '</div>' +
+        (note ? '<div class="text-[11px] text-gray-500">' + note + '</div>' : '') + '</div>' +
+        '</div>';
+    }
+  });
+  
+  lineItemsEl.innerHTML = html;
+  subtotalEl.textContent = 'HK$' + subtotal.toLocaleString();
+  totalEl.textContent = 'HKD ' + subtotal.toLocaleString() + '.00';
+}
+
+var summaryOpen = true;
+function toggleSummary() {
+  var content = document.getElementById('summaryContent');
+  var toggle = document.getElementById('summaryToggle');
+  summaryOpen = !summaryOpen;
+  if (summaryOpen) {
+    content.classList.remove('hidden');
+    toggle.textContent = 'expand_less';
+  } else {
+    content.classList.add('hidden');
+    toggle.textContent = 'expand_more';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderSummary();
+});
+
+// Info Box Toggle
+var infoOpen = false;
+function toggleInfo() {
+  var content = document.getElementById('infoContent');
+  var arrow = document.getElementById('infoArrow');
+  infoOpen = !infoOpen;
+  
+  if (infoOpen) {
+    content.classList.remove('hidden');
+    arrow.textContent = 'expand_less';
+  } else {
+    content.classList.add('hidden');
+    arrow.textContent = 'expand_more';
+  }
+}
+
+// Next Button Handler
+function handleNext() {
+  saveAndUpdateSummary();
+  window.location.href = 'select-bank-partner.html';
+}
+    </script>
+<a href="https://wa.me/85265550943?text=Hi%20Leap%20International%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

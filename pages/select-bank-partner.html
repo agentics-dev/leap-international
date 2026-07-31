@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Choose your business banking partner in Hong Kong. Compare options and select the best bank for your company incorporation needs." name="description"/>
+<meta content="select bank partner Hong Kong, business banking HK, company bank account, Hong Kong business account, corporate banking setup" name="keywords"/>
+<link href="https://www.leapcorpser.com/pages/select-bank-partner.html" rel="canonical"/>
+<meta content="Select Bank Partner — Business Banking Hong Kong | Leap International" property="og:title"/>
+<meta content="Choose your business banking partner in Hong Kong. Compare options and select the best bank for your company incorporation needs." property="og:description"/>
+<meta content="../images/Fast and Affordable Company Incorporation Services.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.leapcorpser.com/pages/select-bank-partner.html" property="og:url"/>
+<meta content="Leap International Corporate Service Limited" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Select Bank Partner — Business Banking Hong Kong | Leap International" name="twitter:title"/>
+<meta content="Choose your business banking partner in Hong Kong. Compare options and select the best bank for your company incorporation needs." name="twitter:description"/>
+  <title>Select Bank Partner Hong Kong | Business Banking Setup — Leap International</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"nav-bg":"#F0F4F8","coral":"#E8713B","nav-text":"#193B30","nav-divider":"#DDE3EA","tertiary":"#0057ce","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","on-surface-variant":"#57423b","primary":"#a43c12","error":"#ba1a1a"},"spacing":{"container-max":"1280px","gutter":"24px"},"fontFamily":{"headline-sm":["DM Sans"],"label-sm":["Inter"],"label-md":["Inter"],"body-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-sm":["24px",{"lineHeight":"32px","fontWeight":"600"}]}}}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .lang-zh { display: none; }
+    html[data-lang="en"] .lang-en { display: block; }
+    html[data-lang="en"] .lang-zh { display: none; }
+    html[data-lang="zh"] .lang-en { display: none; }
+    html[data-lang="zh"] .lang-zh { display: block; }
+    .bank-card { cursor: pointer; transition: all 0.2s ease; border: 2px solid #E5E7EB; }
+    .bank-card:hover { border-color: #D1D5DB; }
+    .bank-card.selected-aspire { border-color: #10B981; }
+    .bank-card.selected-airwallex { border-color: #1E40AF; }
+    .bank-details { display: none; }
+    .bank-details.show { display: block; }
+    .btn-disabled { background: #D1D5DB !important; cursor: not-allowed !important; opacity: 1 !important; }
+    #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
+    #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
+  
+
+        /* Mega menu - show on click for touch/keyboard */
+        .mega-group.show .mega-dropdown { opacity: 1 !important; visibility: visible !important; }
+        .mobile-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .mobile-overlay.open { opacity: 1; visibility: visible; }
+        /* Mega menu - show on hover */
+        @media (min-width: 1024px) {
+            .mega-group:hover .mega-dropdown { opacity: 1 !important; visibility: visible !important; transform: translate(0, 0) !important; }
+            .mega-group:hover .mega-toggle .material-symbols-outlined { transform: rotate(180deg); }
+            .mega-dropdown { transform: translateY(10px); transition: all 0.2s ease; }
+            .mega-group::after { content: ""; position: absolute; top: 100%; left: 0; width: 100%; height: 20px; }
+        }
+
+        header { zoom: 1.38; }
+
+        /* Floating WhatsApp button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, 0.5);
+        }
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+        @media (max-width: 640px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 48px;
+                height: 48px;
+            }
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+
+        /* Phone tooltip */
+        .phone-tooltip { position: relative; }
+        .phone-tooltip::after {
+            content: attr(data-phone);
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            padding: 6px 12px;
+            background: #111827;
+            color: #fff;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            white-space: nowrap;
+            border-radius: 6px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.15s ease, visibility 0.15s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .phone-tooltip:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.leapcorpser.com/pages/select-bank-partner.html#webpage",
+  "url": "https://www.leapcorpser.com/pages/select-bank-partner.html",
+  "name": "Select Bank Partner Hong Kong | Business Banking Setup — Leap International",
+  "description": "Choose your business banking partner in Hong Kong. Compare options and select the best bank for your company incorporation needs.",
+  "isPartOf": {"@id": "https://www.leapcorpser.com/#website"}
+}
+</script>
+
+<!-- Google tag (gtag.js) - Replace G-WMMZZ1F6X0 with your actual Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WMMZZ1F6X0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WMMZZ1F6X0');
+</script>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
+<!-- TopNavBar -->
+<header class="bg-nav-bg fixed top-0 w-full z-50 shadow-none">
+<div class="flex justify-center items-center px-gutter py-3 max-w-container-max mx-auto gap-8">
+<div class="flex items-center gap-4">
+<a class="text-headline-sm font-headline-sm text-tertiary flex items-center gap-2 shrink-0" href="../index.html">
+<img alt="FOI Logo" class="h-12 w-auto object-contain" src="../FOI_logo.png"/ loading="lazy">
+            </a>
+<nav class="hidden lg:flex items-center gap-1">
+<!-- Incorporation -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span><span class="lang-en">Incorporation</span><span class="lang-zh">公司註冊</span></span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Start your company -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Start your company</span><span class="lang-zh">啟動您的公司</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="incorporation-locals.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">business_center</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Incorporation for Hong Kong Residents</span><span class="lang-zh">香港人公司註冊</span></span><span class="lang-zh">香港人公司註冊</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en"><span class="lang-en">Set up your Hong Kong company quickly as a local resident.</span><span class="lang-zh">作為香港居民快速開設公司。</span></span><span class="lang-zh">以香港居民身份快速設立您的香港公司。</span></p>
+                </div>
+            </a>
+            <a href="registered-office-address.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">domain</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span></span><span class="lang-zh">註冊辦事處地址</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en"><span class="lang-en">Use a prestigious, compliant registered address in Tsim Sha Tsui.</span><span class="lang-zh">使用尖沙咀尊貴合規的註冊地址。</span></span><span class="lang-zh">使用位於尖沙咀的尊貴合規註冊地址。</span></p>
+                </div>
+            </a>
+            <a href="incorporation-foreigners.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">public</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Incorporation for Non-Hong Kong Residents</span><span class="lang-zh">非香港人公司註冊</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Register your Hong Kong company online as a non-Hong Kong entrepreneur.</span><span class="lang-zh">作為非香港企業家在線註冊香港公司。</span></p>
+                </div>
+            </a>
+            </div>
+    </div>
+    
+<!-- Accounting -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span><span class="lang-en"><span class="lang-en">Accounting</span><span class="lang-zh">會計服務</span></span><span class="lang-zh">會計服務</span></span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Run & Grow your business -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Run & Grow your business</span><span class="lang-zh">營運及拓展您的業務</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="accounting.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">finance</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Accounting</span><span class="lang-zh">會計服務</span></span><span class="lang-zh">會計服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en"><span class="lang-en">Full-service accounting for your business.</span><span class="lang-zh">為您的企業提供全方位會計服務。</span></span><span class="lang-zh">為您企業提供全方位會計服務。</span></p>
+                </div>
+            </a>
+            <a href="bookkeeping.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">menu_book</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Bookkeeping</span><span class="lang-zh">記帳服務</span></span><span class="lang-zh">記帳服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Monthly bookkeeping services.</span><span class="lang-zh">月度記帳服務。</span></p>
+                </div>
+            </a>
+            <a href="sales-invoice.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">receipt_long</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Sales Invoice</span><span class="lang-zh">銷售發票</span></span><span class="lang-zh">銷售發票</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Professional invoicing solutions.</span><span class="lang-zh">專業發票解決方案。</span></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+<!-- Corporate Secretary -->
+<div class="relative mega-group">
+<button class="mega-toggle flex items-center gap-1 px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true">
+<span><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書</span></span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200">expand_more</span>
+</button>
+<div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
+<div class="flex">
+    <!-- Left: Stay Compliant -->
+    <div class="flex-1 p-6">
+        <h3 class="text-lg font-bold mb-4"><span class="lang-en">Stay Compliant</span><span class="lang-zh">保持合規</span></h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-4">
+            <a href="corporate-secretary.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">gavel</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Essential secretarial support for your company.</span><span class="lang-zh">為您公司提供必要的秘書支援。</span></p>
+                </div>
+            </a>
+            <a href="annual-return-filing.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">assignment_turned_in</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Annual Return Filing</span><span class="lang-zh">年度申報</span></span><span class="lang-zh">年度申報</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Quick, accurate annual filing services.</span><span class="lang-zh">快速準確的年度申報服務。</span></p>
+                </div>
+            </a>
+            <a href="registered-office-address.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">domain</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Prestigious registered address in Tsim Sha Tsui.</span><span class="lang-zh">尖沙咀尊貴註冊辦公地址。</span></p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+<a href="faqs.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span></a>
+<a href="our-culture.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span></a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative" id="langSwitcher">
+  <button id="langBtn" class="flex items-center gap-1.5 px-2.5 py-2 text-nav-text font-label-sm text-[13px] border border-nav-divider rounded-md bg-white hover:text-coral transition-colors duration-200" aria-label="Language" aria-expanded="false" aria-haspopup="listbox">
+    <span id="langFlag">🇬🇧</span>
+    <span id="langLabel">EN</span>
+    <span class="material-symbols-outlined text-[16px] transition-transform duration-200">expand_more</span>
+  </button>
+  <div id="langDropdown" class="absolute top-full right-0 mt-1 bg-white rounded-md shadow-lg border border-gray-200 opacity-0 invisible transition-all duration-200 z-50 min-w-[100px]" role="listbox">
+    <button data-lang="en" class="w-full flex items-center gap-2 px-4 py-2.5 text-left text-[13px] text-nav-text hover:bg-gray-50 rounded-t-md transition-colors" role="option">
+      <span>🇬🇧</span> <span>EN</span>
+    </button>
+    <button data-lang="zh" class="w-full flex items-center gap-2 px-4 py-2.5 text-left text-[13px] text-nav-text hover:bg-gray-50 rounded-b-md transition-colors" role="option">
+      <span>🇨🇳</span> <span>中文</span>
+    </button>
+  </div>
+</div>
+<a href="get-started.html" class="hidden sm:inline-block bg-tertiary text-on-tertiary font-label-sm text-[13px] px-4 py-2 rounded-DEFAULT hover:bg-opacity-90 transition-colors duration-200"><span class="lang-en">Get Started</span><span class="lang-zh">立即開始</span></a>
+<a href="contact.html" class="hidden sm:inline-flex phone-tooltip text-nav-text hover:text-coral transition-colors duration-200" data-phone="+852 65550943" aria-label="Phone +852 65550943">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</a>
+</div>
+<button class="lg:hidden text-nav-text" id="menuToggle" aria-label="Toggle menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay fixed inset-0 bg-black/40 z-40 lg:hidden" id="mobileOverlay"></div>
+<!-- Mobile Menu Panel -->
+<div class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl lg:hidden overflow-y-auto" id="mobileMenu">
+<div class="flex justify-between items-center p-4 border-b">
+<span class="font-headline-sm text-nav-text"><span class="lang-en">Menu</span><span class="lang-zh">選單</span></span>
+<button class="text-nav-text" id="menuClose" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="p-4 space-y-1">
+<div class="py-2"><a href="faqs.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span></a></div>
+<div class="py-2"><a href="our-culture.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span></a></div>
+<div class="pt-4 border-t space-y-2">
+<a href="get-started.html" class="w-full bg-tertiary text-on-tertiary py-3 rounded-DEFAULT font-label-md block text-center"><span class="lang-en">Get Started</span><span class="lang-zh">立即開始</span></a>
+<a href="contact.html" class="block text-center py-2 text-nav-text font-label-md"><span class="lang-en">Contact Sales</span><span class="lang-zh">聯繫銷售</span></a>
+</div>
+</div>
+</div>
+
+<main class="pt-[110px]">
+  <div class="max-w-[1200px] mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+    <div class="mb-8">
+      <h1 class="text-[28px] font-bold text-gray-900 mb-3">
+        <span class="lang-en">Complete Your Business Setup with a Free Bank Account</span>
+        <span class="lang-zh">完成您的商業設置，開設免費銀行帳戶</span>
+      </h1>
+      <p class="text-[16px] text-gray-600">
+        <span class="lang-en">Incorporate with Leap and unlock seamless digital banking via our leading partners.</span>
+        <span class="lang-zh">透過 Leap 註冊並透過我們的領先合作夥伴解鎖無縫數位銀行服務。</span>
+      </p>
+    </div>
+
+    <div class="space-y-3 mb-6">
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined text-[#165DFF] text-[24px] mt-0.5">check_circle</span>
+        <p class="text-[16px] text-gray-700">
+          <span class="lang-en"><strong>100% Online</strong> – No branch visits required.</span>
+          <span class="lang-zh"><strong>100% 線上辦理</strong> – 無需前往分行。</span>
+        </p>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined text-[#165DFF] text-[24px] mt-0.5">check_circle</span>
+        <p class="text-[16px] text-gray-700">
+          <span class="lang-en"><strong>Priority Onboarding</strong> – Exclusive fast-tracked review for Leap customers.</span>
+          <span class="lang-zh"><strong>優先入駐</strong> – Leap 客戶專屬快速審核。</span>
+        </p>
+      </div>
+      <div class="flex items-start gap-2">
+        <span class="material-symbols-outlined text-[#165DFF] text-[24px] mt-0.5">check_circle</span>
+        <p class="text-[16px] text-gray-700">
+          <span class="lang-en"><strong>Exclusive Rewards</strong> – Partner-only perks and welcome bonuses.</span>
+          <span class="lang-zh"><strong>專屬獎勵</strong> – 合作夥伴專屬福利和歡迎獎金。</span>
+        </p>
+      </div>
+    </div>
+
+    <p class="text-[14px] text-gray-500 mb-6">
+      <span class="lang-en"><strong>MSO Licensed Partners</strong> Regulated by HK Customs & Excise Department.</span>
+      <span class="lang-zh"><strong>MSO 持牌合作夥伴</strong> 受香港海關監管。</span>
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <div class="bank-card rounded-xl p-5" id="aspireCard" onclick="selectBank('aspire')">
+        <div class="flex justify-center mb-4">
+          <div class="bg-[#10B981] rounded-lg w-[180px] h-[110px] flex items-center justify-center relative">
+            <div class="absolute top-3 right-3 text-white text-[14px] font-semibold">aspire</div>
+            <div class="absolute bottom-3 left-3">
+              <div class="text-white text-[20px] font-bold">VISA</div>
+              <div class="text-white text-[10px]">Corporate</div>
+            </div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect x="8" y="8" width="24" height="24" rx="4" stroke="white" stroke-width="2"/>
+                <path d="M14 20h12M20 14v12" stroke="white" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <h3 class="text-[20px] font-bold text-gray-900 mb-1">Aspire</h3>
+        <p class="text-[14px] text-gray-500 mb-3">
+          <span class="lang-en">Best For: Growing Teams & SaaS</span>
+          <span class="lang-zh">最適合：成長中的團隊與 SaaS</span>
+        </p>
+        <div class="bg-[#D1FAE5] rounded-lg px-3 py-2">
+          <p class="text-[11px] text-[#065F46] font-medium">
+            <span class="lang-en">LEAP EXCLUSIVE PERK</span>
+            <span class="lang-zh">LEAP 專屬福利</span>
+          </p>
+          <p class="text-[16px] font-bold text-[#065F46]">
+            <span class="lang-en">HK$2,000 Welcome Cashback</span>
+            <span class="lang-zh">HK$2,000 歡迎現金回饋</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="bank-card rounded-xl p-5" id="airwallexCard" onclick="selectBank('airwallex')">
+        <div class="flex justify-center mb-4">
+          <div class="bg-[#1F2937] rounded-lg w-[180px] h-[110px] flex items-center justify-center relative">
+            <div class="absolute top-3 right-3 text-white text-[14px] font-semibold">Airwallex</div>
+            <div class="absolute bottom-3 left-3">
+              <div class="text-white text-[20px] font-bold">VISA</div>
+              <div class="text-white text-[10px]">Commercial</div>
+            </div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect x="8" y="8" width="24" height="24" rx="4" stroke="white" stroke-width="2"/>
+                <path d="M14 20h12M20 14v12" stroke="white" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <h3 class="text-[20px] font-bold text-gray-900 mb-1">Airwallex</h3>
+        <p class="text-[14px] text-gray-500 mb-3">
+          <span class="lang-en">Best For: eCommerce & Global Trade</span>
+          <span class="lang-zh">最適合：電子商務與全球貿易</span>
+        </p>
+        <div class="bg-[#DBEAFE] rounded-lg px-3 py-2">
+          <p class="text-[11px] text-[#1E40AF] font-medium">
+            <span class="lang-en">LEAP EXCLUSIVE PERK</span>
+            <span class="lang-zh">LEAP 專屬福利</span>
+          </p>
+          <p class="text-[16px] font-bold text-[#1E40AF]">
+            <span class="lang-en">HK$100,000 Fee-Free FX</span>
+            <span class="lang-zh">HK$100,000 免手續費外匯</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-6">
+      <a href="#" class="text-[14px] font-medium text-[#165DFF] hover:underline flex items-center justify-center gap-1">
+        <span class="material-symbols-outlined text-[16px]">content_paste</span>
+        <span class="lang-en">Compare all features</span>
+        <span class="lang-zh">比較所有功能</span>
+      </a>
+    </div>
+
+    <div class="bank-details bg-white rounded-xl border border-gray-200 p-6 mb-6" id="aspireDetails">
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-[#165DFF] text-[20px]">star</span>
+        </div>
+        <h3 class="text-[18px] font-bold text-gray-900">
+          <span class="lang-en">Why founders choose <span class="underline">Aspire</span></span>
+          <span class="lang-zh">為什麼創始人選擇 <span class="underline">Aspire</span></span>
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Yield: Earn up to 3.45% p.a. on funds.</span>
+            <span class="lang-zh">收益：資金年收益高達 3.45%。</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Unlimited virtual cards with 1.2% Cashback</span>
+            <span class="lang-zh">無限虛擬卡，1.2% 現金回饋</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Automatically track spend & sync to Xero.</span>
+            <span class="lang-zh">自動追蹤支出並同步到 Xero。</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">20% cashback on Leap service renewals.</span>
+            <span class="lang-zh">Leap 服務續約 20% 現金回饋。</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bank-details bg-white rounded-xl border border-gray-200 p-6 mb-6" id="airwallexDetails">
+      <div class="flex items-center gap-2 mb-4">
+        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+          <span class="material-symbols-outlined text-[#165DFF] text-[20px]">star</span>
+        </div>
+        <h3 class="text-[18px] font-bold text-gray-900">
+          <span class="lang-en">Why founders choose <span class="underline">Airwallex</span></span>
+          <span class="lang-zh">為什麼創始人選擇 <span class="underline">Airwallex</span></span>
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Receive HKD, USD, EUR, GBP locally.</span>
+            <span class="lang-zh">本地接收 HKD、USD、EUR、GBP。</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Accept credit cards & 160+ pay methods.</span>
+            <span class="lang-zh">接受信用卡和 160+ 支付方式。</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Uncapped 1% back on card spending.</span>
+            <span class="lang-zh">卡消費無上限 1% 回饋。</span>
+          </p>
+        </div>
+        <div class="flex items-start gap-2">
+          <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
+          <p class="text-[14px] text-gray-700">
+            <span class="lang-en">Rates as low as 0.2% above interbank.</span>
+            <span class="lang-zh">匯率低於銀行同業拆借利率 0.2%。</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <button id="nextBtn" class="w-full btn-disabled py-3 px-4 rounded-lg text-[16px] font-semibold text-white transition-all" onclick="handleNext()">
+        <span class="lang-en" id="nextBtnText">Select a Partner</span>
+        <span class="lang-zh" id="nextBtnTextZh">選擇合作夥伴</span>
+      </button>
+      <button class="w-full py-3 px-4 text-[14px] font-medium text-[#165DFF] hover:underline" onclick="handleSkip()">
+        <span class="lang-en">Skip for now and set up later</span>
+        <span class="lang-zh">暫時跳過，稍後設置</span>
+      </button>
+      <button onclick="history.back()" class="w-full flex items-center justify-center gap-1.5 py-3 px-4 text-[14px] font-medium text-gray-600 hover:text-[#165DFF] transition-colors">
+        <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+        <span class="lang-en">Back</span>
+        <span class="lang-zh">返回</span>
+      </button>
+    </div>
+      </div>
+
+      <!-- Right - Summary Sidebar -->
+      <div class="md:col-span-1">
+        <div class="bg-white rounded-xl p-6 border border-gray-200 sticky top-8" id="summarySidebar">
+          <div class="flex items-center justify-between mb-4">
+            <span class="text-[14px] font-semibold text-gray-900">
+              <span class="lang-en">Summary</span>
+              <span class="lang-zh">摘要</span>
+            </span>
+            <span class="material-symbols-outlined text-[18px] text-gray-400 cursor-pointer" id="summaryToggle" onclick="toggleSummary()">expand_less</span>
+          </div>
+          <div id="summaryContent">
+            <div id="summaryLineItems" class="space-y-3 mb-4">
+            </div>
+            <div class="border-t border-gray-200 pt-3 mb-3">
+              <div class="flex justify-between text-[13px]">
+                <span class="text-gray-600">
+                  <span class="lang-en">Sub total</span>
+                  <span class="lang-zh">小計</span>
+                </span>
+                <span class="font-semibold" id="summarySubtotal">HK$0</span>
+              </div>
+            </div>
+            <div class="border-t border-gray-200 pt-3">
+              <div class="flex justify-between">
+                <span class="font-bold text-[15px]">
+                  <span class="lang-en">Total due</span>
+                  <span class="lang-zh">應付總額</span>
+                </span>
+                <span class="font-bold text-[18px]" id="summaryTotal">HKD 0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(function() {
+  var LANG_KEY = 'leap-lang';
+  function normaliseLang(v) { return v === 'zh' ? 'zh' : 'en'; }
+  function setLang(lang) {
+    var html = document.documentElement;
+    var v = normaliseLang(lang);
+    html.setAttribute('data-lang', v);
+    var flag = document.getElementById('langFlag');
+    var label = document.getElementById('langLabel');
+    if (flag && label) {
+      if (v === 'zh') { flag.textContent = '🇨🇳'; label.textContent = '中文'; }
+      else { flag.textContent = '🇬🇧'; label.textContent = 'EN'; }
+    }
+    try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
+  }
+  var savedLang = 'en';
+  try { savedLang = normaliseLang(localStorage.getItem(LANG_KEY)); } catch (e) {}
+  setLang(savedLang);
+  var langBtn = document.getElementById('langBtn');
+  var langDropdown = document.getElementById('langDropdown');
+  if (langBtn) {
+    langBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      langDropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', function() { langDropdown.classList.remove('show'); });
+  }
+  if (langDropdown) {
+    langDropdown.querySelectorAll('button[data-lang]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setLang(btn.getAttribute('data-lang'));
+        langDropdown.classList.remove('show');
+      });
+    });
+  }
+})();
+
+    var selectedBank = null;
+
+    function selectBank(bank) {
+      selectedBank = bank;
+      
+      var aspireCard = document.getElementById('aspireCard');
+      var airwallexCard = document.getElementById('airwallexCard');
+      var aspireDetails = document.getElementById('aspireDetails');
+      var airwallexDetails = document.getElementById('airwallexDetails');
+      var nextBtn = document.getElementById('nextBtn');
+      var nextBtnText = document.getElementById('nextBtnText');
+      var nextBtnTextZh = document.getElementById('nextBtnTextZh');
+      
+      aspireCard.classList.remove('selected-aspire');
+      airwallexCard.classList.remove('selected-airwallex');
+      aspireDetails.classList.remove('show');
+      airwallexDetails.classList.remove('show');
+      
+      if (bank === 'aspire') {
+        aspireCard.classList.add('selected-aspire');
+        aspireDetails.classList.add('show');
+        nextBtnText.textContent = 'Select Aspire';
+        nextBtnTextZh.textContent = '選擇 Aspire';
+      } else if (bank === 'airwallex') {
+        airwallexCard.classList.add('selected-airwallex');
+        airwallexDetails.classList.add('show');
+        nextBtnText.textContent = 'Select Airwallex';
+        nextBtnTextZh.textContent = '選擇 Airwallex';
+      }
+      
+      nextBtn.classList.remove('btn-disabled');
+      nextBtn.style.background = '#165DFF';
+      nextBtn.style.cursor = 'pointer';
+      
+      saveAndUpdateSummary();
+    }
+
+    // ========== Shared Summary Engine ==========
+    var SUMMARY_KEY = 'leap-package-cs';
+
+    function getPackageData() {
+      try { var d = JSON.parse(localStorage.getItem(SUMMARY_KEY)); if (!d) d = {}; } catch(e) { d = {}; }
+      try { var inc = JSON.parse(localStorage.getItem('leap-package-inc') || '{}'); } catch(e) { var inc = {}; }
+      if (inc.incorporationPlan) d.incorporationPlan = inc.incorporationPlan;
+      if (inc.incorporationPrice) d.incorporationPrice = inc.incorporationPrice;
+      if (inc.secretaryPlan) d.secretaryPlan = inc.secretaryPlan;
+      if (inc.secretaryPrice) d.secretaryPrice = inc.secretaryPrice;
+      if (inc.secretaryDiscount) d.secretaryDiscount = inc.secretaryDiscount;
+      return d;
+    }
+
+    function savePackageData(data) {
+      try { localStorage.setItem(SUMMARY_KEY, JSON.stringify(data)); } catch(e) {}
+    }
+
+    function saveAndUpdateSummary() {
+      var data = getPackageData();
+      data.selectedBank = selectedBank;
+      savePackageData(data);
+      renderSummary();
+    }
+
+    function renderSummary() {
+      var data = getPackageData();
+      var items = [];
+      
+      var incPlanPrices = { 'Starter': 6500, 'Compliance': 8473, 'Full Compliance': 12428 };
+      var incPrice = data.incorporationPrice || (data.incorporationPlan ? (incPlanPrices[data.incorporationPlan] || 0) : 0);
+      
+      if (incPrice) {
+        var incName = data.incorporationPlan || 'Incorporation Package';
+        var incPlanMap = { 'Starter': '\u5275\u696d\u7248', 'Compliance': '\u5408\u898f\u7248', 'Full Compliance': '\u5168\u9762\u5408\u898f\u7248' };
+        var incNameZh = incPlanMap[data.incorporationPlan] || (data.incorporationPlan || '\u516c\u53f8\u8a3b\u518a\u5957\u9910');
+        items.push({ labelEn: incName, labelZh: incNameZh, price: incPrice, note: 'one time', noteZh: '一次性' });
+      }
+      
+      if (data.secretaryPrice) {
+        var secLabel = data.secretaryPlan === 'standard' ? 'Company Secretary (Standard)' : 'Company Secretary (Premium)';
+        var secLabelZh = data.secretaryPlan === 'standard' ? '公司秘書（標準）' : '公司秘書（高級）';
+        items.push({ labelEn: secLabel, labelZh: secLabelZh, price: data.secretaryPrice, note: '/ year', noteZh: '/ 年' });
+        if (data.secretaryDiscount) {
+          items.push({ labelEn: 'Discount', labelZh: '折扣', price: -data.secretaryDiscount, isDiscount: true });
+        }
+      }
+      
+      if (data.hasOfficeAddress) {
+        items.push({ labelEn: 'Registered Address & Virtual Mailroom', labelZh: '註冊地址與虛擬郵件室', price: 2500, note: '/ year', noteZh: '/ 年' });
+      }
+      
+      if (data.accountingPlan && data.accountingPrice) {
+        var planNames = { annual: 'Annual Filing & Bookkeeping', payroll: 'Accounting & Payroll', premium: 'Accounting Premium' };
+        var planNamesZh = { annual: '年度申報與簿記', payroll: '會計與薪酬', premium: '會計高級版' };
+        var expenseLabels = { '15000': '≤ HK$15K', '50000': '≤ HK$50K', '100000': '≤ HK$100K', '200000': '≤ HK$200K', '400000': '≤ HK$400K', '>400000': '> HK$400K' };
+        var planLabel = (planNames[data.accountingPlan] || 'Accounting Plan') + ' (' + (expenseLabels[data.expenseLevel] || '') + ' mth)';
+        var planLabelZh = (planNamesZh[data.accountingPlan] || '會計方案') + ' (' + (expenseLabels[data.expenseLevel] || '') + ' 每月)';
+        items.push({ labelEn: planLabel, labelZh: planLabelZh, price: data.accountingPrice, note: '/ financial year', noteZh: '/ 財政年度' });
+        if (data.xeroIncluded) {
+          if (data.xeroPrice && data.xeroPrice > 0) {
+            items.push({ labelEn: 'XERO Subscription (1 Year)', labelZh: 'XERO 訂閱（1 年）', price: data.xeroPrice, note: '/ year', noteZh: '/ 年' });
+          } else {
+            items.push({ labelEn: 'XERO Subscription (1 Year)', labelZh: 'XERO 訂閱（1 年）', price: 0, note: 'FREE', noteZh: '免費', isFree: true });
+          }
+        }
+      }
+      
+      var lang = document.documentElement.getAttribute('data-lang') || 'en';
+      var isEn = lang === 'en';
+      var lineItemsEl = document.getElementById('summaryLineItems');
+      var subtotalEl = document.getElementById('summarySubtotal');
+      var totalEl = document.getElementById('summaryTotal');
+      if (!lineItemsEl || !totalEl) return;
+      
+      var subtotal = 0;
+      var html = '';
+      
+      items.forEach(function(item) {
+        var label = isEn ? item.labelEn : item.labelZh;
+        var note = item.note;
+        if (note && !isEn && item.noteZh) note = item.noteZh;
+        subtotal += item.price;
+        
+        if (item.isDiscount) {
+          html += '<div class="flex justify-between text-[13px]"><span class="text-[#165DFF]">' + label + '</span><span class="font-semibold text-[#165DFF]">-HK$' + Math.abs(item.price).toLocaleString() + '</span></div>';
+        } else if (item.isFree) {
+          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + label + '</span><div class="text-right"><div class="font-semibold text-[#10B981]">' + note + '</div></div></div>';
+        } else {
+          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + label + '</span><div class="text-right"><div class="font-semibold">HK$' + item.price.toLocaleString() + '</div>' + (note ? '<div class="text-[11px] text-gray-500">' + note + '</div>' : '') + '</div></div>';
+        }
+      });
+      
+      lineItemsEl.innerHTML = html;
+      subtotalEl.textContent = 'HK$' + subtotal.toLocaleString();
+      totalEl.textContent = 'HKD ' + subtotal.toLocaleString() + '.00';
+    }
+
+    var summaryOpen = true;
+    function toggleSummary() {
+      var content = document.getElementById('summaryContent');
+      var toggle = document.getElementById('summaryToggle');
+      summaryOpen = !summaryOpen;
+      if (summaryOpen) { content.classList.remove('hidden'); toggle.textContent = 'expand_less'; }
+      else { content.classList.add('hidden'); toggle.textContent = 'expand_more'; }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() { renderSummary(); });
+
+    function handleNext() {
+      if (!selectedBank) return;
+      saveAndUpdateSummary();
+      window.location.href = 'payment.html';
+    }
+
+    function handleSkip() {
+      window.location.href = 'payment.html';
+    }
+  </script>
+<a href="https://wa.me/85265550943?text=Hi%20Leap%20International%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

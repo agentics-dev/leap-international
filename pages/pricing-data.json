@@ -1,0 +1,135 @@
+{
+  "auditTaxFiling": {
+    "title": "Audit & Tax Filing",
+    "description": "Comprehensive solutions tailored to your growth, with no surprises along the way.",
+    "selectBar": {
+      "label": "How much are your monthly expenses?",
+      "options": [
+        { "value": "<15k", "label": "< HK$15K monthly expenses" },
+        { "value": "15-50k", "label": "< HK$50K monthly expenses" },
+        { "value": "50-100k", "label": "< HK$100K monthly expenses" },
+        { "value": "100-200k", "label": "< HK$200K monthly expenses" },
+        { "value": "200-400k", "label": "< HK$400K monthly expenses" },
+        { "value": "400k+", "label": ">= HK$400,000 monthly expenses" }
+      ]
+    },
+    "plans": {
+      "standard": {
+        "name": "Standard",
+        "subtitle": "For companies with assets below HK$10M, without offshore tax arrangements or complex assets.",
+        "features": [
+          "Preparation of Audited Financial Statements (Under HK SME-FRS)",
+          "Profit Tax calculation and filing",
+          "Extra support from auditors",
+          "Ongoing expert support"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "subtitle": "For companies with assets exceeding HK$10M; with offshore tax arrangements or complex assets.",
+        "badges": {
+          "topLeft": { "text": "MOST POPULAR", "icon": "✨", "bg": "#10B981", "textColor": "white" },
+          "topRight": { "text": "15% OFF", "bg": "#FFD857", "textColor": "#1a1a1a" }
+        },
+        "features": [
+          "Offshore tax exemption"
+        ]
+      }
+    },
+    "pricing": {
+      "<15k": { "standard": "HK$5,500", "premium": "HK$6,800", "premiumOriginal": "HK$8,000" },
+      "15-50k": { "standard": "HK$8,250", "premium": "HK$9,138", "premiumOriginal": "HK$10,750" },
+      "50-100k": { "standard": "HK$11,000", "premium": "HK$11,475", "premiumOriginal": "HK$13,500" },
+      "100-200k": { "standard": "HK$15,000", "premium": "HK$14,875", "premiumOriginal": "HK$17,500" },
+      "200-400k": { "standard": "HK$22,000", "premium": "HK$20,825", "premiumOriginal": "HK$24,500" },
+      "400k+": { "standard": "Price by quote", "premium": "Price by quote", "premiumOriginal": null }
+    }
+  },
+  "companySecretary": {
+    "title": "Expert Company Secretary for end to end compliance",
+    "selectBar": {
+      "label": "How many shareholders do you have?",
+      "options": [
+        { "value": "1", "label": "1 shareholder" },
+        { "value": "2", "label": "2 shareholders" },
+        { "value": "3-5", "label": "3-5 shareholders" },
+        { "value": "6-9", "label": "6-9 shareholders" },
+        { "value": "10-20", "label": "10-20 shareholders" },
+        { "value": "21-30", "label": "21-30 shareholders" },
+        { "value": ">30", "label": ">30 shareholders" }
+      ]
+    },
+    "pricing": {
+      "1": { "standard": "HK$1,300", "premium": "HK$3,800" },
+      "2": { "standard": "HK$1,900", "premium": "HK$4,400" },
+      "3-5": { "standard": "HK$2,300", "premium": "HK$4,800" },
+      "6-9": { "standard": "HK$2,900", "premium": "HK$5,400" },
+      "10-20": { "standard": "HK$4,000", "premium": "HK$6,500" },
+      "21-30": { "standard": "HK$5,300", "premium": "HK$7,800" },
+      ">30": { "standard": "HK$6,500", "premium": "HK$9,000" }
+    }
+  },
+  "accounting": {
+    "title": "Full-Service Accounting for Growing Businesses",
+    "selectBar": {
+      "label": "How much are your monthly expenses?",
+      "options": [
+        { "value": "<15k", "label": "< HK$15K monthly expenses" },
+        { "value": "15-50k", "label": "< HK$50K monthly expenses" },
+        { "value": "50-100k", "label": "< HK$100K monthly expenses" },
+        { "value": "100-200k", "label": "< HK$200K monthly expenses" },
+        { "value": "200-400k", "label": "< HK$400K monthly expenses" },
+        { "value": "400k+", "label": ">= HK$400,000 monthly expenses" }
+      ]
+    },
+    "plans": {
+      "basic": {
+        "name": "Basic",
+        "subtitle": "Essential annual compliance and reporting for straightforward financial oversight.",
+        "features": [
+          "Annual bookkeeping",
+          "Annual Unaudited Financial Statements",
+          "Employer's Return",
+          "Annual management reports",
+          "5 day support response time"
+        ]
+      },
+      "standard": {
+        "name": "Standard",
+        "subtitle": "Our top choice for growing businesses needing monthly insights and payroll support.",
+        "badges": {
+          "topRight": { "text": "15% OFF", "bg": "#FFD857", "textColor": "#1a1a1a" }
+        },
+        "features": [
+          "Monthly bookkeeping",
+          "Monthly Unaudited Financial Statements",
+          "Monthly management reports",
+          "Monthly Payroll",
+          "Basic tax advice",
+          "48 hr support response time"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "subtitle": "A premium solution with personalised reviews and advanced support for ambitious growth.",
+        "badges": {
+          "topRight": { "text": "15% OFF", "bg": "#FFD857", "textColor": "#1a1a1a" }
+        },
+        "features": [
+          "Quarterly review with senior accountant",
+          "Leave management",
+          "Xero subscription",
+          "24 hr support response time"
+        ]
+      }
+    },
+    "pricing": {
+      "<15k":   { "basic": "HK$3,500",  "standard": "HK$4,998",  "standardOriginal": "HK$5,880",  "premium": "HK$12,852", "premiumOriginal": "HK$15,120" },
+      "15-50k": { "basic": "HK$8,160",  "standard": "HK$8,568",  "standardOriginal": "HK$10,080", "premium": "HK$18,870", "premiumOriginal": "HK$22,200" },
+      "50-100k": { "basic": "HK$11,760", "standard": "HK$12,240", "standardOriginal": "HK$14,400", "premium": "HK$25,500", "premiumOriginal": "HK$30,000" },
+      "100-200k":{ "basic": "HK$21,600", "standard": "HK$22,100", "standardOriginal": "HK$26,000", "premium": "HK$39,780", "premiumOriginal": "HK$46,800" },
+      "200-400k":{ "basic": "HK$32,400", "standard": "HK$34,680", "standardOriginal": "HK$40,800", "premium": "HK$61,200", "premiumOriginal": "HK$72,000" },
+      "400k+":   { "basic": "Custom",   "standard": "Custom",    "standardOriginal": null,   "premium": "Custom",   "premiumOriginal": null }
+    }
+  }
+}

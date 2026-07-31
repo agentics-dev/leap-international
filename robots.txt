@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /netlify/
+Disallow: /pages/payment.html
+Disallow: /pages/confirmation.html
+Disallow: /pages/cs-*
+
+Sitemap: https://www.leapcorpser.com/sitemap.xml

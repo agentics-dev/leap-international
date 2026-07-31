@@ -1,0 +1,7 @@
+{
+  "name": "leap-international",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd admin_src && npm install && npm run build && cd .. && rm -rf admin_dist && mv admin_src/dist admin_dist"
+  }
+}

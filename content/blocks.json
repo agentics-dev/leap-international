@@ -1,0 +1,631 @@
+{
+  "incorporation-locals": {
+    "title_en": "Incorporation for Locals",
+    "title_zh": "本地居民公司註冊",
+    "hero_en": "Register Your Company Seamlessly as a Local Resident",
+    "hero_zh": "以本地居民身份輕鬆註冊您的公司",
+    "intro_en": "Starting a business in your home country should be straightforward. Our team guides you through every step — from choosing the right company structure to filing all necessary documents with the relevant authorities.",
+    "intro_zh": "在本地創業理應簡單直接。我們的團隊將引導您完成每個步驟 — 從選擇合適的公司架構，到向相關機構提交所有必要文件。",
+    "steps": [
+      {
+        "en": "Choose your business structure — Sole Proprietorship, Partnership, or Private Limited Company",
+        "zh": "選擇您的業務結構 — 獨資經營、合夥企業或私人有限公司"
+      },
+      {
+        "en": "Reserve your company name and prepare the constitution",
+        "zh": "保留您的公司名稱並準備公司章程"
+      },
+      {
+        "en": "Submit incorporation documents to the company registry",
+        "zh": "向公司註冊處提交註冊文件"
+      },
+      {
+        "en": "Receive your Certificate of Incorporation and Business Profile",
+        "zh": "領取您的公司註冊證書及商業登記文件"
+      },
+      {
+        "en": "Open a corporate bank account and begin operations",
+        "zh": "開設企業銀行賬戶並開始營運"
+      }
+    ],
+    "cta_en": "Start Your Local Incorporation",
+    "cta_zh": "開始本地公司註冊"
+  },
+  "incorporation-foreigners": {
+    "title_en": "Incorporation for Foreigners",
+    "title_zh": "外國人公司註冊",
+    "hero_en": "Launch Your Business From Anywhere in the World",
+    "hero_zh": "從世界各地啟動您的業務",
+    "intro_en": "You do not need to be physically present to register a company. We handle the entire process remotely — from nominee director arrangements to work visa applications, we ensure full compliance with local regulations.",
+    "intro_zh": "您無需親身到場即可註冊公司。我們全程遠程處理 — 從提名董事安排到工作簽證申請，確保完全符合當地法規。",
+    "steps": [
+      {
+        "en": "Consultation: Understand your business goals and visa requirements",
+        "zh": "諮詢：了解您的業務目標及簽證要求"
+      },
+      {
+        "en": "Company structure setup with nominee director if required",
+        "zh": "設立公司架構，如需要可安排提名董事"
+      },
+      {
+        "en": "Document preparation and submission to the company registry",
+        "zh": "準備文件並提交至公司註冊處"
+      },
+      {
+        "en": "Work visa or Employment Pass application processing",
+        "zh": "處理工作簽證或就業准證申請"
+      },
+      {
+        "en": "Corporate bank account opening assistance",
+        "zh": "協助開設企業銀行賬戶"
+      }
+    ],
+    "cta_en": "Register Your Company Remotely",
+    "cta_zh": "遠程註冊您的公司"
+  },
+  "registered-office-address": {
+    "title_en": "Registered Office Address",
+    "title_zh": "註冊辦公地址",
+    "hero_en": "A Prestigious Business Address Without the Overhead",
+    "hero_zh": "無需高額開支即可擁有尊貴的商業地址",
+    "intro_en": "Every company is required to have a registered office address. Our service provides a professional address in a prime business district, complete with digital mail handling so you never miss an important document.",
+    "intro_zh": "每家公司都必須擁有一個註冊辦公地址。我們的服務提供位於核心商業區的專業地址，並配有數位郵件處理服務，確保您不會錯過任何重要文件。",
+    "features": [
+      {
+        "en": "Prime CBD location for your company registration",
+        "zh": "核心商業區地址用於公司註冊"
+      },
+      {
+        "en": "Digital mailroom — scan, forward, or store your correspondence",
+        "zh": "數位收件室 — 掃描、轉發或儲存您的郵件"
+      },
+      {
+        "en": "Compliant with all statutory requirements",
+        "zh": "符合所有法定要求"
+      },
+      {
+        "en": "No long-term lease commitments required",
+        "zh": "無需長期租約承諾"
+      }
+    ],
+    "cta_en": "Get Your Business Address",
+    "cta_zh": "獲取您的商業地址"
+  },
+  "accounting": {
+    "title_en": "Accounting Services",
+    "title_zh": "會計服務",
+    "hero_en": "Full-Service Accounting for Growing Businesses",
+    "hero_zh": "為成長型企業提供全方位會計服務",
+    "intro_en": "Our accounting team ensures your financial records are accurate, compliant, and always up to date. We combine cloud-based technology with professional expertise to give you complete visibility over your finances.",
+    "intro_zh": "我們的會計團隊確保您的財務記錄準確、合規且時刻保持最新狀態。我們將雲端科技與專業知識相結合，讓您全面掌握財務狀況。",
+    "features": [
+      {
+        "en": "Cloud-based accounting on leading platforms",
+        "zh": "基於主流雲端平台的會計服務"
+      },
+      {
+        "en": "Monthly management accounts and financial statements",
+        "zh": "月度管理賬目及財務報表"
+      },
+      {
+        "en": "Cash flow monitoring and budgeting support",
+        "zh": "現金流監控及預算支援"
+      },
+      {
+        "en": "Dedicated accountant assigned to your business",
+        "zh": "為您的業務指派專屬會計師"
+      }
+    ],
+    "cta_en": "Explore Accounting Plans",
+    "cta_zh": "探索會計方案"
+  },
+  "bookkeeping": {
+    "title_en": "Bookkeeping Services",
+    "title_zh": "記帳服務",
+    "hero_en": "Accurate Books, Zero Stress",
+    "hero_zh": "準確賬目，零壓力",
+    "intro_en": "Stay on top of your day-to-day transactions with professional bookkeeping. We categorise every receipt, reconcile your bank statements, and prepare your records for tax season — so nothing slips through the cracks.",
+    "intro_zh": "透過專業記帳服務，掌握您的日常交易。我們將每張收據分類、核對銀行賬單，並為報稅季節做好準備 — 確保沒有任何遺漏。",
+    "features": [
+      {
+        "en": "Daily transaction categorization and reconciliation",
+        "zh": "每日交易分類及對賬"
+      },
+      {
+        "en": "Accounts payable and receivable management",
+        "zh": "應付賬款及應收賬款管理"
+      },
+      {
+        "en": "Bank and credit card statement reconciliation",
+        "zh": "銀行及信用卡賬單對賬"
+      },
+      {
+        "en": "Monthly bookkeeping reports delivered on time",
+        "zh": "準時交付月度記帳報告"
+      }
+    ],
+    "cta_en": "Start Bookkeeping",
+    "cta_zh": "開始記帳服務"
+  },
+  "audit-tax-filing": {
+    "title_en": "Audit & Tax Filing",
+    "title_zh": "審計與報稅",
+    "hero_en": "Audit-Ready Financials and Timely Tax Submissions",
+    "hero_zh": "審計就緒的財務報表與及時稅務申報",
+    "intro_en": "Tax compliance does not have to be overwhelming. We prepare and file your annual tax returns, manage audit requirements, and ensure you meet every regulatory deadline — with clear communication every step of the way.",
+    "intro_zh": "稅務合規不必令人頭疼。我們為您準備並提交年度報稅表、管理審計要求，並確保您符合所有監管截止日期 — 全程保持清晰溝通。",
+    "features": [
+      {
+        "en": "Annual tax computation and return filing",
+        "zh": "年度稅務計算及報稅表提交"
+      },
+      {
+        "en": "Statutory audit coordination and support",
+        "zh": "法定審計協調及支援"
+      },
+      {
+        "en": "Tax planning advisory to optimize your position",
+        "zh": "稅務規劃諮詢，優化您的稅務狀況"
+      },
+      {
+        "en": "Handling of tax authority queries and correspondence",
+        "zh": "處理稅務機構的查詢及往來信函"
+      }
+    ],
+    "cta_en": "Get Tax Ready",
+    "cta_zh": "準備報稅"
+  },
+  "payroll-services": {
+    "title_en": "Payroll Services",
+    "title_zh": "薪資服務",
+    "hero_en": "Pay Your Team Accurately and On Time, Every Time",
+    "hero_zh": "每次準時準確支付您的團隊薪資",
+    "intro_en": "From salary calculations and statutory contributions to year-end tax forms, our payroll service handles the entire cycle. We keep you compliant with employment regulations while your team gets paid without delay.",
+    "intro_zh": "從薪資計算和法定供款到年終稅表，我們的薪資服務處理整個週期。我們確保您符合就業法規，同時讓您的團隊準時收到薪資。",
+    "features": [
+      {
+        "en": "Monthly payroll processing with detailed payslips",
+        "zh": "月度薪資處理及詳細工資單"
+      },
+      {
+        "en": "CPF, SDL, and other statutory contribution submissions",
+        "zh": "公積金、技能發展稅及其他法定供款提交"
+      },
+      {
+        "en": "Year-end IR8A and IR21 preparation",
+        "zh": "年終 IR8A 及 IR21 表格準備"
+      },
+      {
+        "en": "Leave and benefits administration tracking",
+        "zh": "假期及福利管理追蹤"
+      }
+    ],
+    "cta_en": "Simplify Your Payroll",
+    "cta_zh": "簡化您的薪資流程"
+  },
+  "sales-invoice": {
+    "title_en": "Sales Invoice Services",
+    "title_zh": "銷售發票服務",
+    "hero_en": "Professional Invoicing That Gets You Paid Faster",
+    "hero_zh": "專業發票，加速收款",
+    "intro_en": "Create and send polished, compliant invoices in minutes. Our invoicing system tracks payments, sends automatic reminders, and integrates seamlessly with your accounting records.",
+    "intro_zh": "在幾分鐘內建立並發送專業合規的發票。我們的發票系統追蹤付款、自動發送提醒，並與您的會計記錄無縫整合。",
+    "features": [
+      {
+        "en": "Custom-branded invoice templates",
+        "zh": "自訂品牌發票模板"
+      },
+      {
+        "en": "Automated payment tracking and reminders",
+        "zh": "自動付款追蹤及提醒"
+      },
+      {
+        "en": "Multi-currency support for international clients",
+        "zh": "支援多種貨幣以服務國際客戶"
+      },
+      {
+        "en": "Direct integration with your accounting ledger",
+        "zh": "直接整合至您的會計賬簿"
+      }
+    ],
+    "cta_en": "Create Your First Invoice",
+    "cta_zh": "建立您的第一張發票"
+  },
+  "corporate-secretary": {
+    "title_en": "Corporate Secretary",
+    "title_zh": "公司秘書",
+    "hero_en": "Full Compliance, Zero Worries",
+    "hero_zh": "全面合規，毫無憂慮",
+    "intro_en": "Every company needs a corporate secretary. We handle statutory filings, maintain your company registers, and ensure you never miss a compliance deadline. Consider it your regulatory safety net.",
+    "intro_zh": "每家公司都需要一位公司秘書。我們處理法定申報、維護您的公司登記冊，並確保您絕不錯過任何合規截止日期。這是您的監管安全網。",
+    "features": [
+      {
+        "en": "Annual return preparation and filing",
+        "zh": "年度申報準備及提交"
+      },
+      {
+        "en": "Maintenance of statutory registers and minute books",
+        "zh": "維護法定登記冊及會議記錄"
+      },
+      {
+        "en": "AGM and EGM preparation and documentation",
+        "zh": "股東週年大會及特別大會準備及文件記錄"
+      },
+      {
+        "en": "Changes to company officers and share structure",
+        "zh": "公司管理人員及股份結構變更處理"
+      }
+    ]
+  },
+  "annual-return-filing": {
+    "title_en": "Annual Return Filing",
+    "title_zh": "年度申報",
+    "hero_en": "Timely Filing, Every Year, Guaranteed",
+    "hero_zh": "每年準時申報，保證無誤",
+    "intro_en": "Filing your annual return is a legal obligation. Our team tracks your deadline, prepares the necessary documents, and submits everything on time — so you avoid penalties and stay in good standing.",
+    "intro_zh": "提交年度申報是一項法律義務。我們的團隊追蹤您的截止日期、準備必要文件，並按時提交所有資料 — 讓您避免罰款並保持良好記錄。",
+    "steps": [
+      {
+        "en": "Review your company details and confirm accuracy",
+        "zh": "審查您的公司資料並確認準確性"
+      },
+      {
+        "en": "Prepare financial statements if required",
+        "zh": "如有需要，準備財務報表"
+      },
+      {
+        "en": "Complete and lodge the annual return with the registry",
+        "zh": "填妥並向註冊處提交年度申報"
+      },
+      {
+        "en": "Receive confirmation and maintain records for audit purposes",
+        "zh": "接收確認並保存記錄以供審計"
+      }
+    ]
+  },
+  "pricing": {
+    "title_en": "Pricing",
+    "title_zh": "定價",
+    "hero_en": "Simple, Transparent Pricing",
+    "hero_zh": "簡單透明的定價",
+    "intro_en": "No hidden fees, no surprises. Choose the plan that fits your business and scale as you grow.",
+    "intro_zh": "無隱藏費用，無意外收費。選擇適合您業務的方案，隨業務成長而擴展。",
+    "plans": [
+      {
+        "name_en": "Basic",
+        "name_zh": "基本方案",
+        "price_en": "{PRICE_BASIC}",
+        "price_zh": "{PRICE_BASIC}",
+        "desc_en": "Essential compliance for early-stage startups.",
+        "desc_zh": "早期初創企業的基本合規服務。",
+        "features_en": [
+          "Annual Return Filing",
+          "Basic Document Storage",
+          "Email Support (48h SLA)"
+        ],
+        "features_zh": [
+          "年度申報",
+          "基本文件儲存",
+          "電郵支援（48小時內回覆）"
+        ]
+      },
+      {
+        "name_en": "Pro",
+        "name_zh": "專業方案",
+        "popular": true,
+        "price_en": "{PRICE_PRO}",
+        "price_zh": "{PRICE_PRO}",
+        "desc_en": "Comprehensive financial and secretarial support for growing SMEs.",
+        "desc_zh": "為成長型中小企提供全面的財務及秘書支援。",
+        "features_en": [
+          "Everything in Basic",
+          "Monthly Bookkeeping",
+          "Tax Preparation",
+          "Priority Chat Support",
+          "Visa Application Guidance"
+        ],
+        "features_zh": [
+          "基本方案所有服務",
+          "月度記帳",
+          "稅務準備",
+          "優先即時通訊支援",
+          "簽證申請指導"
+        ]
+      },
+      {
+        "name_en": "Enterprise",
+        "name_zh": "企業方案",
+        "price_en": "Custom",
+        "price_zh": "自訂",
+        "desc_en": "Tailored solutions and dedicated account management for large teams.",
+        "desc_zh": "為大型團隊提供量身定制的解決方案及專屬客戶管理。",
+        "features_en": [
+          "Everything in Pro",
+          "Dedicated Account Manager",
+          "Custom Integrations",
+          "24/7 Phone Support",
+          "Multi-entity Management"
+        ],
+        "features_zh": [
+          "專業方案所有服務",
+          "專屬客戶經理",
+          "自訂整合",
+          "24/7 電話支援",
+          "多實體管理"
+        ]
+      }
+    ]
+  },
+  "our-culture": {
+    "title_en": "Our Culture",
+    "title_zh": "企業文化",
+    "hero_en": "Built by Entrepreneurs, for Entrepreneurs",
+    "hero_zh": "由創業者打造，為創業者服務",
+    "intro_en": "We understand the challenges of running a business because we have been there ourselves. Our culture is rooted in empathy, action, and a genuine desire to see our clients succeed. We believe business services should be transparent, accessible, and actually helpful — not just another expense.",
+    "intro_zh": "我們理解經營企業的挑戰，因為我們親身經歷過。我們的文化植根於同理心、行動力，以及真誠希望客戶成功的初心。我們相信商業服務應該是透明、可及且真正有用的，而不僅僅是另一項開支。",
+    "values": [
+      {
+        "en": "Client-First Mindset — Every decision starts with what is best for our clients",
+        "zh": "客戶優先思維 — 每項決策都以客戶最佳利益為出發點"
+      },
+      {
+        "en": "Continuous Improvement — We never stop refining our processes and technology",
+        "zh": "持續改進 — 我們從不停止優化流程與科技"
+      },
+      {
+        "en": "Radical Transparency — No hidden fees, no confusing terms, just honest communication",
+        "zh": "徹底透明 — 無隱藏費用、無令人困惑的條款，只有坦誠溝通"
+      },
+      {
+        "en": "Team Empowerment — We invest in our people so they can invest in our clients",
+        "zh": "團隊賦能 — 我們投資於團隊，讓他們能為客戶創造價值"
+      }
+    ]
+  },
+  "social-responsibility": {
+    "title_en": "Social Responsibility",
+    "title_zh": "社會責任",
+    "hero_en": "Growing Business, Growing Communities",
+    "hero_zh": "企業成長，社區共榮",
+    "intro_en": "We believe that business success and social impact go hand in hand. Through sustainable practices, community engagement, and ethical operations, we strive to make a positive difference beyond our balance sheet.",
+    "intro_zh": "我們相信商業成功與社會影響力相輔相成。透過可持續實踐、社區參與和道德營運，我們致力在財務報表之外創造正面影響。",
+    "areas": [
+      {
+        "en": "Environmental Sustainability — Minimizing our carbon footprint through digital-first operations and paperless workflows",
+        "zh": "環境可持續性 — 透過數位優先營運及無紙化流程，減少碳足跡"
+      },
+      {
+        "en": "Community Engagement — Supporting local entrepreneurship through mentorship, workshops, and pro-bono advisory",
+        "zh": "社區參與 — 透過導師計劃、工作坊及無償諮詢，支持本地創業"
+      },
+      {
+        "en": "Ethical Governance — Upholding the highest standards of corporate governance and regulatory compliance",
+        "zh": "道德治理 — 堅持最高標準的企業治理及監管合規"
+      }
+    ]
+  },
+  "trust-security": {
+    "title_en": "Trust & Security",
+    "title_zh": "信任與安全",
+    "hero_en": "Your Data, Your Trust — Our Foundation",
+    "hero_zh": "您的資料與信任 — 我們的基石",
+    "intro_en": "We handle sensitive corporate and personal information every day. That responsibility is one we take seriously. Our security framework is built on industry best practices, ensuring your data remains confidential, available only to you and those you authorize.",
+    "intro_zh": "我們每天處理敏感的企業及個人資料，這份責任我們嚴肅對待。我們的安全框架建基於行業最佳實踐，確保您的資料保持機密，僅供您及您授權的人員存取。",
+    "measures": [
+      {
+        "en": "End-to-end encryption for all data in transit and at rest",
+        "zh": "所有傳輸中及靜態資料的端到端加密"
+      },
+      {
+        "en": "Multi-factor authentication and role-based access control",
+        "zh": "多因素認證及基於角色的存取控制"
+      },
+      {
+        "en": "Regular independent security audits and penetration testing",
+        "zh": "定期獨立安全審計及滲透測試"
+      },
+      {
+        "en": "Strict data retention and deletion policies compliant with privacy regulations",
+        "zh": "符合隱私法規的嚴格資料保留及刪除政策"
+      }
+    ]
+  },
+  "blogs": {
+    "title_en": "Blogs",
+    "title_zh": "部落格",
+    "hero_en": "Expert Insights for Business Owners",
+    "hero_zh": "為企業主提供的專業見解",
+    "intro_en": "Stay informed with the latest guides, tips, and regulatory updates for running your business smoothly.",
+    "intro_zh": "掌握最新指南、技巧及監管更新，助您順利經營業務。",
+    "articles": [
+      {
+        "en": "How to Register a Business: A Step-by-Step Guide",
+        "zh": "如何註冊公司：逐步指南",
+        "desc_en": "Everything you need to know about company incorporation, from choosing a structure to receiving your certificate.",
+        "desc_zh": "關於公司註冊的一切須知，從選擇結構到領取證書。"
+      },
+      {
+        "en": "Understanding Corporate Tax Obligations",
+        "zh": "了解企業稅務義務",
+        "desc_en": "A clear breakdown of what taxes your company needs to pay and when.",
+        "desc_zh": "清晰拆解您的公司需要繳納哪些稅項及何時繳納。"
+      },
+      {
+        "en": "SSIC Codes: Why They Matter and How to Choose",
+        "zh": "SSIC 代碼：為何重要及如何選擇",
+        "desc_en": "Selecting the right SSIC code ensures smooth registration and accurate regulatory classification.",
+        "desc_zh": "選擇正確的 SSIC 代碼可確保順利註冊及準確的監管分類。"
+      },
+      {
+        "en": "GST Registration: Thresholds and Requirements",
+        "zh": "消費稅註冊：門檻與要求",
+        "desc_en": "Learn when your business must register for GST and how to stay compliant.",
+        "desc_zh": "了解您的企業何時必須註冊消費稅以及如何保持合規。"
+      },
+      {
+        "en": "A Guide to Employment Pass Applications",
+        "zh": "就業准證申請指南",
+        "desc_en": "Navigate the EP application process for foreign talent with confidence.",
+        "desc_zh": "自信地為海外人才辦理就業准證申請流程。"
+      },
+      {
+        "en": "Dividends and Taxation: What Business Owners Should Know",
+        "zh": "股息與稅務：企業主須知",
+        "desc_en": "Understand how dividends are taxed and how to structure your distributions efficiently.",
+        "desc_zh": "了解股息如何課稅以及如何有效規劃分配結構。"
+      }
+    ],
+    "cta_en": "Read More Articles",
+    "cta_zh": "閱讀更多文章"
+  },
+  "success-stories": {
+    "title_en": "Success Stories",
+    "title_zh": "成功案例",
+    "hero_en": "Real Businesses, Real Results",
+    "hero_zh": "真實企業，真實成果",
+    "intro_en": "Discover how businesses across industries have streamlined their operations and achieved growth with our support. Note: These stories illustrate common scenarios our clients experience.",
+    "intro_zh": "了解各行各業的企業如何透過我們的支援精簡營運並實現增長。備註：這些故事展示客戶經歷的常見情景。",
+    "placeholder": true
+  },
+  "community": {
+    "title_en": "Community",
+    "title_zh": "社群",
+    "hero_en": "Connect, Learn, and Grow Together",
+    "hero_zh": "聯繫、學習、共同成長",
+    "intro_en": "Join a vibrant community of entrepreneurs and business owners. Share experiences, ask questions, and build meaningful connections that help your business thrive.",
+    "intro_zh": "加入充滿活力的企業家及企業主社群。分享經驗、提出問題，建立有意義的聯繫，助您的業務蓬勃發展。",
+    "placeholder": true
+  },
+  "faqs": {
+    "title_en": "Frequently Asked Questions",
+    "title_zh": "常見問題",
+    "hero_en": "Find Answers Quickly",
+    "hero_zh": "快速尋找答案",
+    "questions": [
+      {
+        "q_en": "How long does company incorporation take?",
+        "q_zh": "公司註冊需要多長時間？",
+        "a_en": "Most incorporations are completed within 1–3 business days once all documents are submitted. For foreign directors, additional approvals may extend the timeline to 5–7 business days.",
+        "a_zh": "大多數註冊在提交所有文件後 1–3 個工作天內完成。對於外國董事，額外的審批可能需要 5–7 個工作天。"
+      },
+      {
+        "q_en": "What documents do I need for incorporation?",
+        "q_zh": "公司註冊需要哪些文件？",
+        "a_en": "You will need a valid identification document, proof of residential address, and your proposed company name. For foreign directors, passport copies and additional details are required.",
+        "a_zh": "您需要有效的身份證明文件、住址證明以及擬用的公司名稱。外國董事則需提供護照副本及其他詳細資料。"
+      },
+      {
+        "q_en": "Do I need to be physically present to register a company?",
+        "q_zh": "我需要親身到場才能註冊公司嗎？",
+        "a_en": "No. The entire process can be completed remotely. We handle all filings electronically and can arrange nominee director services if required.",
+        "a_zh": "不需要。整個流程可以遠程完成。我們以電子方式處理所有申報，並可安排提名董事服務（如有需要）。"
+      },
+      {
+        "q_en": "What is a nominee director and do I need one?",
+        "q_zh": "什麼是提名董事？我需要嗎？",
+        "a_en": "A nominee director is a locally resident individual appointed to meet statutory requirements. Foreign-owned companies typically require a nominee director to comply with local regulations.",
+        "a_zh": "提名董事是為符合法定要求而委任的當地居民個人。外資公司通常需要提名董事以遵守當地法規。"
+      },
+      {
+        "q_en": "How does the accounting service work?",
+        "q_zh": "會計服務如何運作？",
+        "a_en": "We connect your accounts to our cloud-based platform. Your dedicated accountant categorizes transactions monthly, prepares financial statements, and handles all tax filings on schedule.",
+        "a_zh": "我們將您的賬戶連接到雲端平台。您的專屬會計師每月進行交易分類、準備財務報表，並按時處理所有稅務申報。"
+      },
+      {
+        "q_en": "Is there a money-back guarantee?",
+        "q_zh": "有退款保證嗎？",
+        "a_en": "Yes. We offer a 30-day money-back guarantee on all our plans. If you are not satisfied within the first 30 days, we will refund your payment in full.",
+        "a_zh": "有。我們為所有方案提供 30 天退款保證。如果您在首 30 天內不滿意，我們將全額退款。"
+      },
+      {
+        "q_en": "Can I switch plans as my business grows?",
+        "q_zh": "隨著業務成長，我可以轉換方案嗎？",
+        "a_en": "Absolutely. You can upgrade or downgrade your plan at any time. We will prorate the difference and ensure a smooth transition with no disruption to your services.",
+        "a_zh": "當然可以。您可以隨時升級或降級方案。我們將按比例計算差額，並確保順利過渡，服務不受中斷。"
+      },
+      {
+        "q_en": "How do you protect my data?",
+        "q_zh": "你們如何保護我的資料？",
+        "a_en": "We employ bank-grade encryption, multi-factor authentication, and strict access controls. Our systems undergo regular independent security audits to ensure your information stays protected.",
+        "a_zh": "我們採用銀行級別加密、多因素認證及嚴格的存取控制。我們的系統定期接受獨立安全審計，確保您的資訊受到保護。"
+      }
+    ]
+  },
+  "privacy-policy": {
+    "title_en": "Privacy Policy",
+    "title_zh": "隱私政策",
+    "hero_en": "How We Protect Your Information",
+    "hero_zh": "我們如何保護您的資訊",
+    "intro_en": "This Privacy Policy explains how Leap International Corporate Service Limited collects, uses, and safeguards your personal data in compliance with applicable data protection laws.",
+    "intro_zh": "本隱私政策說明 Leap International Corporate Service Limited 如何根據適用的資料保護法例收集、使用及保護您的個人資料。",
+    "sections": [
+      {
+        "en": "Information We Collect",
+        "zh": "我們收集的資訊",
+        "content_en": "We collect personal information you provide directly, including your name, contact details, identification documents, and financial information necessary to deliver our services.",
+        "content_zh": "我們收集您直接提供的個人資訊，包括姓名、聯絡資料、身份證明文件以及提供服務所需的財務資訊。"
+      },
+      {
+        "en": "How We Use Your Data",
+        "zh": "我們如何使用您的資料",
+        "content_en": "Your data is used to deliver our services, communicate with you, comply with legal obligations, and improve our offerings. We never sell your personal information to third parties.",
+        "content_zh": "您的資料用於提供服務、與您溝通、遵守法律義務及改進我們的產品。我們絕不會將您的個人資訊出售給第三方。"
+      },
+      {
+        "en": "Data Retention",
+        "zh": "資料保留",
+        "content_en": "We retain your data only for as long as necessary to fulfill the purposes for which it was collected, or as required by applicable laws and regulations.",
+        "content_zh": "我們僅在為達成收集目的所需的時間內保留您的資料，或按適用法律法規的要求保留。"
+      },
+      {
+        "en": "Your Rights",
+        "zh": "您的權利",
+        "content_en": "You have the right to access, correct, or request deletion of your personal data. To exercise these rights, please contact us using the details on our Contact page.",
+        "content_zh": "您有權查閱、更正或要求刪除您的個人資料。如需行使這些權利，請使用聯絡頁面上的資料與我們聯繫。"
+      }
+    ]
+  },
+  "terms-of-service": {
+    "title_en": "Terms of Service",
+    "title_zh": "服務條款",
+    "hero_en": "The Terms Governing Our Services",
+    "hero_zh": "規管我們服務的條款",
+    "intro_en": "These Terms of Service govern your use of our website and services. By engaging our services, you agree to these terms.",
+    "intro_zh": "本服務條款規管您對我們網站及服務的使用。使用我們的服務即表示您同意這些條款。",
+    "sections": [
+      {
+        "en": "Services Provided",
+        "zh": "提供的服務",
+        "content_en": "Leap International provides corporate services including company incorporation, accounting, tax filing, corporate secretarial, payroll, and related advisory services as described on our website.",
+        "content_zh": "Leap International 提供企業服務，包括公司註冊、會計、報稅、公司秘書、薪資及相關諮詢服務，詳見我們網站所述。"
+      },
+      {
+        "en": "Client Obligations",
+        "zh": "客戶義務",
+        "content_en": "Clients agree to provide accurate and complete information necessary for service delivery, and to respond to requests for information in a timely manner.",
+        "content_zh": "客戶同意提供準確完整的服務所需資訊，並及時回應資訊請求。"
+      },
+      {
+        "en": "Fees and Payment",
+        "zh": "費用與付款",
+        "content_en": "Fees are as quoted in our service agreements or pricing page. Payment terms are specified in individual engagement letters.",
+        "content_zh": "費用按服務協議或定價頁面所報。付款條款在個別委聘書中列明。"
+      },
+      {
+        "en": "Limitation of Liability",
+        "zh": "責任限制",
+        "content_en": "Our liability is limited to the extent permitted by applicable law and as specified in individual service agreements.",
+        "content_zh": "我們的責任在適用法律允許的範圍內，以及個別服務協議中訂明的範圍內受到限制。"
+      }
+    ]
+  },
+  "contact": {
+    "title_en": "Contact Us",
+    "title_zh": "聯絡我們",
+    "hero_en": "Let's Start a Conversation",
+    "hero_zh": "讓我們開始對話",
+    "intro_en": "Whether you are ready to incorporate, have a question about our services, or just want to explore your options — our team is here to help.",
+    "intro_zh": "無論您準備註冊公司、對我們的服務有疑問，或只是想探索您的選擇 — 我們的團隊隨時為您提供協助。"
+  }
+}

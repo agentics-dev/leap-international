@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="Your payment for Leap International Hong Kong corporate services has been received. Check your email for confirmation and next steps." name="description"/>
+<meta content="payment confirmation Hong Kong, Leap International payment received, corporate services order confirmed, HK business services receipt" name="keywords"/>
+<link href="https://www.leapcorpser.com/pages/confirmation.html" rel="canonical"/>
+<meta content="Payment Confirmation — Thank You | Leap International" property="og:title"/>
+<meta content="Your payment for Leap International Hong Kong corporate services has been received. Check your email for confirmation and next steps." property="og:description"/>
+<meta content="../images/Fast and Affordable Company Incorporation Services.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="https://www.leapcorpser.com/pages/confirmation.html" property="og:url"/>
+<meta content="Leap International Corporate Service Limited" property="og:site_name"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Payment Confirmation — Thank You | Leap International" name="twitter:title"/>
+<meta content="Your payment for Leap International Hong Kong corporate services has been received. Check your email for confirmation and next steps." name="twitter:description"/>
+  <title>Payment Confirmation — Thank You | Leap International</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <!-- jsPDF for professional PDF invoice generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .lang-en { display: none; }
+    .lang-zh { display: block; }
+    [data-lang="en"] .lang-en { display: block; }
+    [data-lang="en"] .lang-zh { display: none; }
+    [data-lang="zh"] .lang-en { display: none; }
+    [data-lang="zh"] .lang-zh { display: block; }
+    .success-icon { animation: scaleIn 0.5s ease-out; }
+    @keyframes scaleIn {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; }
+      .print-block { page-break-inside: avoid; }
+    }
+  </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://www.leapcorpser.com/pages/confirmation.html#webpage",
+  "url": "https://www.leapcorpser.com/pages/confirmation.html",
+  "name": "Payment Confirmation — Thank You | Leap International",
+  "description": "Your payment for Leap International Hong Kong corporate services has been received. Check your email for confirmation and next steps.",
+  "isPartOf": {"@id": "https://www.leapcorpser.com/#website"}
+}
+</script>
+
+<!-- Google tag (gtag.js) - Replace G-WMMZZ1F6X0 with your actual Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WMMZZ1F6X0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WMMZZ1F6X0');
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div class="max-w-[600px] mx-auto px-6 py-12 text-center print-block">
+    <div class="success-icon mb-6">
+      <span class="material-symbols-outlined text-[80px] text-green-500">check_circle</span>
+    </div>
+
+    <h1 class="text-[28px] font-bold text-gray-900 mb-3">
+      <span class="lang-en">Payment Successful!</span>
+      <span class="lang-zh">支付成功！</span>
+    </h1>
+
+    <p class="text-[16px] text-gray-600 mb-8">
+      <span class="lang-en">Thank you for your payment. Your transaction has been completed successfully.</span>
+      <span class="lang-zh">感謝您的付款。您的交易已成功完成。</span>
+    </p>
+
+    <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 text-left">
+      <h2 class="text-[18px] font-semibold text-gray-900 mb-4">
+        <span class="lang-en">Transaction Details</span>
+        <span class="lang-zh">交易詳情</span>
+      </h2>
+
+      <div class="space-y-3">
+        <div class="flex justify-between text-[14px]">
+          <span class="text-gray-600">
+            <span class="lang-en">Transaction ID</span>
+            <span class="lang-zh">交易編號</span>
+          </span>
+          <span class="font-medium text-gray-900 break-all text-right" id="transactionId">—</span>
+        </div>
+        <div class="flex justify-between text-[14px]">
+          <span class="text-gray-600">
+            <span class="lang-en">Date</span>
+            <span class="lang-zh">日期</span>
+          </span>
+          <span class="font-medium text-gray-900" id="transactionDate">—</span>
+        </div>
+        <div class="flex justify-between text-[14px]">
+          <span class="text-gray-600">
+            <span class="lang-en">Customer</span>
+            <span class="lang-zh">客戶姓名</span>
+          </span>
+          <span class="font-medium text-gray-900 text-right" id="customerName">—</span>
+        </div>
+        <div class="flex justify-between text-[14px]">
+          <span class="text-gray-600">
+            <span class="lang-en">Email</span>
+            <span class="lang-zh">電郵</span>
+          </span>
+          <span class="font-medium text-gray-900 break-all text-right" id="customerEmail">—</span>
+        </div>
+        <div class="flex justify-between text-[14px]">
+          <span class="text-gray-600">
+            <span class="lang-en">Payment Method</span>
+            <span class="lang-zh">支付方式</span>
+          </span>
+          <span class="font-medium text-gray-900" id="paymentMethod">—</span>
+        </div>
+        <div class="flex justify-between text-[14px] border-t border-gray-100 pt-3">
+          <span class="text-gray-900 font-semibold">
+            <span class="lang-en">Total Paid</span>
+            <span class="lang-zh">實付金額</span>
+          </span>
+          <span class="font-bold text-gray-900" id="transactionAmount">HKD —</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Line items breakdown -->
+    <div id="lineItemsBlock" class="bg-white rounded-lg border border-gray-200 p-6 mb-6 text-left hidden">
+      <h2 class="text-[18px] font-semibold text-gray-900 mb-4">
+        <span class="lang-en">Order Summary</span>
+        <span class="lang-zh">訂單摘要</span>
+      </h2>
+      <div id="lineItemsList" class="space-y-2 mb-3"></div>
+      <div id="discountLine" class="hidden flex justify-between text-[14px] py-2 border-t border-gray-100">
+        <span class="text-[#10B981]" id="discountLabel">Discount</span>
+        <span class="font-semibold text-[#10B981]" id="discountAmount">-HKD 0</span>
+      </div>
+      <div class="flex justify-between text-[14px] py-2 border-t border-gray-200">
+        <span class="text-gray-600">
+          <span class="lang-en">Subtotal</span>
+          <span class="lang-zh">小計</span>
+        </span>
+        <span class="font-semibold" id="subtotalAmount">HKD 0</span>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 text-left">
+      <div class="flex items-start gap-3">
+        <span class="material-symbols-outlined text-blue-600">info</span>
+        <div>
+          <p class="text-[14px] text-blue-800">
+            <span class="lang-en">A confirmation email has been sent to your email address. Please keep this for your records.</span>
+            <span class="lang-zh">確認郵件已發送至您的電郵地址。請保留此記錄。</span>
+          </p>
+          <p class="text-[13px] text-blue-700 mt-2">
+            <span class="lang-en">Our team will contact you within 1 business day. For urgent enquiries, reach us on WhatsApp +852 65550943.</span>
+            <span class="lang-zh">我們的團隊將於 1 個工作天內與您聯絡。如有緊急查詢，請透過 WhatsApp +852 65550943 與我們聯絡。</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 no-print">
+      <a href="index.html" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-white bg-[#165DFF] hover:bg-[#0E4FD9] transition-all text-center">
+        <span class="lang-en">Return to Home</span>
+        <span class="lang-zh">返回首頁</span>
+      </a>
+      <button id="downloadPdfBtn" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-white bg-[#10B981] hover:bg-[#059669] transition-all inline-flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[20px]">download</span>
+        <span class="lang-en">Download Invoice</span>
+        <span class="lang-zh">下載發票</span>
+      </button>
+      <button onclick="window.print()" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-[#165DFF] border border-[#165DFF] hover:bg-blue-50 transition-all">
+        <span class="lang-en">Print</span>
+        <span class="lang-zh">列印</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var LANG_KEY = 'leap-lang';
+    function normaliseLang(v) { return v === 'zh' ? 'zh' : 'en'; }
+    function setLang(lang) {
+      var html = document.documentElement;
+      var v = normaliseLang(lang);
+      html.setAttribute('data-lang', v);
+      try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
+    }
+    var params = new URLSearchParams(window.location.search);
+    var urlLang = params.get('lang');
+    var savedLang = 'en';
+    try { savedLang = normaliseLang(localStorage.getItem(LANG_KEY)); } catch (e) {}
+    setLang(urlLang || savedLang);
+
+    var txnId = params.get('id');
+    var amount = params.get('amount');
+    var name = params.get('name') ? decodeURIComponent(params.get('name')) : '';
+    var email = params.get('email') ? decodeURIComponent(params.get('email')) : '';
+    var method = params.get('method') ? decodeURIComponent(params.get('method')) : 'Card';
+    var lineItemsJson = params.get('line_items');
+    var discountCode = params.get('discount_code') ? decodeURIComponent(params.get('discount_code')) : '';
+    var discountAmount = parseFloat(params.get('discount_amount') || '0') || 0;
+
+    var lineItems = [];
+    try { if (lineItemsJson) lineItems = JSON.parse(decodeURIComponent(lineItemsJson)); } catch (e) { lineItems = []; }
+
+    var now = new Date();
+    var dateStr = now.getFullYear() + '-' +
+                 String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                 String(now.getDate()).padStart(2, '0');
+    document.getElementById('transactionDate').textContent = dateStr;
+
+    if (txnId) {
+      document.getElementById('transactionId').textContent = txnId;
+    } else {
+      var fallbackId = 'TXN-' + now.getFullYear() +
+                      String(now.getMonth() + 1).padStart(2, '0') +
+                      String(now.getDate()).padStart(2, '0') + '-' +
+                      String(Math.floor(Math.random() * 9999)).padStart(4, '0');
+      document.getElementById('transactionId').textContent = fallbackId;
+    }
+
+    document.getElementById('customerName').textContent = name || '—';
+    document.getElementById('customerEmail').textContent = email || '—';
+    document.getElementById('paymentMethod').textContent = method || '—';
+
+    var finalAmount = parseFloat(amount) || 0;
+    var subtotal = finalAmount + discountAmount;
+    document.getElementById('transactionAmount').textContent = 'HKD ' + finalAmount.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+    // 渲染 line items
+    if (lineItems.length) {
+      var block = document.getElementById('lineItemsBlock');
+      var list = document.getElementById('lineItemsList');
+      var html = '';
+      lineItems.forEach(function(it) {
+        var price = Number(it.price) || 0;
+        html += '<div class="flex justify-between text-[14px] py-1">';
+        html += '  <span class="text-gray-700">' + escapeHtml(it.name || it.label || 'Service') + '</span>';
+        html += '  <span class="font-medium text-gray-900">HKD ' + price.toLocaleString('en-US', { minimumFractionDigits: 2 }) + '</span>';
+        html += '</div>';
+      });
+      list.innerHTML = html;
+      document.getElementById('subtotalAmount').textContent = 'HKD ' + subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      if (discountAmount > 0) {
+        var discountLine = document.getElementById('discountLine');
+        discountLine.classList.remove('hidden');
+        discountLine.style.display = 'flex';
+        document.getElementById('discountLabel').textContent = (document.documentElement.getAttribute('data-lang') === 'zh' ? '折扣 (' : 'Discount (') + discountCode + ')';
+        document.getElementById('discountAmount').textContent = '-HKD ' + discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      }
+      block.classList.remove('hidden');
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+    window._receiptData = {
+      txnId: txnId || document.getElementById('transactionId').textContent,
+      date: dateStr,
+      name: name,
+      email: email,
+      method: method,
+      amount: finalAmount,
+      subtotal: subtotal,
+      discountCode: discountCode,
+      discountAmount: discountAmount,
+      lineItems: lineItems,
+      isZh: document.documentElement.getAttribute('data-lang') === 'zh'
+    };
+
+    // ===== jsPDF Professional Invoice =====
+    var downloadBtn = document.getElementById('downloadPdfBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function() {
+        try {
+          generateInvoicePdf(window._receiptData);
+        } catch (e) {
+          console.error('PDF generation failed:', e);
+          alert(window._receiptData.isZh ? 'PDF 生成失敗，請改用列印功能。' : 'PDF generation failed. Please use the Print option instead.');
+        }
+      });
+    }
+
+    function generateInvoicePdf(data) {
+      var jsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+      if (!jsPDF) {
+        throw new Error('jsPDF not loaded');
+      }
+      var doc = new jsPDF({ unit: 'mm', format: 'a4' });
+      var isZh = data.isZh;
+      var pageW = 210, pageH = 297;
+      var margin = 18;
+      var y = 0;
+      var currency = 'HKD';
+
+      // Header band
+      doc.setFillColor(22, 93, 255);
+      doc.rect(0, 0, pageW, 36, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(22);
+      doc.text(isZh ? '付款收據' : 'PAYMENT RECEIPT', margin, 18);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.text('Leap International Corporate Service Limited', margin, 26);
+      doc.setTextColor(20, 20, 20);
+
+      y = 50;
+      // Two-column meta block
+      doc.setFontSize(9);
+      doc.setTextColor(120, 120, 120);
+      doc.setFont('helvetica', 'normal');
+
+      var colLeftX = margin;
+      var colRightX = pageW - margin - 60;
+      var labelY1 = y;
+      var labelY2 = y + 6;
+      var labelY3 = y + 12;
+
+      doc.text(isZh ? '收據編號' : 'Receipt No.', colLeftX, labelY1);
+      doc.text(isZh ? '日期' : 'Date', colLeftX, labelY2);
+      doc.text(isZh ? '付款方式' : 'Payment Method', colLeftX, labelY3);
+
+      doc.text(isZh ? '客戶' : 'Customer', colRightX, labelY1);
+      doc.text(isZh ? '電郵' : 'Email', colRightX, labelY2);
+
+      doc.setTextColor(20, 20, 20);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text(String(data.txnId || '—'), colLeftX + 30, labelY1);
+      doc.text(String(data.date || '—'), colLeftX + 30, labelY2);
+      doc.text(String(data.method || '—'), colLeftX + 30, labelY3);
+
+      doc.text(String(data.name || '—'), colRightX + 25, labelY1);
+      doc.text(String(data.email || '—'), colRightX + 25, labelY2);
+
+      y = 80;
+      // Items table header
+      doc.setFillColor(245, 247, 250);
+      doc.rect(margin, y, pageW - margin * 2, 8, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(80, 80, 80);
+      doc.text(isZh ? '項目' : 'Item', margin + 2, y + 5.5);
+      doc.text(isZh ? '金額' : 'Amount', pageW - margin - 2, y + 5.5, { align: 'right' });
+      y += 12;
+
+      // Items rows
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(40, 40, 40);
+      doc.setFontSize(10);
+      (data.lineItems || []).forEach(function(it) {
+        var name = it.name || it.label || 'Service';
+        // wrap long names
+        var lines = doc.splitTextToSize(name, pageW - margin * 2 - 30);
+        doc.text(lines, margin + 2, y);
+        var price = Number(it.price) || 0;
+        doc.text(currency + ' ' + price.toLocaleString('en-US', { minimumFractionDigits: 2 }), pageW - margin - 2, y, { align: 'right' });
+        y += Math.max(6, lines.length * 5);
+      });
+
+      // Discount line
+      if (data.discountAmount > 0) {
+        doc.setTextColor(5, 150, 105);
+        doc.setFont('helvetica', 'bold');
+        var discountLabel = (isZh ? '折扣' : 'Discount') + ' (' + (data.discountCode || '') + ')';
+        doc.text(discountLabel, margin + 2, y);
+        doc.text('-' + currency + ' ' + data.discountAmount.toLocaleString('en-US', { minimumFractionDigits: 2 }), pageW - margin - 2, y, { align: 'right' });
+        y += 7;
+        doc.setTextColor(40, 40, 40);
+        doc.setFont('helvetica', 'normal');
+      }
+
+      // Subtotal + Total
+      y += 2;
+      doc.setDrawColor(220, 220, 220);
+      doc.line(margin, y, pageW - margin, y);
+      y += 7;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(120, 120, 120);
+      doc.text(isZh ? '小計' : 'Subtotal', margin + 2, y);
+      doc.setTextColor(40, 40, 40);
+      doc.text(currency + ' ' + data.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 }), pageW - margin - 2, y, { align: 'right' });
+      y += 8;
+
+      doc.setDrawColor(22, 93, 255);
+      doc.setLineWidth(0.6);
+      doc.line(margin, y, pageW - margin, y);
+      doc.setLineWidth(0.2);
+      y += 8;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(14);
+      doc.setTextColor(22, 93, 255);
+      doc.text(isZh ? '實付總額' : 'Total Paid', margin + 2, y);
+      doc.text(currency + ' ' + data.amount.toLocaleString('en-US', { minimumFractionDigits: 2 }), pageW - margin - 2, y, { align: 'right' });
+
+      // Footer
+      y = pageH - 50;
+      doc.setTextColor(100, 100, 100);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      var footerMsg = isZh
+        ? '感謝您選擇 Leap International。我們的團隊將於 1 個工作天內與您聯絡。\n如有任何查詢，請電郵至 info@leapcorpser.com 或 WhatsApp +852 65550943。'
+        : 'Thank you for choosing Leap International. Our team will contact you within 1 business day.\nFor enquiries: info@leapcorpser.com · WhatsApp +852 65550943 · www.leapcorpser.com';
+      var footerLines = doc.splitTextToSize(footerMsg, pageW - margin * 2);
+      doc.text(footerLines, margin, y);
+
+      y = pageH - 18;
+      doc.setDrawColor(220, 220, 220);
+      doc.line(margin, y, pageW - margin, y);
+      doc.setFontSize(8);
+      doc.setTextColor(150, 150, 150);
+      doc.text('Leap International Corporate Service Limited · ' + (isZh ? '香港公司註冊及企業服務' : 'Hong Kong Company Incorporation & Corporate Services'), pageW / 2, y + 5, { align: 'center' });
+
+      // Save
+      var filename = 'Leap-Receipt-' + (data.txnId || Date.now()) + '.pdf';
+      doc.save(filename);
+    }
+  })();
+  </script>
+</body>
+</html>
