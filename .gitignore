@@ -9,8 +9,9 @@ payment_records.json
 .vercel
 node_modules/
 **/dist/
-admin_dist/
-build/
+	admin_dist/
+	dist/
+	build/
 .env*
 !.env.example
 .DS_Store
@@ -18,3 +19,11 @@ build/
 *.pdf
 *.docx
 *.pptx
+.dev.vars
+
+# Cloudflare wrangler 缓存
+.wrangler/
+deno.lock
+
+# node_modules 顶层（确保递归忽略）
+node_modules/

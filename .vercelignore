@@ -1,0 +1,11 @@
+.env
+.env.*
+.git
+.netlify
+.vercel
+node_modules
+payment_records.json
+*.zip
+*.pdf
+*.docx
+*.pptx

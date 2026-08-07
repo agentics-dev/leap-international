@@ -233,13 +233,14 @@ module.exports = async (req, res) => {
     const signature = req.headers['x-airwallex-signature'] || '';
     const timestamp = req.headers['x-airwallex-timestamp'] || '';
 
-    if (WEBHOOK_SECRET) {
-      if (!verifyAirwallexSignature(rawBody, signature, timestamp, WEBHOOK_SECRET)) {
-        console.error('Webhook signature verification failed');
-        return json(res, 403, { error: 'Invalid signature' });
-      }
-    } else {
-      console.warn('AIRWALLEX_WEBHOOK_SECRET not set — skipping signature verification. Set it in production.');
+    if (!WEBHOOK_SECRET) {
+      console.error('AIRWALLEX_WEBHOOK_SECRET not configured; rejecting webhook');
+      return json(res, 500, { error: 'Webhook signature verification is not configured' });
+    }
+
+    if (!verifyAirwallexSignature(rawBody, signature, timestamp, WEBHOOK_SECRET)) {
+      console.error('Webhook signature verification failed');
+      return json(res, 403, { error: 'Invalid signature' });
     }
 
     const body = JSON.parse(rawBody || '{}');

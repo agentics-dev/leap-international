@@ -334,15 +334,16 @@ exports.handler = async (event) => {
   const NOTIFY_EMAIL = process.env.NOTIFY_EMAIL;
   const rawBody = event.body;
 
-  if (WEBHOOK_SECRET) {
-    const signature = event.headers['x-airwallex-signature'] || '';
-    const timestamp = event.headers['x-airwallex-timestamp'] || '';
-    if (!verifyAirwallexSignature(rawBody, signature, timestamp, WEBHOOK_SECRET)) {
-      console.error('Webhook signature verification failed');
-      return { statusCode: 403, body: 'Invalid signature' };
-    }
-  } else {
-    console.warn('AIRWALLEX_WEBHOOK_SECRET not set — skipping signature verification. Set it in production.');
+  if (!WEBHOOK_SECRET) {
+    console.error('AIRWALLEX_WEBHOOK_SECRET not configured; rejecting webhook');
+    return { statusCode: 500, body: 'Webhook signature verification is not configured' };
+  }
+
+  const signature = event.headers['x-airwallex-signature'] || '';
+  const timestamp = event.headers['x-airwallex-timestamp'] || '';
+  if (!verifyAirwallexSignature(rawBody, signature, timestamp, WEBHOOK_SECRET)) {
+    console.error('Webhook signature verification failed');
+    return { statusCode: 403, body: 'Invalid signature' };
   }
 
   let body;

@@ -6,6 +6,9 @@ import DashboardLayout from './components/DashboardLayout';
 import NewsList from './pages/NewsList';
 import NewsEditor from './pages/NewsEditor';
 
+import FaqList from './pages/FaqList';
+import FaqEditor from './pages/FaqEditor';
+
 function App() {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,6 +47,9 @@ function App() {
           <Route path="news" element={<NewsList />} />
           <Route path="news/new" element={<NewsEditor />} />
           <Route path="news/edit/:id" element={<NewsEditor />} />
+          <Route path="faqs" element={<FaqList />} />
+          <Route path="faqs/new" element={<FaqEditor />} />
+          <Route path="faqs/edit/:id" element={<FaqEditor />} />
         </Route>
       </Routes>
     </BrowserRouter>

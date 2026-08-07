@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { LogOut, FileText } from 'lucide-react';
+import { LogOut, FileText, HelpCircle } from 'lucide-react';
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -30,6 +30,17 @@ export default function DashboardLayout() {
           >
             <FileText className="w-5 h-5 mr-3" />
             News & Activities
+          </Link>
+          <Link
+            to="/faqs"
+            className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
+              location.pathname.startsWith('/faqs')
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <HelpCircle className="w-5 h-5 mr-3" />
+            FAQ Management
           </Link>
         </nav>
         <div className="p-4 border-t border-gray-200">

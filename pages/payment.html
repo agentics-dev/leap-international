@@ -17,8 +17,9 @@
   <meta content="Securely complete your payment for Leap International's Hong Kong company incorporation, accounting and corporate services. Credit card, Alipay, WeChat Pay and bank transfer accepted." name="twitter:description"/>
   <title>Secure Payment — Leap International Corporate Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- CyberSource Unified Checkout SDK：captureContext 返回后，动态从 token 里的 clientLibrary 加载，
+       不写死 URL（见 handleFinalPayment）。这里先不静态引入。 -->
 <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"nav-bg":"#F0F4F8","coral":"#E8713B","nav-text":"#193B30","nav-divider":"#DDE3EA","tertiary":"#0057ce","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","on-surface-variant":"#57423b","primary":"#a43c12","error":"#ba1a1a"},"spacing":{"container-max":"1280px","gutter":"24px"},"fontFamily":{"headline-sm":["DM Sans"],"label-sm":["Inter"],"label-md":["Inter"],"body-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-sm":["24px",{"lineHeight":"32px","fontWeight":"600"}]}}}}</script>
-  <script src="https://checkout.airwallex.com/assets/elements.bundle.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
   <style>
@@ -237,8 +238,8 @@
                     <span class="material-symbols-outlined text-white text-[18px]">menu_book</span>
                 </div>
                 <div>
-                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Bookkeeping</span><span class="lang-zh">記帳服務</span></span><span class="lang-zh">記帳服務</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Monthly bookkeeping services.</span><span class="lang-zh">月度記帳服務。</span></p>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Audit Services</span><span class="lang-zh">核數服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Audit and tax services.</span><span class="lang-zh">核數及稅務服務</span></p>
                 </div>
             </a>
             <a href="sales-invoice.html" class="flex items-start gap-3 group">
@@ -246,8 +247,17 @@
                     <span class="material-symbols-outlined text-white text-[18px]">receipt_long</span>
                 </div>
                 <div>
-                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en"><span class="lang-en">Sales Invoice</span><span class="lang-zh">銷售發票</span></span><span class="lang-zh">銷售發票</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Professional invoicing solutions.</span><span class="lang-zh">專業發票解決方案。</span></p>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Company Concierge Services</span><span class="lang-zh">公司管家服務</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Company concierge support.</span><span class="lang-zh">公司日常管家支援</span></p>
+                </div>
+            </a>
+            <a href="audit-tax-filing.html" class="flex items-start gap-3 group">
+                <div class="mt-1 bg-blue-600 rounded p-1">
+                    <span class="material-symbols-outlined text-white text-[18px]">description</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Audit & Tax Filing</span><span class="lang-zh">審計及稅務申報</span></p>
+                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Statutory audit and profits tax filing services.</span><span class="lang-zh">法定審計及利得稅申報服務。</span></p>
                 </div>
             </a>
         </div>
@@ -410,16 +420,9 @@
               </div>
 
               <div id="cardFormFields" class="card-fields-container">
-              <div class="grid grid-cols-1 gap-4 mb-4">
-                <div>
-                  <label class="block text-[14px] font-medium text-gray-700 mb-1">
-                    <span class="lang-en">Card information</span>
-                    <span class="lang-zh">信用卡資訊</span>
-                  </label>
-                  <div id="airwallex-card" class="w-full min-h-[48px] px-4 py-3 border border-gray-300 rounded-lg"></div>
-                  <p id="card-error" class="text-[13px] text-red-500 mt-1 hidden"></p>
-                </div>
-              </div>
+              <!-- CyberSource Unified Checkout 渲染容器（SDK 在此挂载卡表单） -->
+              <div id="payment-buttons" class="w-full min-h-[60px] mb-4"></div>
+              <p id="card-error" class="text-[13px] text-red-500 mt-1 hidden"></p>
 
               <div class="mb-4">
                 <label class="block text-[14px] font-medium text-gray-700 mb-1">
@@ -950,13 +953,14 @@
       var firstName = document.getElementById('firstName').value.trim();
       var lastName = document.getElementById('lastName').value.trim();
       var email = document.getElementById('email').value.trim();
-      
+
       if (!firstName || !lastName || !email) return;
-      
+
       document.getElementById('accountDetailsSection').classList.add('hidden');
       document.getElementById('paymentMethodSection').classList.remove('hidden');
-      
-      initAirwallexCard();
+
+      // CyberSource SDK 在用户点 PAY NOW 时才动态加载（见 handleFinalPayment），
+      // 这里不再预初始化。
     }
 
     function selectPayment(method) {
@@ -989,43 +993,62 @@
       }
     }
 
-    var airwallexCard = null;
-    var airwallexReady = false;
+    // ====== CyberSource Unified Checkout ======
+    // 流程（与官方 cybersource-unified-checkout-sample-node 一致）：
+    //   handleFinalPayment → 后端拿 captureContext → 从 token 解出 clientLibrary 动态加载 SDK →
+    //   Accept(cc).unifiedPayments(sidebar).show() 渲染表单 → 用户填卡 → up.complete(tt) 返回签名 JWT →
+    //   发给 process-payment 验签 + 发邮件 → 跳转成功/失败页
+    var ucCaptureContext = null;
+    var ucSdkLoaded = false;
 
-    function initAirwallexCard() {
-      if (airwallexReady) return;
-      if (typeof Airwallex === 'undefined') {
-        setTimeout(initAirwallexCard, 200);
-        return;
-      }
-
-      Airwallex.init({
-        env: 'production',
-        origin: window.location.origin
-      });
-
-      airwallexCard = Airwallex.createElement('card', {
-        style: {
-          base: {
-            fontFamily: '"Inter", sans-serif',
-            fontSize: '14px',
-            color: '#374151'
-          }
+    // 从 captureContext JWT 里解出 clientLibrary URL + integrity，动态加载 SDK（不写死 URL，防注入）
+    function loadUcSdk(captureContext) {
+      return new Promise(function (resolve, reject) {
+        try {
+          var payload = JSON.parse(atob(captureContext.split('.')[1]));
+          var ctxData = (payload.ctx && payload.ctx[0] && payload.ctx[0].data) || {};
+          var clientLibrary = ctxData.clientLibrary;
+          var clientLibraryIntegrity = ctxData.clientLibraryIntegrity;
+          if (!clientLibrary) throw new Error('clientLibrary not found in capture context');
+          var script = document.createElement('script');
+          script.src = clientLibrary;
+          if (clientLibraryIntegrity) script.integrity = clientLibraryIntegrity;
+          script.crossOrigin = 'anonymous';
+          script.onload = function () { ucSdkLoaded = true; resolve(); };
+          script.onerror = function () { reject(new Error('Failed to load CyberSource SDK')); };
+          document.head.appendChild(script);
+        } catch (e) {
+          reject(e);
         }
       });
+    }
 
-      try {
-        airwallexCard.mount('airwallex-card');
-        airwallexReady = true;
-      } catch (e) {
-        console.error('Airwallex mount failed:', e);
-      }
+    function gotoFail(reason, amount, lang) {
+      var p = new URLSearchParams();
+      p.set('reason', encodeURIComponent(reason || 'An error occurred. Please try again.'));
+      p.set('amount', String(amount));
+      p.set('lang', lang);
+      window.location.href = 'payment-failed.html?' + p.toString();
+    }
+
+    function gotoConfirm(args) {
+      var p = new URLSearchParams();
+      p.set('id', args.id);
+      p.set('amount', args.amount);
+      p.set('name', encodeURIComponent(args.name));
+      p.set('email', encodeURIComponent(args.email));
+      p.set('method', encodeURIComponent(args.method || 'Card'));
+      p.set('line_items', encodeURIComponent(JSON.stringify(args.line_items)));
+      if (args.discount_code) p.set('discount_code', encodeURIComponent(args.discount_code));
+      if (args.discount_amount) p.set('discount_amount', String(args.discount_amount));
+      p.set('lang', args.lang);
+      setAppliedDiscount(null);
+      window.location.href = 'confirmation.html?' + p.toString();
     }
 
     async function handleFinalPayment() {
       var payBtn = document.querySelector('button[onclick="handleFinalPayment()"]');
       var errorEl = document.getElementById('card-error');
-      // 优先使用 currentTotal（含折扣后的应付金额），避免从 DOM 文本解析失败
       var amount = currentTotal || 0;
       if (!amount || amount <= 0) {
         var summaryText = (document.getElementById('summaryTotal') || {}).textContent || '';
@@ -1038,35 +1061,22 @@
         return;
       }
 
-      if (typeof Airwallex === 'undefined' || !airwallexCard) {
-        errorEl.textContent = 'Payment system is still loading. Please try again.';
-        errorEl.classList.remove('hidden');
-        return;
-      }
+      var firstName = document.getElementById('firstName').value.trim();
+      var lastName = document.getElementById('lastName').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var fullName = firstName + ' ' + lastName;
+      var lang = document.documentElement.getAttribute('data-lang') || 'en';
+      var discountCode = appliedDiscount ? appliedDiscount.code : '';
+      var discountAmount = currentDiscountAmount || 0;
 
       payBtn.disabled = true;
       payBtn.classList.add('btn-disabled');
       payBtn.innerHTML = '<span class="lang-en">Processing...</span><span class="lang-zh">處理中...</span>';
       errorEl.classList.add('hidden');
 
-      var firstName = document.getElementById('firstName').value.trim();
-      var lastName = document.getElementById('lastName').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var fullName = firstName + ' ' + lastName;
-      var lang = document.documentElement.getAttribute('data-lang') || 'en';
-      var selectedMethodRadio = document.querySelector('input[name="paymentMethod"]:checked');
-      var paymentMethodKey = selectedMethodRadio ? selectedMethodRadio.value : 'card';
-      var paymentMethodLabel = paymentMethodKey === 'card' ? (lang === 'zh' ? '信用卡 / Apple Pay' : 'Card / Apple Pay') :
-                               paymentMethodKey === 'alipay' ? 'Alipay' :
-                               paymentMethodKey === 'wechat' ? (lang === 'zh' ? '微信支付' : 'WeChat Pay') :
-                               paymentMethodKey === 'bankTransfer' ? (lang === 'zh' ? '銀行轉帳' : 'Bank Transfer') : 'Card';
-
-      // 收集折扣信息
-      var discountCode = appliedDiscount ? appliedDiscount.code : '';
-      var discountAmount = currentDiscountAmount || 0;
-
       try {
-        var res = await fetch('/.netlify/functions/create-payment-intent', {
+        // 1) 后端拿 captureContext（含金额校验 + completeMandate）
+        var res = await fetch('/api/create-payment-intent', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1080,66 +1090,68 @@
             locale: lang
           })
         });
-
         if (!res.ok) {
           var errData = await res.json();
-          throw new Error(errData.error || 'Failed to create payment');
+          throw new Error(errData.error || 'Failed to create payment session');
+        }
+        var sessionData = await res.json();
+        ucCaptureContext = sessionData.captureContext;
+
+        // 2) 动态加载 SDK（URL/integrity 来自 captureContext，不写死）
+        if (!ucSdkLoaded) await loadUcSdk(ucCaptureContext);
+        if (typeof Accept === 'undefined') throw new Error('CyberSource SDK not available');
+
+        // 3) 渲染表单 + 用户填卡 + 完成授权（completeMandate:type:AUTH 已在 captureContext 里）
+        var accept = await Accept(ucCaptureContext);
+        var up = await accept.unifiedPayments(true); // sidebar 模式
+        var tt = await up.show({ containers: { paymentSelection: '#payment-buttons' } });
+        var completeResponse = await up.complete(tt); // 返回签名 JWT（含付款结果）
+
+        // 4) 发给后端验签 + 发邮件
+        var payRes = await fetch('/api/process-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            completeResponse: completeResponse,
+            customer_name: fullName,
+            customer_email: email,
+            line_items: currentLineItems,
+            discount_code: discountCode,
+            discount_amount: discountAmount,
+            locale: lang
+          })
+        });
+        var payData = await payRes.json();
+        if (!payRes.ok || !payData.verified) {
+          throw new Error((payData && payData.error) || 'Payment verification failed');
         }
 
-        var intentData = await res.json();
-
-        var result = await Airwallex.confirmPaymentIntent({
-          element: airwallexCard,
-          id: intentData.id,
-          client_secret: intentData.client_secret,
-          return_url: window.location.origin + '/pages/confirmation.html',
-          payment_method_options: {
-            card: {
-              billing: {
-                first_name: firstName,
-                last_name: lastName,
-                email: email
-              }
-            }
-          }
-        });
-
-        if (result && result.status === 'SUCCEEDED') {
-          var params = new URLSearchParams();
-          params.set('id', intentData.id);
-          params.set('amount', amount);
-          params.set('name', encodeURIComponent(fullName));
-          params.set('email', encodeURIComponent(email));
-          params.set('method', encodeURIComponent(paymentMethodLabel));
-          params.set('line_items', encodeURIComponent(JSON.stringify(currentLineItems)));
-          if (discountCode) params.set('discount_code', encodeURIComponent(discountCode));
-          if (discountAmount) params.set('discount_amount', String(discountAmount));
-          params.set('lang', lang);
-          // 清理 localStorage 中的折扣码
-          setAppliedDiscount(null);
-          window.location.href = 'confirmation.html?' + params.toString();
+        // 5) 根据验签后的状态跳转
+        if (payData.status === 'AUTHORIZED' || payData.status === 'PENDING') {
+          gotoConfirm({
+            id: payData.paymentId,
+            amount: amount,
+            name: fullName,
+            email: email,
+            method: [payData.cardBrand, payData.cardLast4 ? '****' + payData.cardLast4 : ''].filter(Boolean).join(' '),
+            line_items: currentLineItems,
+            discount_code: discountCode,
+            discount_amount: discountAmount,
+            lang: lang
+          });
         } else {
-          var declineMsg = result && result.decline_reason ? result.decline_reason : 'Payment was declined. Please try again.';
-          // 跳转到失败页
-          var failParams = new URLSearchParams();
-          failParams.set('reason', encodeURIComponent(declineMsg));
-          failParams.set('amount', String(amount));
-          failParams.set('lang', lang);
-          window.location.href = 'payment-failed.html?' + failParams.toString();
+          gotoFail(payData.status || 'Payment was declined. Please try again.', amount, lang);
         }
       } catch (e) {
-        // 致命错误：跳转失败页
-        var failParams2 = new URLSearchParams();
-        failParams2.set('reason', encodeURIComponent(e.message || 'An error occurred. Please try again.'));
-        failParams2.set('amount', String(amount));
-        failParams2.set('lang', lang);
-        window.location.href = 'payment-failed.html?' + failParams2.toString();
-      } finally {
+        // 用户中途取消也会进这里（SDK 抛错）
         if (payBtn) {
           payBtn.disabled = false;
           payBtn.classList.remove('btn-disabled');
           payBtn.innerHTML = '<span class="lang-en">PAY NOW</span><span class="lang-zh">立即支付</span>';
         }
+        errorEl.textContent = e.message || 'An error occurred. Please try again.';
+        errorEl.classList.remove('hidden');
+        errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }
   </script>

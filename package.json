@@ -1,7 +1,16 @@
 {
-  "name": "leap-international",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "cd admin_src && npm install && npm run build && cd .. && rm -rf admin_dist && mv admin_src/dist admin_dist"
-  }
+	  "name": "leap-international",
+	  "version": "1.0.0",
+	  "scripts": {
+	  	  "build": "cd admin_src && npm install && npm run build && cd .. && rm -rf dist admin_dist && mkdir -p dist && cp -R index.html pages images content FOI_logo.png FOI_logo.svg FOI_logo_192px.png FOI_logo_384px.png robots.txt sitemap.xml dist/ && mv admin_src/dist dist/admin_dist"
+	  },
+	  "dependencies": {
+	  	  "@netlify/blobs": "^8.1.0",
+	  	  "cybersource-rest-client": "0.0.65",
+	  	  "jsonwebtoken": "^9.0.2",
+	  	  "jwk-to-pem": "^2.0.0"
+	  },
+	  "devDependencies": {
+	  	  "wrangler": "^4.119.0"
+	  }
 }
