@@ -15,17 +15,26 @@ const ALLOWED_CLIENT_LIBRARY_HOSTS = new Set([
   'up.cybersource.com',
 ]);
 
-function getFlexHost(env) {
-  return env && env.CYBS_ENV === 'production' ? 'flex.cybersource.com' : 'testflex.cybersource.com';
+// 公钥 endpoint 用 runEnvironment（apitest/api.cybersource.com），不是 testflex/flex。
+// 参照官方 .NET sample CaptureContextValidator：GET https://{runEnvironment}/flex/v2/public-keys/{kid}
+// 返回的 JWK 虽然 use="enc"，但 RSA 公钥同样可用于 RS256 验签（use 字段只是建议）。
+function getKeyHost(env) {
+  return env && env.CYBS_ENV === 'production' ? 'api.cybersource.com' : 'apitest.cybersource.com';
 }
 
-// 简易 JWT 解码（不验签，仅取 header/payload）
+// Base64URL 字符串 → 解码后的 UTF-8 字符串（JWT 各段用 Base64URL，不是标准 Base64）
+function b64urlToString(b64url) {
+  const b64 = b64url.replace(/-/g, '+').replace(/_/g, '/').padEnd(b64url.length + ((4 - (b64url.length % 4)) % 4), '=');
+  return atob(b64);
+}
+
+// 简易 JWT 解码（不验签，仅取 header/payload）。用 Base64URL 解码。
 function decodeJWT(token) {
   if (typeof token !== 'string') throw new Error('Token must be a string');
   const parts = token.split('.');
   if (parts.length !== 3) throw new Error('Invalid JWT format');
-  const header = JSON.parse(atob(parts[0]));
-  const payload = JSON.parse(atob(parts[1]));
+  const header = JSON.parse(b64urlToString(parts[0]));
+  const payload = JSON.parse(b64urlToString(parts[1]));
   return { header, payload };
 }
 
@@ -53,7 +62,7 @@ const jwkCache = new Map(); // key: host:kid, value: { key, expiresAt }
 const JWK_CACHE_TTL = 60 * 60 * 1000;
 
 async function getCyberSourcePublicKey(kid, env) {
-  const host = getFlexHost(env);
+  const host = getKeyHost(env);
   const cacheKey = `${host}:${kid}`;
   const cached = jwkCache.get(cacheKey);
   if (cached && cached.expiresAt > Date.now()) return cached.key;
