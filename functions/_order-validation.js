@@ -38,14 +38,14 @@ function normalizeLineItems(lineItems) {
     const quantity =
       Number.isInteger(item.quantity) && item.quantity > 0 && item.quantity <= 10 ? item.quantity : 1;
     const unitPrice = typeof item.unit_price === 'number' ? item.unit_price : Number(item.price);
-    if (!Number.isInteger(unitPrice) || Math.abs(unitPrice) > 200000) {
+    if (!Number.isInteger(unitPrice) || unitPrice > 200000) {
       return { valid: false, reason: 'Invalid line item price' };
     }
-    const isDiscountLine = unitPrice < 0;
-    if (isDiscountLine && !/discount|折扣/i.test(`${item.name || ''} ${item.label || ''}`)) {
-      return { valid: false, reason: 'Invalid negative line item' };
+    // 折扣只能通过 discount_code 字段处理，line items 必须为正价（防注入）
+    if (unitPrice <= 0) {
+      return { valid: false, reason: 'Line item price must be positive' };
     }
-    if (!VALID_PRICES.has(Math.abs(unitPrice))) {
+    if (!VALID_PRICES.has(unitPrice)) {
       return { valid: false, reason: 'Line item price is not in the service catalog' };
     }
     const name = String(item.name || item.label || 'Service').slice(0, 120);

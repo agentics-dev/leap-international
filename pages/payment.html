@@ -17,6 +17,8 @@
   <meta content="Securely complete your payment for Leap International's Hong Kong company incorporation, accounting and corporate services. Credit card, Alipay, WeChat Pay and bank transfer accepted." name="twitter:description"/>
   <title>Secure Payment — Leap International Corporate Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Stripe.js — 卡 / 支付宝 / 微信 / Apple Pay / Google Pay（用 /v3/ 路径，香港节点 v3.js 有 403 问题）-->
+  <script src="https://js.stripe.com/v3/"></script>
   <!-- CyberSource Unified Checkout SDK：captureContext 返回后，动态从 token 里的 clientLibrary 加载，
        不写死 URL（见 handleFinalPayment）。这里先不静态引入。 -->
 <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"nav-bg":"#F0F4F8","coral":"#E8713B","nav-text":"#193B30","nav-divider":"#DDE3EA","tertiary":"#0057ce","on-tertiary":"#ffffff","surface-container-lowest":"#ffffff","on-surface-variant":"#57423b","primary":"#a43c12","error":"#ba1a1a"},"spacing":{"container-max":"1280px","gutter":"24px"},"fontFamily":{"headline-sm":["DM Sans"],"label-sm":["Inter"],"label-md":["Inter"],"body-md":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"600"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"500"}],"headline-sm":["24px",{"lineHeight":"32px","fontWeight":"600"}]}}}}</script>
@@ -420,8 +422,10 @@
               </div>
 
               <div id="cardFormFields" class="card-fields-container">
-              <!-- CyberSource Unified Checkout 渲染容器（SDK 在此挂载卡表单） -->
-              <div id="payment-buttons" class="w-full min-h-[60px] mb-4"></div>
+              <!-- Stripe Payment Element 挂载点（卡 / Apple Pay / Google Pay） -->
+              <div id="stripe-payment-element" class="w-full min-h-[60px] mb-4"></div>
+              <!-- CyberSource Unified Checkout 渲染容器（SDK 在此挂载卡表单）— 凭证恢复后可切回 -->
+              <div id="payment-buttons" class="w-full min-h-[60px] mb-4" style="display:none"></div>
               <p id="card-error" class="text-[13px] text-red-500 mt-1 hidden"></p>
 
               <div class="mb-4">
@@ -963,16 +967,21 @@
       // 这里不再预初始化。
     }
 
+    // 当前选中的支付方式（handleFinalPayment 读取）
+    var selectedPaymentMethod = 'card';
+
     function selectPayment(method) {
       var paymentMethods = ['card', 'alipay', 'wechat', 'bankTransfer'];
       var cardFields = document.getElementById('cardFormFields');
       var payBtn = document.getElementById('payButton');
       var nonCardMsg = document.getElementById('nonCardMessage');
-      
+
+      selectedPaymentMethod = method;
+
       paymentMethods.forEach(function(m) {
         var element = document.getElementById(m + 'Payment');
         var radio = element.querySelector('input[type="radio"]');
-        
+
         if (m === method) {
           element.classList.add('selected');
           radio.checked = true;
@@ -981,12 +990,18 @@
           radio.checked = false;
         }
       });
-      
+
+      // 卡：显示卡表单 + 按钮；支付宝/微信：显示按钮（点击跳转 Stripe）；银行转账：只显示信息
       if (method === 'card') {
         if (cardFields) cardFields.style.display = 'block';
         if (nonCardMsg) nonCardMsg.style.display = 'none';
         if (payBtn) payBtn.style.display = 'block';
+      } else if (method === 'alipay' || method === 'wechat') {
+        if (cardFields) cardFields.style.display = 'none';
+        if (nonCardMsg) nonCardMsg.style.display = 'none';
+        if (payBtn) payBtn.style.display = 'block';
       } else {
+        // bankTransfer
         if (cardFields) cardFields.style.display = 'none';
         if (nonCardMsg) nonCardMsg.style.display = 'block';
         if (payBtn) payBtn.style.display = 'none';
@@ -1075,81 +1090,162 @@
       errorEl.classList.add('hidden');
 
       try {
-        // 1) 后端拿 captureContext（含金额校验 + completeMandate）
-        var res = await fetch('/api/create-payment-intent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            amount: amount,
-            currency: 'HKD',
-            customer_name: fullName,
-            customer_email: email,
-            line_items: currentLineItems,
-            discount_code: discountCode,
-            discount_amount: discountAmount,
-            locale: lang
-          })
-        });
-        if (!res.ok) {
-          var errData = await res.json();
-          throw new Error(errData.error || 'Failed to create payment session');
-        }
-        var sessionData = await res.json();
-        ucCaptureContext = sessionData.captureContext;
-
-        // 2) 动态加载 SDK（URL/integrity 来自 captureContext，不写死）
-        if (!ucSdkLoaded) await loadUcSdk(ucCaptureContext);
-        if (typeof Accept === 'undefined') throw new Error('CyberSource SDK not available');
-
-        // 3) 渲染表单 + 用户填卡 + 完成授权（completeMandate:type:AUTH 已在 captureContext 里）
-        var accept = await Accept(ucCaptureContext);
-        var up = await accept.unifiedPayments(true); // sidebar 模式
-        var tt = await up.show({ containers: { paymentSelection: '#payment-buttons' } });
-        var completeResponse = await up.complete(tt); // 返回签名 JWT（含付款结果）
-
-        // 4) 发给后端验签 + 发邮件
-        var payRes = await fetch('/api/process-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            completeResponse: completeResponse,
-            customer_name: fullName,
-            customer_email: email,
-            line_items: currentLineItems,
-            discount_code: discountCode,
-            discount_amount: discountAmount,
-            locale: lang
-          })
-        });
-        var payData = await payRes.json();
-        if (!payRes.ok || !payData.verified) {
-          throw new Error((payData && payData.error) || 'Payment verification failed');
-        }
-
-        // 5) 根据验签后的状态跳转
-        if (payData.status === 'AUTHORIZED' || payData.status === 'PENDING') {
-          gotoConfirm({
-            id: payData.paymentId,
-            amount: amount,
-            name: fullName,
-            email: email,
-            method: [payData.cardBrand, payData.cardLast4 ? '****' + payData.cardLast4 : ''].filter(Boolean).join(' '),
-            line_items: currentLineItems,
-            discount_code: discountCode,
-            discount_amount: discountAmount,
-            lang: lang
-          });
+        // 按支付方式分支
+        if (selectedPaymentMethod === 'card' || selectedPaymentMethod === 'alipay' || selectedPaymentMethod === 'wechat') {
+          await payWithStripe(selectedPaymentMethod, { amount: amount, fullName: fullName, email: email, lang: lang, discountCode: discountCode, discountAmount: discountAmount, payBtn: payBtn, errorEl: errorEl });
+        } else if (selectedPaymentMethod === 'bankTransfer') {
+          // 银行转账不在此处理（UI 已隐藏按钮）
         } else {
-          gotoFail(payData.status || 'Payment was declined. Please try again.', amount, lang);
+          throw new Error('Please select a payment method');
         }
       } catch (e) {
-        // 用户中途取消也会进这里（SDK 抛错）
         if (payBtn) {
           payBtn.disabled = false;
           payBtn.classList.remove('btn-disabled');
           payBtn.innerHTML = '<span class="lang-en">PAY NOW</span><span class="lang-zh">立即支付</span>';
         }
         errorEl.textContent = e.message || 'An error occurred. Please try again.';
+        errorEl.classList.remove('hidden');
+        errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    // ====== Stripe 支付（卡 / 支付宝 / 微信）======
+    var STRIPE_PUBLISHABLE_KEY = 'pk_test_51Tweur3AiJ8fUlKdoOKJ268f9hldnCglqOFCzwONT2DQxhSbe9NBH7QUXICNzAB9fkORza8uvzcw4AYGODL2dYKY00XnTVY9OS';
+    var stripeInstance = null;
+    var stripeElements = null;
+    var currentStripeIntentId = null;
+
+    function getStripe() {
+      if (!stripeInstance) stripeInstance = Stripe(STRIPE_PUBLISHABLE_KEY);
+      return stripeInstance;
+    }
+
+    async function payWithStripe(method, ctx) {
+      // 1) 创建 PaymentIntent
+      var res = await fetch('/api/create-stripe-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: ctx.amount,
+          currency: 'HKD',
+          customer_name: ctx.fullName,
+          customer_email: ctx.email,
+          line_items: currentLineItems,
+          discount_code: ctx.discountCode,
+          discount_amount: ctx.discountAmount,
+          locale: ctx.lang,
+          payment_method: method
+        })
+      });
+      if (!res.ok) {
+        var errData = await res.json().catch(function () { return {}; });
+        throw new Error(errData.error || 'Failed to create payment session');
+      }
+      var intent = await res.json();
+      currentStripeIntentId = intent.payment_intent_id;
+
+      var stripe = getStripe();
+
+      // 保存订单上下文（支付宝/微信回跳后 stripe-return.html 用它发邮件 + 跳转）
+      localStorage.setItem('leap-stripe-order', JSON.stringify({
+        payment_intent_id: intent.payment_intent_id,
+        amount: ctx.amount,
+        customer_name: ctx.fullName,
+        customer_email: ctx.email,
+        discount_code: ctx.discountCode,
+        discount_amount: ctx.discountAmount,
+        locale: ctx.lang
+      }));
+
+      // 2) 按方式确认
+      if (method === 'card') {
+        // 卡：渲染 Payment Element，用户填卡后确认
+        await renderStripeCardElement(stripe, intent.client_secret);
+        // 注意：confirmPayment 由用户点击 PAY NOW 按钮后触发（Element 内部按钮）
+        // 这里改成：渲染 Element 后恢复按钮，等用户再点一次确认
+        if (ctx.payBtn) {
+          ctx.payBtn.disabled = false;
+          ctx.payBtn.classList.remove('btn-disabled');
+          ctx.payBtn.innerHTML = '<span class="lang-en">CONFIRM PAYMENT</span><span class="lang-zh">確認支付</span>';
+          ctx.payBtn.setAttribute('data-stripe-confirm', 'card');
+        }
+        // 替换按钮行为：下次点击走确认逻辑
+        window._stripeCardCtx = ctx;
+        ctx.payBtn.onclick = confirmStripeCard;
+      } else if (method === 'alipay') {
+        // 支付宝：重定向流程
+        var result = await stripe.confirmAlipayPayment(intent.client_secret, {
+          return_url: stripeReturnUrl()
+        });
+        if (result.error) throw new Error(result.error.message);
+        // 成功会自动重定向，不会走到这里
+      } else if (method === 'wechat') {
+        // 微信：显示二维码
+        var wxResult = await stripe.confirmWechatPayPayment(intent.client_secret, {
+          payment_method_options: { wechat_pay: { client: 'web' } },
+          return_url: stripeReturnUrl()
+        });
+        if (wxResult.error) throw new Error(wxResult.error.message);
+      }
+    }
+
+    // 渲染 Stripe Payment Element（卡）
+    async function renderStripeCardElement(stripe, clientSecret) {
+      // 确保挂载点可见
+      var cardFields = document.getElementById('cardFormFields');
+      if (cardFields) cardFields.style.display = 'block';
+
+      // 销毁旧 Element（如有）
+      var mountEl = document.getElementById('stripe-payment-element');
+      mountEl.innerHTML = '';
+
+      stripeElements = stripe.elements({
+        clientSecret: clientSecret,
+        appearance: { theme: 'stripe', variables: { colorPrimary: '#165DFF' } }
+      });
+      var paymentElement = stripeElements.create('payment', {
+        layout: { type: 'tabs', defaultCollapsed: false, radios: false, spacedAccordionItems: false }
+      });
+      paymentElement.mount('#stripe-payment-element');
+    }
+
+    // 计算 stripe-return 页的完整 URL（兼容 /payment 和 /payment.html 两种路径）
+    function stripeReturnUrl() {
+      var path = window.location.pathname.replace(/\/payment(\.html)?$/, '/stripe-return.html');
+      return window.location.origin + path;
+    }
+
+    // 确认 Stripe 卡支付（PAY NOW 第二次点击）
+    async function confirmStripeCard() {
+      var ctx = window._stripeCardCtx;
+      if (!ctx || !stripeElements) return;
+      var payBtn = ctx.payBtn;
+      var errorEl = ctx.errorEl;
+      payBtn.disabled = true;
+      payBtn.innerHTML = '<span class="lang-en">Processing...</span><span class="lang-zh">處理中...</span>';
+      errorEl.classList.add('hidden');
+
+      try {
+        var stripe = getStripe();
+        var returnUrl = stripeReturnUrl();
+        var result = await stripeElements.submit();
+        if (result.error) throw new Error(result.error.message);
+
+        var confirmResult = await stripe.confirmPayment({
+          elements: stripeElements,
+          confirmParams: { return_url: returnUrl }
+        });
+
+        // confirmPayment 成功会重定向；如果没重定向且有 error，说明失败
+        if (confirmResult.error) {
+          throw new Error(confirmResult.error.message);
+        }
+      } catch (e) {
+        payBtn.disabled = false;
+        payBtn.classList.remove('btn-disabled');
+        payBtn.innerHTML = '<span class="lang-en">CONFIRM PAYMENT</span><span class="lang-zh">確認支付</span>';
+        errorEl.textContent = e.message || 'Payment failed. Please try again.';
         errorEl.classList.remove('hidden');
         errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }

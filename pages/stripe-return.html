@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Status — Leap International</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .lang-en { display: none; }
+    .lang-zh { display: block; }
+    [data-lang="en"] .lang-en { display: block; }
+    [data-lang="en"] .lang-zh { display: none; }
+    [data-lang="zh"] .lang-en { display: none; }
+  </style>
+</head>
+<body class="bg-[#F0F4F8] min-h-screen flex items-center justify-center p-6">
+  <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-8 text-center">
+    <!-- 加载中 -->
+    <div id="loadingState">
+      <div class="w-12 h-12 border-4 border-[#165DFF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+      <p class="text-[16px] text-gray-600">
+        <span class="lang-en">Confirming your payment...</span>
+        <span class="lang-zh">正在確認您的付款...</span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // 从 localStorage 恢复订单上下文（payment.html 在跳转前保存）
+    var orderCtx = {};
+    try {
+      orderCtx = JSON.parse(localStorage.getItem('leap-stripe-order') || '{}');
+    } catch (e) {}
+
+    var params = new URLSearchParams(window.location.search);
+    var paymentIntentId = params.get('payment_intent') || orderCtx.payment_intent_id;
+
+    async function checkStatus() {
+      if (!paymentIntentId) {
+        redirectToFail('Missing payment information');
+        return;
+      }
+
+      try {
+        var res = await fetch('/api/confirm-stripe-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            payment_intent_id: paymentIntentId,
+            customer_name: orderCtx.customer_name || '',
+            customer_email: orderCtx.customer_email || '',
+            discount_code: orderCtx.discount_code || '',
+            discount_amount: orderCtx.discount_amount || 0,
+            locale: orderCtx.locale || 'en'
+          })
+        });
+        var data = await res.json();
+
+        if (data.succeeded || data.status === 'succeeded') {
+          // 成功 → 跳确认页
+          var p = new URLSearchParams();
+          p.set('id', data.payment_id || paymentIntentId);
+          p.set('amount', orderCtx.amount || '');
+          p.set('name', encodeURIComponent(orderCtx.customer_name || ''));
+          p.set('email', encodeURIComponent(orderCtx.customer_email || ''));
+          p.set('method', encodeURIComponent(data.method || 'Card'));
+          p.set('lang', orderCtx.locale || 'en');
+          localStorage.removeItem('leap-stripe-order');
+          window.location.href = 'confirmation.html?' + p.toString();
+        } else {
+          // 还在处理中（如微信扫码后未完成）或失败
+          redirectToFail(data.message || data.status || 'Payment not completed');
+        }
+      } catch (e) {
+        redirectToFail(e.message);
+      }
+    }
+
+    function redirectToFail(reason) {
+      var p = new URLSearchParams();
+      p.set('reason', encodeURIComponent(reason));
+      p.set('amount', orderCtx.amount || '');
+      p.set('lang', orderCtx.locale || 'en');
+      window.location.href = 'payment-failed.html?' + p.toString();
+    }
+
+    // 语言初始化
+    var savedLang = localStorage.getItem('leap-lang') || 'en';
+    document.documentElement.setAttribute('data-lang', savedLang);
+
+    // 自动检查（稍等 1 秒让 Stripe 处理完）
+    setTimeout(checkStatus, 1000);
+  </script>
+</body>
+</html>
