@@ -4,7 +4,7 @@
 //
 // 三个要点：
 //   1. Secret 是 Base64，先 decode 成字节再做 HMAC key
-//   2. request-target 方法小写：post /up/v1/capture-contexts
+//   2. request-target 方法小写：post /uc/v1/sessions
 //   3. 签名串每行 \n 分隔，最后一行不带 \n
 
 function getBaseUrl(env) {

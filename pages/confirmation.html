@@ -23,12 +23,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .lang-en { display: none; }
-    .lang-zh { display: block; }
-    [data-lang="en"] .lang-en { display: block; }
-    [data-lang="en"] .lang-zh { display: none; }
-    [data-lang="zh"] .lang-en { display: none; }
-    [data-lang="zh"] .lang-zh { display: block; }
+
+    /* 三语显示规则由 js/i18n.js 统一注入 */
     .success-icon { animation: scaleIn 0.5s ease-out; }
     @keyframes scaleIn {
       0% { transform: scale(0); }
@@ -62,6 +58,8 @@
   gtag('js', new Date());
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
+  <!-- i18n 三语切换（EN / 繁體 / 简体）-->
+  <script src="/js/i18n.js" defer></script>
 </head>
 <body class="bg-gray-50 min-h-screen flex items-center justify-center">
   <div class="max-w-[600px] mx-auto px-6 py-12 text-center print-block">
@@ -71,60 +69,60 @@
 
     <h1 class="text-[28px] font-bold text-gray-900 mb-3">
       <span class="lang-en">Payment Successful!</span>
-      <span class="lang-zh">支付成功！</span>
+      <span class="lang-zh">支付成功！</span><span class="lang-zh-Hans lang-zh-Hans-clone">支付成功！</span>
     </h1>
 
     <p class="text-[16px] text-gray-600 mb-8">
       <span class="lang-en">Thank you for your payment. Your transaction has been completed successfully.</span>
-      <span class="lang-zh">感謝您的付款。您的交易已成功完成。</span>
+      <span class="lang-zh">感謝您的付款。您的交易已成功完成。</span><span class="lang-zh-Hans lang-zh-Hans-clone">感谢您的付款。您的交易已成功完成。</span>
     </p>
 
     <div class="bg-white rounded-lg border border-gray-200 p-6 mb-6 text-left">
       <h2 class="text-[18px] font-semibold text-gray-900 mb-4">
         <span class="lang-en">Transaction Details</span>
-        <span class="lang-zh">交易詳情</span>
+        <span class="lang-zh">交易詳情</span><span class="lang-zh-Hans lang-zh-Hans-clone">交易详情</span>
       </h2>
 
       <div class="space-y-3">
         <div class="flex justify-between text-[14px]">
           <span class="text-gray-600">
             <span class="lang-en">Transaction ID</span>
-            <span class="lang-zh">交易編號</span>
+            <span class="lang-zh">交易編號</span><span class="lang-zh-Hans lang-zh-Hans-clone">交易编号</span>
           </span>
           <span class="font-medium text-gray-900 break-all text-right" id="transactionId">—</span>
         </div>
         <div class="flex justify-between text-[14px]">
           <span class="text-gray-600">
             <span class="lang-en">Date</span>
-            <span class="lang-zh">日期</span>
+            <span class="lang-zh">日期</span><span class="lang-zh-Hans lang-zh-Hans-clone">日期</span>
           </span>
           <span class="font-medium text-gray-900" id="transactionDate">—</span>
         </div>
         <div class="flex justify-between text-[14px]">
           <span class="text-gray-600">
             <span class="lang-en">Customer</span>
-            <span class="lang-zh">客戶姓名</span>
+            <span class="lang-zh">客戶姓名</span><span class="lang-zh-Hans lang-zh-Hans-clone">客户姓名</span>
           </span>
           <span class="font-medium text-gray-900 text-right" id="customerName">—</span>
         </div>
         <div class="flex justify-between text-[14px]">
           <span class="text-gray-600">
             <span class="lang-en">Email</span>
-            <span class="lang-zh">電郵</span>
+            <span class="lang-zh">電郵</span><span class="lang-zh-Hans lang-zh-Hans-clone">电邮</span>
           </span>
           <span class="font-medium text-gray-900 break-all text-right" id="customerEmail">—</span>
         </div>
         <div class="flex justify-between text-[14px]">
           <span class="text-gray-600">
             <span class="lang-en">Payment Method</span>
-            <span class="lang-zh">支付方式</span>
+            <span class="lang-zh">支付方式</span><span class="lang-zh-Hans lang-zh-Hans-clone">支付方式</span>
           </span>
           <span class="font-medium text-gray-900" id="paymentMethod">—</span>
         </div>
         <div class="flex justify-between text-[14px] border-t border-gray-100 pt-3">
           <span class="text-gray-900 font-semibold">
             <span class="lang-en">Total Paid</span>
-            <span class="lang-zh">實付金額</span>
+            <span class="lang-zh">實付金額</span><span class="lang-zh-Hans lang-zh-Hans-clone">实付金额</span>
           </span>
           <span class="font-bold text-gray-900" id="transactionAmount">HKD —</span>
         </div>
@@ -135,7 +133,7 @@
     <div id="lineItemsBlock" class="bg-white rounded-lg border border-gray-200 p-6 mb-6 text-left hidden">
       <h2 class="text-[18px] font-semibold text-gray-900 mb-4">
         <span class="lang-en">Order Summary</span>
-        <span class="lang-zh">訂單摘要</span>
+        <span class="lang-zh">訂單摘要</span><span class="lang-zh-Hans lang-zh-Hans-clone">订单摘要</span>
       </h2>
       <div id="lineItemsList" class="space-y-2 mb-3"></div>
       <div id="discountLine" class="hidden flex justify-between text-[14px] py-2 border-t border-gray-100">
@@ -145,7 +143,7 @@
       <div class="flex justify-between text-[14px] py-2 border-t border-gray-200">
         <span class="text-gray-600">
           <span class="lang-en">Subtotal</span>
-          <span class="lang-zh">小計</span>
+          <span class="lang-zh">小計</span><span class="lang-zh-Hans lang-zh-Hans-clone">小计</span>
         </span>
         <span class="font-semibold" id="subtotalAmount">HKD 0</span>
       </div>
@@ -157,11 +155,11 @@
         <div>
           <p class="text-[14px] text-blue-800">
             <span class="lang-en">A confirmation email has been sent to your email address. Please keep this for your records.</span>
-            <span class="lang-zh">確認郵件已發送至您的電郵地址。請保留此記錄。</span>
+            <span class="lang-zh">確認郵件已發送至您的電郵地址。請保留此記錄。</span><span class="lang-zh-Hans lang-zh-Hans-clone">确认邮件已发送至您的电邮地址。请保留此记录。</span>
           </p>
           <p class="text-[13px] text-blue-700 mt-2">
             <span class="lang-en">Our team will contact you within 1 business day. For urgent enquiries, reach us on WhatsApp +852 65550943.</span>
-            <span class="lang-zh">我們的團隊將於 1 個工作天內與您聯絡。如有緊急查詢，請透過 WhatsApp +852 65550943 與我們聯絡。</span>
+            <span class="lang-zh">我們的團隊將於 1 個工作天內與您聯絡。如有緊急查詢，請透過 WhatsApp +852 65550943 與我們聯絡。</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们的团队将于 1 个工作天内与您联络。如有紧急查询，请透过 WhatsApp +852 65550943 与我们联络。</span>
           </p>
         </div>
       </div>
@@ -170,35 +168,29 @@
     <div class="flex flex-col sm:flex-row gap-4 no-print">
       <a href="../index.html" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-white bg-[#165DFF] hover:bg-[#0E4FD9] transition-all text-center">
         <span class="lang-en">Return to Home</span>
-        <span class="lang-zh">返回首頁</span>
+        <span class="lang-zh">返回首頁</span><span class="lang-zh-Hans lang-zh-Hans-clone">返回首页</span>
       </a>
       <button id="downloadPdfBtn" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-white bg-[#10B981] hover:bg-[#059669] transition-all inline-flex items-center justify-center gap-2">
         <span class="material-symbols-outlined text-[20px]">download</span>
         <span class="lang-en">Download Invoice</span>
-        <span class="lang-zh">下載發票</span>
+        <span class="lang-zh">下載發票</span><span class="lang-zh-Hans lang-zh-Hans-clone">下载发票</span>
       </button>
       <button onclick="window.print()" class="flex-1 py-3 px-4 rounded-lg text-[16px] font-semibold text-[#165DFF] border border-[#165DFF] hover:bg-blue-50 transition-all">
         <span class="lang-en">Print</span>
-        <span class="lang-zh">列印</span>
+        <span class="lang-zh">列印</span><span class="lang-zh-Hans lang-zh-Hans-clone">列印</span>
       </button>
     </div>
   </div>
 
   <script>
   (function() {
-    var LANG_KEY = 'leap-lang';
-    function normaliseLang(v) { return v === 'zh' ? 'zh' : 'en'; }
-    function setLang(lang) {
-      var html = document.documentElement;
-      var v = normaliseLang(lang);
-      html.setAttribute('data-lang', v);
-      try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
-    }
+    // 本地定义 params / urlLang（不依赖 i18n.js 的 defer 加载时序，避免内联脚本先执行时 ReferenceError）
     var params = new URLSearchParams(window.location.search);
     var urlLang = params.get('lang');
+
     var savedLang = 'en';
     try { savedLang = normaliseLang(localStorage.getItem(LANG_KEY)); } catch (e) {}
-    setLang(urlLang || savedLang);
+    if (typeof setLang === 'function') setLang(urlLang || savedLang);
 
     var txnId = params.get('id');
     var amount = params.get('amount');

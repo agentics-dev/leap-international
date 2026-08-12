@@ -45,25 +45,33 @@ export async function onRequestPost(context) {
     const siteOrigin = resolveSiteOrigin(request);
     const safeOrigin = siteOrigin.replace(/^http:/, 'https:').replace(/\/$/, '');
 
+    // V1 Sessions API 请求体（POST /uc/v1/sessions）
+    // 参考官方 .NET 示例 CaptureContextRequest.cs
     const captureContextRequest = {
-      clientVersion: '0.26',
       targetOrigins: [safeOrigin],
-      allowedCardNetworks: ['VISA', 'MASTERCARD', 'AMEX', 'JCB', 'DISCOVER', 'CUP'],
-      allowedPaymentTypes: ['PANENTRY'],
       country: 'HK',
       locale: locale === 'zh' ? 'zh_HK' : 'en_US',
-      completeMandate: { type: 'AUTH', decisionManager: true },
-      orderInformation: {
-        amountDetails: {
-          totalAmount: String(amount) + '.00',
-          currency: currency || 'HKD',
+      // V1: consumerAuthentication 是枚举 "3DS"/"NONE"（V0 是布尔值 true/false）
+      // type: CAPTURE = 授权+扣款（SALE），AUTH 只授权不扣款
+      completeMandate: {
+        type: 'CAPTURE',
+        consumerAuthentication: '3DS',
+        decisionManager: true,
+      },
+      // V1: orderInformation 必须包在 data 里（V0 在顶层）
+      data: {
+        orderInformation: {
+          amountDetails: {
+            totalAmount: String(amount) + '.00',
+            currency: currency || 'HKD',
+          },
         },
       },
     };
 
     const r = await cybsRequest({
       method: 'POST',
-      path: '/up/v1/capture-contexts',
+      path: '/uc/v1/sessions',
       body: captureContextRequest,
       env,
     });
