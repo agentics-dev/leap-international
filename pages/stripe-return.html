@@ -9,12 +9,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .lang-en { display: none; }
-    .lang-zh { display: block; }
-    [data-lang="en"] .lang-en { display: block; }
-    [data-lang="en"] .lang-zh { display: none; }
-    [data-lang="zh"] .lang-en { display: none; }
+    /* 三语显示规则由 js/i18n.js 统一注入 */
   </style>
+  <script src="/js/i18n.js" defer></script>
 </head>
 <body class="bg-[#F0F4F8] min-h-screen flex items-center justify-center p-6">
   <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-8 text-center">
@@ -23,7 +20,7 @@
       <div class="w-12 h-12 border-4 border-[#165DFF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
       <p class="text-[16px] text-gray-600">
         <span class="lang-en">Confirming your payment...</span>
-        <span class="lang-zh">正在確認您的付款...</span>
+        <span class="lang-zh">正在確認您的付款...</span><span class="lang-zh-Hans lang-zh-Hans-clone">正在确认您的付款...</span>
       </p>
     </div>
   </div>
@@ -87,8 +84,9 @@
       window.location.href = 'payment-failed.html?' + p.toString();
     }
 
-    // 语言初始化
+    // 语言初始化（兼容旧值 zh → zh-Hant）
     var savedLang = localStorage.getItem('leap-lang') || 'en';
+    if (savedLang === 'zh') savedLang = 'zh-Hant';
     document.documentElement.setAttribute('data-lang', savedLang);
 
     // 自动检查（稍等 1 秒让 Stripe 处理完）
