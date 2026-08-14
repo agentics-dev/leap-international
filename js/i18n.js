@@ -110,3 +110,12 @@ html[data-lang="zh-Hans"] .lang-zh-Hans { display: revert !important; }
     }
   }, true); // ← 捕获阶段，确保在页面的 document click handler 之前执行
 })();
+
+// ========== Mega Menu 切换（inline onclick 用，最可靠）==========
+window.toggleMegaMenu = function(el) {
+  var parent = el.closest('.mega-group');
+  if (!parent) return;
+  var isOpen = parent.classList.contains('show');
+  document.querySelectorAll('.mega-group').forEach(function(g) { g.classList.remove('show'); });
+  if (!isOpen) parent.classList.add('show');
+};
