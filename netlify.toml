@@ -1,6 +1,6 @@
 	[build]
 	  publish = "dist"
-	  functions = "netlify/functions"
+	  functions = "functions"
 
 # 用 zisi 打包函数（默认），把 node_modules 一起带上
 # cybersource-rest-client 含 winston 等依赖，需要随函数 bundle

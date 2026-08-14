@@ -53,11 +53,8 @@ export async function onRequestPost(context) {
   const params = new URLSearchParams();
   params.append('amount', String(toStripeAmount(amount)));
   params.append('currency', String(currency).toLowerCase());
-  params.append('automatic_payment_methods[enabled]', 'true');
-  // 卡支付用 automatic_payment_methods，异步方式明确指定类型
-  if (payment_method !== 'card') {
-    pmTypes.forEach((t) => params.append('payment_method_types[]', t));
-  }
+  // 明确指定支付方式类型（不启用 automatic_payment_methods，避免显示 Airwallex 等不需要的方式）
+  pmTypes.forEach((t) => params.append('payment_method_types[]', t));
   // 客户信息存入 metadata（webhook 用它发邮件）
   params.append('metadata[customer_name]', String(customer_name || '').slice(0, 500));
   params.append('metadata[customer_email]', String(customer_email || '').slice(0, 500));
