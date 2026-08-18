@@ -20,19 +20,30 @@ module.exports = async (req, res) => {
 
   try {
     const { url, anonKey } = getSupabaseConfig();
-    const params = new URLSearchParams({
-      select: 'id,question_en,answer_en,question_zh,answer_zh,created_at',
+
+    const buildParams = (select) => new URLSearchParams({
+      select,
       order: 'created_at.asc',
     });
 
-    const response = await fetch(`${url}/rest/v1/faqs?${params.toString()}`, {
-      method: 'GET',
-      headers: {
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    const headers = {
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
+      'Content-Type': 'application/json',
+    };
+
+    // Phase 3 columns (category, related_page, updated_at) — fall back to base
+    // select if migration 20260814_phase3_cms_extensions.sql is not applied yet.
+    let response = await fetch(
+      `${url}/rest/v1/faqs?${buildParams('id,question_en,answer_en,question_zh,answer_zh,category,related_page,updated_at,created_at').toString()}`,
+      { method: 'GET', headers }
+    );
+    if (response.status === 400) {
+      response = await fetch(
+        `${url}/rest/v1/faqs?${buildParams('id,question_en,answer_en,question_zh,answer_zh,created_at').toString()}`,
+        { method: 'GET', headers }
+      );
+    }
 
     if (!response.ok) {
       console.error('Supabase FAQ fetch failed:', response.status);

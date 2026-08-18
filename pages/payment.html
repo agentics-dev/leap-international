@@ -828,12 +828,15 @@
         if (note && !isEn && item.noteZh) note = item.noteZh;
         subtotal += item.price;
 
+        var safeLabel = escapeHtml(label);
+        var safeNote = escapeHtml(note);
+
         if (item.isDiscount) {
-          html += '<div class="flex justify-between text-[13px]"><span class="text-[#165DFF]">' + label + '</span><span class="font-semibold text-[#165DFF]">-HK$' + Math.abs(item.price).toLocaleString() + '</span></div>';
+          html += '<div class="flex justify-between text-[13px]"><span class="text-[#165DFF]">' + safeLabel + '</span><span class="font-semibold text-[#165DFF]">-HK$' + Math.abs(item.price).toLocaleString() + '</span></div>';
         } else if (item.isFree) {
-          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + label + '</span><div class="text-right"><div class="font-semibold text-[#10B981]">' + note + '</div></div></div>';
+          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + safeLabel + '</span><div class="text-right"><div class="font-semibold text-[#10B981]">' + safeNote + '</div></div></div>';
         } else {
-          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + label + '</span><div class="text-right"><div class="font-semibold">HK$' + item.price.toLocaleString() + '</div>' + (note ? '<div class="text-[11px] text-gray-500">' + note + '</div>' : '') + '</div></div>';
+          html += '<div class="flex justify-between text-[13px]"><span class="text-gray-700">' + safeLabel + '</span><div class="text-right"><div class="font-semibold">HK$' + item.price.toLocaleString() + '</div>' + (note ? '<div class="text-[11px] text-gray-500">' + safeNote + '</div>' : '') + '</div></div>';
         }
       });
 
@@ -844,8 +847,9 @@
         discountAmount = calcDiscountAmount(subtotal);
         if (discountAmount > 0) {
           var code = DISCOUNT_CODES[appliedDiscount.code.toUpperCase()];
-          var discountLabel = (isEn ? 'Discount (' + appliedDiscount.code + ')' : '折扣 ( ' + appliedDiscount.code + ' )');
-          var discountDesc = isEn ? code.labelEn : code.labelZh;
+          var safeCode = escapeHtml(appliedDiscount.code);
+          var discountLabel = (isEn ? 'Discount (' + safeCode + ')' : '折扣 ( ' + safeCode + ' )');
+          var discountDesc = escapeHtml(isEn ? code.labelEn : code.labelZh);
           discountRowHtml = '<div class="flex justify-between text-[13px] mt-1"><span class="text-[#10B981]">' + discountLabel + ' <span class="text-gray-500">— ' + discountDesc + '</span></span><span class="font-semibold text-[#10B981]">-HK$' + discountAmount.toLocaleString() + '</span></div>';
         }
       }

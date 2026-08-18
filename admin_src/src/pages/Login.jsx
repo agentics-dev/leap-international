@@ -10,16 +10,41 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // 客户端限流：5 次失败后锁定 5 分钟（服务端由 Supabase Auth 内置限流兜底）
+    const KEY = 'leap-admin-login-lock';
+    try {
+      const lock = JSON.parse(localStorage.getItem(KEY) || '{}');
+      if (lock.until && Date.now() < lock.until) {
+        const waitMin = Math.ceil((lock.until - Date.now()) / 60000);
+        setError(`Too many attempts. Please try again in ${waitMin} minute(s).`);
+        return;
+      }
+    } catch (err) { /* 忽略损坏的锁定记录 */ }
+
     setLoading(true);
     setError(null);
-    
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      setError(error.message);
+      try {
+        const lock = JSON.parse(localStorage.getItem(KEY) || '{}');
+        const fails = (lock.fails || 0) + 1;
+        if (fails >= 5) {
+          localStorage.setItem(KEY, JSON.stringify({ fails: 0, until: Date.now() + 5 * 60 * 1000 }));
+          setError('Too many failed attempts. Please try again in 5 minutes.');
+        } else {
+          localStorage.setItem(KEY, JSON.stringify({ fails }));
+          // 统一错误信息，避免账号枚举
+          setError('Invalid email or password.');
+        }
+      } catch (err) {
+        setError('Invalid email or password.');
+      }
     }
     setLoading(false);
   };

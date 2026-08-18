@@ -13,6 +13,28 @@ function getSupabaseConfig() {
   return { url: url.replace(/\/+$/, ''), anonKey };
 }
 
+const BASE_SELECT = 'id,slug,category,title_en,title_zh,title_zh_cn,excerpt_en,excerpt_zh,excerpt_zh_cn,content_en,content_zh,content_zh_cn,cover_image_url,publish_time';
+// Phase 3 fields (author byline, sources, key stats, updated_at) — require
+// migration 20260814_phase3_cms_extensions.sql. Falls back automatically.
+const EXTENDED_SELECT = BASE_SELECT + ',updated_at,sources,key_stats,authors(id,slug,name,name_zh,title,title_zh,credential,credential_zh,photo_url,linkedin_url)';
+
+async function fetchArticle(url, anonKey, select, slug) {
+  const params = new URLSearchParams({
+    slug: `eq.${slug}`,
+    is_published: 'eq.true',
+    select,
+    limit: '1',
+  });
+  return fetch(`${url}/rest/v1/news_activities?${params.toString()}`, {
+    method: 'GET',
+    headers: {
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'GET') {
     return json(res, 405, { error: 'Method not allowed' });
@@ -25,21 +47,12 @@ module.exports = async (req, res) => {
 
   try {
     const { url, anonKey } = getSupabaseConfig();
-    const params = new URLSearchParams({
-      slug: `eq.${slug}`,
-      is_published: 'eq.true',
-      select: 'id,slug,category,title_en,title_zh,title_zh_cn,excerpt_en,excerpt_zh,excerpt_zh_cn,content_en,content_zh,content_zh_cn,cover_image_url,publish_time',
-      limit: '1',
-    });
 
-    const response = await fetch(`${url}/rest/v1/news_activities?${params.toString()}`, {
-      method: 'GET',
-      headers: {
-        apikey: anonKey,
-        Authorization: `Bearer ${anonKey}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    let response = await fetchArticle(url, anonKey, EXTENDED_SELECT, slug);
+    if (response.status === 400) {
+      // Phase 3 migration not applied yet — fall back to base columns.
+      response = await fetchArticle(url, anonKey, BASE_SELECT, slug);
+    }
 
     if (!response.ok) {
       console.error('Supabase news detail fetch failed:', response.status);

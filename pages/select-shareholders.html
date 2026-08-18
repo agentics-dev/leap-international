@@ -1009,19 +1009,19 @@ function renderSummary() {
     
     if (item.isDiscount) {
       html += '<div class="flex justify-between text-[13px]">' +
-        '<span class="text-[#165DFF]">' + label + '</span>' +
+        '<span class="text-[#165DFF]">' + escapeHtml(label) + '</span>' +
         '<span class="font-semibold text-[#165DFF]">-HK$' + Math.abs(item.price).toLocaleString() + '</span>' +
         '</div>';
     } else if (item.isFree) {
       html += '<div class="flex justify-between text-[13px]">' +
-        '<span class="text-gray-700">' + label + '</span>' +
-        '<div class="text-right"><div class="font-semibold text-[#10B981]">' + note + '</div></div>' +
+        '<span class="text-gray-700">' + escapeHtml(label) + '</span>' +
+        '<div class="text-right"><div class="font-semibold text-[#10B981]">' + escapeHtml(note) + '</div></div>' +
         '</div>';
     } else {
       html += '<div class="flex justify-between text-[13px]">' +
-        '<span class="text-gray-700">' + label + '</span>' +
+        '<span class="text-gray-700">' + escapeHtml(label) + '</span>' +
         '<div class="text-right"><div class="font-semibold">HK$' + item.price.toLocaleString() + '</div>' +
-        (note ? '<div class="text-[11px] text-gray-500">' + note + '</div>' : '') + '</div>' +
+        (note ? '<div class="text-[11px] text-gray-500">' + escapeHtml(note) + '</div>' : '') + '</div>' +
         '</div>';
     }
   });

@@ -37,9 +37,19 @@ export default function NewsEditor() {
   const [cropImage, setCropImage] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
 
+  // Phase 3: byline + evidence layer
+  const [authors, setAuthors] = useState([]);
+  const [sourcesText, setSourcesText] = useState('[]');
+  const [keyStatsText, setKeyStatsText] = useState('[]');
+
   useEffect(() => {
     if (id) fetchArticle();
   }, [id]);
+
+  useEffect(() => {
+    supabase.from('authors').select('id,name,title').eq('is_active', true).order('name')
+      .then(({ data, error }) => { if (!error && data) setAuthors(data); });
+  }, []);
 
   const fetchArticle = async () => {
     setLoading(true);
@@ -60,6 +70,8 @@ export default function NewsEditor() {
         publish_time: data.publish_time ? new Date(data.publish_time).toISOString().slice(0, 16) : '',
         images
       });
+      setSourcesText(JSON.stringify(data.sources || [], null, 2));
+      setKeyStatsText(JSON.stringify(data.key_stats || [], null, 2));
     }
     setLoading(false);
   };
@@ -86,30 +98,81 @@ export default function NewsEditor() {
       cover_image_url: article.images.length > 0 ? article.images[0].url : null
     };
 
-    if (id) {
-      await supabase.from('news_activities').update(payload).eq('id', id);
-    } else {
-      const { data } = await supabase.from('news_activities').insert([payload]).select().single();
-      if (data) navigate(`/news/edit/${data.id}`, { replace: true });
+    // Phase 3 fields (author byline, sources, key stats). Parsed defensively;
+    // if the migration is not applied yet, save falls back without them.
+    let phase3 = null;
+    try {
+      phase3 = {
+        author_id: article.author_id || null,
+        sources: JSON.parse(sourcesText || '[]'),
+        key_stats: JSON.parse(keyStatsText || '[]'),
+      };
+    } catch (e) {
+      setSaving(false);
+      alert('Sources / Key Stats contain invalid JSON. Fix or clear them before saving.');
+      return;
     }
-    
+
+    const save = async (body) => id
+      ? supabase.from('news_activities').update(body).eq('id', id)
+      : supabase.from('news_activities').insert([body]).select().single();
+
+    // Mass assignment 防护：只允许白名单字段写入，忽略任何额外字段
+    const WRITABLE_FIELDS = [
+      'slug', 'category', 'is_published', 'publish_time',
+      'title_en', 'excerpt_en', 'content_en',
+      'title_zh', 'excerpt_zh', 'content_zh',
+      'title_zh_cn', 'excerpt_zh_cn', 'content_zh_cn',
+      'images_metadata', 'cover_image_url',
+      'author_id', 'sources', 'key_stats',
+    ];
+    const pick = (obj) => Object.fromEntries(
+      WRITABLE_FIELDS.filter((k) => obj[k] !== undefined).map((k) => [k, obj[k]])
+    );
+    const fullBody = pick({ ...payload, ...phase3 });
+    const baseBody = pick(payload);
+
+    let { data, error } = await save(fullBody);
+    if (error && /column|schema cache/i.test(error.message || '')) {
+      ({ data, error } = await save(baseBody));
+    }
+
+    if (!error && !id && data) {
+      navigate(`/news/edit/${data.id}`, { replace: true });
+    }
+
     setSaving(false);
+    if (error) {
+      alert(`Save failed: ${error.message}`);
+      return;
+    }
     alert('Saved successfully');
   };
 
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (!files.length) return;
-    
+
     if (article.images.length + files.length > 5) {
       alert('Maximum 5 images allowed per article.');
       return;
     }
 
+    const ALLOWED_EXT = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    const MAX_SIZE = 5 * 1024 * 1024; // 5MB
+
     const newImages = [...article.images];
-    
+
     for (const file of files) {
-      const fileExt = file.name.split('.').pop();
+      const fileExt = (file.name.split('.').pop() || '').toLowerCase();
+      if (!ALLOWED_EXT.includes(fileExt) || !file.type.startsWith('image/')) {
+        alert(`Skipped "${file.name}": only JPG/PNG/WebP/GIF images are allowed.`);
+        continue;
+      }
+      if (file.size > MAX_SIZE) {
+        alert(`Skipped "${file.name}": file exceeds the 5MB limit.`);
+        continue;
+      }
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
       const filePath = `${fileName}`;
 
@@ -209,6 +272,19 @@ export default function NewsEditor() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Author (byline)</label>
+                <select
+                  value={article.author_id || ''}
+                  onChange={e => setArticle({...article, author_id: e.target.value || null})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">— No author —</option>
+                  {authors.map(a => (
+                    <option key={a.id} value={a.id}>{a.name}{a.title ? ` — ${a.title}` : ''}</option>
+                  ))}
+                </select>
+              </div>
               <div className="flex items-center pt-6">
                 <label className="flex items-center cursor-pointer">
                   <input
@@ -219,6 +295,32 @@ export default function NewsEditor() {
                   />
                   <span className="ml-2 text-sm font-medium text-gray-900">Publish Immediately</span>
                 </label>
+              </div>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Sources (JSON) <span className="text-gray-400 font-normal">— evidence layer: primary sources cited in the article</span>
+                </label>
+                <textarea
+                  value={sourcesText}
+                  onChange={e => setSourcesText(e.target.value)}
+                  rows={3}
+                  spellCheck={false}
+                  placeholder='[{"label":"Companies Registry","url":"https://www.cr.gov.hk"}]'
+                  className="w-full px-3 py-2 font-mono text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Key Stats (JSON) <span className="text-gray-400 font-normal">— citable numbers table for AI engines</span>
+                </label>
+                <textarea
+                  value={keyStatsText}
+                  onChange={e => setKeyStatsText(e.target.value)}
+                  rows={3}
+                  spellCheck={false}
+                  placeholder='[{"label":"Incorporation time","value":"1-3 business days"}]'
+                  className="w-full px-3 py-2 font-mono text-xs border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                />
               </div>
             </div>
 

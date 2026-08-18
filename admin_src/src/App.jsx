@@ -8,6 +8,13 @@ import NewsEditor from './pages/NewsEditor';
 
 import FaqList from './pages/FaqList';
 import FaqEditor from './pages/FaqEditor';
+import AuthorList from './pages/AuthorList';
+import AuthorEditor from './pages/AuthorEditor';
+import ComparisonList from './pages/ComparisonList';
+import ComparisonEditor from './pages/ComparisonEditor';
+import CaseStudyList from './pages/CaseStudyList';
+import CaseStudyEditor from './pages/CaseStudyEditor';
+import AiCrawlerActivity from './pages/AiCrawlerActivity';
 
 function App() {
   const [session, setSession] = useState(null);
@@ -50,6 +57,16 @@ function App() {
           <Route path="faqs" element={<FaqList />} />
           <Route path="faqs/new" element={<FaqEditor />} />
           <Route path="faqs/edit/:id" element={<FaqEditor />} />
+          <Route path="authors" element={<AuthorList />} />
+          <Route path="authors/new" element={<AuthorEditor />} />
+          <Route path="authors/edit/:id" element={<AuthorEditor />} />
+          <Route path="comparisons" element={<ComparisonList />} />
+          <Route path="comparisons/new" element={<ComparisonEditor />} />
+          <Route path="comparisons/edit/:id" element={<ComparisonEditor />} />
+          <Route path="case-studies" element={<CaseStudyList />} />
+          <Route path="case-studies/new" element={<CaseStudyEditor />} />
+          <Route path="case-studies/edit/:id" element={<CaseStudyEditor />} />
+          <Route path="ai-crawlers" element={<AiCrawlerActivity />} />
         </Route>
       </Routes>
     </BrowserRouter>

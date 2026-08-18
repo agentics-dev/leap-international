@@ -1,9 +1,48 @@
+# Leap International Corporate Service Limited — robots.txt
+# Canonical host: https://leapcorpser.com (www subdomain is not in use)
+
 User-agent: *
 Allow: /
-
 Disallow: /netlify/
+Disallow: /admin/
+Disallow: /admin_dist/
 Disallow: /pages/payment.html
+Disallow: /pages/payment-failed.html
 Disallow: /pages/confirmation.html
-Disallow: /pages/cs-*
+Disallow: /pages/stripe-return.html
+Disallow: /pages/cs-
+Disallow: /pages/select-
 
-Sitemap: https://www.leapcorpser.com/sitemap.xml
+# ---------------------------------------------------------------------------
+# AI / LLM crawlers — explicitly welcomed (GEO).
+# Blocking any of these makes the site invisible to the corresponding engine:
+#   GPTBot / OAI-SearchBot / ChatGPT-User -> ChatGPT
+#   ClaudeBot / Claude-User               -> Claude
+#   PerplexityBot                         -> Perplexity
+#   Bytespider                            -> Doubao (do NOT block)
+#   Google-Extended                       -> Gemini / AI Overviews training
+#   Meta-ExternalAgent                    -> Meta AI
+#   Applebot-Extended / Amazonbot / CCBot / cohere-ai -> Apple, Alexa, Common Crawl, Cohere
+# ---------------------------------------------------------------------------
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Bytespider
+User-agent: Google-Extended
+User-agent: Meta-ExternalAgent
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: CCBot
+User-agent: cohere-ai
+Allow: /
+Disallow: /pages/payment.html
+Disallow: /pages/payment-failed.html
+Disallow: /pages/confirmation.html
+Disallow: /pages/stripe-return.html
+Disallow: /pages/cs-
+Disallow: /pages/select-
+
+Sitemap: https://leapcorpser.com/sitemap.xml

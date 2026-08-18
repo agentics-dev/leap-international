@@ -1177,7 +1177,7 @@ Leap International Corporate Service Limited is registered as a Trust or Company
       opt.classList.remove('selected');
     });
     el.classList.add('selected');
-    document.getElementById('selectedAccountingExpense').innerHTML = el.innerHTML;
+    var _tgt = document.getElementById('selectedAccountingExpense'); _tgt.innerHTML = ''; while (el.firstChild) _tgt.appendChild(el.firstChild.cloneNode(true));
 
     var trigger = document.querySelector('#accountingExpenseSelect .custom-select-trigger');
     var options = document.getElementById('accountingExpenseOptions');

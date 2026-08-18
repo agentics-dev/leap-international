@@ -570,7 +570,7 @@
             });
             el.classList.add('selected');
             selectedExpense = value;
-            document.getElementById('selectedExpense').innerHTML = el.innerHTML;
+            var _tgt = document.getElementById('selectedExpense'); _tgt.innerHTML = ''; while (el.firstChild) _tgt.appendChild(el.firstChild.cloneNode(true));
             document.getElementById('nextBtn').disabled = false;
             document.getElementById('expenseDropdown').classList.remove('show');
         }

@@ -1,0 +1,137 @@
+{
+  "canonicalHost": "https://leapcorpser.com",
+  "legacyHosts": ["https://www.leapcorpser.com"],
+  "indexNowKey": "166be1ab8105add8b4c889998dd22af1",
+
+  "organization": {
+    "sameAs": []
+  },
+
+  "transactionalPatterns": [
+    "payment.html",
+    "payment-failed.html",
+    "confirmation.html",
+    "stripe-return.html",
+    "cs-",
+    "select-"
+  ],
+
+  "meta": {
+    "index.html": {
+      "title": "Hong Kong Company Incorporation | Leap International",
+      "description": "Hong Kong company incorporation, accounting, audit & corporate secretary services for foreigners and locals. Transparent fees, bilingual support. Free quote."
+    },
+    "pricing.html": {
+      "title": "Pricing — HK Company Incorporation & Corporate Services",
+      "description": "Transparent pricing for Hong Kong company incorporation, corporate secretary, accounting and audit services. Compare packages and get an instant quote."
+    },
+    "incorporation-foreigners.html": {
+      "title": "Hong Kong Company Incorporation for Foreigners | Leap",
+      "description": "Start a Hong Kong company as a foreigner — 100% remote incorporation, no residency required. Documents, bank account and compliance handled. From HK$3,500."
+    },
+    "incorporation-locals.html": {
+      "title": "Hong Kong Company Incorporation for HK Residents | Leap",
+      "description": "Fast Hong Kong company registration for local residents — same-day filing, business registration certificate and corporate secretary included. Start today."
+    },
+    "accounting.html": {
+      "title": "Accounting Services Hong Kong — From HK$3,500/yr | Leap",
+      "description": "Full-service Hong Kong accounting from HK$3,500/year: bookkeeping, management accounts, profits tax returns and audit support by certified professionals."
+    },
+    "bookkeeping.html": {
+      "title": "Bookkeeping Services Hong Kong — From HK$3,500/yr | Leap",
+      "description": "Accurate, audit-ready bookkeeping for Hong Kong companies from HK$3,500/year. Monthly books, expense tracking and financial reports done for you."
+    },
+    "corporate-secretary.html": {
+      "title": "Corporate Secretary Services Hong Kong | Leap International",
+      "description": "Licensed Hong Kong corporate secretary services: annual returns, registered office, statutory compliance and CR filings handled on time, every time."
+    },
+    "annual-return-filing.html": {
+      "title": "Annual Return Filing Hong Kong (NAR1) | Leap International",
+      "description": "Hong Kong annual return (NAR1) filing done for you — on-time Companies Registry submission, penalty avoidance and compliance reminders. From HK$1,500."
+    },
+    "audit-tax-filing.html": {
+      "title": "Audit & Tax Filing Services — Hong Kong | Leap International",
+      "description": "HK statutory audit and profits tax filing by certified professionals. Accurate, on-time compliance for Hong Kong companies. Get a transparent quote."
+    },
+    "company-setup.html": {
+      "title": "Company Setup Hong Kong — Incorporation Guide | Leap",
+      "description": "Step-by-step Hong Kong company setup: name approval, documents, CR registration, business registration and bank account. Incorporate in days."
+    },
+    "faqs.html": {
+      "title": "FAQs — Hong Kong Company Services | Leap International",
+      "description": "Answers to common questions about Hong Kong company incorporation, corporate secretary, accounting, audit, tax filing and registered office services."
+    },
+    "get-started.html": {
+      "title": "Get Started — Register Your Hong Kong Business | Leap",
+      "description": "Register or grow your Hong Kong business with Leap International. Answer a few questions and get a tailored incorporation or compliance plan today."
+    },
+    "news.html": {
+      "title": "News & Activities | Leap International",
+      "description": "Latest news, guides and policy updates on Hong Kong company incorporation, tax, compliance and doing business in Hong Kong from Leap International."
+    },
+    "news-detail.html": {
+      "title": "News Details | Leap International",
+      "description": "Read the latest Hong Kong corporate services news, compliance updates and practical business guides from the Leap International team."
+    },
+    "our-culture.html": {
+      "title": "About Leap International — Our Culture & Team",
+      "description": "Meet Leap International: a Hong Kong corporate services team helping founders with incorporation, compliance and cross-border growth. Discover our culture."
+    },
+    "contact.html": {
+      "title": "Contact Us — Let's Start a Conversation | Leap International",
+      "description": "Contact Leap International for Hong Kong company incorporation, accounting, audit and corporate secretary services. TST East office. Reply within 24 hours."
+    },
+    "privacy-policy.html": {
+      "title": "Privacy Policy | Leap International",
+      "description": "How Leap International collects, uses and protects your personal and company information across our Hong Kong corporate services. PDPO compliant."
+    },
+    "terms-of-service.html": {
+      "title": "Terms of Service | Leap International",
+      "description": "The terms governing Leap International's Hong Kong company incorporation, corporate secretary, accounting, audit and related corporate services."
+    },
+    "registered-office-address.html": {
+      "title": "Registered Office Address Hong Kong | Leap International",
+      "description": "Prestigious Tsim Sha Tsui East registered office address for your Hong Kong company — mail handling, government correspondence and compliance included."
+    },
+    "sales-invoice.html": {
+      "title": "Sales Invoice Services Hong Kong | Leap International",
+      "description": "Professional sales invoicing for Hong Kong companies — compliant invoice setup, issuance and tracking so you get paid faster. Part of Leap accounting."
+    }
+  },
+
+  "llms": {
+    "name": "Leap International Corporate Service Limited",
+    "summary": "Leap International is a Hong Kong corporate services firm that helps foreigners and local founders incorporate, operate and stay compliant in Hong Kong. Services cover company incorporation, corporate secretary, accounting, bookkeeping, audit and profits tax filing, annual return filing, and registered office address. The firm is based in Tsim Sha Tsui East, Kowloon, Hong Kong and provides bilingual (English / Traditional Chinese) support with transparent, published pricing.",
+    "sections": [
+      {
+        "heading": "Core services",
+        "items": [
+          { "name": "Hong Kong company incorporation for foreigners (100% remote, no residency required)", "url": "/pages/incorporation-foreigners.html" },
+          { "name": "Hong Kong company incorporation for local residents (fast registration)", "url": "/pages/incorporation-locals.html" },
+          { "name": "Corporate secretary services (annual returns, statutory compliance)", "url": "/pages/corporate-secretary.html" },
+          { "name": "Accounting services (from HK$3,500/year)", "url": "/pages/accounting.html" },
+          { "name": "Bookkeeping services (from HK$3,500/year)", "url": "/pages/bookkeeping.html" },
+          { "name": "Audit and profits tax filing", "url": "/pages/audit-tax-filing.html" },
+          { "name": "Annual return (NAR1) filing", "url": "/pages/annual-return-filing.html" },
+          { "name": "Registered office address in Tsim Sha Tsui East", "url": "/pages/registered-office-address.html" },
+          { "name": "Company setup step-by-step guide", "url": "/pages/company-setup.html" }
+        ]
+      },
+      {
+        "heading": "Key resources",
+        "items": [
+          { "name": "Transparent pricing for all services", "url": "/pages/pricing.html" },
+          { "name": "Frequently asked questions", "url": "/pages/faqs.html" },
+          { "name": "News, guides and Hong Kong policy updates", "url": "/pages/news.html" },
+          { "name": "About the team and company culture", "url": "/pages/our-culture.html" },
+          { "name": "Contact (reply within 24 hours)", "url": "/pages/contact.html" }
+        ]
+      }
+    ],
+    "contact": {
+      "address": "Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East, Kowloon, Hong Kong",
+      "phone": "+852 65550943",
+      "hours": "Monday-Friday 09:00-18:00 (HKT)"
+    }
+  }
+}

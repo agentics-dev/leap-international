@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { X, Monitor, Tablet, Smartphone } from 'lucide-react';
 import clsx from 'clsx';
+import { sanitizeHtml } from '../lib/sanitize';
 
 export default function ArticlePreviewDialog({ article, onClose }) {
   const [device, setDevice] = useState('desktop');
@@ -8,7 +9,10 @@ export default function ArticlePreviewDialog({ article, onClose }) {
 
   const title = article[`title_${lang}`] || article.title_en || 'Untitled';
   const excerpt = article[`excerpt_${lang}`] || article.excerpt_en || 'No excerpt';
-  const content = article[`content_${lang}`] || article.content_en || '';
+  const content = useMemo(
+    () => sanitizeHtml(article[`content_${lang}`] || article.content_en || ''),
+    [article, lang]
+  );
   
   // Try to use the first image's crop if available, else original URL
   let coverStyle = {};

@@ -119,3 +119,13 @@ window.toggleMegaMenu = function(el) {
   document.querySelectorAll('.mega-group').forEach(function(g) { g.classList.remove('show'); });
   if (!isOpen) parent.classList.add('show');
 };
+
+// ========== HTML 转义工具（全站共享，防 XSS）==========
+window.escapeHtml = function (s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+};

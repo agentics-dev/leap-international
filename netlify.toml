@@ -7,6 +7,13 @@
 [functions]
   node_bundler = "zisi"
 
+# Content APIs: the canonical implementations live in /api (Vercel style).
+# Netlify wrappers for them live in netlify/functions/ (see _vercel-adapter.js).
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
 [[redirects]]
   from = "/404"
   to = "/index.html"
@@ -16,6 +23,12 @@
   from = "/admin/*"
   to = "/admin/index.html"
   status = 200
+
+# Phase 4.2: log AI-crawler visits at the edge (HTML pages only).
+[[edge_functions]]
+  path = "/*"
+  function = "ai-crawl-logger"
+  excluded_patterns = ["\\.css$", "\\.js$", "\\.map$", "\\.png$", "\\.jpe?g$", "\\.gif$", "\\.svg$", "\\.ico$", "\\.webp$", "\\.woff2?$", "\\.ttf$", "\\.xml$", "\\.txt$", "^/admin/", "^/admin_dist/", "^/api/", "^/\\.netlify/"]
 
 [[headers]]
   for = "/*"

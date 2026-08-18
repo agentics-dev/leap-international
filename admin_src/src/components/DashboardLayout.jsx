@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { LogOut, FileText, HelpCircle } from 'lucide-react';
+import { LogOut, FileText, HelpCircle, Users, Scale, Trophy, Bot } from 'lucide-react';
 
 export default function DashboardLayout() {
   const location = useLocation();
@@ -41,6 +41,50 @@ export default function DashboardLayout() {
           >
             <HelpCircle className="w-5 h-5 mr-3" />
             FAQ Management
+          </Link>
+          <Link
+            to="/authors"
+            className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
+              location.pathname.startsWith('/authors')
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Users className="w-5 h-5 mr-3" />
+            Authors
+          </Link>
+          <Link
+            to="/comparisons"
+            className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
+              location.pathname.startsWith('/comparisons')
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Scale className="w-5 h-5 mr-3" />
+            Comparison Pages
+          </Link>
+          <Link
+            to="/case-studies"
+            className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
+              location.pathname.startsWith('/case-studies')
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Trophy className="w-5 h-5 mr-3" />
+            Case Studies
+          </Link>
+          <Link
+            to="/ai-crawlers"
+            className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium ${
+              location.pathname.startsWith('/ai-crawlers')
+                ? 'bg-blue-50 text-blue-700'
+                : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Bot className="w-5 h-5 mr-3" />
+            AI Crawlers
           </Link>
         </nav>
         <div className="p-4 border-t border-gray-200">
