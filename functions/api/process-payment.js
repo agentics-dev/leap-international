@@ -120,7 +120,7 @@ export async function onRequestPost(context) {
 
       if (customer_email && RESEND_API_KEY) {
         try {
-          const isZh = locale === 'zh';
+          const isZh = (locale === 'zh' || locale === 'zh-Hant' || locale === 'zh-Hans');
           const tr = (en, zh) => (isZh ? zh : en);
           await sendResendEmail({
             apiKey: RESEND_API_KEY,

@@ -68,7 +68,7 @@ function buildNotifyEmail({ amount, currency, customerName, customerEmail, metho
 // 生成客户确认邮件
 function buildCustomerEmail({ amount, currency, customerName, paymentId, locale }) {
   const formattedAmount = formatAmount(amount, currency);
-  const isZh = locale === 'zh';
+  const isZh = (locale === 'zh' || locale === 'zh-Hant' || locale === 'zh-Hans');
   const tr = (en, zh) => (isZh ? zh : en);
   return {
     from: 'Leap International <notify@leapcorpser.com>',

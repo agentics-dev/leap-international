@@ -50,7 +50,8 @@ export async function onRequestPost(context) {
     const captureContextRequest = {
       targetOrigins: [safeOrigin],
       country: 'HK',
-      locale: locale === 'zh' ? 'zh_HK' : 'en_US',
+      // V1 locale 映射：繁体→zh_HK，简体→zh_CN，其余→en_US（兼容旧值 'zh'）
+      locale: (locale === 'zh' || locale === 'zh-Hant') ? 'zh_HK' : locale === 'zh-Hans' ? 'zh_CN' : 'en_US',
       // V1: consumerAuthentication 是枚举 "3DS"/"NONE"（V0 是布尔值 true/false）
       // type: CAPTURE = 授权+扣款（SALE），AUTH 只授权不扣款
       completeMandate: {

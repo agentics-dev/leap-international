@@ -91,23 +91,20 @@ html[data-lang="zh-Hans"] .lang-zh-Hans { display: revert !important; }
 
   // ====== 事件委托：监听 document 的 click（不依赖 DOM 时机）======
   // 这样无论按钮何时出现在 DOM 里，点击都能被捕获
+  // 注意：必须用 closest('button[data-lang]') 精确匹配——
+  // setLang 会在 <html> 上设置 data-lang，若向上遍历找 [data-lang] 会误命中
+  // <html>，导致全站每次点击都被 preventDefault（checkbox/radio 打不上勾）。
   document.addEventListener('click', function (e) {
-    // 找到被点击的 data-lang 按钮（可能是按钮本身或其子元素）
-    var target = e.target;
-    while (target && target !== document) {
-      if (target.getAttribute && target.getAttribute('data-lang')) {
-        e.preventDefault();
-        e.stopPropagation();
-        window.setLang(target.getAttribute('data-lang'));
-        // 关闭下拉菜单
-        var dropdown = document.getElementById('langDropdown');
-        if (dropdown) dropdown.classList.remove('show');
-        var langBtn = document.getElementById('langBtn');
-        if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
-        return;
-      }
-      target = target.parentNode;
-    }
+    var el = e.target && e.target.closest ? e.target.closest('button[data-lang]') : null;
+    if (!el) return;
+    e.preventDefault();
+    e.stopPropagation();
+    window.setLang(el.getAttribute('data-lang'));
+    // 关闭下拉菜单
+    var dropdown = document.getElementById('langDropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    var langBtn = document.getElementById('langBtn');
+    if (langBtn) langBtn.setAttribute('aria-expanded', 'false');
   }, true); // ← 捕获阶段，确保在页面的 document click handler 之前执行
 })();
 
