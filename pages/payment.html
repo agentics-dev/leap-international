@@ -778,7 +778,12 @@
       var data = getPackageData();
       var items = [];
 
-      if (data.incorporationPrice) {
+      // 测试订单：?test=1 → 单项 HKD 100 内部测试服务（走完整支付网关，测完可移除此分支）
+      var isTestOrder = new URLSearchParams(window.location.search).get('test') === '1';
+
+      if (isTestOrder) {
+        items.push({ labelEn: 'Internal Test Service', labelZh: '內部測試服務', price: 100, note: 'one time', noteZh: '一次性' });
+      } else if (data.incorporationPrice) {
         var incName = data.incorporationPlan || 'Incorporation Package';
         var incPlanMap = { 'Starter': '\u5275\u696d\u7248', 'Compliance': '\u5408\u898f\u7248', 'Full Compliance': '\u5168\u9762\u5408\u898f\u7248' };
         var incNameZh = incPlanMap[data.incorporationPlan] || (data.incorporationPlan || '\u516c\u53f8\u8a3b\u518a\u5957\u9910');
@@ -789,7 +794,7 @@
         items.push({ labelEn: 'Annual Business Registration fee to HKSAR', labelZh: '香港特別行政區年度商業登記費', price: 2350, note: 'one time', noteZh: '一次性' });
       }
 
-      if (data.secretaryPrice) {
+      if (!isTestOrder && data.secretaryPrice) {
         var secLabel = data.secretaryPlan === 'standard' ? 'Company Secretary (Standard)' : 'Company Secretary (Premium)';
         var secLabelZh = data.secretaryPlan === 'standard' ? '公司秘書（標準）' : '公司秘書（高級）';
         items.push({ labelEn: secLabel, labelZh: secLabelZh, price: data.secretaryPrice, note: '/ year', noteZh: '/ 年' });
@@ -798,11 +803,11 @@
         }
       }
 
-      if (data.hasOfficeAddress) {
+      if (!isTestOrder && data.hasOfficeAddress) {
         items.push({ labelEn: 'Registered Address & Virtual Mailroom', labelZh: '註冊地址與虛擬郵件室', price: 2500, note: '/ year', noteZh: '/ 年' });
       }
 
-      if (data.accountingPlan && data.accountingPrice) {
+      if (!isTestOrder && data.accountingPlan && data.accountingPrice) {
         var planNames = { annual: 'Annual Filing & Bookkeeping', payroll: 'Accounting & Payroll', premium: 'Accounting Premium' };
         var planNamesZh = { annual: '年度申報與簿記', payroll: '會計與薪酬', premium: '會計高級版' };
         var expenseLabels = { '15000': '≤ HK$15K', '50000': '≤ HK$50K', '100000': '≤ HK$100K', '200000': '≤ HK$200K', '400000': '≤ HK$400K', '>400000': '> HK$400K' };
@@ -885,6 +890,10 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       appliedDiscount = getAppliedDiscount();
+      // 测试订单不应用折扣（避免金额偏离白名单被后端拒绝）
+      if (new URLSearchParams(window.location.search).get('test') === '1') {
+        appliedDiscount = null;
+      }
       renderSummary();
 
       // 折扣码面板交互
