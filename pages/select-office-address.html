@@ -784,6 +784,12 @@
     </main>
 
     <script>
+    // escapeHtml 本地兜底（防 i18n.js defer/缓存时序问题；与 i18n.js 实现一致）
+    var escapeHtml = window.escapeHtml || function (s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    };
 (function() {
   var langBtn = document.getElementById('langBtn');
   var langDropdown = document.getElementById('langDropdown');
