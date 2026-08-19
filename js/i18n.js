@@ -69,6 +69,36 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
     else { flag.textContent = '🇬🇧'; label.textContent = 'EN'; }
   }
 
+  // 把当前语言写入地址栏 ?lang=（不刷新页面），形成可分享的三语链接
+  function updateUrlLang(v) {
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', v);
+      window.history.replaceState({}, '', url);
+    } catch (e) {}
+  }
+
+  // SEO：注入 hreflang（en / zh-Hant / zh-Hans / x-default 互链）
+  function injectHreflang() {
+    if (document.getElementById('leap-hreflang')) return;
+    try {
+      ['en', 'zh-Hant', 'zh-Hans', 'x-default'].forEach(function (lg) {
+        var link = document.createElement('link');
+        link.rel = 'alternate';
+        link.hreflang = lg;
+        var u = new URL(window.location.href);
+        if (lg === 'x-default') u.searchParams.delete('lang');
+        else u.searchParams.set('lang', lg);
+        link.href = u.toString();
+        document.head.appendChild(link);
+      });
+      var mark = document.createElement('span');
+      mark.id = 'leap-hreflang';
+      mark.style.display = 'none';
+      document.head.appendChild(mark);
+    } catch (e) {}
+  }
+
   window.setLang = function (lang) {
     try {
       var html = document.documentElement;
@@ -77,6 +107,7 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
       html.setAttribute('lang', v === 'zh-Hant' ? 'zh-Hant' : v === 'zh-Hans' ? 'zh-Hans' : 'en');
       updateSwitcherUI(v);
       try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
+      updateUrlLang(v);
       document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: v } }));
     } catch (e) {
       console.error('setLang error:', e);
@@ -87,6 +118,7 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
 
   // ====== 立即执行（不等 DOMContentLoaded）======
   injectStyles();
+  injectHreflang();
 
   // 设置初始语言（从 localStorage 或 URL ?lang=）
   try {

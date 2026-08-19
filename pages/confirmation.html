@@ -31,7 +31,7 @@
   </main>
   <script>
     (function(){
-      var lang='en';try{lang=localStorage.getItem('leap-lang')||'en'}catch(e){}
+      var lang='en';try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('leap-lang')||'en'}catch(e){}if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
       var copy={en:{loading:'Verifying your receipt...',title:'Payment confirmed',lead:'Thank you. A confirmation has been sent to your email.',amount:'Amount paid',name:'Customer',email:'Email',method:'Payment method',reference:'Reference',home:'Return home',invalid:'This payment receipt is missing, invalid or expired. Please contact us if payment was deducted.'},'zh-Hant':{loading:'正在驗證付款收據...',title:'付款已確認',lead:'謝謝。付款確認已發送至您的電郵。',amount:'付款金額',name:'客戶',email:'電郵',method:'付款方式',reference:'交易編號',home:'返回首頁',invalid:'付款收據缺失、無效或已過期。如款項已被扣除，請聯絡我們。'},'zh-Hans':{loading:'正在验证付款收据...',title:'付款已确认',lead:'谢谢。付款确认已发送至您的邮箱。',amount:'付款金额',name:'客户',email:'邮箱',method:'付款方式',reference:'交易编号',home:'返回首页',invalid:'付款收据缺失、无效或已过期。如款项已被扣除，请联系我们。'}};
       var tr=copy[lang]||copy.en;document.getElementById('loading').textContent=tr.loading;
       var token=new URLSearchParams(location.hash.slice(1)).get('receipt');

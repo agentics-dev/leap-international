@@ -16,7 +16,7 @@
   </section></main>
   <script>
     (function(){
-      var params=new URLSearchParams(location.search);var lang=params.get('lang');try{lang=lang||localStorage.getItem('leap-lang')||'en'}catch(e){lang=lang||'en'}
+      var params=new URLSearchParams(location.search);var lang=params.get('lang');try{lang=lang||localStorage.getItem('leap-lang')||'en'}catch(e){lang=lang||'en'};if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
       var copy={en:{title:'Payment was not completed',lead:'No successful payment was recorded. You can review your details and try again.',fallback:'The payment provider declined or could not complete this transaction.',amount:'Attempted amount:',retry:'Try again',help:'Contact support'},'zh-Hant':{title:'付款未完成',lead:'系統未記錄成功付款。您可檢查資料後重試。',fallback:'付款服務商拒絕或未能完成此交易。',amount:'嘗試付款金額：',retry:'重新嘗試',help:'聯絡支援'},'zh-Hans':{title:'付款未完成',lead:'系统未记录成功付款。您可以检查资料后重试。',fallback:'付款服务商拒绝或未能完成此交易。',amount:'尝试付款金额：',retry:'重新尝试',help:'联系支持'}};var tr=copy[lang]||copy.en;
       document.documentElement.lang=lang==='zh-Hant'?'zh-HK':lang==='zh-Hans'?'zh-CN':'en';document.getElementById('title').textContent=tr.title;document.getElementById('lead').textContent=tr.lead;document.getElementById('reason').textContent=params.get('reason')||tr.fallback;document.getElementById('retry').textContent=tr.retry;document.getElementById('help').textContent=tr.help;
       var amount=Number(params.get('amount'));document.getElementById('amount').textContent=amount>0?tr.amount+' '+new Intl.NumberFormat(lang==='en'?'en-HK':'zh-HK',{style:'currency',currency:'HKD'}).format(amount):'';

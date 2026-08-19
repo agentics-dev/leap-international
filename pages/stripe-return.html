@@ -23,7 +23,7 @@
   </main>
   <script>
     (function(){
-      var lang='en';try{lang=localStorage.getItem('leap-lang')||'en'}catch(e){}
+      var lang='en';try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('leap-lang')||'en'}catch(e){}if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
       var copy={
         en:{checking:'Checking your payment',checkingMsg:'Please keep this page open while we confirm the result.',processing:'Payment is processing',processingMsg:'Your provider is still processing the payment. You can safely close this page; contact us if the status does not update.',action:'Additional action is required',actionMsg:'Return to checkout to complete the payment authentication.',error:'We could not verify the payment',errorMsg:'Please return to checkout or contact our support team.',help:'Contact support',back:'Return to checkout'},
         'zh-Hant':{checking:'正在確認付款',checkingMsg:'我們正在確認付款結果，請保持此頁開啟。',processing:'付款處理中',processingMsg:'付款服務商仍在處理此交易。您可安全關閉此頁；如狀態未有更新，請聯絡我們。',action:'需要額外驗證',actionMsg:'請返回結賬頁完成付款驗證。',error:'未能確認付款',errorMsg:'請返回結賬頁或聯絡我們的支援團隊。',help:'聯絡支援',back:'返回結賬'},
