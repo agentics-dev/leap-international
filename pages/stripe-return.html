@@ -1,97 +1,51 @@
 <!DOCTYPE html>
-<html data-lang="en">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Payment Status — Leap International</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+  <title>Payment status | Leap International Corporate Service Limited</title>
+  <link rel="icon" href="/FOI_logo_192px.png">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    /* 三语显示规则由 js/i18n.js 统一注入 */
+    *{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#142033;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}.header{height:74px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #dfe4ec;background:#fff}.header img{width:76px;height:48px;object-fit:contain}.wrap{min-height:calc(100vh - 74px);display:grid;place-items:center;padding:30px 18px}.status{width:min(540px,100%);padding:38px;border:1px solid #dfe4ec;border-radius:8px;background:#fff;text-align:center}.spinner{width:42px;height:42px;margin:0 auto 22px;border:3px solid #dbe5f5;border-top-color:#145ddb;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}h1{margin:0 0 12px;font-size:28px;letter-spacing:0}p{margin:0;color:#667085;line-height:1.6}.actions{display:flex;justify-content:center;gap:10px;margin-top:24px}.button{display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:0 18px;border:1px solid #c8d0db;border-radius:6px;color:#344054;background:#fff;font-weight:750;text-decoration:none}.button.primary{border-color:#145ddb;color:#fff;background:#145ddb}.hidden{display:none}
   </style>
-  <script src="/js/i18n.js?v=20260819" defer></script>
-  <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
-<body class="bg-[#F0F4F8] min-h-screen flex items-center justify-center p-6">
-  <div class="bg-white rounded-2xl shadow-lg max-w-md w-full p-8 text-center">
-    <!-- 加载中 -->
-    <div id="loadingState">
-      <div class="w-12 h-12 border-4 border-[#165DFF] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-      <p class="text-[16px] text-gray-600">
-        <span class="lang-en">Confirming your payment...</span>
-        <span class="lang-zh">正在確認您的付款...</span><span class="lang-zh-Hans lang-zh-Hans-clone">正在确认您的付款...</span>
-      </p>
-    </div>
-  </div>
-
+<body>
+  <header class="header"><a href="/" aria-label="Leap International home"><img src="/FOI_logo.png" alt="Leap International"></a></header>
+  <main class="wrap">
+    <section class="status" aria-live="polite">
+      <div id="spinner" class="spinner" aria-hidden="true"></div>
+      <h1 id="title">Checking your payment</h1>
+      <p id="message">Please keep this page open while we confirm the result.</p>
+      <div id="actions" class="actions hidden">
+        <a class="button" href="/pages/contact.html" id="helpLink">Contact support</a>
+        <a class="button primary" href="/pages/payment.html" id="returnLink">Return to checkout</a>
+      </div>
+    </section>
+  </main>
   <script>
-    // 从 localStorage 恢复订单上下文（payment.html 在跳转前保存）
-    var orderCtx = {};
-    try {
-      orderCtx = JSON.parse(localStorage.getItem('leap-stripe-order') || '{}');
-    } catch (e) {}
-
-    var params = new URLSearchParams(window.location.search);
-    var paymentIntentId = params.get('payment_intent') || orderCtx.payment_intent_id;
-
-    async function checkStatus() {
-      if (!paymentIntentId) {
-        redirectToFail('Missing payment information');
-        return;
+    (function(){
+      var lang='en';try{lang=localStorage.getItem('leap-lang')||'en'}catch(e){}
+      var copy={
+        en:{checking:'Checking your payment',checkingMsg:'Please keep this page open while we confirm the result.',processing:'Payment is processing',processingMsg:'Your provider is still processing the payment. You can safely close this page; contact us if the status does not update.',action:'Additional action is required',actionMsg:'Return to checkout to complete the payment authentication.',error:'We could not verify the payment',errorMsg:'Please return to checkout or contact our support team.',help:'Contact support',back:'Return to checkout'},
+        'zh-Hant':{checking:'正在確認付款',checkingMsg:'我們正在確認付款結果，請保持此頁開啟。',processing:'付款處理中',processingMsg:'付款服務商仍在處理此交易。您可安全關閉此頁；如狀態未有更新，請聯絡我們。',action:'需要額外驗證',actionMsg:'請返回結賬頁完成付款驗證。',error:'未能確認付款',errorMsg:'請返回結賬頁或聯絡我們的支援團隊。',help:'聯絡支援',back:'返回結賬'},
+        'zh-Hans':{checking:'正在确认付款',checkingMsg:'我们正在确认付款结果，请保持此页打开。',processing:'付款处理中',processingMsg:'付款服务商仍在处理此交易。您可以安全关闭此页；如状态未更新，请联系我们。',action:'需要额外验证',actionMsg:'请返回结账页完成付款验证。',error:'未能确认付款',errorMsg:'请返回结账页或联系我们的支持团队。',help:'联系支持',back:'返回结账'}
+      };
+      var tr=copy[lang]||copy.en,title=document.getElementById('title'),message=document.getElementById('message');
+      title.textContent=tr.checking;message.textContent=tr.checkingMsg;document.getElementById('helpLink').textContent=tr.help;document.getElementById('returnLink').textContent=tr.back;
+      var params=new URLSearchParams(location.search);var paymentId=params.get('payment_intent')||params.get('payment_intent_id')||sessionStorage.getItem('leap-stripe-payment-id');var clientSecret=params.get('payment_intent_client_secret')||sessionStorage.getItem('leap-stripe-client-secret');
+      function show(type,msg){document.getElementById('spinner').classList.add('hidden');title.textContent=tr[type];message.textContent=msg||tr[type+'Msg'];document.getElementById('actions').classList.remove('hidden')}
+      function confirm(){return fetch('/api/confirm-stripe-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({payment_intent_id:paymentId,payment_intent_client_secret:clientSecret})}).then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||tr.errorMsg);return d})})}
+      if(!paymentId||!clientSecret){show('error');return}
+      var attempts=0,maxAttempts=15;
+      function poll(){
+        confirm().then(function(result){
+          if(result.status==='succeeded'&&result.receipt_token){location.replace('/pages/confirmation.html#receipt='+encodeURIComponent(result.receipt_token));return}
+          if(result.status==='requires_action'){show('action');return}
+          if(result.status==='failed'){var q=new URLSearchParams({reason:result.failure_message||tr.errorMsg,amount:String(result.amount||''),lang:lang});location.replace('/pages/payment-failed.html?'+q);return}
+          attempts+=1;if(attempts<maxAttempts){setTimeout(poll,2000)}else{show('processing')}
+        }).catch(function(error){attempts+=1;if(attempts<3){setTimeout(poll,2000)}else{show('error',error.message)}})
       }
-
-      try {
-        var res = await fetch('/api/confirm-stripe-payment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            payment_intent_id: paymentIntentId,
-            customer_name: orderCtx.customer_name || '',
-            customer_email: orderCtx.customer_email || '',
-            discount_code: orderCtx.discount_code || '',
-            discount_amount: orderCtx.discount_amount || 0,
-            locale: orderCtx.locale || 'en'
-          })
-        });
-        var data = await res.json();
-
-        if (data.succeeded || data.status === 'succeeded') {
-          // 成功 → 跳确认页
-          var p = new URLSearchParams();
-          p.set('id', data.payment_id || paymentIntentId);
-          p.set('amount', orderCtx.amount || '');
-          p.set('name', encodeURIComponent(orderCtx.customer_name || ''));
-          p.set('email', encodeURIComponent(orderCtx.customer_email || ''));
-          p.set('method', encodeURIComponent(data.method || 'Card'));
-          p.set('lang', orderCtx.locale || 'en');
-          localStorage.removeItem('leap-stripe-order');
-          window.location.href = 'confirmation.html?' + p.toString();
-        } else {
-          // 还在处理中（如微信扫码后未完成）或失败
-          redirectToFail(data.message || data.status || 'Payment not completed');
-        }
-      } catch (e) {
-        redirectToFail(e.message);
-      }
-    }
-
-    function redirectToFail(reason) {
-      var p = new URLSearchParams();
-      p.set('reason', encodeURIComponent(reason));
-      p.set('amount', orderCtx.amount || '');
-      p.set('lang', orderCtx.locale || 'en');
-      window.location.href = 'payment-failed.html?' + p.toString();
-    }
-
-    // 语言初始化（兼容旧值 zh → zh-Hant）
-    var savedLang = localStorage.getItem('leap-lang') || 'en';
-    if (savedLang === 'zh') savedLang = 'zh-Hant';
-    document.documentElement.setAttribute('data-lang', savedLang);
-
-    // 自动检查（稍等 1 秒让 Stripe 处理完）
-    setTimeout(checkStatus, 1000);
+      poll();
+    })();
   </script>
 </body>
 </html>

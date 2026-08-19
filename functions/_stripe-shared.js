@@ -2,8 +2,6 @@
 // Stripe 支付用的共享工具：JSON 响应、金额格式化、HTML 转义、Resend 邮件发送。
 // 邮件模板复用 CyberSource process-payment.js 的风格。
 
-const { validateOrder } = require('./_order-validation');
-
 function json(status, payload) {
   return new Response(JSON.stringify(payload), {
     status,
@@ -28,10 +26,14 @@ function toStripeAmount(hkd) {
   return Math.round(Number(hkd) * 100);
 }
 
-async function sendResendEmail({ apiKey, from, to, subject, html, replyTo }) {
+async function sendResendEmail({ apiKey, from, to, subject, html, replyTo, idempotencyKey }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+      ...(idempotencyKey ? { 'Idempotency-Key': idempotencyKey } : {}),
+    },
     body: JSON.stringify({
       from,
       to: Array.isArray(to) ? to : [to],
@@ -45,11 +47,11 @@ async function sendResendEmail({ apiKey, from, to, subject, html, replyTo }) {
 }
 
 // 生成支付成功通知邮件（发给公司）
-function buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status }) {
+function buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status, gateway }) {
   const formattedAmount = formatAmount(amount, currency);
   const displayTime = new Date().toLocaleString('zh-HK', { timeZone: 'Asia/Hong_Kong' });
   return {
-    from: 'Leap International <notify@leapcorpser.com>',
+    from: 'Leap International Corporate Service Limited <notify@leapcorpser.com>',
     subject: `💰 New Payment - ${formattedAmount} - ${customerName || 'N/A'}`,
     html: `<div style="font-family:Inter,sans-serif;max-width:520px;margin:0 auto;padding:24px">
       <h2>💰 New Payment Received</h2>
@@ -60,7 +62,7 @@ function buildNotifyEmail({ amount, currency, customerName, customerEmail, metho
       <p><strong>Time:</strong> ${escapeHtml(displayTime)}</p>
       <p><strong>Transaction ID:</strong> <code>${escapeHtml(paymentId)}</code></p>
       <p><strong>Status:</strong> ${escapeHtml(status)}</p>
-      <p><strong>Gateway:</strong> Stripe</p>
+      <p><strong>Gateway:</strong> ${escapeHtml(gateway || 'Stripe')}</p>
     </div>`,
   };
 }
@@ -71,9 +73,9 @@ function buildCustomerEmail({ amount, currency, customerName, paymentId, locale 
   const isZh = (locale === 'zh' || locale === 'zh-Hant' || locale === 'zh-Hans');
   const tr = (en, zh) => (isZh ? zh : en);
   return {
-    from: 'Leap International <notify@leapcorpser.com>',
+    from: 'Leap International Corporate Service Limited <notify@leapcorpser.com>',
     subject: isZh
-      ? `✅ Leap International 付款確認 — ${formattedAmount}`
+      ? `✅ 溱柏國際商業服務 付款確認 — ${formattedAmount}`
       : `✅ Leap International Payment Confirmed — ${formattedAmount}`,
     html: `<div style="font-family:Inter,sans-serif;max-width:520px;margin:0 auto;padding:24px">
       <h2>${tr('Payment Confirmed', '付款確認')} ✅</h2>
@@ -87,14 +89,19 @@ function buildCustomerEmail({ amount, currency, customerName, paymentId, locale 
 }
 
 // 发送支付成功的两封邮件（通知 + 客户确认）
-async function sendPaymentEmails({ env, amount, currency, customerName, customerEmail, method, paymentId, status, locale }) {
+async function sendPaymentEmails({ env, amount, currency, customerName, customerEmail, method, paymentId, status, locale, gateway }) {
   const RESEND_API_KEY = env.RESEND_API_KEY;
   const NOTIFY_EMAIL = env.NOTIFY_EMAIL;
   if (!RESEND_API_KEY || !NOTIFY_EMAIL) return;
 
-  const notify = buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status });
+  const notify = buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status, gateway });
   try {
-    await sendResendEmail({ apiKey: RESEND_API_KEY, to: NOTIFY_EMAIL, ...notify });
+    await sendResendEmail({
+      apiKey: RESEND_API_KEY,
+      to: NOTIFY_EMAIL,
+      idempotencyKey: `payment-${paymentId}-business`.slice(0, 256),
+      ...notify,
+    });
   } catch (e) {
     console.error('Notify email failed:', e.message);
   }
@@ -102,11 +109,17 @@ async function sendPaymentEmails({ env, amount, currency, customerName, customer
   if (customerEmail) {
     const customer = buildCustomerEmail({ amount, currency, customerName, paymentId, locale });
     try {
-      await sendResendEmail({ apiKey: RESEND_API_KEY, to: customerEmail, replyTo: NOTIFY_EMAIL, ...customer });
+      await sendResendEmail({
+        apiKey: RESEND_API_KEY,
+        to: customerEmail,
+        replyTo: NOTIFY_EMAIL,
+        idempotencyKey: `payment-${paymentId}-customer`.slice(0, 256),
+        ...customer,
+      });
     } catch (e) {
       console.error('Customer email failed:', e.message);
     }
   }
 }
 
-module.exports = { json, escapeHtml, formatAmount, toStripeAmount, sendResendEmail, sendPaymentEmails, validateOrder };
+module.exports = { json, escapeHtml, formatAmount, toStripeAmount, sendResendEmail, sendPaymentEmails };

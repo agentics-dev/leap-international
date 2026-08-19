@@ -379,7 +379,7 @@
       </h1>
       <p class="text-[16px] text-gray-600">
         <span class="lang-en">Incorporate with Leap and unlock seamless digital banking via our leading partners.</span>
-        <span class="lang-zh">透過 Leap 註冊並透過我們的領先合作夥伴解鎖無縫數位銀行服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">透过 Leap 注册并透过我们的领先合作伙伴解锁无缝数位银行服务。</span>
+        <span class="lang-zh">透過 溱柏 註冊並透過我們的領先合作夥伴解鎖無縫數位銀行服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">透过 溱柏 注册并透过我们的领先合作伙伴解锁无缝数位银行服务。</span>
       </p>
     </div>
 
@@ -524,7 +524,7 @@
           <span class="material-symbols-outlined text-[#10B981] text-[20px] mt-0.5">check</span>
           <p class="text-[14px] text-gray-700">
             <span class="lang-en">20% cashback on Leap service renewals.</span>
-            <span class="lang-zh">Leap 服務續約 20% 現金回饋。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap 服务续约 20% 现金回馈。</span>
+            <span class="lang-zh">溱柏 服務續約 20% 現金回饋。</span><span class="lang-zh-Hans lang-zh-Hans-clone">溱柏 服务续约 20% 现金回馈。</span>
           </p>
         </div>
       </div>
@@ -795,10 +795,12 @@
     function handleNext() {
       if (!selectedBank) return;
       saveAndUpdateSummary();
+      try { sessionStorage.setItem('leap-checkout-flow', 'incorporation'); } catch (e) {}
       window.location.href = 'payment.html';
     }
 
     function handleSkip() {
+      try { sessionStorage.setItem('leap-checkout-flow', 'incorporation'); } catch (e) {}
       window.location.href = 'payment.html';
     }
   </script>

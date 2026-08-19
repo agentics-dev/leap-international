@@ -735,7 +735,14 @@
         }
 
         function confirmOrder() {
-            alert('Order confirmed! This is a placeholder for payment integration.');
+            var plan = String(orderData.csPlan || '').toLowerCase();
+            var shareholders = parseInt(orderData.csShareholders, 10);
+            if ((plan !== 'standard' && plan !== 'premium') || !Number.isInteger(shareholders) || shareholders < 1 || shareholders > 50) {
+                alert('Please review your company secretary plan and shareholder count before payment.');
+                return;
+            }
+            try { sessionStorage.setItem('leap-checkout-flow', 'company_secretary'); } catch (e) {}
+            window.location.href = 'payment.html';
         }
     </script>
 <script>if(!window.toggleMegaMenu){window.toggleMegaMenu=function(e){var p=e.closest(".mega-group");if(!p)return;var o=p.classList.contains("show");document.querySelectorAll(".mega-group").forEach(function(g){g.classList.remove("show")});if(!o)p.classList.add("show")}}</script>
