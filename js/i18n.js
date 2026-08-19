@@ -46,6 +46,16 @@ html[data-lang="zh-Hant"] .lang-zh { display: revert !important; }
 /* 简体模式：只显示 .lang-zh-Hans */
 html[data-lang="zh-Hans"] .lang-en, html[data-lang="zh-Hans"] .lang-zh { display: none !important; }
 html[data-lang="zh-Hans"] .lang-zh-Hans { display: revert !important; }
+
+/* ===== 导航栏放大 30% ===== */
+header.bg-nav-bg > div { padding-top: 16px !important; padding-bottom: 16px !important; }
+header.bg-nav-bg img[alt="FOI Logo"] { height: 62px !important; }
+header.bg-nav-bg .mega-primary-link,
+header.bg-nav-bg nav > a,
+header.bg-nav-bg #langBtn { font-size: 17px !important; padding-top: 10px !important; padding-bottom: 10px !important; }
+header.bg-nav-bg .mega-toggle .material-symbols-outlined { font-size: 23px !important; width: 23px !important; }
+header.bg-nav-bg #menuToggle svg { width: 30px !important; height: 30px !important; }
+header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
 `;
     (document.head || document.documentElement).appendChild(style);
   }
