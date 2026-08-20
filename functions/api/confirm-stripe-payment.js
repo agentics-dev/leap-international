@@ -1,101 +1,110 @@
-// functions/api/confirm-stripe-payment.js
-// Stripe — 查询 PaymentIntent 状态，成功则发邮件（卡支付用，同步确认）。
-// Cloudflare Pages Function：路由 POST /api/confirm-stripe-payment
+const { json } = require('../_stripe-shared');
+const { signReceipt } = require('../_receipt-token');
 
-const { json, sendPaymentEmails } = require('../_stripe-shared');
+function paymentMethodDescription(paymentIntent) {
+  const paymentMethod = paymentIntent.payment_method;
+  if (paymentMethod && typeof paymentMethod === 'object') {
+    if (paymentMethod.type === 'card' && paymentMethod.card) {
+      return `${paymentMethod.card.brand || 'Card'} ****${paymentMethod.card.last4 || ''}`.trim();
+    }
+    if (paymentMethod.type === 'alipay') return 'Alipay';
+    if (paymentMethod.type === 'wechat_pay') return 'WeChat Pay';
+    return paymentMethod.type || 'Online payment';
+  }
+  return 'Online payment';
+}
+
+function publicStatus(status) {
+  if (status === 'succeeded') return 'succeeded';
+  if (status === 'processing') return 'processing';
+  if (status === 'requires_action' || status === 'requires_confirmation') return 'requires_action';
+  if (status === 'requires_payment_method' || status === 'canceled') return 'failed';
+  return 'pending';
+}
+
+function secretsMatch(expected, candidate) {
+  if (typeof expected !== 'string' || typeof candidate !== 'string' || expected.length !== candidate.length) return false;
+  let difference = 0;
+  for (let index = 0; index < expected.length; index++) difference |= expected.charCodeAt(index) ^ candidate.charCodeAt(index);
+  return difference === 0;
+}
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-
-  if (!env.STRIPE_SECRET_KEY) {
-    return json(500, { error: 'Stripe not configured' });
-  }
+  if (!env.STRIPE_SECRET_KEY) return json(503, { error: 'Stripe payment is not configured' });
 
   let body;
   try {
     body = await request.json();
-  } catch (e) {
+  } catch (error) {
     return json(400, { error: 'Invalid JSON body' });
   }
+  const paymentId = String(body.payment_intent_id || '');
+  const clientSecret = String(body.payment_intent_client_secret || '');
+  if (!/^pi_[A-Za-z0-9_]+$/.test(paymentId)) return json(400, { error: 'Invalid payment ID' });
+  if (!clientSecret.startsWith(`${paymentId}_secret_`)) return json(400, { error: 'Missing payment verification secret' });
 
-  const {
-    payment_intent_id,
-    customer_name,
-    customer_email,
-    discount_code,
-    discount_amount,
-    locale,
-  } = body;
-
-  if (!payment_intent_id) {
-    return json(400, { error: 'Missing payment_intent_id' });
-  }
-
-  // 1. 查询 PaymentIntent 状态
-  let data;
   try {
-    const res = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(payment_intent_id)}`, {
+    const query = new URLSearchParams({ 'expand[]': 'payment_method' });
+    const response = await fetch(`https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentId)}?${query}`, {
       headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` },
     });
-    data = await res.json();
-    if (!res.ok) {
-      console.error('Stripe retrieve error:', JSON.stringify(data));
-      return json(res.status, { error: 'Failed to retrieve payment', detail: data.error });
-    }
-  } catch (e) {
-    console.error('confirm-stripe-payment error:', e);
-    return json(500, { error: 'Failed to query payment', detail: e.message });
-  }
+    const data = await response.json();
+    if (!response.ok) return json(response.status, { error: 'Unable to verify payment' });
+    if (!secretsMatch(data.client_secret, clientSecret)) return json(403, { error: 'Payment verification failed' });
 
-  // 2. 检查支付状态
-  const status = data.status;
-  if (status !== 'succeeded') {
+    const status = publicStatus(data.status);
+    const amount = (data.amount_received || data.amount || 0) / 100;
+    const currency = String(data.currency || 'hkd').toUpperCase();
+    const metadata = data.metadata || {};
+    const method = paymentMethodDescription(data);
+
+    // 微信支付等待扫码时，把二维码透传给前端展示（data URL 图片 + 官方说明页）
+    let qrImageUrl = null;
+    let qrHostedUrl = null;
+    let qrExpiresAt = null;
+    if (status === 'requires_action' && data.next_action) {
+      const qr = data.next_action.wechat_pay_display_qr_code;
+      if (qr && typeof qr === 'object') {
+        const image = String(qr.image_data_url || qr.qr_code || qr.data_url || '');
+        if (image.startsWith('data:image/')) qrImageUrl = image.slice(0, 200000);
+        const hosted = String(qr.hosted_instructions_url || '');
+        if (/^https:\/\//.test(hosted)) qrHostedUrl = hosted;
+        if (Number.isFinite(qr.expires_at)) qrExpiresAt = qr.expires_at;
+      }
+    }
+
+    let receiptToken = null;
+    if (status === 'succeeded') {
+      if (!env.PAYMENT_RECEIPT_SECRET) return json(503, { error: 'Payment succeeded but receipt service is unavailable' });
+      receiptToken = await signReceipt({
+        type: 'payment_receipt',
+        gateway: 'stripe',
+        paymentId: data.id,
+        status,
+        amount,
+        currency,
+        method,
+        customerName: metadata.customer_name || '',
+        customerEmail: metadata.customer_email || '',
+      }, env.PAYMENT_RECEIPT_SECRET);
+    }
+
     return json(200, {
       status,
-      succeeded: false,
-      message: `Payment status: ${status}`,
+      succeeded: status === 'succeeded',
+      payment_id: data.id,
+      amount,
+      currency,
+      method,
+      receipt_token: receiptToken,
+      failure_message: data.last_payment_error && data.last_payment_error.message || null,
+      qr_image_url: qrImageUrl,
+      qr_hosted_url: qrHostedUrl,
+      qr_expires_at: qrExpiresAt,
     });
+  } catch (error) {
+    console.error('confirm-stripe-payment error:', error.message);
+    return json(502, { error: 'Unable to query Stripe' });
   }
-
-  // 3. 支付成功 → 发邮件
-  const amount = data.amount_received ? data.amount_received / 100 : (data.amount / 100);
-  const currency = (data.currency || 'hkd').toUpperCase();
-  const paymentId = data.id;
-
-  // 优先用 PaymentIntent 的 metadata（创建时存的，可信），客户端传入的仅作 fallback
-  const meta = data.metadata || {};
-  const finalName = meta.customer_name || customer_name || '';
-  const finalEmail = meta.customer_email || customer_email || '';
-  const finalLocale = meta.locale || locale || 'en';
-
-  // 提取支付方式描述
-  let method = 'Card';
-  const pmTypes = data.payment_method_types || [];
-  if (pmTypes.includes('alipay')) method = 'Alipay 支付宝';
-  else if (pmTypes.includes('wechat_pay')) method = 'WeChat Pay 微信支付';
-  else if (data.charges && data.charges.data[0]) {
-    const card = data.charges.data[0].payment_method_details;
-    if (card && card.card) method = `${card.card.brand} ****${card.card.last4}`;
-  }
-
-  await sendPaymentEmails({
-    env,
-    amount,
-    currency,
-    customerName: finalName,
-    customerEmail: finalEmail,
-    method,
-    paymentId,
-    status: 'SUCCEEDED',
-    locale: finalLocale,
-  });
-
-  return json(200, {
-    status: 'succeeded',
-    succeeded: true,
-    payment_id: paymentId,
-    amount,
-    currency,
-    method,
-  });
 }

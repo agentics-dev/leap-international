@@ -13,6 +13,7 @@
       selectAgain:'Return to services', quoteUnavailable:'We could not verify this order. Please try again.', paymentUnavailable:'Payment is temporarily unavailable. Please contact us for assistance.',
       discountApplied:'Discount applied:', invalidDiscount:'This discount code is invalid or unavailable.', paymentFailed:'Payment could not be completed. Please try again.',
       cybsInstruction:'Complete the payment in the secure form below.',
+      wechatScanHint:'Open WeChat on your phone and scan this code to pay', qrOpenInstructions:'Open payment instructions', cancelPayment:'Cancel payment', qrValidFor:'Code valid for {t}', qrExpired:'The QR code has expired. Please return and pay again.',
       line_incorporation_local_starter:'Hong Kong company incorporation - Local Starter', line_incorporation_non_hk_starter:'Hong Kong company incorporation - Non-Hong Kong Starter',
       line_secretary_standard:'Company secretary - Standard', line_secretary_premium:'Company secretary - Premium', line_secretary_extra_shareholder:'Additional shareholder service',
       line_registered_office:'Registered office address', line_audit_standard:'Audit package - Standard', line_audit_premium:'Audit package - Premium'
@@ -28,6 +29,7 @@
       selectAgain:'返回服務頁面', quoteUnavailable:'未能驗證此訂單，請重試。', paymentUnavailable:'付款功能暫時無法使用，請聯絡我們尋求協助。',
       discountApplied:'已套用折扣：', invalidDiscount:'此折扣碼無效或目前不可使用。', paymentFailed:'未能完成付款，請重試。',
       cybsInstruction:'請在下方安全付款表格中完成付款。',
+      wechatScanHint:'請使用手機微信掃描此二維碼付款', qrOpenInstructions:'開啟付款說明', cancelPayment:'取消付款', qrValidFor:'二維碼有效時間 {t}', qrExpired:'二維碼已過期，請返回重新付款。',
       line_incorporation_local_starter:'香港公司註冊 - 本地創業版', line_incorporation_non_hk_starter:'香港公司註冊 - 非香港居民創業版',
       line_secretary_standard:'公司秘書 - 標準版', line_secretary_premium:'公司秘書 - 高級版', line_secretary_extra_shareholder:'額外股東服務',
       line_registered_office:'註冊辦公地址', line_audit_standard:'審計方案 - 標準版', line_audit_premium:'審計方案 - 高級版'
@@ -43,6 +45,7 @@
       selectAgain:'返回服务页面', quoteUnavailable:'未能验证此订单，请重试。', paymentUnavailable:'付款功能暂时无法使用，请联系我们寻求协助。',
       discountApplied:'已应用折扣：', invalidDiscount:'此折扣码无效或目前不可使用。', paymentFailed:'未能完成付款，请重试。',
       cybsInstruction:'请在下方安全付款表格中完成付款。',
+      wechatScanHint:'请使用手机微信扫描此二维码付款', qrOpenInstructions:'开启付款说明', cancelPayment:'取消付款', qrValidFor:'二维码有效时间 {t}', qrExpired:'二维码已过期，请返回重新付款。',
       line_incorporation_local_starter:'香港公司注册 - 本地创业版', line_incorporation_non_hk_starter:'香港公司注册 - 非香港居民创业版',
       line_secretary_standard:'公司秘书 - 标准版', line_secretary_premium:'公司秘书 - 高级版', line_secretary_extra_shareholder:'额外股东服务',
       line_registered_office:'注册办公地址', line_audit_standard:'审计方案 - 标准版', line_audit_premium:'审计方案 - 高级版'
@@ -53,7 +56,7 @@
     lang: 'en', order: null, quote: null, discountCode: '', step: 1, gateway: null,
     stripe: null, stripeElements: null, stripePaymentElement: null, stripeIntentId: null, stripeClientSecret: null,
     paymentReady: false, paymentBusy: false, cyberCheckout: null, cyberMountStarted: false, cyberCheckoutToken: null,
-    idempotencyKey: null
+    idempotencyKey: null, qrPollTimer: null, qrCountdownTimer: null, qrDeadline: 0
   };
 
   var $ = function (id) { return document.getElementById(id); };
@@ -369,6 +372,17 @@
       });
       if (result.error) throw new Error(result.error.message);
       if (result.paymentIntent) {
+        // 微信支付：confirmPayment 不重定向而是返回等待扫码的 PaymentIntent，
+        // 取出二维码在页内展示并轮询结果
+        var nextAction = result.paymentIntent.next_action;
+        var wechatQr = nextAction && (nextAction.wechat_pay_display_qr_code ||
+          (nextAction.type === 'wechat_pay_display_qr_code' ? nextAction : null));
+        if (result.paymentIntent.status === 'requires_action' && wechatQr) {
+          showWechatQr(wechatQr.image_data_url || wechatQr.qr_code || '',
+            wechatQr.hosted_instructions_url || '', wechatQr.expires_at || null);
+          pollWechatPayment();
+          return;
+        }
         var verified = await api('/api/confirm-stripe-payment', {
           method:'POST', headers:{'Content-Type':'application/json'},
           body:JSON.stringify({ payment_intent_id:result.paymentIntent.id, payment_intent_client_secret:state.stripeClientSecret })
@@ -379,6 +393,88 @@
       setBusy(false);
       paymentError(error.message || t('paymentFailed'));
     }
+  }
+
+  // ===== 微信支付二维码：页内展示 + 状态轮询 =====
+  var WECHAT_QR_TIMEOUT_MS = 15 * 60 * 1000; // 最长等待 15 分钟
+  var WECHAT_POLL_INTERVAL_MS = 3000;
+
+  function clearQrTimers() {
+    if (state.qrPollTimer) { clearTimeout(state.qrPollTimer); state.qrPollTimer = null; }
+    if (state.qrCountdownTimer) { clearInterval(state.qrCountdownTimer); state.qrCountdownTimer = null; }
+  }
+
+  function showWechatQr(imageUrl, hostedUrl, expiresAt) {
+    var overlay = $('wechatQrOverlay');
+    if (!overlay) return;
+    if (imageUrl) $('wechatQrImage').src = imageUrl;
+    $('qrAmount').textContent = state.quote ? money(state.quote.total) : '';
+    var hostedLink = $('qrHostedLink');
+    if (/^https:\/\//.test(String(hostedUrl || ''))) {
+      hostedLink.href = hostedUrl;
+      hostedLink.classList.remove('hidden');
+    } else {
+      hostedLink.classList.add('hidden');
+    }
+    overlay.classList.remove('hidden');
+    // 倒计时：取二维码过期时间与 15 分钟上限中较早者
+    var deadline = Date.now() + WECHAT_QR_TIMEOUT_MS;
+    if (expiresAt && expiresAt * 1000 > Date.now() && expiresAt * 1000 < deadline) deadline = expiresAt * 1000;
+    state.qrDeadline = deadline;
+    var timerEl = $('qrTimer');
+    var renderCountdown = function () {
+      var left = Math.max(0, Math.floor((state.qrDeadline - Date.now()) / 1000));
+      var mm = String(Math.floor(left / 60)).padStart(2, '0');
+      var ss = String(left % 60).padStart(2, '0');
+      timerEl.textContent = t('qrValidFor').replace('{t}', mm + ':' + ss);
+      if (left <= 0) { expireWechatQr(); return; }
+    };
+    renderCountdown();
+    state.qrCountdownTimer = setInterval(renderCountdown, 1000);
+  }
+
+  function hideWechatQr() {
+    clearQrTimers();
+    var overlay = $('wechatQrOverlay');
+    if (overlay) overlay.classList.add('hidden');
+  }
+
+  function cancelWechatQr() {
+    hideWechatQr();
+    setBusy(false);
+  }
+
+  function expireWechatQr() {
+    hideWechatQr();
+    setBusy(false);
+    paymentError(t('qrExpired'));
+  }
+
+  function pollWechatPayment() {
+    var attempts = 0;
+    var maxAttempts = Math.ceil(WECHAT_QR_TIMEOUT_MS / WECHAT_POLL_INTERVAL_MS);
+    var pollOnce = function () {
+      api('/api/confirm-stripe-payment', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({ payment_intent_id:state.stripeIntentId, payment_intent_client_secret:state.stripeClientSecret })
+      }).then(function (result) {
+        if (result.status === 'succeeded') { hideWechatQr(); routePaymentResult(result); return; }
+        if (result.status === 'failed') {
+          hideWechatQr(); setBusy(false);
+          paymentError(result.failure_message || t('paymentFailed'));
+          return;
+        }
+        // requires_action / processing：继续等待扫码
+        attempts += 1;
+        if (attempts < maxAttempts) state.qrPollTimer = setTimeout(pollOnce, WECHAT_POLL_INTERVAL_MS);
+        else expireWechatQr();
+      }).catch(function () {
+        attempts += 1;
+        if (attempts < 5) state.qrPollTimer = setTimeout(pollOnce, WECHAT_POLL_INTERVAL_MS);
+        else expireWechatQr();
+      });
+    };
+    pollOnce();
   }
 
   function routePaymentResult(result) {
@@ -503,6 +599,8 @@
   });
   $('backButton').addEventListener('click', function () { destroyPaymentForm(); updateSteps(1); $('firstName').focus(); });
   $('payButton').addEventListener('click', function () { if (state.gateway === 'stripe') confirmStripe(); });
+  var qrCancelButton = $('qrCancel');
+  if (qrCancelButton) qrCancelButton.addEventListener('click', cancelWechatQr);
   $('mobilePayButton').addEventListener('click', function () { if (state.gateway === 'stripe') confirmStripe(); });
   $('applyDiscount').addEventListener('click', applyDiscount);
   $('discountCode').addEventListener('keydown', function (event) { if (event.key === 'Enter') { event.preventDefault(); applyDiscount(); } });
