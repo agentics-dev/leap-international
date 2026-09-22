@@ -12,7 +12,11 @@ function parseSignature(header) {
   if (!header) return parts;
   for (const item of header.split(',')) {
     const [k, v] = item.split('=');
-    if (k && v) parts[k.trim()] = v.trim();
+    if (k && v) {
+      const key = k.trim();
+      if (!parts[key]) parts[key] = [];
+      parts[key].push(v.trim());
+    }
   }
   return parts;
 }
@@ -20,16 +24,17 @@ function parseSignature(header) {
 // 用 HMAC-SHA256 验证 Stripe 签名
 async function verifySignature(payload, sigHeader, secret) {
   const parts = parseSignature(sigHeader);
-  const timestamp = parts.t;
-  const signature = parts.v1;
-  if (!timestamp || !signature) {
+  const timestamp = parts.t && parts.t[0];
+  const signatures = parts.v1 || [];
+  if (!timestamp || signatures.length === 0) {
     throw new Error('Missing t or v1 in signature header');
   }
 
   // 防重放：拒绝 5 分钟前的请求
-  const age = Math.floor(Date.now() / 1000) - parseInt(timestamp, 10);
-  if (age > 300) {
-    throw new Error('Timestamp too old');
+  const parsedTimestamp = Number.parseInt(timestamp, 10);
+  const age = Math.abs(Math.floor(Date.now() / 1000) - parsedTimestamp);
+  if (!Number.isInteger(parsedTimestamp) || age > 300) {
+    throw new Error('Timestamp outside tolerance');
   }
 
   const signedPayload = `${timestamp}.${payload}`;
@@ -40,16 +45,16 @@ async function verifySignature(payload, sigHeader, secret) {
     false,
     ['sign']
   );
-  const expectedSig = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(signedPayload));
-  const expectedB64 = btoa(String.fromCharCode(...new Uint8Array(expectedSig)));
+  const expectedBytes = new Uint8Array(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(signedPayload)));
+  const expectedHex = Array.from(expectedBytes, (byte) => byte.toString(16).padStart(2, '0')).join('');
 
-  // 时间安全比较
-  if (expectedB64.length !== signature.length) return false;
-  let diff = 0;
-  for (let i = 0; i < signature.length; i++) {
-    diff |= expectedB64.charCodeAt(i) ^ signature.charCodeAt(i);
-  }
-  return diff === 0;
+  return signatures.some((signature) => {
+    const candidate = signature.toLowerCase();
+    if (expectedHex.length !== candidate.length) return false;
+    let diff = 0;
+    for (let i = 0; i < candidate.length; i++) diff |= expectedHex.charCodeAt(i) ^ candidate.charCodeAt(i);
+    return diff === 0;
+  });
 }
 
 export async function onRequestPost(context) {
@@ -107,6 +112,7 @@ export async function onRequestPost(context) {
       paymentId: pi.id,
       status: 'SUCCEEDED',
       locale: meta.locale || 'en',
+      gateway: 'Stripe',
     });
 
     console.log(`Webhook processed: ${pi.id} - ${currency} ${amount}`);

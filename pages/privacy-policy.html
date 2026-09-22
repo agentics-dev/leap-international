@@ -309,8 +309,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -429,7 +429,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -714,11 +714,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 

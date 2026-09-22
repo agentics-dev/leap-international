@@ -37,6 +37,8 @@
 
         /* Mega menu - show on click for touch/keyboard */
         .mega-group.show .mega-dropdown { display: block !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto; }
+        .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
+        .mobile-menu.open { transform: translateX(0); }
         .mobile-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .mobile-overlay.open { opacity: 1; visibility: visible; }
         /* Mega menu - show on hover */
@@ -139,7 +141,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -481,11 +483,11 @@
     </div>
 
     <div class="text-center mb-6">
-      <a href="#" class="text-[14px] font-medium text-[#165DFF] hover:underline flex items-center justify-center gap-1">
+      <button type="button" id="compareFeaturesBtn" aria-expanded="false" onclick="toggleBankComparison()" class="text-[14px] font-medium text-[#165DFF] hover:underline flex items-center justify-center gap-1 mx-auto">
         <span class="material-symbols-outlined text-[16px]">content_paste</span>
         <span class="lang-en">Compare all features</span>
         <span class="lang-zh">比較所有功能</span><span class="lang-zh-Hans lang-zh-Hans-clone">比较所有功能</span>
-      </a>
+      </button>
     </div>
 
     <div class="bank-details bg-white rounded-xl border border-gray-200 p-6 mb-6" id="aspireDetails">
@@ -648,6 +650,15 @@
 
     var selectedBank = null;
 
+    function toggleBankComparison() {
+      var button = document.getElementById('compareFeaturesBtn');
+      var expanded = button.getAttribute('aria-expanded') !== 'true';
+      document.getElementById('aspireDetails').classList.toggle('show', expanded || selectedBank === 'aspire');
+      document.getElementById('airwallexDetails').classList.toggle('show', expanded || selectedBank === 'airwallex');
+      button.setAttribute('aria-expanded', String(expanded));
+      if (expanded) document.getElementById('aspireDetails').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function selectBank(bank) {
       selectedBank = bank;
       
@@ -663,6 +674,7 @@
       airwallexCard.classList.remove('selected-airwallex');
       aspireDetails.classList.remove('show');
       airwallexDetails.classList.remove('show');
+      document.getElementById('compareFeaturesBtn').setAttribute('aria-expanded', 'false');
       
       if (bank === 'aspire') {
         aspireCard.classList.add('selected-aspire');

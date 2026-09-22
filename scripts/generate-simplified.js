@@ -1,10 +1,9 @@
 // scripts/generate-simplified.js
-// 预生成简体中文：扫描所有 HTML 文件的 .lang-zh 元素，用 OpenCC 转成简体，
-// 在每个 .lang-zh 后面插入简体克隆 <span class="lang-zh lang-zh-Hans">。
+// 预生成简体中文：为缺少简体兄弟节点的 .lang-zh 元素补上转换后的节点。
 // 零运行时延迟，不依赖 CDN。
 //
 // 用法：node scripts/generate-simplified.js
-// 可以多次运行（幂等）：先清理旧克隆，再重新生成。
+// 可以多次运行（幂等）；--check 检查缺口和已有简体文案，不写文件。
 
 const fs = require('fs');
 const path = require('path');
@@ -22,52 +21,52 @@ const HTML_FILES = [
 
 let totalElements = 0;
 let totalFiles = 0;
+let traditionalInSimplified = 0;
+const checkOnly = process.argv.includes('--check');
 
 HTML_FILES.forEach(filePath => {
   const relPath = path.relative(ROOT, filePath);
   let content = fs.readFileSync(filePath, 'utf8');
   const original = content;
 
-  // 1. 先清理旧的简体克隆（幂等）：删除所有 class 含 lang-zh-Hans-clone 的标签
-  // 用正则匹配整个 span 元素（单行或多行）
-  content = content.replace(/<span[^>]*class="[^"]*lang-zh-Hans-clone[^"]*"[^>]*>[\s\S]*?<\/span>/g, '');
-
-  // 2. 找所有 class="lang-zh"（不含 lang-zh-Hans）的 span，在其后插入简体克隆
-  // 匹配模式：<span class="lang-zh"...>...</span>（非贪婪，但要处理嵌套 span）
-  // 由于嵌套 span 会让正则不可靠，用手动扫描
+  // 保留已有简体文案，只补紧邻繁体节点后缺失的对应元素。
 
   const result = [];
   let lastIndex = 0;
-  // 匹配 <span class="...lang-zh..." ...> 开始标签
-  const spanStartRegex = /<span\s+([^>]*?)class="([^"]*\blang-zh\b[^"]*)"/g;
-  // 注意：\blang-zh\b 不匹配 lang-zh-Hans（因为后面有 - 不是边界）
-  // 但要确保 class 不含 lang-zh-Hans
+  const elementStartRegex = /<(span|p|h4)\b[^>]*>/g;
   let match;
 
-  while ((match = spanStartRegex.exec(content)) !== null) {
-    const fullClass = match[3] || match[2]; // class 属性值
-    // 跳过已经是简体克隆的
-    if (fullClass.includes('lang-zh-Hans')) continue;
-    // 跳过已包含简体克隆标记的
-    if (fullClass.includes('lang-zh-Hans-clone')) continue;
+  while ((match = elementStartRegex.exec(content)) !== null) {
+    const tag = match[1];
+    const classMatch = match[0].match(/class=(["'])(.*?)\1/);
+    if (!classMatch || !classMatch[2].split(/\s+/).includes('lang-zh')) continue;
 
     const tagStart = match.index;
-    // 找匹配的 </span>（考虑嵌套）
+    // 找到本元素的结束标签（包括嵌套的同名元素）。
     let depth = 1;
     let pos = match.index + match[0].length;
     while (depth > 0 && pos < content.length) {
-      const nextOpen = content.indexOf('<span', pos);
-      const nextClose = content.indexOf('</span>', pos);
+      const nextOpen = content.indexOf(`<${tag}`, pos);
+      const nextClose = content.indexOf(`</${tag}>`, pos);
       if (nextClose === -1) break;
       if (nextOpen !== -1 && nextOpen < nextClose) {
         depth++;
-        pos = nextOpen + 5;
+        pos = nextOpen + tag.length + 1;
       } else {
         depth--;
-        pos = nextClose + 7;
+        pos = nextClose + tag.length + 3;
       }
     }
-    const tagEnd = pos; // </span> 之后
+    if (depth !== 0) continue;
+    const tagEnd = pos;
+
+    const nextElement = content.slice(tagEnd).match(/^\s*<([a-z][\w-]*)\b([^>]*)>/i);
+    const nextClass = nextElement && nextElement[0].match(/class=(["'])(.*?)\1/);
+    if (nextElement && nextElement[1].toLowerCase() === tag && nextClass &&
+        nextClass[2].split(/\s+/).includes('lang-zh-Hans')) {
+      elementStartRegex.lastIndex = tagEnd;
+      continue;
+    }
 
     const fullElement = content.substring(tagStart, tagEnd);
 
@@ -79,37 +78,42 @@ HTML_FILES.forEach(filePath => {
       });
 
     // 修改克隆的 class：加 lang-zh-Hans 和 lang-zh-Hans-clone
-    simplified = simplified.replace(
-      /(<span\s+[^>]*?)class="([^"]*\blang-zh\b[^"]*)"/,
-      (m, prefix, classes) => {
-        // 移除 lang-zh，加 lang-zh-Hans
-        let newClasses = classes.replace(/\blang-zh\b/g, 'lang-zh-Hans') + ' lang-zh-Hans-clone';
-        return `${prefix}class="${newClasses}"`;
-      }
-    );
-
-    // 注意：克隆元素不应该有 lang-zh 类（否则会被繁体 CSS 显示）
-    // 上面已经把 lang-zh 替换成了 lang-zh-Hans，所以 OK
+    simplified = simplified.replace(/class=(["'])(.*?)\1/, (m, quote, classes) => {
+      const newClasses = classes.split(/\s+/).map(c => c === 'lang-zh' ? 'lang-zh-Hans' : c);
+      newClasses.push('lang-zh-Hans-clone');
+      return `class=${quote}${newClasses.join(' ')}${quote}`;
+    });
 
     result.push(content.substring(lastIndex, tagEnd));
     result.push(simplified);
     lastIndex = tagEnd;
     totalElements++;
 
-    spanStartRegex.lastIndex = tagEnd;
+    elementStartRegex.lastIndex = tagEnd;
   }
 
   result.push(content.substring(lastIndex));
   content = result.join('');
 
   if (content !== original) {
-    fs.writeFileSync(filePath, content, 'utf8');
+    if (!checkOnly) fs.writeFileSync(filePath, content, 'utf8');
     totalFiles++;
-    console.log(`✅ ${relPath}`);
-  } else {
-    console.log(`⏭️  ${relPath} — 无 .lang-zh 元素`);
+    console.log(`${checkOnly ? '缺少简体' : '已补齐'} ${relPath}`);
+  }
+
+  if (checkOnly) {
+    const { JSDOM } = require('jsdom');
+    const document = new JSDOM(content).window.document;
+    document.querySelectorAll('.lang-zh-Hans').forEach(element => {
+      const text = element.textContent.trim();
+      if (text !== convert(text)) {
+        traditionalInSimplified++;
+        console.error(`简体残留繁体 ${relPath}: ${text.slice(0, 80)}`);
+      }
+    });
   }
 });
 
-console.log(`\n总计: ${totalFiles} 个文件，${totalElements} 个简体元素已生成`);
-console.log('\n下一步: 同步到 dist，重启 localhost 测试');
+console.log(`\n总计: ${totalFiles} 个文件，${totalElements} 个简体元素${checkOnly ? '待补齐' : '已生成'}`);
+if (checkOnly) console.log(`已有简体文案残留繁体: ${traditionalInSimplified} 处`);
+if (checkOnly && (totalElements || traditionalInSimplified)) process.exitCode = 1;

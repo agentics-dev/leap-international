@@ -309,8 +309,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -429,7 +429,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -680,14 +680,14 @@
 
         <!-- Headline -->
         <h1 class="text-[44px] sm:text-[60px] md:text-[80px] lg:text-[96px] font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-white/90 to-white/40 tracking-tight leading-[1.05] mb-8 drop-shadow-sm">
-            <span class="lang-zh block">跨越邊界，連接世界</span><span class="lang-zh-Hans block lang-zh-Hans-clone">跨越边界，连接世界</span>
-            <span class="lang-en block">Leap Beyond Borders,<br>Connect the World.</span>
+            <span class="lang-zh block">跨越邊界<br>連接世界</span><span class="lang-zh-Hans block lang-zh-Hans-clone">跨越边界<br>连接世界</span>
+            <span class="lang-en block">Leap Beyond Borders<br>Connect the World</span>
         </h1>
 
         <!-- Subtitle -->
         <p class="text-[16px] md:text-[20px] text-white/60 max-w-2xl mx-auto font-light leading-[1.8]">
-            <span class="lang-en">A premium cross-border statutory secretarial service provider dedicated to multinational enterprises.</span>
-            <span class="lang-zh">專注於跨國企業的高端跨境法定秘書服務機構。</span><span class="lang-zh-Hans lang-zh-Hans-clone">专注于跨国企业的高端跨境法定秘书服务机构。</span>
+            <span class="lang-en">A premium cross-border statutory secretarial service provider dedicated to multinational enterprises</span>
+            <span class="lang-zh">專注於跨國企業的高端跨境法定秘書服務機構</span><span class="lang-zh-Hans lang-zh-Hans-clone">专注于跨国企业的高端跨境法定秘书服务机构</span>
         </p>
     </div>
     
@@ -715,13 +715,13 @@
         <!-- Scrolling Right Column -->
         <div class="lg:col-span-7 space-y-12 text-[17px] md:text-[20px] text-gray-600 leading-[1.9] font-light">
             <p class="text-[20px] md:text-[24px] text-gray-900 font-medium leading-[1.6]">
-                <span class="lang-en">Rooted in Hong Kong, an international financial hub, Leap International Business Services is a premium cross-border statutory secretarial service provider dedicated to multinational enterprises.<br/>We are deeply grounded in Hong Kong's local compliance framework while connecting global business networks to empower business expansion in both directions: helping overseas enterprises establish in Hong Kong and enter the core commercial circles of the Asia-Pacific region, while also supporting Hong Kong-based enterprises in crossing geographic boundaries and expanding their international business footprint worldwide.</span>
-                <span class="lang-zh">紮根香港國際金融樞紐，溱柏國際商業服務是專注於跨國企業的高端跨境法定秘書服務機構。<br/>我們深耕香港本土合規體系，打通全球商務網絡，雙向賦能商業佈局：助力境外企業落地香港、入局亞太核心商圈；同時亦陪伴香港本土企業跨越地域邊界，全域拓展國際商業版圖。</span><span class="lang-zh-Hans lang-zh-Hans-clone">紮根香港國際金融樞紐，溱柏國際商業服務是專注於跨國企業的高端跨境法定秘書服務機構。<br/>我們深耕香港本土合規體系，打通全球商務網絡，雙向賦能商業佈局：助力境外企業落地香港、入局亞太核心商圈；同時亦陪伴香港本土企業跨越地域邊界，全域拓展國際商業版圖。</span>
+                <span class="lang-en">Rooted in Hong Kong, an international financial hub, Leap International Business Services is a premium cross-border statutory secretarial service provider dedicated to multinational enterprises.<br/><br/>We are deeply grounded in Hong Kong's local compliance framework while connecting global business networks to empower business expansion in both directions: helping overseas enterprises establish in Hong Kong and enter the core commercial circles of the Asia-Pacific region, while also supporting Hong Kong-based enterprises in crossing geographic boundaries and expanding their international business footprint worldwide.</span>
+                <span class="lang-zh">紮根香港國際金融樞紐，溱柏國際商業服務是專注於跨國企業的高端跨境法定秘書服務機構。<br/><br/>我們深耕香港本土合規體系，打通全球商務網絡，雙向賦能商業佈局：助力境外企業落地香港、入局亞太核心商圈；同時亦陪伴香港本土企業跨越地域邊界，全域拓展國際商業版圖。</span><span class="lang-zh-Hans lang-zh-Hans-clone">扎根香港国际金融枢纽，溱柏国际商业服务是专注于跨国企业的高端跨境法定秘书服务机构。<br/><br/>我们深耕香港本土合规体系，打通全球商务网络，双向赋能商业布局：助力境外企业落地香港、入局亚太核心商圈；同时亦陪伴香港本土企业跨越地域边界，全域拓展国际商业版图。</span>
             </p>
             <div class="p-8 bg-gray-50 rounded-3xl border border-gray-100">
                 <p class="italic text-gray-800">
                     <span class="lang-en">"Leap" implies crossing, breakthrough, and soaring: based on full-process compliance capabilities, multilingual exclusive services, and integrated cross-border support, we break down the threshold of cross-border operations, comprehensively empower partner enterprises to break through development bottlenecks, and achieve steady and high-quality leapfrog growth.</span>
-                    <span class="lang-zh">「溱柏」蘊含跨越、突破、騰飛之意：我們以全流程合規能力、多語專屬服務、一體化跨境配套為底蘊，破除跨境經營門檻，全方位賦能合作企業突破發展瓶頸，實現穩健且高質量的飛躍式增長。</span><span class="lang-zh-Hans lang-zh-Hans-clone">「溱柏」蕴含跨越、突破、腾飞之意：我们以全流程合规能力、多语专属服务、一体化跨境配套为底蕴，破除跨境经营门槛，全方位赋能合作企业突破发展瓶颈，实现稳健且高质量的飞跃式增长。</span>
+                    <span class="lang-zh">「Leap」蘊含跨越、突破、騰飛之意：我們以全流程合規能力、多語專屬服務、一體化跨境配套為底蘊，破除跨境經營門檻，全方位賦能合作企業突破發展瓶頸，實現穩健且高質量的飛躍式增長。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap蕴含跨越、突破、腾飞之意：我们以全流程合规能力、多语专属服务、一体化跨境配套为底蕴，破除跨境经营门槛，全方位赋能合作企业突破发展瓶颈，实现稳健且高质量的飞跃式增长。</span>
                 </p>
             </div>
         </div>
@@ -757,8 +757,8 @@
                             <span class="lang-zh">合規為本</span><span class="lang-zh-Hans lang-zh-Hans-clone">合规为本</span>
                         </h3>
                         <p class="text-[16px] md:text-[18px] text-gray-600 leading-[1.7] max-w-lg">
-                            <span class="lang-en">Strictly adhere to Hong Kong TCSP industry regulatory standards, relying on the local compliance framework for lawful and steady operations.</span>
-                            <span class="lang-zh">恪守香港TCSP行業監管準則，依托本土合規體系，合法穩健運營；</span><span class="lang-zh-Hans lang-zh-Hans-clone">恪守香港TCSP行业监管准则，依托本土合规体系，合法稳健运营；</span>
+                            <span class="lang-en">Strictly adhere to Hong Kong TCSP industry regulatory standards, relying on the local compliance framework for lawful and steady operations</span>
+                            <span class="lang-zh">恪守香港TCSP行業監管準則，依托本土合規體系，合法穩健運營</span><span class="lang-zh-Hans lang-zh-Hans-clone">恪守香港TCSP行业监管准则，依托本土合规体系，合法稳健运营</span>
                         </p>
                     </div>
                 </div>
@@ -777,8 +777,8 @@
                             <span class="lang-zh">專業為核</span><span class="lang-zh-Hans lang-zh-Hans-clone">专业为核</span>
                         </h3>
                         <p class="text-[15px] text-white/60 leading-[1.6]">
-                            <span class="lang-en">Matching international vision with local resources to efficiently solve enterprise challenges.</span>
-                            <span class="lang-zh">以國際視野匹配本地資源，破解跨境營運痛點，高效解決企業跨境難題；</span><span class="lang-zh-Hans lang-zh-Hans-clone">以国际视野匹配本地资源，破解跨境营运痛点，高效解决企业跨境难题；</span>
+                            <span class="lang-en">Matching international vision with local resources to efficiently solve enterprise challenges</span>
+                            <span class="lang-zh">以國際視野匹配本地資源，破解跨境營運痛點，高效解決企業跨境難題</span><span class="lang-zh-Hans lang-zh-Hans-clone">以国际视野匹配本地资源，破解跨境营运痛点，高效解决企业跨境难题</span>
                         </p>
                     </div>
                 </div>
@@ -797,8 +797,8 @@
                             <span class="lang-zh">透明為道</span><span class="lang-zh-Hans lang-zh-Hans-clone">透明为道</span>
                         </h3>
                         <p class="text-[15px] text-white/80 leading-[1.6]">
-                            <span class="lang-en">Open service pricing with zero hidden charges, fully protecting client rights.</span>
-                            <span class="lang-zh">服務定價公開透明，零隱性收費，保障客戶權益；</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务定价公开透明，零隐性收费，保障客户权益；</span>
+                            <span class="lang-en">Open service pricing with zero hidden charges, fully protecting client rights</span>
+                            <span class="lang-zh">服務定價公開透明，零隱性收費，保障客戶權益</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务定价公开透明，零隐性收费，保障客户权益</span>
                         </p>
                     </div>
                 </div>
@@ -819,8 +819,8 @@
                             <span class="lang-zh">共生為心</span><span class="lang-zh-Hans lang-zh-Hans-clone">共生为心</span>
                         </h3>
                         <p class="text-[16px] md:text-[18px] text-gray-600 leading-[1.7] max-w-lg">
-                            <span class="lang-en">Respecting cross-cultural differences, accompanying enterprise development over the long term, and pursuing business leaps together.</span>
-                            <span class="lang-zh">尊重跨國文化差異，長期陪伴企業發展，共赴商業飛躍。</span><span class="lang-zh-Hans lang-zh-Hans-clone">尊重跨国文化差异，长期陪伴企业发展，共赴商业飞跃。</span>
+                            <span class="lang-en">Respecting cross-cultural differences, accompanying enterprise development over the long term, and pursuing business leaps together</span>
+                            <span class="lang-zh">尊重跨國文化差異，長期陪伴企業發展，共赴商業飛躍</span><span class="lang-zh-Hans lang-zh-Hans-clone">尊重跨国文化差异，长期陪伴企业发展，共赴商业飞跃</span>
                         </p>
                     </div>
                 </div>
@@ -907,11 +907,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 

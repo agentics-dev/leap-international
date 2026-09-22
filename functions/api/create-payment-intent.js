@@ -1,104 +1,79 @@
-// functions/api/create-payment-intent.js
-// CyberSource Unified Checkout — 生成 captureContext。
-// Cloudflare Pages Function：路由 POST /api/create-payment-intent
-
 const { cybsRequest } = require('../_cybs-auth');
-const { validateOrder } = require('../_order-validation');
+const { quoteOrder } = require('../_order-validation');
+const { json } = require('../_stripe-shared');
+const { signReceipt } = require('../_receipt-token');
 
-function json(status, payload) {
-  return new Response(JSON.stringify(payload), {
-    status,
-    headers: { 'Content-Type': 'application/json' },
-  });
+function normalizeCustomer(customer) {
+  const name = String(customer && customer.name || '').trim().slice(0, 120);
+  const email = String(customer && customer.email || '').trim().toLowerCase().slice(0, 254);
+  if (!name) return { valid: false, error: 'Customer name is required' };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { valid: false, error: 'A valid customer email is required' };
+  return { valid: true, name, email };
 }
 
-function resolveSiteOrigin(request) {
-  const url = new URL(request.url);
-  return url.origin; // Pages Functions 里 request.url 含完整 origin
+function safeTargetOrigin(request, env) {
+  const raw = env.SITE_URL || new URL(request.url).origin;
+  const url = new URL(raw);
+  if (url.protocol !== 'https:' && url.hostname !== 'localhost' && url.hostname !== '127.0.0.1') {
+    throw new Error('SITE_URL must use HTTPS');
+  }
+  return url.origin;
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-
-  if (!env.CYBS_MERCHANT_ID || !env.CYBS_API_KEY || !env.CYBS_SECRET_KEY) {
-    return json(500, { error: 'CyberSource credentials not configured' });
+  if (String(env.PAYMENT_GATEWAY || 'stripe').toLowerCase() !== 'cybersource') {
+    return json(409, { error: 'CyberSource is not the active payment gateway' });
   }
+  if (!env.CYBS_MERCHANT_ID || !env.CYBS_API_KEY || !env.CYBS_SECRET_KEY) {
+    return json(503, { error: 'CyberSource payment is not configured' });
+  }
+  if (!env.PAYMENT_RECEIPT_SECRET) return json(503, { error: 'Payment verification is not configured' });
+
+  let body;
+  try {
+    body = await request.json();
+  } catch (error) {
+    return json(400, { error: 'Invalid JSON body' });
+  }
+  const quote = quoteOrder(body.order, body.discount_code, env);
+  if (!quote.valid) return json(400, { error: quote.reason, code: quote.code });
+  const customer = normalizeCustomer(body.customer);
+  if (!customer.valid) return json(400, { error: customer.error });
 
   try {
-    const body = await request.json();
-    const {
-      amount,
-      currency,
-      customer_name,
-      customer_email,
-      line_items,
-      discount_code,
-      discount_amount,
-      locale,
-    } = body;
-
-    if (!amount || !currency) return json(400, { error: 'Missing amount or currency' });
-
-    const validation = validateOrder({ amount, currency, line_items, discount_code, discount_amount });
-    if (!validation.valid) return json(400, { error: validation.reason });
-
-    const siteOrigin = resolveSiteOrigin(request);
-    const safeOrigin = siteOrigin.replace(/^http:/, 'https:').replace(/\/$/, '');
-
-    // V1 Sessions API 请求体（POST /uc/v1/sessions）
-    // 参考官方 .NET 示例 CaptureContextRequest.cs
+    const locale = String(body.locale || 'en');
     const captureContextRequest = {
-      targetOrigins: [safeOrigin],
+      targetOrigins: [safeTargetOrigin(request, env)],
       country: 'HK',
-      // V1 locale 映射：繁体→zh_HK，简体→zh_CN，其余→en_US（兼容旧值 'zh'）
       locale: (locale === 'zh' || locale === 'zh-Hant') ? 'zh_HK' : locale === 'zh-Hans' ? 'zh_CN' : 'en_US',
-      // V1: consumerAuthentication 是枚举 "3DS"/"NONE"（V0 是布尔值 true/false）
-      // type: CAPTURE = 授权+扣款（SALE），AUTH 只授权不扣款
-      completeMandate: {
-        type: 'CAPTURE',
-        consumerAuthentication: '3DS',
-        decisionManager: true,
-      },
-      // V1: orderInformation 必须包在 data 里（V0 在顶层）
+      completeMandate: { type: 'CAPTURE', consumerAuthentication: '3DS', decisionManager: true },
       data: {
         orderInformation: {
-          amountDetails: {
-            totalAmount: String(amount) + '.00',
-            currency: currency || 'HKD',
-          },
+          amountDetails: { totalAmount: `${quote.total}.00`, currency: quote.currency },
         },
       },
     };
-
-    const r = await cybsRequest({
-      method: 'POST',
-      path: '/uc/v1/sessions',
-      body: captureContextRequest,
-      env,
-    });
-
-    if (!r.ok) {
-      console.error('CyberSource Sessions failed:', r.status, JSON.stringify(r.data).slice(0, 300));
-      return json(r.status, { error: 'CyberSource Sessions API failed', detail: r.data });
+    const response = await cybsRequest({ method: 'POST', path: '/uc/v1/sessions', body: captureContextRequest, env });
+    if (!response.ok) {
+      console.error('CyberSource Sessions failed:', response.status);
+      return json(response.status, { error: 'Unable to start CyberSource payment' });
     }
-
-    // r.data 是 captureContext JWT 字符串
-    const captureContext = typeof r.data === 'string' ? r.data : r.data.captureContext || r.data;
-
-    return json(200, {
-      captureContext,
-      amount,
-      currency: currency || 'HKD',
-      customer_name: customer_name || '',
-      customer_email: customer_email || '',
-      line_items: validation.products,
-      subtotal: validation.subtotal,
-      discount_code: discount_code || '',
-      discount_amount: validation.discountAmount,
-      locale: locale || 'en',
-    });
+    const captureContext = typeof response.data === 'string'
+      ? response.data
+      : response.data.captureContext || response.data;
+    const checkoutToken = await signReceipt({
+      type: 'checkout_context',
+      gateway: 'cybersource',
+      order: quote.order,
+      discountCode: quote.discountCode,
+      amount: quote.total,
+      currency: quote.currency,
+      customer: { name: customer.name, email: customer.email },
+    }, env.PAYMENT_RECEIPT_SECRET);
+    return json(200, { captureContext, checkout_token: checkoutToken, quote });
   } catch (error) {
-    console.error('create-payment-intent error:', error);
-    return json(500, { error: error.message });
+    console.error('create-payment-intent error:', error.message);
+    return json(502, { error: 'Unable to reach CyberSource' });
   }
 }

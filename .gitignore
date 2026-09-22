@@ -14,6 +14,7 @@ node_modules/
 	build/
 .env*
 !.env.example
+/test-results/
 .DS_Store
 *.zip
 *.pdf

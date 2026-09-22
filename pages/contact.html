@@ -309,8 +309,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -429,7 +429,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -661,9 +661,7 @@
 <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-section-gap">
 <div class="text-center mb-12">
 <h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4"><span class="lang-en">Let's Start a Conversation</span><span class="lang-zh">讓我們展開對話</span><span class="lang-zh-Hans lang-zh-Hans-clone">让我们展开对话</span></h1>
-<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">讓我們開始對話</p>
-<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto">Whether you are ready to incorporate, have a question about our services, or just want to explore your options — our team is here to help.</p>
-<p class="font-body-md text-body-md text-on-surface-variant mt-2">無論您準備註冊公司、對我們的服務有疑問，或只是想探索您的選擇 — 我們的團隊隨時為您提供協助。</p>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl mx-auto"><span class="lang-en">Whether you are ready to incorporate, have a question about our services, or just want to explore your options — our team is here to help.</span><span class="lang-zh">無論您準備註冊公司、對我們的服務有疑問，或只是想探索您的選擇，我們的團隊都樂意協助。</span><span class="lang-zh-Hans lang-zh-Hans-clone">无论您准备注册公司、对我们的服务有疑问，还是想了解有哪些选择，我们的团队都乐意协助。</span></p>
 </div>
 <div class="max-w-2xl mx-auto">
 
@@ -671,43 +669,43 @@
 <form class="bg-surface-main rounded-xl p-8 ambient-shadow space-y-5" id="contactForm" novalidate>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Full Name / 姓名 *</label>
+<label for="nameInput" class="block font-label-sm text-label-sm text-on-surface-variant mb-1"><span class="lang-en">Full Name *</span><span class="lang-zh">姓名 *</span><span class="lang-zh-Hans lang-zh-Hans-clone">姓名 *</span></label>
 <input class="w-full px-4 py-3 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors" placeholder="Your full name" type="text" id="nameInput" aria-label="Your full name" required/>
 <span class="validation-msg text-error" id="nameError"><span class="lang-en">Please enter your full name</span><span class="lang-zh">請輸入您的全名</span><span class="lang-zh-Hans lang-zh-Hans-clone">请输入您的全名</span></span>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Email Address / 電郵地址 *</label>
+<label for="emailInput" class="block font-label-sm text-label-sm text-on-surface-variant mb-1"><span class="lang-en">Email Address *</span><span class="lang-zh">電郵地址 *</span><span class="lang-zh-Hans lang-zh-Hans-clone">电邮地址 *</span></label>
 <input class="w-full px-4 py-3 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors" placeholder="you@company.com" type="email" id="emailInput" aria-label="Email address" required/>
 <span class="validation-msg text-error" id="emailError"><span class="lang-en">Please enter a valid email address</span><span class="lang-zh">請輸入有效的電郵地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">请输入有效的电邮地址</span></span>
 </div>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Service Interested In / 有興趣的服務 *</label>
+<label for="serviceInput" class="block font-label-sm text-label-sm text-on-surface-variant mb-1"><span class="lang-en">Service Interested In *</span><span class="lang-zh">有興趣的服務 *</span><span class="lang-zh-Hans lang-zh-Hans-clone">感兴趣的服务 *</span></label>
 <select class="w-full px-4 py-3 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors appearance-none" id="serviceInput" required>
-<option value="">Select a service / 選擇服務</option>
-<option>Company Incorporation / 公司註冊</option>
-<option>Accounting & Tax / 會計與報稅</option>
-<option>Corporate Secretary / 公司秘書</option>
-<option>Visa & Immigration / 簽證與移民</option>
-<option>Payroll Services / 薪資服務</option>
-<option>Registered Address / 註冊地址</option>
-<option>Other / Multiple Services / 其他/多項服務</option>
+<option value="" data-en="Select a service" data-zh-hant="選擇服務" data-zh-hans="选择服务">Select a service</option>
+<option value="incorporation" data-en="Company Incorporation" data-zh-hant="公司註冊" data-zh-hans="公司注册">Company Incorporation</option>
+<option value="accounting-tax" data-en="Accounting &amp; Tax" data-zh-hant="會計與報稅" data-zh-hans="会计与报税">Accounting &amp; Tax</option>
+<option value="corporate-secretary" data-en="Corporate Secretary" data-zh-hant="公司秘書" data-zh-hans="公司秘书">Corporate Secretary</option>
+<option value="visa-immigration" data-en="Visa &amp; Immigration" data-zh-hant="簽證與移民" data-zh-hans="签证与移民">Visa &amp; Immigration</option>
+<option value="payroll" data-en="Payroll Services" data-zh-hant="薪資服務" data-zh-hans="薪资服务">Payroll Services</option>
+<option value="registered-address" data-en="Registered Address" data-zh-hant="註冊地址" data-zh-hans="注册地址">Registered Address</option>
+<option value="other" data-en="Other / Multiple Services" data-zh-hant="其他／多項服務" data-zh-hans="其他／多项服务">Other / Multiple Services</option>
 </select>
 <span class="validation-msg text-error" id="serviceError"><span class="lang-en">Please select a service</span><span class="lang-zh">請選擇一項服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">请选择一项服务</span></span>
 </div>
 <div>
-<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Message / 留言</label>
-<textarea class="w-full px-4 py-3 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors resize-none" placeholder="Tell us about your needs... / 告訴我們您的需求..." rows="3"></textarea>
+<label for="messageInput" class="block font-label-sm text-label-sm text-on-surface-variant mb-1"><span class="lang-en">Message</span><span class="lang-zh">留言</span><span class="lang-zh-Hans lang-zh-Hans-clone">留言</span></label>
+<textarea class="w-full px-4 py-3 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:border-tertiary focus:ring-1 focus:ring-tertiary transition-colors resize-none" placeholder="Tell us about your needs..." id="messageInput" rows="3"></textarea>
 </div>
-<button class="btn-submit w-full bg-tertiary text-on-tertiary font-label-md text-label-md px-8 py-3.5 rounded-DEFAULT hover:bg-opacity-90 transition-colors relative" type="submit" id="submitBtn">Send Enquiry / 發送查詢</button>
-<p class="font-label-sm text-label-sm text-on-surface-variant text-center">We respect your privacy. No spam, ever. / 我們尊重您的隱私。絕不濫發。</p>
+<button class="btn-submit w-full bg-tertiary text-on-tertiary font-label-md text-label-md px-8 py-3.5 rounded-DEFAULT hover:bg-opacity-90 transition-colors relative" type="submit" id="submitBtn"><span class="lang-en">Send Enquiry</span><span class="lang-zh">發送查詢</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送查询</span></button>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center"><span class="lang-en">We respect your privacy. No spam, ever.</span><span class="lang-zh">我們尊重您的私隱，絕不發送垃圾郵件。</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们尊重您的隐私，绝不发送垃圾邮件。</span></p>
 </form>
 </div>
 <div class="max-w-2xl mx-auto mt-12">
 <div class="bg-surface-container-lowest rounded-lg p-8 text-center">
-<h3 class="font-headline-sm text-headline-sm mb-4">Other Contact Methods / 其他聯絡方式</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-2">Email: info@leapcorpser.com</p>
-<p class="font-body-md text-body-md text-on-surface-variant mb-2">Mobile/WhatsApp: +852 65550943</p>
+<h3 class="font-headline-sm text-headline-sm mb-4"><span class="lang-en">Other Contact Methods</span><span class="lang-zh">其他聯絡方式</span><span class="lang-zh-Hans lang-zh-Hans-clone">其他联系方式</span></h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-2"><span class="lang-en">Email: </span><span class="lang-zh">電郵：</span><span class="lang-zh-Hans lang-zh-Hans-clone">电子邮箱：</span>info@leapcorpser.com</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-2"><span class="lang-en">Mobile/WhatsApp: </span><span class="lang-zh">手機／WhatsApp：</span><span class="lang-zh-Hans lang-zh-Hans-clone">手机／WhatsApp：</span>+852 65550943</p>
 <p class="font-body-md text-body-md text-on-surface-variant"><span class="lang-en">Address: Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">地址：尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">地址：尖沙咀东部加连威老道92号幸福中心908室</span></p>
 </div>
 </div>
@@ -723,11 +721,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -736,7 +734,7 @@ Leap International Corporate Service Limited is registered as a Trust or Company
 <!-- Back to Top -->
 
 <!-- Success Toast -->
-<div class="success-toast" id="successToast"><span class="lang-en">✓ Message sent successfully!</span><span class="lang-zh">✓ 訊息發送成功！</span><span class="lang-zh-Hans lang-zh-Hans-clone">✓ 讯息发送成功！</span> We'll be in touch within 24 hours.</div>
+<div class="success-toast" id="successToast"><span class="lang-en">✓ Message sent successfully! We'll be in touch within 24 hours.</span><span class="lang-zh">✓ 訊息發送成功！我們會在24小時內與您聯絡。</span><span class="lang-zh-Hans lang-zh-Hans-clone">✓ 讯息发送成功！我们会在24小时内与您联系。</span></div>
 <script>
 (function() {
   // ========== Language Switcher ==========
@@ -873,6 +871,54 @@ Leap International Corporate Service Limited is registered as a Trust or Company
   var nameInput = document.getElementById('nameInput');
   var emailInput = document.getElementById('emailInput');
   var serviceInput = document.getElementById('serviceInput');
+  var messageInput = document.getElementById('messageInput');
+
+  var contactCopy = {
+    en: {
+      title: "Contact Us — Let's Start a Conversation | Leap International",
+      namePlaceholder: 'Your full name', nameLabel: 'Full name', emailLabel: 'Email address',
+      serviceLabel: 'Service interested in', messagePlaceholder: 'Tell us about your needs...',
+      messageLabel: 'Message', whatsappLabel: 'Chat on WhatsApp',
+      whatsappMessage: "Hi Leap International, I'd like to enquire about your services."
+    },
+    'zh-Hant': {
+      title: '聯絡我們｜溱柏國際商業服務',
+      namePlaceholder: '您的全名', nameLabel: '姓名', emailLabel: '電郵地址',
+      serviceLabel: '有興趣的服務', messagePlaceholder: '告訴我們您的需求…',
+      messageLabel: '留言', whatsappLabel: '透過 WhatsApp 聯絡我們',
+      whatsappMessage: '您好，我想查詢溱柏的服務。'
+    },
+    'zh-Hans': {
+      title: '联系我们｜溱柏国际商业服务',
+      namePlaceholder: '您的全名', nameLabel: '姓名', emailLabel: '电邮地址',
+      serviceLabel: '感兴趣的服务', messagePlaceholder: '告诉我们您的需求…',
+      messageLabel: '留言', whatsappLabel: '通过 WhatsApp 联系我们',
+      whatsappMessage: '您好，我想咨询溱柏的服务。'
+    }
+  };
+
+  function updateContactLocale() {
+    var lang = window.currentLang ? window.currentLang() : 'en';
+    var copy = contactCopy[lang] || contactCopy.en;
+    document.title = copy.title;
+    nameInput.placeholder = copy.namePlaceholder;
+    nameInput.setAttribute('aria-label', copy.nameLabel);
+    emailInput.setAttribute('aria-label', copy.emailLabel);
+    serviceInput.setAttribute('aria-label', copy.serviceLabel);
+    messageInput.placeholder = copy.messagePlaceholder;
+    messageInput.setAttribute('aria-label', copy.messageLabel);
+    var whatsAppLink = document.querySelector('.whatsapp-float');
+    if (whatsAppLink) {
+      whatsAppLink.setAttribute('aria-label', copy.whatsappLabel);
+      whatsAppLink.href = 'https://wa.me/85265550943?text=' + encodeURIComponent(copy.whatsappMessage);
+    }
+    serviceInput.querySelectorAll('option').forEach(function(option) {
+      option.textContent = option.getAttribute('data-' + lang.toLowerCase());
+    });
+  }
+
+  document.addEventListener('langchange', updateContactLocale);
+  updateContactLocale();
 
   function validateField(input, errorEl, validator) {
     var isValid = validator(input.value);

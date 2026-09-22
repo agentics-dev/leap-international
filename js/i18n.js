@@ -69,6 +69,42 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
     else { flag.textContent = '🇬🇧'; label.textContent = 'EN'; }
   }
 
+  function updateWhatsappLinks(lang) {
+    var messages = {
+      en: {
+        general: "Hi Leap International, I'd like to enquire about your services.",
+        audit: "Hi Leap International, I'd like to enquire about your Audit & Tax Filing services."
+      },
+      'zh-Hant': {
+        general: '您好，我想查詢溱柏的服務。',
+        audit: '您好，我想查詢溱柏的審計及報稅服務。'
+      },
+      'zh-Hans': {
+        general: '您好，我想咨询溱柏的服务。',
+        audit: '您好，我想咨询溱柏的审计及报税服务。'
+      }
+    };
+    var locales = { en: 'en', 'zh-Hant': 'zh_HK', 'zh-Hans': 'zh_CN' };
+    document.querySelectorAll('a.whatsapp-float').forEach(function (link) {
+      var originalUrl = new URL(link.href);
+      if (originalUrl.hostname !== 'wa.me' && originalUrl.hostname !== 'api.whatsapp.com') return;
+      var phone = originalUrl.hostname === 'wa.me'
+        ? originalUrl.pathname.slice(1)
+        : originalUrl.searchParams.get('phone');
+      if (!phone) return;
+      var topic = link.getAttribute('data-whatsapp-topic');
+      if (!topic) {
+        topic = /Audit & Tax Filing/i.test(originalUrl.searchParams.get('text') || '') ? 'audit' : 'general';
+        link.setAttribute('data-whatsapp-topic', topic);
+      }
+      var url = new URL('https://api.whatsapp.com/send');
+      url.searchParams.set('phone', phone);
+      url.searchParams.set('text', messages[lang][topic]);
+      url.searchParams.set('lang', locales[lang]);
+      link.href = url.toString();
+    });
+  }
+
   // 把当前语言写入地址栏 ?lang=（不刷新页面），形成可分享的三语链接
   function updateUrlLang(v) {
     try {
@@ -106,6 +142,7 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
       html.setAttribute('data-lang', v);
       html.setAttribute('lang', v === 'zh-Hant' ? 'zh-Hant' : v === 'zh-Hans' ? 'zh-Hans' : 'en');
       updateSwitcherUI(v);
+      updateWhatsappLinks(v);
       try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
       updateUrlLang(v);
       document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: v } }));
@@ -129,6 +166,12 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
     window.setLang(urlLang || savedLang);
   } catch (e) {
     console.error('i18n initial setLang error:', e);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      updateWhatsappLinks(window.currentLang());
+    });
   }
 
   // ====== 事件委托：监听 document 的 click（不依赖 DOM 时机）======

@@ -314,8 +314,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -543,7 +543,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260821" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -820,8 +820,8 @@
                 <img src="images/Register%20a%20new%20business.png" alt="Register a new business" class="w-full h-[180px] sm:h-[220px] md:h-[240px] object-cover" / loading="lazy">
                 <div class="p-8 flex-1 flex flex-col">
                     <h3 class="text-[24px] font-bold text-[#111827] mb-3">
-                        <span class="lang-en"><span class="text-black">Register</span> <span class="font-normal text-gray-600">a new business</span></span>
-                        <span class="lang-zh"><span class="text-black">註冊</span><span class="font-normal text-gray-600">新公司</span></span><span class="lang-zh-Hans lang-zh-Hans-clone"><span class="text-black">注册</span><span class="font-normal text-gray-600">新公司</span></span>
+                        <span class="lang-en">Register a new business</span>
+                        <span class="lang-zh">註冊新公司</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册新公司</span>
                     </h3>
                     <p class="text-[15px] text-[#4B5563] mb-8 flex-1">
                         <span class="lang-en">Launch your company with ease. Fast, paperless incorporation, fully guided for both Hong Kong and non-Hong Kong residents.</span>
@@ -839,8 +839,8 @@
                 <img src="images/Run%20and%20grow%20your%20existing%20business.png" alt="Run and grow your existing business" class="w-full h-[180px] sm:h-[220px] md:h-[240px] object-cover" / loading="lazy">
                 <div class="p-8 flex-1 flex flex-col">
                     <h3 class="text-[24px] font-bold text-[#111827] mb-3">
-                        <span class="lang-en"><span class="text-black">Run and grow</span> <span class="font-normal text-gray-600">your existing business</span></span>
-                        <span class="lang-zh"><span class="text-black">營運和發展</span><span class="font-normal text-gray-600">您的現有業務</span></span><span class="lang-zh-Hans lang-zh-Hans-clone"><span class="text-black">营运和发展</span><span class="font-normal text-gray-600">您的现有业务</span></span>
+                        <span class="lang-en">Run and grow your existing business</span>
+                        <span class="lang-zh">營運和發展<span class="whitespace-nowrap">您的現有業務</span></span><span class="lang-zh-Hans lang-zh-Hans-clone">营运和发展<span class="whitespace-nowrap">您的现有业务</span></span>
                     </h3>
                     <p class="text-[15px] text-[#4B5563] mb-8 flex-1">
                         <span class="lang-en">Stay compliant and in control. Simplify your ongoing admin with expert accounting and corporate secretarial services.</span>
@@ -997,11 +997,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -1543,7 +1543,7 @@ document.addEventListener('keydown', function(e) {
                     </div>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span> <span class="required">*</span></label>
+                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
                     <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>

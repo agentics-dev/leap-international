@@ -201,7 +201,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-white text-gray-900">
@@ -650,8 +650,8 @@
 
     <!-- Bottom note -->
     <div class="text-center text-[14px] text-gray-500 mb-8">
-        <span class="lang-en">Not sure which tier applies? <a href="#" onclick="openEnquireModal(); return false;" class="text-[#165DFF] font-medium underline underline-offset-2">Contact our team</a> — we&rsquo;ll help you find the right fit.</span>
-        <span class="lang-zh">不確定哪個級別適用？<a href="#" onclick="openEnquireModal(); return false;" class="text-[#165DFF] font-medium underline underline-offset-2">聯繫我們的團隊</a> — 我們會幫助您找到最合適的方案。</span><span class="lang-zh-Hans lang-zh-Hans-clone">不确定哪个级别适用？<a href="#" onclick="openEnquireModal(); return false;" class="text-[#165DFF] font-medium underline underline-offset-2">联系我们的团队</a> — 我们会帮助您找到最合适的方案。</span>
+        <span class="lang-en">Not sure which tier applies? <button type="button" onclick="openEnquireModal()" class="text-[#165DFF] font-medium underline underline-offset-2">Contact our team</button> — we&rsquo;ll help you find the right fit.</span>
+        <span class="lang-zh">不確定哪個級別適用？<button type="button" onclick="openEnquireModal()" class="text-[#165DFF] font-medium underline underline-offset-2">聯繫我們的團隊</button> — 我們會幫助您找到最合適的方案。</span><span class="lang-zh-Hans lang-zh-Hans-clone">不确定哪个级别适用？<button type="button" onclick="openEnquireModal()" class="text-[#165DFF] font-medium underline underline-offset-2">联系我们的团队</button> — 我们会帮助您找到最合适的方案。</span>
     </div>
 
 </div>
@@ -718,9 +718,6 @@
 
 <script>
 (function() {
-    function norm(v) { return v === 'zh' ? 'zh' : 'en'; }var saved = 'en';
-    try { saved = norm(localStorage.getItem(LANG_KEY)); } catch(e) {}
-    setLang(saved);
 
     var langBtn = document.getElementById('langBtn');
     var langDropdown = document.getElementById('langDropdown');

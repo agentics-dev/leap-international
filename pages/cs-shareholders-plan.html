@@ -147,7 +147,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-white text-gray-900">
@@ -424,9 +424,6 @@
 </div></main>
 <script>
 (function() {
-function norm(v) { return v === 'zh' ? 'zh' : 'en'; }var saved = 'en';
-try { saved = norm(localStorage.getItem(LANG_KEY)); } catch(e) {}
-setLang(saved);
 var langBtn = document.getElementById('langBtn');
 var langDropdown = document.getElementById('langDropdown');
 if (langBtn && langDropdown) {

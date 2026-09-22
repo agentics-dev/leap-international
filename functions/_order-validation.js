@@ -1,91 +1,214 @@
-// functions/_order-validation.js
-// 订单校验（金额、折扣、价格白名单）。Cloudflare Workers 版：价格硬编码，不读 fs。
+// Canonical order catalog and server-side quotation logic.
+// Browser-supplied prices are intentionally ignored.
 
-// 价格白名单：从 pages/pricing-data.json 提取的服务价 + 固定套餐价。
-// （Cloudflare Workers 无文件系统，故硬编码。改价时同步更新这里和 pricing-data.json）
-const VALID_PRICES = new Set([
-  0, 10, 15, 50, 79, 100, 200, 400, 1300, 1545, 1900, 2300, 2350, 2500, 2900,
-  3500, 3800, 4000, 4400, 4800, 4998, 5300, 5400, 5500, 5880, 6500, 6800, 7800,
-  8000, 8160, 8250, 8568, 9000, 9138, 10080, 10750, 11000, 11475, 11760, 12240,
-  12852, 13500, 14400, 14875, 15000, 15120, 17500, 18870, 20825, 21600, 22000,
-  22100, 22200, 24500, 25500, 26000, 30000, 32400, 34680, 39780, 40800, 46800,
-  61200, 72000,
-  // 注：原 regex 版会把 400000（">=HK$400,000" 标签）误纳入，已剔除
-]);
+const CURRENCY = 'HKD';
+const MAX_ORDER_TOTAL = 200000;
+const MAX_SHAREHOLDERS = 50;
 
-const DISCOUNT_CODES = {
-  WELCOME10: { type: 'percent', value: 10 },
-  LEAP500: { type: 'fixed', value: 500 },
-  FOUNDERS: { type: 'fixed', value: 1000 },
-  PARTNER15: { type: 'percent', value: 15 },
-};
+const CATALOG = Object.freeze({
+  incorporation: Object.freeze({ local: 6500, non_hk: 8500 }),
+  secretary: Object.freeze({ standard: 1300, premium: 3800, shareholderSurcharge: 200 }),
+  registeredOffice: 2500,
+  audit: Object.freeze({ standard: 5500, premium: 8000 }),
+});
 
-function calculateDiscount(subtotal, discountCode) {
-  if (!discountCode) return 0;
-  const code = DISCOUNT_CODES[String(discountCode).trim().toUpperCase()];
-  if (!code) return 0;
-  if (code.type === 'percent') return Math.round((subtotal * code.value) / 100);
-  if (code.type === 'fixed') return Math.min(code.value, subtotal);
-  return 0;
+function fail(code, reason) {
+  return { valid: false, code, reason };
 }
 
-function normalizeLineItems(lineItems) {
-  if (!Array.isArray(lineItems) || lineItems.length === 0 || lineItems.length > 20) {
-    return { valid: false, reason: 'Invalid line items' };
+function normalizeEnum(value) {
+  return String(value || '').trim().toLowerCase().replace(/[\s-]+/g, '_');
+}
+
+function normalizeShareholders(value) {
+  const number = Number(value == null || value === '' ? 1 : value);
+  if (!Number.isInteger(number) || number < 1 || number > MAX_SHAREHOLDERS) return null;
+  return number;
+}
+
+function addSecretaryLines(lines, secretary) {
+  if (!secretary) return { valid: true, secretary: null };
+  const plan = normalizeEnum(secretary.plan);
+  const shareholders = normalizeShareholders(secretary.shareholders);
+  if (plan !== 'standard' && plan !== 'premium') {
+    return fail('UNKNOWN_SECRETARY_PLAN', 'Unknown company secretary plan');
   }
-  const normalized = [];
-  for (const item of lineItems) {
-    const quantity =
-      Number.isInteger(item.quantity) && item.quantity > 0 && item.quantity <= 10 ? item.quantity : 1;
-    const unitPrice = typeof item.unit_price === 'number' ? item.unit_price : Number(item.price);
-    if (!Number.isInteger(unitPrice) || unitPrice > 200000) {
-      return { valid: false, reason: 'Invalid line item price' };
-    }
-    // 折扣只能通过 discount_code 字段处理，line items 必须为正价（防注入）
-    if (unitPrice <= 0) {
-      return { valid: false, reason: 'Line item price must be positive' };
-    }
-    if (!VALID_PRICES.has(unitPrice)) {
-      return { valid: false, reason: 'Line item price is not in the service catalog' };
-    }
-    const name = String(item.name || item.label || 'Service').slice(0, 120);
-    normalized.push({
-      name,
-      quantity,
-      unit_price: unitPrice,
-      price: unitPrice,
-      type: 'service',
-      sku: String(item.sku || item.code || 'svc-' + name.slice(0, 16).replace(/\s+/g, '-').toLowerCase()).slice(0, 64),
+  if (!shareholders) return fail('INVALID_SHAREHOLDERS', 'Shareholder count must be between 1 and 50');
+
+  lines.push({
+    code: `secretary_${plan}`,
+    name: plan === 'standard' ? 'Company Secretary - Standard' : 'Company Secretary - Premium',
+    quantity: 1,
+    unit_price: CATALOG.secretary[plan],
+  });
+
+  const extraShareholders = Math.max(0, shareholders - 2);
+  if (extraShareholders) {
+    lines.push({
+      code: 'secretary_extra_shareholder',
+      name: 'Additional shareholder service',
+      quantity: extraShareholders,
+      unit_price: CATALOG.secretary.shareholderSurcharge,
     });
   }
-  return { valid: true, items: normalized };
+  return { valid: true, secretary: { plan, shareholders } };
 }
 
-function validateOrder({ amount, currency, line_items, discount_code, discount_amount }) {
-  if (typeof amount !== 'number' || !Number.isFinite(amount) || amount < 1) {
-    return { valid: false, reason: 'Invalid amount' };
+function normalizeOrder(order) {
+  if (!order || typeof order !== 'object' || Array.isArray(order)) {
+    return fail('EMPTY_ORDER', 'Please select a service package before payment');
   }
-  if (amount > 200000) return { valid: false, reason: 'Amount exceeds maximum limit' };
-  if (!Number.isInteger(amount)) return { valid: false, reason: 'Amount must be a whole number' };
-  if (currency !== 'HKD') return { valid: false, reason: 'Unsupported currency' };
 
-  const normalized = normalizeLineItems(line_items);
+  const flow = normalizeEnum(order.flow);
+  const lines = [];
+
+  if (flow === 'incorporation') {
+    const incorporation = order.incorporation || {};
+    const residency = normalizeEnum(incorporation.residency);
+    const plan = normalizeEnum(incorporation.plan);
+    if (plan !== 'starter') return fail('UNKNOWN_INCORPORATION_PLAN', 'Unknown incorporation plan');
+    if (residency !== 'local' && residency !== 'non_hk') {
+      return fail('UNKNOWN_RESIDENCY', 'Unknown incorporation residency package');
+    }
+
+    lines.push({
+      code: `incorporation_${residency}_starter`,
+      name: residency === 'local'
+        ? 'Hong Kong Company Incorporation - Local Starter'
+        : 'Hong Kong Company Incorporation - Non-Hong Kong Starter',
+      quantity: 1,
+      unit_price: CATALOG.incorporation[residency],
+    });
+
+    const secretaryResult = addSecretaryLines(lines, order.secretary);
+    if (!secretaryResult.valid) return secretaryResult;
+
+    const registeredOffice = order.registeredOffice === true;
+    if (registeredOffice) {
+      lines.push({ code: 'registered_office', name: 'Registered Office Address', quantity: 1, unit_price: CATALOG.registeredOffice });
+    }
+
+    return {
+      valid: true,
+      order: {
+        flow,
+        incorporation: { residency, plan },
+        secretary: secretaryResult.secretary,
+        registeredOffice,
+      },
+      lines,
+    };
+  }
+
+  if (flow === 'company_secretary') {
+    const secretaryResult = addSecretaryLines(lines, order.secretary);
+    if (!secretaryResult.valid || !secretaryResult.secretary) {
+      return secretaryResult.valid
+        ? fail('UNKNOWN_SECRETARY_PLAN', 'Please select a company secretary plan')
+        : secretaryResult;
+    }
+
+    const requestedAudit = normalizeEnum(order.audit && order.audit.plan);
+    let audit = null;
+    if (requestedAudit && requestedAudit !== 'none') {
+      if (requestedAudit !== 'standard' && requestedAudit !== 'premium') {
+        return fail('UNKNOWN_AUDIT_PLAN', 'Unknown audit plan');
+      }
+      lines.push({
+        code: `audit_${requestedAudit}`,
+        name: requestedAudit === 'standard' ? 'Audit Package - Standard' : 'Audit Package - Premium',
+        quantity: 1,
+        unit_price: CATALOG.audit[requestedAudit],
+      });
+      audit = { plan: requestedAudit };
+    }
+
+    return { valid: true, order: { flow, secretary: secretaryResult.secretary, audit }, lines };
+  }
+
+  return fail('UNKNOWN_ORDER_FLOW', 'This order is no longer supported. Please select a package again');
+}
+
+function parseDiscountCodes(raw) {
+  if (!raw) return {};
+  let parsed;
+  try {
+    parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
+  } catch (error) {
+    throw new Error('DISCOUNT_CODES_JSON is not valid JSON');
+  }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+    throw new Error('DISCOUNT_CODES_JSON must be an object');
+  }
+  return parsed;
+}
+
+function calculateDiscount(subtotal, discountCode, env, order, now = Date.now()) {
+  const normalizedCode = String(discountCode || '').trim().toUpperCase();
+  if (!normalizedCode) return { valid: true, code: '', amount: 0 };
+
+  let codes;
+  try {
+    codes = parseDiscountCodes(env && env.DISCOUNT_CODES_JSON);
+  } catch (error) {
+    return fail('DISCOUNT_CONFIG_ERROR', 'Discounts are temporarily unavailable');
+  }
+
+  const rule = codes[normalizedCode];
+  if (!rule || rule.active === false) return fail('INVALID_DISCOUNT', 'Discount code is invalid or inactive');
+  if (rule.startsAt && Date.parse(rule.startsAt) > now) return fail('INVALID_DISCOUNT', 'Discount code is not active yet');
+  if (rule.expiresAt && Date.parse(rule.expiresAt) <= now) return fail('EXPIRED_DISCOUNT', 'Discount code has expired');
+  if (Array.isArray(rule.flows) && !rule.flows.map(normalizeEnum).includes(order.flow)) {
+    return fail('DISCOUNT_NOT_APPLICABLE', 'Discount code does not apply to this service');
+  }
+
+  const type = normalizeEnum(rule.type);
+  const value = Number(rule.value);
+  let amount = 0;
+  if (type === 'percent' && Number.isFinite(value) && value > 0 && value <= 100) {
+    amount = Math.round((subtotal * value) / 100);
+  } else if (type === 'fixed' && Number.isInteger(value) && value > 0) {
+    amount = Math.min(value, subtotal);
+  } else {
+    return fail('DISCOUNT_CONFIG_ERROR', 'Discount configuration is invalid');
+  }
+
+  return { valid: true, code: normalizedCode, amount };
+}
+
+function quoteOrder(orderInput, discountCode, env = {}, now = Date.now()) {
+  const normalized = normalizeOrder(orderInput);
   if (!normalized.valid) return normalized;
 
-  const subtotal = normalized.items.reduce((sum, item) => sum + item.unit_price * item.quantity, 0);
-  if (!Number.isInteger(subtotal) || subtotal < 1 || subtotal > 200000) {
-    return { valid: false, reason: 'Invalid order total' };
+  const lineItems = normalized.lines.map((item) => ({ ...item, total: item.quantity * item.unit_price }));
+  const subtotal = lineItems.reduce((sum, item) => sum + item.total, 0);
+  if (!Number.isInteger(subtotal) || subtotal < 1 || subtotal > MAX_ORDER_TOTAL) {
+    return fail('INVALID_ORDER_TOTAL', 'Order total is outside the supported range');
   }
 
-  const expectedDiscount = calculateDiscount(subtotal, discount_code);
-  if ((Number(discount_amount) || 0) !== expectedDiscount) {
-    return { valid: false, reason: 'Discount amount mismatch' };
-  }
-  const expectedAmount = subtotal - expectedDiscount;
-  if (amount !== expectedAmount) {
-    return { valid: false, reason: 'Amount does not match server-calculated order total' };
-  }
-  return { valid: true, products: normalized.items, subtotal, discountAmount: expectedDiscount };
+  const discount = calculateDiscount(subtotal, discountCode, env, normalized.order, now);
+  if (!discount.valid) return discount;
+  const total = subtotal - discount.amount;
+  if (total < 1) return fail('INVALID_ORDER_TOTAL', 'Order total must be greater than zero');
+
+  return {
+    valid: true,
+    currency: CURRENCY,
+    order: normalized.order,
+    lineItems,
+    subtotal,
+    discountCode: discount.code,
+    discountAmount: discount.amount,
+    total,
+  };
 }
 
-module.exports = { validateOrder, calculateDiscount, DISCOUNT_CODES, VALID_PRICES };
+module.exports = {
+  CATALOG,
+  CURRENCY,
+  MAX_ORDER_TOTAL,
+  normalizeOrder,
+  parseDiscountCodes,
+  calculateDiscount,
+  quoteOrder,
+};

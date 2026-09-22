@@ -310,8 +310,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -480,7 +480,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -798,17 +798,17 @@
                     <div class="bg-white p-10 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
                         <span class="material-symbols-outlined text-[#10B981] text-[43px] mb-4">work</span>
                         <h3 class="font-bold text-gray-900 mb-2 text-[17px]"><span class="lang-en">100% Remote Incorporation</span><span class="lang-zh">100% 遠程註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">100% 远程注册</span></h3>
-                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">Set up your Hong Kong company from anywhere with expert guidance and no travel required.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">無需親身到場，專家全程遠程協助註冊您的香港公司。</p>
+                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">Set up your Hong Kong company from anywhere with expert guidance and no travel required.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">無需親身到場，專家全程遠程協助註冊您的香港公司。</p><p class="lang-zh-Hans text-[14px] text-gray-500 leading-relaxed lang-zh-Hans-clone">无需亲身到场，专家全程远程协助注册您的香港公司。</p>
                     </div>
                     <div class="bg-white p-10 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
                         <span class="material-symbols-outlined text-[#A855F7] text-[43px] mb-4">payments</span>
                         <h3 class="font-bold text-gray-900 mb-2 text-[17px]"><span class="lang-en">No hidden costs</span><span class="lang-zh">無隱藏收費</span><span class="lang-zh-Hans lang-zh-Hans-clone">无隐藏收费</span></h3>
-                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">Transparent, all-inclusive pricing with government fees included.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">透明、全包價格，政府費用已包含在內。</p>
+                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">Transparent, all-inclusive pricing with government fees included.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">透明、全包價格，政府費用已包含在內。</p><p class="lang-zh-Hans text-[14px] text-gray-500 leading-relaxed lang-zh-Hans-clone">透明、全包价格，政府费用已包含在内。</p>
                     </div>
                     <div class="bg-white p-10 rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-gray-100 text-center flex flex-col items-center">
                         <span class="material-symbols-outlined text-[#3B82F6] text-[43px] mb-4">groups</span>
                         <h3 class="font-bold text-gray-900 mb-2 text-[17px]"><span class="lang-en">Everything Under One Roof</span><span class="lang-zh">一站式服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">一站式服务</span></h3>
-                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">From accounting and tax to payroll and admin, everything is managed seamlessly as your business grows.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">從會計、稅務到薪資及行政，所有事務一站式無縫管理，助您業務成長。</p>
+                        <p class="lang-en text-[14px] text-gray-500 leading-relaxed">From accounting and tax to payroll and admin, everything is managed seamlessly as your business grows.</p><p class="lang-zh text-[14px] text-gray-500 leading-relaxed">從會計、稅務到薪資及行政，所有事務一站式無縫管理，助您業務成長。</p><p class="lang-zh-Hans text-[14px] text-gray-500 leading-relaxed lang-zh-Hans-clone">从会计、税务到薪资及行政，所有事务一站式无缝管理，助您业务成长。</p>
                     </div>
                 </div>
             </div>
@@ -835,25 +835,25 @@
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#10B981] text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-sm">Step 01</div>
                         <span class="material-symbols-outlined text-[#10B981] text-[48px] mb-3 opacity-90">search</span>
                         <h4 class="font-bold text-[16px] text-gray-900 mb-2"><span class="lang-en">Check your company name</span><span class="lang-zh">檢查公司名稱</span><span class="lang-zh-Hans lang-zh-Hans-clone">检查公司名称</span></h4>
-                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Make sure your desired company name is available.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">確保您想使用的公司名稱可用。</p>
+                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Make sure your desired company name is available.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">確保您想使用的公司名稱可用。</p><p class="lang-zh-Hans text-[13px] text-gray-500 leading-relaxed lang-zh-Hans-clone">确保您想使用的公司名称可用。</p>
                     </div>
                     <div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#6366F1] text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-sm">Step 02</div>
                         <span class="material-symbols-outlined text-[#6366F1] text-[48px] mb-3 opacity-90">assignment</span>
                         <h4 class="font-bold text-[16px] text-gray-900 mb-2"><span class="lang-en">Choose your Registration Package</span><span class="lang-zh">選擇註冊套餐</span><span class="lang-zh-Hans lang-zh-Hans-clone">选择注册套餐</span></h4>
-                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Select the plan that fits your business needs.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">選擇適合您業務需求的方案。</p>
+                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Select the plan that fits your business needs.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">選擇適合您業務需求的方案。</p><p class="lang-zh-Hans text-[13px] text-gray-500 leading-relaxed lang-zh-Hans-clone">选择适合您业务需求的方案。</p>
                     </div>
                     <div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#F59E0B] text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-sm">Step 03</div>
                         <span class="material-symbols-outlined text-[#F59E0B] text-[48px] mb-3 opacity-90">contact_mail</span>
                         <h4 class="font-bold text-[16px] text-gray-900 mb-2"><span class="lang-en">Provide your Company Details</span><span class="lang-zh">提供公司資料</span><span class="lang-zh-Hans lang-zh-Hans-clone">提供公司资料</span></h4>
-                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Meet with our incorporation manager for fully managed setup.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">與我們的註冊經理會面，享受全程代辦服務。</p>
+                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">Meet with our incorporation manager for fully managed setup.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">與我們的註冊經理會面，享受全程代辦服務。</p><p class="lang-zh-Hans text-[13px] text-gray-500 leading-relaxed lang-zh-Hans-clone">与我们的注册经理会面，享受全程代办服务。</p>
                     </div>
                     <div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
                         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#0066FF] text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-sm">Step 04</div>
                         <span class="material-symbols-outlined text-[#0066FF] text-[48px] mb-3 opacity-90">verified</span>
                         <h4 class="font-bold text-[16px] text-gray-900 mb-2"><span class="lang-en">We handle the rest</span><span class="lang-zh">我們處理其餘事宜</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们处理其余事宜</span></h4>
-                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">We register your business with Company Registry and set you up for success.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">我們為您向公司註冊處完成註冊，助您順利啟航。</p>
+                        <p class="lang-en text-[13px] text-gray-500 leading-relaxed">We register your business with Company Registry and set you up for success.</p><p class="lang-zh text-[13px] text-gray-500 leading-relaxed">我們為您向公司註冊處完成註冊，助您順利啟航。</p><p class="lang-zh-Hans text-[13px] text-gray-500 leading-relaxed lang-zh-Hans-clone">我们为您向公司注册处完成注册，助您顺利启航。</p>
                     </div>
                 </div>
             </div>
@@ -870,7 +870,7 @@
                         </div>
                         <div class="pt-1">
                             <h3 class="text-[16px] font-bold text-gray-900 mb-1"><span class="lang-en">Identify the business type</span><span class="lang-zh">確定業務類型</span><span class="lang-zh-Hans lang-zh-Hans-clone">确定业务类型</span></h3>
-                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">This information is required for proper classification and registration purposes.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">此資訊為正確分類及註冊所需。</p>
+                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">This information is required for proper classification and registration purposes.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">此資訊為正確分類及註冊所需。</p><p class="lang-zh-Hans text-[14px] text-gray-600 leading-relaxed lang-zh-Hans-clone">此资讯为正确分类及注册所需。</p>
                         </div>
                     </div>
                     <div class="flex gap-6 items-start">
@@ -879,7 +879,7 @@
                         </div>
                         <div class="pt-1">
                             <h3 class="text-[16px] font-bold text-gray-900 mb-1"><span class="lang-en">Register your company name</span><span class="lang-zh">註冊公司名稱</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册公司名称</span></h3>
-                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Check if your company name is available using our online name checker.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">使用我們的線上名稱檢查工具確認公司名稱是否可用。</p>
+                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Check if your company name is available using our online name checker.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">使用我們的線上名稱檢查工具確認公司名稱是否可用。</p><p class="lang-zh-Hans text-[14px] text-gray-600 leading-relaxed lang-zh-Hans-clone">使用我们的线上名称检查工具确认公司名称是否可用。</p>
                         </div>
                     </div>
                     <div class="flex gap-6 items-start">
@@ -888,7 +888,7 @@
                         </div>
                         <div class="pt-1">
                             <h3 class="text-[16px] font-bold text-gray-900 mb-1"><span class="lang-en">Identify your company directors and shareholders</span><span class="lang-zh">確認公司董事及股東</span><span class="lang-zh-Hans lang-zh-Hans-clone">确认公司董事及股东</span></h3>
-                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Directors of a company in Hong Kong are not required to be shareholders. A Hong Kong Private Limited Company can have up to 50 shareholders (excluding employees/former employees).</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">香港公司董事無需為股東。香港私人有限公司最多可有50名股東（不包括員工/前員工）。</p>
+                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Directors of a company in Hong Kong are not required to be shareholders. A Hong Kong Private Limited Company can have up to 50 shareholders (excluding employees/former employees).</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">香港公司董事無需為股東。香港私人有限公司最多可有50名股東（不包括員工/前員工）。</p><p class="lang-zh-Hans text-[14px] text-gray-600 leading-relaxed lang-zh-Hans-clone">香港公司董事无需为股东。香港私人有限公司最多可有50名股东（不包括员工/前员工）。</p>
                         </div>
                     </div>
                     <div class="flex gap-6 items-start">
@@ -897,7 +897,7 @@
                         </div>
                         <div class="pt-1">
                             <h3 class="text-[16px] font-bold text-gray-900 mb-1"><span class="lang-en">Allocate your paid-up capital</span><span class="lang-zh">分配繳足股本</span><span class="lang-zh-Hans lang-zh-Hans-clone">分配缴足股本</span></h3>
-                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Determine the initial capital shareholders will contribute. In Hong Kong, except for regulated industries, there's no minimum requirement for share capital, allowing incorporation with just HK$1.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">確定股東將投入的初始資本。在香港，除受監管行業外，股本無最低要求，僅需HK$1即可註冊。</p>
+                            <p class="lang-en text-[14px] text-gray-600 leading-relaxed">Determine the initial capital shareholders will contribute. In Hong Kong, except for regulated industries, there's no minimum requirement for share capital, allowing incorporation with just HK$1.</p><p class="lang-zh text-[14px] text-gray-600 leading-relaxed">確定股東將投入的初始資本。在香港，除受監管行業外，股本無最低要求，僅需HK$1即可註冊。</p><p class="lang-zh-Hans text-[14px] text-gray-600 leading-relaxed lang-zh-Hans-clone">确定股东将投入的初始资本。在香港，除受监管行业外，股本无最低要求，仅需HK$1即可注册。</p>
                         </div>
                     </div>
                 </div>
@@ -915,7 +915,7 @@
                             <span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
                         </button>
                         <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
-                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Hong Kong offers a strategic location, low tax rates, and a business-friendly environment for both Hong Kong and non-Hong Kong residents.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">香港擁有戰略位置、低稅率及友善的營商環境，適合香港人及非香港人。</p>
+                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Hong Kong offers a strategic location, low tax rates, and a business-friendly environment for both Hong Kong and non-Hong Kong residents.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">香港擁有戰略位置、低稅率及友善的營商環境，適合香港人及非香港人。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">香港拥有战略位置、低税率及友善的营商环境，适合香港人及非香港人。</p>
                         </div>
                     </div>
                     <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
@@ -924,7 +924,7 @@
                             <span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
                         </button>
                         <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
-                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">You need at least one director, one shareholder, and a registered company secretary.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">您需要至少一名董事、一名股東及一名註冊公司秘書。</p>
+                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">You need at least one director, one shareholder, and a registered company secretary.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">您需要至少一名董事、一名股東及一名註冊公司秘書。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">您需要至少一名董事、一名股东及一名注册公司秘书。</p>
                         </div>
                     </div>
                     <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
@@ -933,7 +933,7 @@
                             <span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
                         </button>
                         <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
-                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes, the entire process can be completed online with Leap's paperless platform.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以，整個流程可透過Leap的無紙化平台線上完成。</p>
+                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes, the entire process can be completed online with Leap's paperless platform.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以，整個流程可透過Leap的無紙化平台線上完成。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可以，整个流程可透过Leap的无纸化平台线上完成。</p>
                         </div>
                     </div>
                     <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
@@ -942,7 +942,7 @@
                             <span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
                         </button>
                         <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
-                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Absolutely, 100% non-Hong Kong resident ownership is permitted without any local residency requirement for shareholders.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">當然可以，允許100%外資持股，股東無需本地居住。</p>
+                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Absolutely, 100% non-Hong Kong resident ownership is permitted without any local residency requirement for shareholders.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">當然可以，允許100%外資持股，股東無需本地居住。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">当然可以，允许100%外资持股，股东无需本地居住。</p>
                         </div>
                     </div>
                     <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
@@ -951,7 +951,7 @@
                             <span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
                         </button>
                         <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
-                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes, directors can be of any nationality and do not need to reside in Hong Kong.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以，董事可為任何國籍，無需居住在香港。</p>
+                            <p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes, directors can be of any nationality and do not need to reside in Hong Kong.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以，董事可為任何國籍，無需居住在香港。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可以，董事可为任何国籍，无需居住在香港。</p>
                         </div>
                     </div>
                     <div class="text-center pt-3">
@@ -1000,11 +1000,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -1343,7 +1343,7 @@ document.addEventListener('keydown', function(e) {
                     </div>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span> <span class="required">*</span></label>
+                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
                     <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>

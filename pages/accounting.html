@@ -310,8 +310,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -484,7 +484,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -724,6 +724,8 @@
 </p>
 <p class="lang-zh text-gray-600 mb-8 text-[15px] leading-relaxed max-w-lg">
     我們的會計團隊確保您的財務記錄準確、合規且時刻保持最新狀態。我們將雲端科技與專業知識相結合，讓您全面掌握財務狀況。
+</p><p class="lang-zh-Hans text-gray-600 mb-8 text-[15px] leading-relaxed max-w-lg lang-zh-Hans-clone">
+    我们的会计团队确保您的财务记录准确、合规且时刻保持最新状态。我们将云端科技与专业知识相结合，让您全面掌握财务状况。
 </p>
 <ul class="space-y-3 mb-8 text-[14px] text-gray-800"><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Basic accounting entry services</strong></span><span class="lang-zh"><strong>基本会计入账服务</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>基本会计入账服务</strong></span></li><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Monthly management accounts and financial statements</strong></span><span class="lang-zh"><strong>月度管理賬目及財務報表</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>月度管理账目及财务报表</strong></span></li><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Cash flow monitoring and budgeting support</strong></span><span class="lang-zh"><strong>現金流監控及預算支援</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>现金流监控及预算支援</strong></span></li></ul>
 <div class="flex flex-wrap gap-4 mb-6">
@@ -817,16 +819,16 @@
 <h2 class="text-[28px] font-bold text-center text-gray-900 mb-10"><span class="lang-en">What's Included</span><span class="lang-zh">服務內容</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务内容</span></h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">check_circle</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Basic accounting entry services</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">基本会计入账服务</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Basic accounting entry services</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">基本会计入账服务</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">基本会计入账服务</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">verified</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Monthly management accounts and financial statements</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">月度管理賬目及財務報表</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Monthly management accounts and financial statements</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">月度管理賬目及財務報表</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">月度管理账目及财务报表</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">star</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Cash flow monitoring and budgeting support</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">現金流監控及預算支援</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Cash flow monitoring and budgeting support</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">現金流監控及預算支援</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">现金流监控及预算支援</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">favorite</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Dedicated accountant assigned to your business</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">為您的業務指派專屬會計師</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Dedicated accountant assigned to your business</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">為您的業務指派專屬會計師</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">为您的业务指派专属会计师</p></div>
 </div></div>
 </div>
 </section>
@@ -839,25 +841,25 @@
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#10B981; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 01</div>
 <span class="material-symbols-outlined text-[86px] mb-3 opacity-90" style="color:#10B981;">receipt_long</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Share your documents</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">提交收據、銀行流水與交易資料</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">提交收據、銀行流水與交易資料</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">提交收据、银行流水与交易资料</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#6366F1; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 02</div>
 <span class="material-symbols-outlined text-[86px] mb-3 opacity-90" style="color:#6366F1;">sync</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">We reconcile and review</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">對賬與分類，確保賬目準確</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">對賬與分類，確保賬目準確</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">对账与分类，确保账目准确</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#F59E0B; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 03</div>
 <span class="material-symbols-outlined text-[86px] mb-3 opacity-90" style="color:#F59E0B;">analytics</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Monthly reporting</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">提供月度報表與管理賬目</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">提供月度報表與管理賬目</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">提供月度报表与管理账目</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#0066FF; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 04</div>
 <span class="material-symbols-outlined text-[86px] mb-3 opacity-90" style="color:#0066FF;">verified</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Stay compliant</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">按期準備稅務/審計所需材料</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">按期準備稅務/審計所需材料</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">按期准备税务/审计所需材料</h4>
 </div></div>
 <div class="flex justify-center mt-10">
-<button class="px-8 py-3 bg-[#0066FF] hover:bg-blue-700 text-white font-medium rounded-md transition-colors text-[14px]" onclick="document.getElementById('accountingExpenseSelect').scrollIntoView({behavior:'smooth'})"><span class="lang-en">Explore Accounting Plans</span><span class="lang-zh block text-[11px] font-medium opacity-90 mt-0.5">探索會計方案</span><span class="lang-zh-Hans block text-[11px] font-medium opacity-90 mt-0.5 lang-zh-Hans-clone">探索会计方案</span></button>
+<button class="px-8 py-3 bg-[#0066FF] hover:bg-blue-700 text-white font-medium rounded-md transition-colors text-[18.2px]" onclick="document.getElementById('accountingExpenseSelect').scrollIntoView({behavior:'smooth'})"><span class="lang-en">Explore Accounting Plans</span><span class="lang-zh block text-[14.3px] font-medium opacity-90 mt-0.5">探索會計方案</span><span class="lang-zh-Hans block text-[14.3px] font-medium opacity-90 mt-0.5 lang-zh-Hans-clone">探索会计方案</span></button>
 </div>
 </div>
 </section>
@@ -867,16 +869,16 @@
 <div class="flex flex-col lg:flex-row gap-8 lg:gap-10">
 <div class="flex-1 space-y-3"><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">What accounting software do you support?</span><span class="lang-zh">你們支援哪些會計軟體？</span><span class="lang-zh-Hans lang-zh-Hans-clone">你们支援哪些会计软体？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">We support mainstream cloud accounting platforms and can recommend the best fit for your setup.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">我們支援主流雲端會計平台，並可按您的現況提供最合適方案。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">We support mainstream cloud accounting platforms and can recommend the best fit for your setup.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">我們支援主流雲端會計平台，並可按您的現況提供最合適方案。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">我们支援主流云端会计平台，并可按您的现况提供最合适方案。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">How often will I receive reports?</span><span class="lang-zh">我多久會收到報表？</span><span class="lang-zh-Hans lang-zh-Hans-clone">我多久会收到报表？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Monthly management accounts and reports are standard, and frequency can be adjusted to your needs.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可按月提供管理賬目與報表，並可依需求調整頻率。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Monthly management accounts and reports are standard, and frequency can be adjusted to your needs.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可按月提供管理賬目與報表，並可依需求調整頻率。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可按月提供管理账目与报表，并可依需求调整频率。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">Can you help with budgeting and cash flow?</span><span class="lang-zh">可以協助預算與現金流嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">可以协助预算与现金流吗？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We provide cash flow monitoring and budgeting support to help with better decisions.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以。我們提供現金流監控與預算支援，協助您做出更好決策。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We provide cash flow monitoring and budgeting support to help with better decisions.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以。我們提供現金流監控與預算支援，協助您做出更好決策。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可以。我们提供现金流监控与预算支援，协助您做出更好决策。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">Will I have a dedicated accountant?</span><span class="lang-zh">會有專屬會計師嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">会有专属会计师吗？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. A dedicated accountant will be assigned to your business.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">會。我們會為您的業務指派專屬會計師對接。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. A dedicated accountant will be assigned to your business.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">會。我們會為您的業務指派專屬會計師對接。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">会。我们会为您的业务指派专属会计师对接。</p></div>
 </div><div class="text-center pt-3"><span class="lang-en"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">View more</a></span><span class="lang-zh"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">查看更多</a></span><span class="lang-zh-Hans lang-zh-Hans-clone"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">查看更多</a></span></div></div>
 <div class="w-full lg:w-[260px] shrink-0">
 <div class="bg-[#FAFAFA] rounded-xl p-6 border border-gray-100 text-center h-full flex flex-col justify-center shadow-sm">
@@ -917,11 +919,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -1177,7 +1179,7 @@ Leap International Corporate Service Limited is registered as a Trust or Company
       opt.classList.remove('selected');
     });
     el.classList.add('selected');
-    var _tgt = document.getElementById('selectedAccountingExpense'); _tgt.innerHTML = ''; while (el.firstChild) _tgt.appendChild(el.firstChild.cloneNode(true));
+    var _tgt = document.getElementById('selectedAccountingExpense'); _tgt.replaceChildren(...Array.from(el.childNodes, function(node) { return node.cloneNode(true); }));
 
     var trigger = document.querySelector('#accountingExpenseSelect .custom-select-trigger');
     var options = document.getElementById('accountingExpenseOptions');
@@ -1254,7 +1256,7 @@ window.openEnquireModal = function() {
 }
 </script>
                 <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span> <span class="required">*</span></label>
+                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
                     <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>
@@ -1309,7 +1311,7 @@ window.openEnquireModal = function() {
                     </div>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span> <span class="required">*</span></label>
+                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
                     <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>

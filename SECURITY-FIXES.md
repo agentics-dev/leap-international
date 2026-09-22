@@ -54,15 +54,15 @@
 - **NewsEditor.jsx 上传**:已增加扩展名白名单(jpg/jpeg/png/webp/gif)+ MIME `image/*` 校验 + 5MB 大小限制;文件名本就是 `时间戳-随机串.扩展名` 随机命名(存 Supabase Storage,非 webroot)。
 - **AuthorEditor.jsx / select-office-address.html**:两文件**均无文件上传代码**(后者仅是"mail scanning"文案),误报。
 
-## 六、依赖与供应链(6 项)—— 4 修复 + 2 残留(P3)
+## 六、依赖与供应链(6 项)—— 已全部修复
 | 依赖 | 级别 | 处理 |
 |---|---|---|
 | cybersource-rest-client | high | **已卸载**(线上 Cloudflare Functions 用 Web Crypto 自实现签名,从不依赖该 SDK;仅 Netlify 遗留路径引用,遗留文件一并删除) |
 | axios | high | 随 cybersource-rest-client 卸载消除(其传递依赖,源码无直接引用) |
 | node-jose | moderate | 同上消除 |
 | uuid | moderate | 同上消除 |
-| elliptic | low (P3) | jwk-to-pem 的传递依赖,暂留(CyberSource JWT 验签需要 jwk-to-pem) |
-| jwk-to-pem | low (P3) | 已升级到最新版;后续可考虑用 Web Crypto 重写验签以彻底移除 |
+| elliptic | low | 随未使用的 jwk-to-pem 卸载消除 |
+| jwk-to-pem | low | CyberSource JWT 验签已使用 Web Crypto,该依赖已卸载 |
 
 另:`@netlify/blobs`、`jsonwebtoken`(均无人使用)一并卸载;wrangler 升级到最新(消除其工具链 undici 漏洞,仅影响本地开发,不入生产包)。
 
@@ -72,4 +72,3 @@
 ## 遗留事项(需人工执行)
 1. **执行 RLS 迁移**:Supabase Dashboard → SQL Editor 运行 `supabase/migrations/20260818_security_rls.sql`。
 2. admin 后台重新构建部署(本次仅改源码):`cd admin_src && npm run build`。
-3. elliptic/jwk-to-pem 两个 low 级传递依赖,后续用 Web Crypto 重写 `_cybs-token.js` 验签后可彻底移除。

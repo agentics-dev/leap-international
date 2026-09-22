@@ -310,8 +310,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -430,7 +430,7 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -670,6 +670,8 @@
 </p>
 <p class="lang-zh text-gray-600 mb-8 text-[15px] leading-relaxed max-w-lg">
     透過專業記帳服務，掌握您的日常交易。我們將每張收據分類、核對銀行賬單，並為報稅季節做好準備 — 確保沒有任何遺漏。
+</p><p class="lang-zh-Hans text-gray-600 mb-8 text-[15px] leading-relaxed max-w-lg lang-zh-Hans-clone">
+    透过专业记帐服务，掌握您的日常交易。我们将每张收据分类、核对银行账单，并为报税季节做好准备 — 确保没有任何遗漏。
 </p>
 <ul class="space-y-3 mb-8 text-[14px] text-gray-800"><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Daily transaction categorization and reconciliation</strong></span><span class="lang-zh"><strong>每日交易分類及對賬</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>每日交易分类及对账</strong></span></li><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Accounts payable and receivable management</strong></span><span class="lang-zh"><strong>應付賬款及應收賬款管理</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>应付账款及应收账款管理</strong></span></li><li class="flex items-start gap-3"><span class="w-1.5 h-1.5 bg-black rounded-full mt-2 shrink-0"></span><span class="lang-en"><strong>Bank and credit card statement reconciliation</strong></span><span class="lang-zh"><strong>銀行及信用卡賬單對賬</strong></span><span class="lang-zh-Hans lang-zh-Hans-clone"><strong>银行及信用卡账单对账</strong></span></li></ul>
 <div class="flex flex-wrap gap-4 mb-6">
@@ -789,16 +791,16 @@
 <h2 class="text-[28px] font-bold text-center text-gray-900 mb-10"><span class="lang-en">What's Included</span><span class="lang-zh">服務內容</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务内容</span></h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-5"><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">check_circle</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Daily transaction categorization and reconciliation</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">每日交易分類及對賬</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Daily transaction categorization and reconciliation</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">每日交易分類及對賬</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">每日交易分类及对账</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">verified</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Accounts payable and receivable management</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">應付賬款及應收賬款管理</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Accounts payable and receivable management</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">應付賬款及應收賬款管理</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">应付账款及应收账款管理</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">star</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Bank and credit card statement reconciliation</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">銀行及信用卡賬單對賬</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Bank and credit card statement reconciliation</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">銀行及信用卡賬單對賬</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">银行及信用卡账单对账</p></div>
 </div><div class="bg-white rounded-xl p-7 shadow-sm border border-gray-200 flex gap-5">
 <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[#0066FF] text-[26px]">favorite</span></div>
-<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Monthly bookkeeping reports delivered on time</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">準時交付月度記帳報告</p></div>
+<div><p class="lang-en font-bold text-[16px] text-gray-900 mb-1">Monthly bookkeeping reports delivered on time</p><p class="lang-zh font-bold text-[16px] text-gray-900 mb-1">準時交付月度記帳報告</p><p class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-1 lang-zh-Hans-clone">准时交付月度记帐报告</p></div>
 </div></div>
 </div>
 </section>
@@ -811,22 +813,22 @@
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#10B981; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 01</div>
 <span class="material-symbols-outlined text-[48px] mb-3 opacity-90" style="color:#10B981;">receipt_long</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Capture transactions</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">整理與歸類日常交易與收據</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">整理與歸類日常交易與收據</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">整理与归类日常交易与收据</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#6366F1; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 02</div>
 <span class="material-symbols-outlined text-[48px] mb-3 opacity-90" style="color:#6366F1;">sync</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Reconcile statements</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">核對銀行與信用卡賬單</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">核對銀行與信用卡賬單</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">核对银行与信用卡账单</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#F59E0B; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 03</div>
 <span class="material-symbols-outlined text-[48px] mb-3 opacity-90" style="color:#F59E0B;">dashboard</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Get clear reports</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">按月交付記帳報告與摘要</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">按月交付記帳報告與摘要</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">按月交付记帐报告与摘要</h4>
 </div><div class="bg-white rounded-xl p-7 text-center shadow-sm border border-gray-200 relative pt-12">
 <div class="absolute -top-3 left-1/2 -translate-x-1/2" style="background:#0066FF; color:#fff; font-size:10px; font-weight:700; padding:4px 16px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.12em; box-shadow:0 2px 10px rgba(0,0,0,0.08);">Step 04</div>
 <span class="material-symbols-outlined text-[48px] mb-3 opacity-90" style="color:#0066FF;">verified</span>
 <h4 class="lang-en font-bold text-[16px] text-gray-900 mb-2">Ready for tax season</h4>
-<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">賬目整潔，報稅季更省心</h4>
+<h4 class="lang-zh font-bold text-[16px] text-gray-900 mb-2">賬目整潔，報稅季更省心</h4><h4 class="lang-zh-Hans font-bold text-[16px] text-gray-900 mb-2 lang-zh-Hans-clone">账目整洁，报税季更省心</h4>
 </div></div>
 <div class="flex justify-center mt-10">
 <button class="px-8 py-3 bg-[#0066FF] hover:bg-blue-700 text-white font-medium rounded-md transition-colors text-[14px]" onclick="window.location.href='accounting.html'"><span class="lang-en">Start Bookkeeping</span><span class="lang-zh">開始記帳服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">开始记帐服务</span></button>
@@ -839,16 +841,16 @@
 <div class="flex flex-col lg:flex-row gap-8 lg:gap-10">
 <div class="flex-1 space-y-3"><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">Do you reconcile bank statements?</span><span class="lang-zh">你們會核對銀行賬單嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">你们会核对银行账单吗？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We reconcile bank and credit card statements periodically to ensure data accuracy.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">會。我們會按期核對銀行與信用卡賬單，確保數據一致。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We reconcile bank and credit card statements periodically to ensure data accuracy.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">會。我們會按期核對銀行與信用卡賬單，確保數據一致。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">会。我们会按期核对银行与信用卡账单，确保数据一致。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">What documents do I need to provide?</span><span class="lang-zh">我需要提供什麼文件？</span><span class="lang-zh-Hans lang-zh-Hans-clone">我需要提供什么文件？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Receipts, invoices, bank statements, and transaction records. We will provide a checklist.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">收據、發票、銀行流水與交易紀錄即可，我們會提供清單。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Receipts, invoices, bank statements, and transaction records. We will provide a checklist.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">收據、發票、銀行流水與交易紀錄即可，我們會提供清單。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">收据、发票、银行流水与交易纪录即可，我们会提供清单。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">Can you handle accounts payable/receivable?</span><span class="lang-zh">可以處理應付/應收賬款嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">可以处理应付/应收账款吗？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We can assist with managing accounts payable and receivable workflows.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以。我們可協助管理應付與應收賬款流程。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Yes. We can assist with managing accounts payable and receivable workflows.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可以。我們可協助管理應付與應收賬款流程。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可以。我们可协助管理应付与应收账款流程。</p></div>
 </div><div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn"><span class="lang-en">When will I receive bookkeeping reports?</span><span class="lang-zh">何時能收到記帳報告？</span><span class="lang-zh-Hans lang-zh-Hans-clone">何时能收到记帐报告？</span><span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span></button>
-<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Monthly bookkeeping reports are delivered on schedule to keep you informed.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可按月準時交付記帳報告，方便您掌握經營狀況。</p></div>
+<div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300"><p class="lang-en pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">Monthly bookkeeping reports are delivered on schedule to keep you informed.</p><p class="lang-zh pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed">可按月準時交付記帳報告，方便您掌握經營狀況。</p><p class="lang-zh-Hans pb-4 sm:pb-5 md:pb-6 text-[14px] sm:text-[16px] md:text-[18px] text-gray-600 leading-relaxed lang-zh-Hans-clone">可按月准时交付记帐报告，方便您掌握经营状况。</p></div>
 </div><div class="text-center pt-3"><span class="lang-en"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">View more</a></span><span class="lang-zh"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">查看更多</a></span><span class="lang-zh-Hans lang-zh-Hans-clone"><a href="/pages/faqs.html" class="text-[#0066FF] font-medium text-[15px] sm:text-[17px] md:text-[18px] hover:underline">查看更多</a></span></div></div>
 <div class="w-full lg:w-[260px] shrink-0">
 <div class="bg-[#FAFAFA] rounded-xl p-6 border border-gray-100 text-center h-full flex flex-col justify-center shadow-sm">
@@ -885,11 +887,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -1136,7 +1138,7 @@ Leap International Corporate Service Limited is registered as a Trust or Company
     var trigger = document.getElementById('selectedBookkeepingExpense');
     var options = document.getElementById('bookkeepingExpenseOptions');
     var arrow = document.querySelector('#bookkeepingExpenseSelect .arrow');
-    if (trigger) { trigger.innerHTML = ''; while (el.firstChild) trigger.appendChild(el.firstChild.cloneNode(true)); }
+    if (trigger) { trigger.replaceChildren(...Array.from(el.childNodes, function(node) { return node.cloneNode(true); })); }
     document.querySelectorAll('#bookkeepingExpenseOptions .custom-select-option').forEach(function(opt) { opt.classList.remove('selected'); });
     el.classList.add('selected');
     bookkeepingSelectOpen = false;

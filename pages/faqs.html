@@ -267,11 +267,10 @@
         .card-hover:hover .icon-glow {
             box-shadow: 0 0 20px rgba(0, 87, 206, 0.3);
         }
-        .faq-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
+        .faq-summary { list-style: none; }
+        .faq-summary::-webkit-details-marker { display: none; }
+        .faq-group { padding: 0; }
+        .faq-item[open] .faq-arrow { transform: rotate(180deg); }
         .section-title::after { content: ""; display: block; width: 48px; height: 3px; margin: 12px auto 0; border-radius: 2px; }
         
         .radial-glow { transition: all 0.3s ease; }
@@ -280,12 +279,6 @@
         }
 
         /* Language switching handled by js/i18n.js */
-        .faq-content.open {
-            max-height: 800px;
-        }
-        .faq-btn.open .material-symbols-outlined {
-            transform: rotate(180deg);
-        }
         /* Mobile Menu */
         .mobile-menu { transform: translateX(100%); transition: transform 0.3s ease; }
         .mobile-menu.open { transform: translateX(0); }
@@ -309,8 +302,8 @@
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
-        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
-        .success-toast.show { transform: translateX(-50%) translateY(0); }
+        .success-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); visibility: hidden; background: #059669; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; z-index: 999; transition: transform 0.4s ease; box-shadow: 0 8px 24px rgba(5,150,105,0.3); }
+        .success-toast.show { transform: translateX(-50%) translateY(0); visibility: visible; }
     
         #langDropdown.show { opacity: 1 !important; visibility: visible !important; }
         #langBtn[aria-expanded="true"] .material-symbols-outlined { transform: rotate(180deg); }
@@ -430,37 +423,9 @@
 </script>
 
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "@id": "https://www.leapcorpser.com/pages/faqs.html#faqpage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "How long does Hong Kong company incorporation take?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Most incorporations are completed within 1-3 business days once all documents are submitted."
-    }
-  },{
-    "@type": "Question",
-    "name": "Do I need to be physically present to register a Hong Kong company?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "No. The entire process can be completed remotely. We handle all filings electronically."
-    }
-  },{
-    "@type": "Question",
-    "name": "What is a nominee director and do I need one?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "A nominee director is a locally resident individual appointed to meet statutory requirements."
-    }
-  }]
-}
-</script>
+<!-- FAQ_SCHEMA -->
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260820" defer></script>
+  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
   <script src="/js/nav.js?v=20260813-5" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
@@ -706,18 +671,13 @@
         <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
         <input type="text" id="faqSearch" 
             class="w-full pl-12 pr-4 py-4 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all shadow-sm text-[16px]"
-            placeholder="Search FAQs / 搜尋常見問題..."
+            placeholder="Search FAQs"
+            aria-label="Search FAQs"
         >
     </div>
 
-    <!-- Loading state -->
-    <div id="faqLoading" class="text-center py-12">
-        <div class="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-
-    <!-- FAQ Container -->
-    <div id="faqContainer" class="space-y-4 hidden">
-        <!-- FAQs will be injected here via JS -->
+    <div id="faqContainer" class="space-y-10">
+        <!-- FAQ_ITEMS -->
     </div>
 
     <!-- No results -->
@@ -737,11 +697,11 @@
 <a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
 </div>
 <p class="font-label-sm text-label-sm text-gray-500">
-Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East &nbsp;|&nbsp; 
+<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
 <a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
 </p>
 <p class="font-label-sm text-label-sm text-gray-500">
-Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).
+<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
 </p>
 </div>
 
@@ -982,116 +942,36 @@ Leap International Corporate Service Limited is registered as a Trust or Company
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    let allFaqs = [];
-    const container = document.getElementById('faqContainer');
     const searchInput = document.getElementById('faqSearch');
-    const loading = document.getElementById('faqLoading');
     const noResults = document.getElementById('faqNoResults');
+    const groups = [...document.querySelectorAll('.faq-group')];
 
-    function escapeHtml(value) {
-        return String(value == null ? '' : value)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+    function updateSearchLabel() {
+        const lang = document.documentElement.getAttribute('data-lang');
+        const label = lang === 'zh-Hant' ? '搜尋常見問題' : lang === 'zh-Hans' ? '搜索常见问题' : 'Search FAQs';
+        searchInput.placeholder = label;
+        searchInput.setAttribute('aria-label', label);
     }
 
-    async function fetchFaqs() {
-        try {
-            const response = await fetch('/api/faqs');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            allFaqs = data || [];
-            renderFaqs(allFaqs);
-        } catch (err) {
-            console.error('Error fetching FAQs:', err);
-            container.innerHTML = '<div class="p-6 text-center text-red-500">Failed to load FAQs. Please try again later.</div>';
-        } finally {
-            loading.classList.add('hidden');
-            container.classList.remove('hidden');
-        }
-    }
-
-    function renderFaqs(faqsToRender) {
-        container.innerHTML = '';
-        
-        if (faqsToRender.length === 0) {
-            noResults.classList.remove('hidden');
-            return;
-        }
-        
-        noResults.classList.add('hidden');
-
-        faqsToRender.forEach((faq, index) => {
-            const item = document.createElement('div');
-            item.className = 'bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden';
-            
-            // Format answer text to handle line breaks
-            const formatText = (text) => escapeHtml(text).replace(/\n/g, '<br/>');
-            
-            item.innerHTML = `
-                <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center hover:bg-blue-50 transition-colors focus:outline-none focus:bg-blue-50">
-                    <span class="text-[16px] sm:text-[18px] font-bold text-gray-900 pr-4">
-                        <span class="lang-en">${escapeHtml(faq.question_en)}</span>
-                        <span class="lang-zh">${escapeHtml(faq.question_zh)}</span><span class="lang-zh-Hans lang-zh-Hans-clone">${escapeHtml(faq.question_zh)}</span>
-                    </span>
-                    <span class="material-symbols-outlined text-[#165DFF] transition-transform duration-300">expand_more</span>
-                </button>
-                <div class="faq-content px-6 bg-white transition-all duration-300 max-h-0 overflow-hidden opacity-0">
-                    <p class="pb-6 pt-2 text-[15px] sm:text-[16px] leading-relaxed text-gray-600 whitespace-pre-line">
-                        <span class="lang-en">${formatText(faq.answer_en)}</span>
-                        <span class="lang-zh">${formatText(faq.answer_zh)}</span><span class="lang-zh-Hans lang-zh-Hans-clone">${formatText(faq.answer_zh)}</span>
-                    </p>
-                </div>
-            `;
-            container.appendChild(item);
-        });
-
-        // Event listeners for toggling
-        document.querySelectorAll('.faq-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const icon = this.querySelector('.material-symbols-outlined');
-                const isOpen = content.classList.contains('max-h-[2000px]');
-                
-                if (!isOpen) {
-                    content.classList.remove('max-h-0', 'opacity-0');
-                    content.classList.add('max-h-[2000px]', 'opacity-100');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    content.classList.remove('max-h-[2000px]', 'opacity-100');
-                    content.classList.add('max-h-0', 'opacity-0');
-                    icon.style.transform = 'rotate(0deg)';
-                }
+    function filterFaqs() {
+        const query = searchInput.value.trim().toLocaleLowerCase();
+        let visible = 0;
+        groups.forEach(group => {
+            let groupVisible = 0;
+            group.querySelectorAll('.faq-item').forEach(item => {
+                const matches = item.textContent.toLocaleLowerCase().includes(query);
+                item.classList.toggle('hidden', !matches);
+                if (matches) groupVisible++;
             });
+            group.classList.toggle('hidden', groupVisible === 0);
+            visible += groupVisible;
         });
-
-        // Trigger language sync
-        const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
-        document.documentElement.setAttribute('data-lang', currentLang);
+        noResults.classList.toggle('hidden', visible > 0);
     }
 
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        if (!query) {
-            renderFaqs(allFaqs);
-            return;
-        }
-        
-        const filtered = allFaqs.filter(faq => {
-            return (faq.question_en && faq.question_en.toLowerCase().includes(query)) ||
-                   (faq.answer_en && faq.answer_en.toLowerCase().includes(query)) ||
-                   (faq.question_zh && faq.question_zh.toLowerCase().includes(query)) ||
-                   (faq.answer_zh && faq.answer_zh.toLowerCase().includes(query));
-        });
-        
-        renderFaqs(filtered);
-    });
-
-    fetchFaqs();
+    searchInput.addEventListener('input', filterFaqs);
+    document.addEventListener('langchange', updateSearchLabel);
+    updateSearchLabel();
 });
 </script>
 </body></html>
