@@ -1,16 +1,10 @@
 // Canonical order catalog and server-side quotation logic.
 // Browser-supplied prices are intentionally ignored.
 
-const CURRENCY = 'HKD';
+const CATALOG = require('../js/pricing-catalog');
+const CURRENCY = CATALOG.currency;
 const MAX_ORDER_TOTAL = 200000;
 const MAX_SHAREHOLDERS = 50;
-
-const CATALOG = Object.freeze({
-  incorporation: Object.freeze({ local: 6500, non_hk: 8500 }),
-  secretary: Object.freeze({ standard: 1300, premium: 3800, shareholderSurcharge: 200 }),
-  registeredOffice: 2500,
-  audit: Object.freeze({ standard: 5500, premium: 8000 }),
-});
 
 function fail(code, reason) {
   return { valid: false, code, reason };
@@ -26,7 +20,7 @@ function normalizeShareholders(value) {
   return number;
 }
 
-function addSecretaryLines(lines, secretary) {
+function addSecretaryLines(lines, secretary, included = false) {
   if (!secretary) return { valid: true, secretary: null };
   const plan = normalizeEnum(secretary.plan);
   const shareholders = normalizeShareholders(secretary.shareholders);
@@ -36,10 +30,12 @@ function addSecretaryLines(lines, secretary) {
   if (!shareholders) return fail('INVALID_SHAREHOLDERS', 'Shareholder count must be between 1 and 50');
 
   lines.push({
-    code: `secretary_${plan}`,
-    name: plan === 'standard' ? 'Company Secretary - Standard' : 'Company Secretary - Premium',
+    code: included ? `secretary_${plan}_upgrade` : `secretary_${plan}`,
+    name: included
+      ? (plan === 'standard' ? 'First-year Standard Secretary - Included' : 'First-year Premium Secretary Upgrade')
+      : (plan === 'standard' ? 'Company Secretary - Standard' : 'Company Secretary - Premium'),
     quantity: 1,
-    unit_price: CATALOG.secretary[plan],
+    unit_price: included ? (plan === 'premium' ? CATALOG.secretaryUpgrade : 0) : CATALOG.secretary[plan],
   });
 
   const extraShareholders = Math.max(0, shareholders - 2);
@@ -80,7 +76,7 @@ function normalizeOrder(order) {
       unit_price: CATALOG.incorporation[residency],
     });
 
-    const secretaryResult = addSecretaryLines(lines, order.secretary);
+    const secretaryResult = addSecretaryLines(lines, order.secretary, true);
     if (!secretaryResult.valid) return secretaryResult;
 
     const registeredOffice = order.registeredOffice === true;
@@ -108,22 +104,36 @@ function normalizeOrder(order) {
         : secretaryResult;
     }
 
-    const requestedAudit = normalizeEnum(order.audit && order.audit.plan);
-    let audit = null;
-    if (requestedAudit && requestedAudit !== 'none') {
-      if (requestedAudit !== 'standard' && requestedAudit !== 'premium') {
-        return fail('UNKNOWN_AUDIT_PLAN', 'Unknown audit plan');
-      }
+    const remediationYears = order.remediationYears === undefined ? 0 : order.remediationYears;
+    if (!Number.isSafeInteger(remediationYears) || remediationYears < 0) {
+      return fail('INVALID_REMEDIATION_YEARS', 'Please enter the actual number of past years requiring annual return remediation');
+    }
+    if (remediationYears > 0) {
       lines.push({
-        code: `audit_${requestedAudit}`,
-        name: requestedAudit === 'standard' ? 'Audit Package - Standard' : 'Audit Package - Premium',
-        quantity: 1,
-        unit_price: CATALOG.audit[requestedAudit],
+        code: 'annual_return_remediation',
+        name: 'Historical Annual Return Remediation (per year)',
+        quantity: remediationYears,
+        unit_price: CATALOG.annualReturnRemediation,
       });
-      audit = { plan: requestedAudit };
     }
 
-    return { valid: true, order: { flow, secretary: secretaryResult.secretary, audit }, lines };
+    const requestedAudit = order.audit;
+    let audit = null;
+    if (requestedAudit) {
+      const revenueBand = normalizeEnum(requestedAudit.revenueBand);
+      if (!Object.prototype.hasOwnProperty.call(CATALOG.audit, revenueBand)) {
+        return fail('UNKNOWN_AUDIT_PLAN', 'Please select your annual revenue band again. Revenue above USD 5,000,000 requires a custom quote.');
+      }
+      lines.push({
+        code: `audit_${revenueBand}`,
+        name: `Audit and Tax Filing - ${revenueBand}`,
+        quantity: 1,
+        unit_price: CATALOG.audit[revenueBand],
+      });
+      audit = { revenueBand };
+    }
+
+    return { valid: true, order: { flow, secretary: secretaryResult.secretary, audit, remediationYears }, lines };
   }
 
   return fail('UNKNOWN_ORDER_FLOW', 'This order is no longer supported. Please select a package again');

@@ -25,6 +25,21 @@
     return l === 'zh-Hant' || l === 'zh-Hans';
   };
 
+  window.leapText = function (en, zh, hans) {
+    var lang = window.currentLang();
+    return lang === 'zh-Hans' ? hans : lang === 'zh-Hant' ? zh : en;
+  };
+
+  function updateLocalisedElements() {
+    ['l10n', 'placeholder', 'title', 'alt', 'aria-label'].forEach(function (kind) {
+      document.querySelectorAll('[data-' + kind + '-en]').forEach(function (el) {
+        var value = window.leapText(el.getAttribute('data-' + kind + '-en'), el.getAttribute('data-' + kind + '-zh'), el.getAttribute('data-' + kind + '-hans'));
+        if (kind === 'l10n') el.textContent = value;
+        else el.setAttribute(kind, value);
+      });
+    });
+  }
+
   // 注入 CSS（立即执行，不等 DOMContentLoaded）
   function injectStyles() {
     if (document.getElementById('i18n-styles')) return;
@@ -49,7 +64,7 @@ html[data-lang="zh-Hans"] .lang-zh-Hans { display: revert !important; }
 
 /* ===== 导航栏放大 30% ===== */
 header.bg-nav-bg > div { padding-top: 16px !important; padding-bottom: 16px !important; }
-header.bg-nav-bg img[alt="FOI Logo"] { height: 62px !important; }
+header.bg-nav-bg img[data-alt-en="FOI Logo"] { height: 62px !important; }
 header.bg-nav-bg .mega-primary-link,
 header.bg-nav-bg nav > a,
 header.bg-nav-bg #langBtn { font-size: 17px !important; padding-top: 10px !important; padding-bottom: 10px !important; }
@@ -116,13 +131,15 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
 
   // SEO：注入 hreflang（en / zh-Hant / zh-Hans / x-default 互链）
   function injectHreflang() {
-    if (document.getElementById('leap-hreflang')) return;
+    if (document.getElementById('leap-hreflang') || document.querySelector('link[hreflang]')) return;
     try {
       ['en', 'zh-Hant', 'zh-Hans', 'x-default'].forEach(function (lg) {
         var link = document.createElement('link');
         link.rel = 'alternate';
         link.hreflang = lg;
         var u = new URL(window.location.href);
+        u.hash = '';
+        u.pathname = u.pathname.replace(/\.html$/, '');
         if (lg === 'x-default') u.searchParams.delete('lang');
         else u.searchParams.set('lang', lg);
         link.href = u.toString();
@@ -142,6 +159,7 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
       html.setAttribute('data-lang', v);
       html.setAttribute('lang', v === 'zh-Hant' ? 'zh-Hant' : v === 'zh-Hans' ? 'zh-Hans' : 'en');
       updateSwitcherUI(v);
+      updateLocalisedElements();
       updateWhatsappLinks(v);
       try { localStorage.setItem(LANG_KEY, v); } catch (e) {}
       updateUrlLang(v);
@@ -170,7 +188,7 @@ header.bg-nav-bg .lang-dropdown-option { font-size: 15px !important; }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      updateWhatsappLinks(window.currentLang());
+      window.setLang(window.currentLang());
     });
   }
 

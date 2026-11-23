@@ -7,16 +7,18 @@
   <style>
     *{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#142033;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}.header{height:74px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #dfe4ec;background:#fff}.header img{width:76px;height:48px;object-fit:contain}.wrap{min-height:calc(100vh - 74px);display:grid;place-items:center;padding:34px 18px}.card{width:min(620px,100%);padding:38px;border:1px solid #dfe4ec;border-radius:8px;background:#fff}.icon{width:54px;height:54px;display:grid;place-items:center;margin-bottom:20px;border-radius:50%;color:#067647;background:#ecfdf3;font-size:28px;font-weight:900}h1{margin:0 0 10px;font-size:30px;letter-spacing:0}.lead{margin:0 0 28px;color:#667085;line-height:1.6}.receipt{border-top:1px solid #e4e7ec}.row{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid #eaecf0;font-size:14px}.row span{color:#667085}.row strong{text-align:right;overflow-wrap:anywhere}.total{font-size:19px}.button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;margin-top:26px;padding:0 20px;border-radius:6px;color:#fff;background:#145ddb;font-weight:800;text-decoration:none}.error{padding:14px;border-radius:6px;color:#b42318;background:#fef3f2;line-height:1.5}.hidden{display:none}@media(max-width:500px){.card{padding:26px 20px}.row{align-items:flex-start;flex-direction:column;gap:5px}.row strong{text-align:left}}
   </style>
+<link rel="stylesheet" href="/js/footer.css?v=20261105">
+<script src="/js/footer.js?v=20261105" defer></script>
 </head>
 <body>
-  <header class="header"><a href="/" aria-label="Leap International home"><img src="/FOI_logo.png" alt="Leap International"></a></header>
+  <header class="header"><a href="/" aria-label="Leap International home" data-aria-label-en="Leap International home" data-aria-label-zh="Leap International 首頁" data-aria-label-hans="Leap International 首页"><img src="/FOI_logo.png" alt="Leap International"></a></header>
   <main class="wrap">
     <section class="card" aria-live="polite">
       <div id="loading">Verifying your receipt...</div>
       <div id="verified" class="hidden">
         <div class="icon" aria-hidden="true">✓</div>
         <h1 id="title">Payment confirmed</h1>
-        <p id="lead" class="lead">Thank you. A confirmation has been sent to your email.</p>
+        <p id="lead" class="lead">Thank you. We will send the payment confirmation to your email.</p>
         <div class="receipt">
           <div class="row total"><span id="amountLabel">Amount paid</span><strong id="amount"></strong></div>
           <div class="row"><span id="nameLabel">Customer</span><strong id="name"></strong></div>
@@ -29,11 +31,12 @@
       <div id="invalid" class="error hidden" role="alert"></div>
     </section>
   </main>
+<footer data-site-footer></footer>
   <script>
     (function(){
       var lang='en';try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('leap-lang')||'en'}catch(e){}if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
       document.documentElement.lang=lang==='zh-Hant'?'zh-HK':lang==='zh-Hans'?'zh-CN':'en';
-      var copy={en:{loading:'Verifying your receipt...',title:'Payment confirmed',lead:'Thank you. A confirmation has been sent to your email.',amount:'Amount paid',name:'Customer',email:'Email',method:'Payment method',reference:'Reference',home:'Return home',invalid:'This payment receipt is missing, invalid or expired. Please contact us if payment was deducted.'},'zh-Hant':{loading:'正在驗證付款收據...',title:'付款已確認',lead:'謝謝。付款確認已發送至您的電郵。',amount:'付款金額',name:'客戶',email:'電郵',method:'付款方式',reference:'交易編號',home:'返回首頁',invalid:'付款收據缺失、無效或已過期。如款項已被扣除，請聯絡我們。'},'zh-Hans':{loading:'正在验证付款收据...',title:'付款已确认',lead:'谢谢。付款确认已发送至您的邮箱。',amount:'付款金额',name:'客户',email:'邮箱',method:'付款方式',reference:'交易编号',home:'返回首页',invalid:'付款收据缺失、无效或已过期。如款项已被扣除，请联系我们。'}};
+      var copy={en:{loading:'Verifying your receipt...',title:'Payment confirmed',lead:'Thank you. We will send the payment confirmation to your email.',amount:'Amount paid',name:'Customer',email:'Email',method:'Payment method',reference:'Reference',home:'Return home',invalid:'This payment receipt is missing, invalid or expired. Please contact us if payment was deducted.'},'zh-Hant':{loading:'正在驗證付款收據...',title:'付款已確認',lead:'謝謝。我們會將付款確認發送至您的電郵。',amount:'付款金額',name:'客戶',email:'電郵',method:'付款方式',reference:'交易編號',home:'返回首頁',invalid:'付款收據缺失、無效或已過期。如款項已被扣除，請聯絡我們。'},'zh-Hans':{loading:'正在验证付款收据...',title:'付款已确认',lead:'谢谢。我们会将付款确认发送至您的邮箱。',amount:'付款金额',name:'客户',email:'邮箱',method:'付款方式',reference:'交易编号',home:'返回首页',invalid:'付款收据缺失、无效或已过期。如款项已被扣除，请联系我们。'}};
       var tr=copy[lang]||copy.en;document.getElementById('loading').textContent=tr.loading;
       var token=new URLSearchParams(location.hash.slice(1)).get('receipt');
       function invalid(){document.getElementById('loading').classList.add('hidden');document.getElementById('invalid').textContent=tr.invalid;document.getElementById('invalid').classList.remove('hidden')}
@@ -41,10 +44,12 @@
       fetch('/api/verify-payment-receipt',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({receipt_token:token})}).then(function(r){return r.json().then(function(d){if(!r.ok||!d.verified)throw new Error();return d.receipt})}).then(function(receipt){
         document.getElementById('loading').classList.add('hidden');document.getElementById('verified').classList.remove('hidden');
         document.getElementById('title').textContent=tr.title;document.getElementById('lead').textContent=tr.lead;document.getElementById('amountLabel').textContent=tr.amount;document.getElementById('nameLabel').textContent=tr.name;document.getElementById('emailLabel').textContent=tr.email;document.getElementById('methodLabel').textContent=tr.method;document.getElementById('referenceLabel').textContent=tr.reference;document.getElementById('homeButton').textContent=tr.home;
-        document.getElementById('amount').textContent=new Intl.NumberFormat(lang==='en'?'en-HK':'zh-HK',{style:'currency',currency:receipt.currency||'HKD'}).format(receipt.amount||0);document.getElementById('name').textContent=receipt.customerName||'-';document.getElementById('email').textContent=receipt.customerEmail||'-';document.getElementById('method').textContent=receipt.method||'-';document.getElementById('reference').textContent=receipt.paymentId||'-';
+        document.getElementById('amount').textContent=new Intl.NumberFormat(lang==='en'?'en-HK':'zh-HK',{style:'currency',currencyDisplay:'code',currency:receipt.currency||'USD'}).format(receipt.amount||0);document.getElementById('name').textContent=receipt.customerName||'-';document.getElementById('email').textContent=receipt.customerEmail||'-';var methods={card:['Credit/debit card','信用卡／扣賬卡','信用卡／借记卡'],'online payment':['Online payment','線上付款','在线付款'],alipay:['Alipay','支付寶','支付宝'],'wechat pay':['WeChat Pay','微信支付','微信支付']};var method=methods[String(receipt.method||'').toLowerCase()];document.getElementById('method').textContent=method?method[lang==='en'?0:lang==='zh-Hant'?1:2]:(receipt.method||'-');document.getElementById('reference').textContent=receipt.paymentId||'-';
         sessionStorage.removeItem('leap-stripe-payment-id');sessionStorage.removeItem('leap-stripe-client-secret');sessionStorage.removeItem('leap-checkout-customer');sessionStorage.removeItem('leap-checkout-flow');localStorage.removeItem('leap-package-inc');localStorage.removeItem('leap-package-cs');
       }).catch(invalid);
     })();
   </script>
+<script src="/js/metadata.js" defer></script>
+<script src="/js/accessibility.js" defer></script>
 </body>
 </html>

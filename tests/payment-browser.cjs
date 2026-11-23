@@ -4,6 +4,7 @@ const path = require('node:path');
 const fs = require('node:fs');
 
 const baseUrl = process.env.PAYMENT_TEST_URL || 'http://localhost:8888/pages/payment';
+const baseOrigin = new URL(baseUrl).origin;
 const screenshots = path.join(process.cwd(), 'test-results');
 fs.mkdirSync(screenshots, { recursive: true });
 
@@ -54,7 +55,7 @@ async function preparePage(browser, viewport, order = incorporationOrder) {
     body: JSON.stringify({ gateway: 'stripe', available: true, enabledMethods: ['card'], stripePublishableKey: 'pk_test_browser_mock' }),
   }));
   await page.route('**/api/create-stripe-intent', async (route) => {
-    const quoteResponse = await page.request.post('http://localhost:8888/api/quote-order', { data: { order: {
+    const quoteResponse = await page.request.post(baseOrigin + '/api/quote-order', { data: { order: {
       flow: 'incorporation',
       incorporation: { residency: 'non_hk', plan: 'starter' },
       secretary: { plan: 'standard', shareholders: 4 },
@@ -83,7 +84,7 @@ async function preparePage(browser, viewport, order = incorporationOrder) {
   for (const viewport of viewports) {
     const { context, page, errors } = await preparePage(browser, viewport);
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => document.querySelector('#totalValue').textContent.includes('12,700'));
+    await page.waitForFunction(() => document.querySelector('#totalValue').textContent.includes('11,400'));
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, `horizontal overflow at ${viewport.width}`);
     assert.equal(await page.locator('#mobilePaybar').evaluate((el) => el.classList.contains('visible')), false);
     await page.screenshot({ path: path.join(screenshots, `payment-${viewport.width}.png`), fullPage: true });
@@ -117,7 +118,7 @@ async function preparePage(browser, viewport, order = incorporationOrder) {
 
   const receiptContext = await browser.newContext({ viewport: { width: 375, height: 812 } });
   const receiptPage = await receiptContext.newPage();
-  await receiptPage.goto('http://localhost:8888/pages/confirmation?amount=1&name=Forged', { waitUntil: 'networkidle' });
+  await receiptPage.goto(baseOrigin + '/pages/confirmation?amount=1&name=Forged', { waitUntil: 'networkidle' });
   assert.equal(await receiptPage.locator('#invalid').isVisible(), true);
   assert.equal(await receiptPage.locator('#verified').isVisible(), false);
   await receiptContext.close();
@@ -125,8 +126,9 @@ async function preparePage(browser, viewport, order = incorporationOrder) {
   for (const lang of ['en', 'zh-Hant', 'zh-Hans']) {
     const failureContext = await browser.newContext({ viewport: { width: 375, height: 812 } });
     const failurePage = await failureContext.newPage();
-    await failurePage.goto(`http://localhost:8888/pages/payment-failed?reason=Declined&amount=8500&lang=${encodeURIComponent(lang)}`, { waitUntil: 'networkidle' });
-    assert.equal(await failurePage.locator('#reason').textContent(), 'Declined');
+    await failurePage.goto(`${baseOrigin}/pages/payment-failed?reason=Declined&amount=8500&lang=${encodeURIComponent(lang)}`, { waitUntil: 'networkidle' });
+    const safeReasons = { en: 'The payment provider declined or could not complete this transaction.', 'zh-Hant': '付款服務商拒絕或未能完成此交易。', 'zh-Hans': '付款服务商拒绝或未能完成此交易。' };
+    assert.equal(await failurePage.locator('#reason').textContent(), safeReasons[lang]);
     assert.match(await failurePage.locator('#amount').textContent(), /8,500/);
     assert.notEqual((await failurePage.locator('#title').textContent()).trim(), '');
     await failureContext.close();

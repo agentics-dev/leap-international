@@ -15,20 +15,21 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// 格式化金额：8800 → "HKD 8,800.00"
+// 格式化金额：8800 → "USD 8,800.00"
 function formatAmount(amount, currency) {
   const n = Number(amount) || 0;
-  return `${currency || 'HKD'} ${n.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+  return `${currency || 'USD'} ${n.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
 }
 
-// 港币金额（整数元）→ Stripe 需要的最小单位（分）。HKD 无小数货币。
-function toStripeAmount(hkd) {
-  return Math.round(Number(hkd) * 100);
+// 美元金额 → Stripe 需要的最小单位（美分）。
+function toStripeAmount(amount) {
+  return Math.round(Number(amount) * 100);
 }
 
-async function sendResendEmail({ apiKey, from, to, subject, html, replyTo, idempotencyKey }) {
+async function sendResendEmail({ apiKey, from, to, subject, html, replyTo, idempotencyKey, timeoutMs }) {
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
+    ...(timeoutMs ? { signal: AbortSignal.timeout(timeoutMs) } : {}),
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
@@ -42,14 +43,15 @@ async function sendResendEmail({ apiKey, from, to, subject, html, replyTo, idemp
       ...(replyTo ? { reply_to: [replyTo] } : {}),
     }),
   });
-  if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
+  if (!res.ok) throw new Error(`Resend HTTP ${res.status}`);
   return res.json();
 }
 
 // 生成支付成功通知邮件（发给公司）
-function buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status, gateway }) {
+function buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status, gateway, paymentTime }) {
   const formattedAmount = formatAmount(amount, currency);
-  const displayTime = new Date().toLocaleString('zh-HK', { timeZone: 'Asia/Hong_Kong' });
+  const displayTime = Number.isInteger(paymentTime)
+    ? new Date(paymentTime * 1000).toLocaleString('zh-HK', { timeZone: 'Asia/Hong_Kong' }) : 'N/A';
   return {
     from: 'Leap International Corporate Service Limited <notify@leapcorpser.com>',
     subject: `💰 New Payment - ${formattedAmount} - ${customerName || 'N/A'}`,
@@ -88,38 +90,30 @@ function buildCustomerEmail({ amount, currency, customerName, paymentId, locale 
   };
 }
 
-// 发送支付成功的两封邮件（通知 + 客户确认）
-async function sendPaymentEmails({ env, amount, currency, customerName, customerEmail, method, paymentId, status, locale, gateway }) {
-  const RESEND_API_KEY = env.RESEND_API_KEY;
-  const NOTIFY_EMAIL = env.NOTIFY_EMAIL;
-  if (!RESEND_API_KEY || !NOTIFY_EMAIL) return;
+// The same payment must produce the same message on every provider retry.
+async function sendPaymentEmails(payment, deliver = (_, message) => sendResendEmail(message)) {
+  const { env, paymentId, customerEmail } = payment;
+  const { RESEND_API_KEY, NOTIFY_EMAIL } = env;
+  if (!RESEND_API_KEY || !NOTIFY_EMAIL) throw new Error('Payment notification is not configured');
 
-  const notify = buildNotifyEmail({ amount, currency, customerName, customerEmail, method, paymentId, status, gateway });
-  try {
-    await sendResendEmail({
-      apiKey: RESEND_API_KEY,
-      to: NOTIFY_EMAIL,
-      idempotencyKey: `payment-${paymentId}-business`.slice(0, 256),
-      ...notify,
-    });
-  } catch (e) {
-    console.error('Notify email failed:', e.message);
-  }
-
-  if (customerEmail) {
-    const customer = buildCustomerEmail({ amount, currency, customerName, paymentId, locale });
-    try {
-      await sendResendEmail({
-        apiKey: RESEND_API_KEY,
-        to: customerEmail,
-        replyTo: NOTIFY_EMAIL,
-        idempotencyKey: `payment-${paymentId}-customer`.slice(0, 256),
-        ...customer,
-      });
-    } catch (e) {
-      console.error('Customer email failed:', e.message);
-    }
-  }
+  const business = deliver('business', {
+    ...buildNotifyEmail(payment),
+    apiKey: RESEND_API_KEY,
+    timeoutMs: 8000,
+    to: NOTIFY_EMAIL,
+    idempotencyKey: `payment-${paymentId}-business`.slice(0, 256),
+  });
+  const customer = customerEmail && deliver('customer', {
+    ...buildCustomerEmail(payment),
+    apiKey: RESEND_API_KEY,
+    timeoutMs: 8000,
+    to: customerEmail,
+    replyTo: NOTIFY_EMAIL,
+    idempotencyKey: `payment-${paymentId}-customer`.slice(0, 256),
+  });
+  const results = await Promise.allSettled([business, customer]);
+  const failed = results.find(result => result.status === 'rejected');
+  if (failed) throw failed.reason;
 }
 
 module.exports = { json, escapeHtml, formatAmount, toStripeAmount, sendResendEmail, sendPaymentEmails };

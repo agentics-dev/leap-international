@@ -27,19 +27,19 @@
     },
     "incorporation-foreigners.html": {
       "title": "Hong Kong Company Incorporation for Foreigners | Leap",
-      "description": "Start a Hong Kong company as a foreigner — 100% remote incorporation, no residency required. Documents, bank account and compliance handled. From HK$3,500."
+      "description": "Start a Hong Kong company as a foreigner — 100% remote incorporation, no residency required. Documents, bank account and compliance handled. From USD 8,500."
     },
     "incorporation-locals.html": {
       "title": "Hong Kong Company Incorporation for HK Residents | Leap",
       "description": "Fast Hong Kong company registration for local residents — same-day filing, business registration certificate and corporate secretary included. Start today."
     },
     "accounting.html": {
-      "title": "Accounting Services Hong Kong — From HK$3,500/yr | Leap",
-      "description": "Full-service Hong Kong accounting from HK$3,500/year: bookkeeping, management accounts, profits tax returns and audit support by certified professionals."
+      "title": "Accounting Services Hong Kong — From USD 3,000/yr | Leap",
+      "description": "Full-service Hong Kong accounting from USD 3,000/year: bookkeeping, management accounts, profits tax returns and audit support by certified professionals."
     },
     "bookkeeping.html": {
-      "title": "Bookkeeping Services Hong Kong — From HK$3,500/yr | Leap",
-      "description": "Accurate, audit-ready bookkeeping for Hong Kong companies from HK$3,500/year. Monthly books, expense tracking and financial reports done for you."
+      "title": "Bookkeeping Services Hong Kong — From USD 2,800/yr | Leap",
+      "description": "Accurate, audit-ready bookkeeping for Hong Kong companies from USD 2,800/year. Monthly books, expense tracking and financial reports done for you."
     },
     "corporate-secretary.html": {
       "title": "Corporate Secretary Services Hong Kong | Leap International",
@@ -47,7 +47,7 @@
     },
     "annual-return-filing.html": {
       "title": "Annual Return Filing Hong Kong (NAR1) | Leap International",
-      "description": "Hong Kong annual return (NAR1) filing done for you — on-time Companies Registry submission, penalty avoidance and compliance reminders. From HK$1,500."
+      "description": "Hong Kong annual return (NAR1) filing is included in company secretary plans from USD 1,300/year, with timely submission and compliance reminders."
     },
     "audit-tax-filing.html": {
       "title": "Audit & Tax Filing Services — Hong Kong | Leap International",
@@ -109,8 +109,8 @@
           { "name": "Hong Kong company incorporation for foreigners (100% remote, no residency required)", "url": "/pages/incorporation-foreigners.html" },
           { "name": "Hong Kong company incorporation for local residents (fast registration)", "url": "/pages/incorporation-locals.html" },
           { "name": "Corporate secretary services (annual returns, statutory compliance)", "url": "/pages/corporate-secretary.html" },
-          { "name": "Accounting services (from HK$3,500/year)", "url": "/pages/accounting.html" },
-          { "name": "Bookkeeping services (from HK$3,500/year)", "url": "/pages/bookkeeping.html" },
+          { "name": "Accounting services (from USD 3,000/year)", "url": "/pages/accounting.html" },
+          { "name": "Bookkeeping services (from USD 2,800/year)", "url": "/pages/bookkeeping.html" },
           { "name": "Audit and profits tax filing", "url": "/pages/audit-tax-filing.html" },
           { "name": "Annual return (NAR1) filing", "url": "/pages/annual-return-filing.html" },
           { "name": "Registered office address in Tsim Sha Tsui East", "url": "/pages/registered-office-address.html" },

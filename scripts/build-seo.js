@@ -274,14 +274,14 @@ async function generateSitemap(pageFiles, news) {
   const entries = [];
   for (const rel of pageFiles) {
     const name = path.basename(rel);
-    const loc = rel === 'index.html' ? `${HOST}/` : `${HOST}/pages/${name}`;
+    const loc = rel === 'index.html' ? `${HOST}/` : `${HOST}/pages/${name.replace(/\.html$/, '')}`;
     const meta = SITEMAP_META[name] || { priority: '0.8', changefreq: 'monthly' };
     entries.push({ loc, lastmod: sourceMtime(rel), ...meta });
   }
   for (const item of news) {
     if (!item.slug) continue;
     entries.push({
-      loc: `${HOST}/pages/news-detail.html?slug=${encodeURIComponent(item.slug)}`,
+      loc: `${HOST}/pages/news-detail?slug=${encodeURIComponent(item.slug)}`,
       lastmod: (item.updated_at || item.publish_time || TODAY).slice(0, 10),
       changefreq: 'monthly',
       priority: '0.7',
@@ -345,7 +345,7 @@ function xmlEscape(s) {
 
 function generateFeed(news) {
   const items = news.filter((n) => n.slug && n.title_en).slice(0, 50).map((n) => {
-    const link = `${HOST}/pages/news-detail.html?slug=${encodeURIComponent(n.slug)}`;
+    const link = `${HOST}/pages/news-detail?slug=${encodeURIComponent(n.slug)}`;
     const pub = n.publish_time ? new Date(n.publish_time).toUTCString() : new Date().toUTCString();
     return `    <item>
       <title>${xmlEscape(n.title_en)}</title>
@@ -409,7 +409,7 @@ async function main() {
 
   // admin panel ships at dist/admin (this repo's convention) — exclude from SEO processing
   const htmlFiles = walk(DIST).filter((f) => f.endsWith('.html') && !f.includes('admin_dist')
-    && !path.relative(DIST, f).split(path.sep).includes('admin'));
+    && !path.relative(DIST, f).split(path.sep).includes('admin') && path.basename(f) !== '404.html');
   const publicPages = [];
 
   for (const file of htmlFiles) {
@@ -417,7 +417,7 @@ async function main() {
     const name = path.basename(file);
     let html = fs.readFileSync(file, 'utf8');
 
-    html = normalizeHosts(html);
+    html = normalizeHosts(html).replace(/(https:\/\/leapcorpser\.com\/pages\/[^\s"'<>?#]+)\.html/g, '$1');
 
     const transactional = rel.startsWith('pages/') && isTransactional(name);
     const meta = CONFIG.meta[name];
@@ -432,7 +432,7 @@ async function main() {
       }
       const title = (CONFIG.meta[name] && CONFIG.meta[name].title)
         || (html.match(/<title>([\s\S]*?)<\/title>/i) || [, name])[1].trim();
-      const pageUrl = rel === 'index.html' ? `${HOST}/` : `${HOST}/${rel}`;
+      const pageUrl = rel === 'index.html' ? `${HOST}/` : `${HOST}/${rel.replace(/\.html$/, '')}`;
       html = injectSchema(html, rel, pageUrl, title);
       html = injectReferralBeacon(html);
       publicPages.push(rel);

@@ -8,9 +8,11 @@
     *{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#142033;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}.header{height:74px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #dfe4ec;background:#fff}.header img{width:76px;height:48px;object-fit:contain}.wrap{min-height:calc(100vh - 74px);display:grid;place-items:center;padding:30px 18px}.status{width:min(540px,100%);padding:38px;border:1px solid #dfe4ec;border-radius:8px;background:#fff;text-align:center}.spinner{width:42px;height:42px;margin:0 auto 22px;border:3px solid #dbe5f5;border-top-color:#145ddb;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}h1{margin:0 0 12px;font-size:28px;letter-spacing:0}p{margin:0;color:#667085;line-height:1.6}.actions{display:flex;justify-content:center;gap:10px;margin-top:24px}.button{display:inline-flex;min-height:44px;align-items:center;justify-content:center;padding:0 18px;border:1px solid #c8d0db;border-radius:6px;color:#344054;background:#fff;font-weight:750;text-decoration:none}.button.primary{border-color:#145ddb;color:#fff;background:#145ddb}.hidden{display:none}
 .qr-block{margin:22px auto 0;text-align:center}.qr-block img{width:208px;height:208px;object-fit:contain;border:1px solid #e4e7ec;border-radius:10px;padding:8px;image-rendering:pixelated}.qr-block p{margin:10px 0 0;font-size:14px}.qr-block a{display:inline-block;margin-top:8px;color:#145ddb;font-weight:700}
   </style>
+<link rel="stylesheet" href="/js/footer.css?v=20261105">
+<script src="/js/footer.js?v=20261105" defer></script>
 </head>
 <body>
-  <header class="header"><a href="/" aria-label="Leap International home"><img src="/FOI_logo.png" alt="Leap International"></a></header>
+  <header class="header"><a href="/" aria-label="Leap International home" data-aria-label-en="Leap International home" data-aria-label-zh="Leap International 首頁" data-aria-label-hans="Leap International 首页"><img src="/FOI_logo.png" alt="Leap International"></a></header>
   <main class="wrap">
     <section class="status" aria-live="polite">
       <div id="spinner" class="spinner" aria-hidden="true"></div>
@@ -22,6 +24,7 @@
       </div>
     </section>
   </main>
+<footer data-site-footer></footer>
   <script>
     (function(){
       var lang='en';try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('leap-lang')||'en'}catch(e){}if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
@@ -31,6 +34,7 @@
         'zh-Hant':{checking:'正在確認付款',checkingMsg:'我們正在確認付款結果，請保持此頁開啟。',processing:'付款處理中',processingMsg:'付款服務商仍在處理此交易。您可安全關閉此頁；如狀態未有更新，請聯絡我們。',action:'需要額外驗證',actionMsg:'請返回結賬頁完成付款驗證。',error:'未能確認付款',errorMsg:'請返回結賬頁或聯絡我們的支援團隊。',help:'聯絡支援',back:'返回結賬',scan:'請使用微信掃碼完成付款',openInstr:'開啟付款說明'},
         'zh-Hans':{checking:'正在确认付款',checkingMsg:'我们正在确认付款结果，请保持此页打开。',processing:'付款处理中',processingMsg:'付款服务商仍在处理此交易。您可以安全关闭此页；如状态未更新，请联系我们。',action:'需要额外验证',actionMsg:'请返回结账页完成付款验证。',error:'未能确认付款',errorMsg:'请返回结账页或联系我们的支持团队。',help:'联系支持',back:'返回结账',scan:'请使用微信扫码完成付款',openInstr:'开启付款说明'}
       };
+      document.documentElement.lang=lang;document.documentElement.setAttribute('data-lang',lang);
       var tr=copy[lang]||copy.en,title=document.getElementById('title'),message=document.getElementById('message');
       title.textContent=tr.checking;message.textContent=tr.checkingMsg;document.getElementById('helpLink').textContent=tr.help;document.getElementById('returnLink').textContent=tr.back;
       var params=new URLSearchParams(location.search);var paymentId=params.get('payment_intent')||params.get('payment_intent_id')||sessionStorage.getItem('leap-stripe-payment-id');var clientSecret=params.get('payment_intent_client_secret')||sessionStorage.getItem('leap-stripe-client-secret');
@@ -44,7 +48,7 @@
           if(result.status==='requires_action'){
             if(result.qr_image_url&&!document.getElementById('stripeQr')){
               var block=document.createElement('div');block.id='stripeQr';block.className='qr-block';
-              var img=document.createElement('img');img.src=result.qr_image_url;img.alt='WeChat Pay QR code';
+              var img=document.createElement('img');img.src=result.qr_image_url;img.alt=tr.scan;
               var hint=document.createElement('p');hint.textContent=tr.scan;
               block.appendChild(img);block.appendChild(hint);
               if(result.qr_hosted_url){var a=document.createElement('a');a.href=result.qr_hosted_url;a.target='_blank';a.rel='noopener';a.textContent=tr.openInstr;block.appendChild(a)}
@@ -56,10 +60,12 @@
           }
           if(result.status==='failed'){var q=new URLSearchParams({reason:result.failure_message||tr.errorMsg,amount:String(result.amount||''),lang:lang});location.replace('/pages/payment-failed.html?'+q);return}
           attempts+=1;if(attempts<maxAttempts){setTimeout(poll,2000)}else{show('processing')}
-        }).catch(function(error){attempts+=1;if(attempts<3){setTimeout(poll,2000)}else{show('error',error.message)}})
+        }).catch(function(error){attempts+=1;if(attempts<3){setTimeout(poll,2000)}else{show('error')}})
       }
       poll();
     })();
   </script>
+<script src="/js/metadata.js" defer></script>
+<script src="/js/accessibility.js" defer></script>
 </body>
 </html>

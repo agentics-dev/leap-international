@@ -103,6 +103,12 @@ async function verifyAndDecodeToken(token, env) {
 
   const valid = await crypto.subtle.verify('RSASSA-PKCS1-v1_5', publicKey, signature, signingInput);
   if (!valid) throw new Error('Signature verification failed');
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Invalid payment payload');
+  const now = Math.floor(Date.now() / 1000);
+  if ((payload.exp !== undefined && (!Number.isInteger(payload.exp) || payload.exp <= now)) ||
+      (payload.nbf !== undefined && (!Number.isInteger(payload.nbf) || payload.nbf > now))) {
+    throw new Error('Payment token is outside its validity window');
+  }
   return payload;
 }
 

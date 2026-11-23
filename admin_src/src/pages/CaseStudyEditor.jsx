@@ -172,7 +172,7 @@ export default function CaseStudyEditor() {
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
           <JsonField
             label="Metrics (real numbers — the part AI engines quote)"
-            hint='[{"label":"Incorporation time","value":"3 business days"},{"label":"First-year cost","value":"HK$8,800"}]'
+            hint='[{"label":"Incorporation time","value":"3 business days"},{"label":"First-year cost","value":"USD 8,800"}]'
             value={item.metrics}
             onChange={(v) => setItem({ ...item, metrics: v })}
           />

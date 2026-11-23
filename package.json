@@ -7,11 +7,17 @@
     "seo": "node scripts/build-seo.js dist",
     "indexnow": "node scripts/indexnow-push.js",
     "serve": "node serve.js 3000",
-    "test:payment": "node --test tests/payment-order.test.js"
+    "test:payment": "node --test tests/payment-order.test.js tests/pricing-consistency.test.js",
+    "test:language": "node --test tests/site-language.test.js"
   },
   "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "cssnano": "^7.1.9",
     "jsdom": "^30.0.1",
     "opencc-js": "^1.0.5",
+    "postcss": "^8.5.33",
+    "tailwindcss": "^3.4.19",
     "wrangler": "^4.123.0"
   }
 }

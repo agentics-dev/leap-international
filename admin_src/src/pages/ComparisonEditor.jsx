@@ -164,7 +164,7 @@ export default function ComparisonEditor() {
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-6">
           <JsonField
             label="Comparison rows (8–15 recommended)"
-            hint='[{"dimension":"Pricing transparency","leap":"Published packages from HK$3,500","competitor":"Quote only"}]'
+            hint='[{"dimension":"Pricing transparency","leap":"Published packages from USD 3,500","competitor":"Quote only"}]'
             value={item.comparison_rows}
             onChange={(v) => setItem({ ...item, comparison_rows: v })}
             rows={8}

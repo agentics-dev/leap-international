@@ -306,7 +306,7 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         /* Form validation */
         .input-error { border-color: #ba1a1a !important; }
-        .input-success { border-color: #059669 !important; }
+        .input-success { border-color: #047857 !important; }
         .validation-msg { font-size: 11px; margin-top: 2px; display: none; }
         .validation-msg.show { display: block; }
         /* Success toast */
@@ -457,7 +457,7 @@
             width: 56px; height: 56px; background: #D1FAE5; border-radius: 50%;
             margin-bottom: 16px;
         }
-        .enquire-success-msg .check-icon span { color: #059669; font-size: 32px; }
+        .enquire-success-msg .check-icon span { color: #047857; font-size: 32px; }
     </style>
 <script type="application/ld+json">
 {
@@ -479,8 +479,10 @@
   gtag('config', 'G-WMMZZ1F6X0');
 </script>
   <!-- i18n 三语切换（EN / 繁體 / 简体）-->
-  <script src="/js/i18n.js?v=20260922-wa-locale" defer></script>
-  <script src="/js/nav.js?v=20260813-5" defer></script>
+  <script src="/js/i18n.js?v=20261104-language-audit"></script>
+  <script src="/js/nav.js?v=20261106-1" defer></script>
+<link rel="stylesheet" href="/js/footer.css?v=20261105">
+<script src="/js/footer.js?v=20261105" defer></script>
 </head>
 <body class="bg-surface text-on-surface antialiased font-body-md text-body-md selection:bg-tertiary selection:text-on-tertiary">
 <!-- TopNavBar -->
@@ -488,7 +490,7 @@
 <div class="flex justify-center items-center px-gutter py-3 max-w-container-max mx-auto gap-8">
 <div class="flex items-center gap-4">
 <a class="text-headline-sm font-headline-sm text-tertiary flex items-center gap-2 shrink-0" href="/">
-<img alt="FOI Logo" class="h-12 w-auto object-contain" src="/FOI_logo.png"/ loading="lazy">
+<img alt="FOI Logo" data-alt-en="FOI Logo" data-alt-zh="Leap International 標誌" data-alt-hans="Leap International 标志" class="h-12 w-auto object-contain" src="/FOI_logo.png" loading="lazy" decoding="async">
             </a>
 <nav class="hidden lg:flex items-center gap-1">
 <!-- Incorporation -->
@@ -496,7 +498,7 @@
 <a href="/pages/incorporation-locals.html" class="mega-primary-link px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200">
 <span><span class="lang-en">Incorporation</span><span class="lang-zh">公司註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司注册</span></span>
 </a>
-<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu">
+<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu" data-aria-label-en="Open submenu" data-aria-label-zh="開啟子選單" data-aria-label-hans="开启子菜单">
 <span class="material-symbols-outlined w-[18px] overflow-hidden text-[18px] leading-none transition-transform duration-200">expand_more</span>
 </button>
 <div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
@@ -509,7 +511,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Incorporation for Hong Kong Residents</span><span class="lang-zh">香港人公司註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">香港人公司注册</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Set up your Hong Kong company quickly as a local resident.</span><span class="lang-zh">作為香港居民快速開設公司。</span><span class="lang-zh-Hans lang-zh-Hans-clone">作为香港居民快速开设公司。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Set up your Hong Kong company quickly as a local resident.</span><span class="lang-zh">作為香港居民快速開設公司。</span><span class="lang-zh-Hans lang-zh-Hans-clone">作为香港居民快速开设公司。</span></p>
                 </div>
             </a>
             <a href="/pages/registered-office-address.html" class="flex items-start gap-3 group">
@@ -518,7 +520,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Use a prestigious, compliant registered address in Tsim Sha Tsui.</span><span class="lang-zh">使用尖沙咀尊貴合規的註冊地址。</span><span class="lang-zh-Hans lang-zh-Hans-clone">使用尖沙咀尊贵合规的注册地址。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Use a prestigious, compliant registered address in Tsim Sha Tsui.</span><span class="lang-zh">使用尖沙咀尊貴合規的註冊地址。</span><span class="lang-zh-Hans lang-zh-Hans-clone">使用尖沙咀尊贵合规的注册地址。</span></p>
                 </div>
             </a>
             <a href="/pages/incorporation-foreigners.html" class="flex items-start gap-3 group">
@@ -527,7 +529,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Incorporation for Non-Hong Kong Residents</span><span class="lang-zh">非香港人公司註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">非香港人公司注册</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Register your Hong Kong company online as a non-Hong Kong entrepreneur.</span><span class="lang-zh">作為非香港企業家在線註冊香港公司。</span><span class="lang-zh-Hans lang-zh-Hans-clone">作为非香港企业家在线注册香港公司。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Register your Hong Kong company online as a non-Hong Kong entrepreneur.</span><span class="lang-zh">作為非香港企業家在線註冊香港公司。</span><span class="lang-zh-Hans lang-zh-Hans-clone">作为非香港企业家在线注册香港公司。</span></p>
                 </div>
             </a>
         </div>
@@ -540,7 +542,7 @@
 <a href="/pages/accounting.html" class="mega-primary-link px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200">
 <span><span class="lang-en">Accounting</span><span class="lang-zh">會計</span><span class="lang-zh-Hans lang-zh-Hans-clone">会计</span></span>
 </a>
-<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu">
+<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu" data-aria-label-en="Open submenu" data-aria-label-zh="開啟子選單" data-aria-label-hans="开启子菜单">
 <span class="material-symbols-outlined w-[18px] overflow-hidden text-[18px] leading-none transition-transform duration-200">expand_more</span>
 </button>
 <div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
@@ -553,7 +555,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Accounting</span><span class="lang-zh">會計服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">会计服务</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Full-service accounting for your business.</span><span class="lang-zh">為您的企業提供全方位會計服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">为您的企业提供全方位会计服务。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Full-service accounting for your business.</span><span class="lang-zh">為您的企業提供全方位會計服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">为您的企业提供全方位会计服务。</span></p>
                 </div>
             </a>
             <a href="/pages/bookkeeping.html" class="flex items-start gap-3 group">
@@ -562,7 +564,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Audit Services</span><span class="lang-zh">核數服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">核数服务</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Audit and tax services.</span><span class="lang-zh">核數及稅務服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">核数及税务服务</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Audit and tax services.</span><span class="lang-zh">核數及稅務服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">核数及税务服务</span></p>
                 </div>
             </a>
             <a href="/pages/sales-invoice.html" class="flex items-start gap-3 group">
@@ -571,7 +573,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Company Concierge Services</span><span class="lang-zh">公司管家服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司管家服务</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Company concierge support.</span><span class="lang-zh">公司日常管家支援</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司日常管家支援</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Company concierge support.</span><span class="lang-zh">公司日常管家支援</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司日常管家支援</span></p>
                 </div>
             </a>
             <a href="/pages/audit-tax-filing.html" class="flex items-start gap-3 group">
@@ -580,7 +582,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Audit & Tax Filing</span><span class="lang-zh">審計及稅務申報</span><span class="lang-zh-Hans lang-zh-Hans-clone">审计及税务申报</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Statutory audit and profits tax filing services.</span><span class="lang-zh">法定審計及利得稅申報服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">法定审计及利得税申报服务。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Statutory audit and profits tax filing services.</span><span class="lang-zh">法定審計及利得稅申報服務。</span><span class="lang-zh-Hans lang-zh-Hans-clone">法定审计及利得税申报服务。</span></p>
                 </div>
             </a>
         </div>
@@ -593,7 +595,7 @@
 <a href="/pages/corporate-secretary.html" class="mega-primary-link px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200">
 <span><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司秘书</span></span>
 </a>
-<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu">
+<button type="button" class="mega-toggle flex items-center justify-center w-8 h-8 shrink-0 overflow-hidden text-nav-text hover:text-coral transition-colors duration-200" aria-expanded="false" aria-haspopup="true" aria-label="Open submenu" data-aria-label-en="Open submenu" data-aria-label-zh="開啟子選單" data-aria-label-hans="开启子菜单">
 <span class="material-symbols-outlined w-[18px] overflow-hidden text-[18px] leading-none transition-transform duration-200">expand_more</span>
 </button>
 <div class="mega-dropdown absolute top-full left-0 mt-0 max-w-[90vw] lg:w-[680px] bg-surface-container-lowest rounded-b-lg shadow-xl opacity-0 invisible transition-all duration-200 z-50 border-t-2 border-tertiary overflow-hidden">
@@ -606,7 +608,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司秘书服务</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Keep your company compliant with statutory obligations.</span><span class="lang-zh">協助公司持續符合法定要求。</span><span class="lang-zh-Hans lang-zh-Hans-clone">协助公司持续符合法定要求。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Keep your company compliant with statutory obligations.</span><span class="lang-zh">協助公司持續符合法定要求。</span><span class="lang-zh-Hans lang-zh-Hans-clone">协助公司持续符合法定要求。</span></p>
                 </div>
             </a>
             <a href="/pages/annual-return-filing.html" class="flex items-start gap-3 group">
@@ -615,7 +617,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Annual Return Filing</span><span class="lang-zh">周年申報</span><span class="lang-zh-Hans lang-zh-Hans-clone">周年申报</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Prepare and file annual returns on time.</span><span class="lang-zh">按時準備及提交周年申報。</span><span class="lang-zh-Hans lang-zh-Hans-clone">按时准备及提交周年申报。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Prepare and file annual returns on time.</span><span class="lang-zh">按時準備及提交周年申報。</span><span class="lang-zh-Hans lang-zh-Hans-clone">按时准备及提交周年申报。</span></p>
                 </div>
             </a>
             <a href="/pages/registered-office-address.html" class="flex items-start gap-3 group">
@@ -624,7 +626,7 @@
                 </div>
                 <div>
                     <p class="font-bold text-[15px] group-hover:text-blue-600 transition-colors"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址</span></p>
-                    <p class="text-gray-500 text-[13px] leading-tight mt-1"><span class="lang-en">Use our Tsim Sha Tsui address for official correspondence.</span><span class="lang-zh">使用我們的尖沙咀地址接收官方信件。</span><span class="lang-zh-Hans lang-zh-Hans-clone">使用我们的尖沙咀地址接收官方信件。</span></p>
+                    <p class="text-gray-600 text-[13px] leading-tight mt-1"><span class="lang-en">Use our Tsim Sha Tsui address for official correspondence.</span><span class="lang-zh">使用我們的尖沙咀地址接收官方信件。</span><span class="lang-zh-Hans lang-zh-Hans-clone">使用我们的尖沙咀地址接收官方信件。</span></p>
                 </div>
             </a>
         </div>
@@ -632,13 +634,14 @@
 </div>
 </div>
 </div>
+<a href="/pages/insights.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">Insights</span><span class="lang-zh">資訊</span><span class="lang-zh-Hans lang-zh-Hans-clone">资讯</span></a>
 <a href="/pages/faqs.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span><span class="lang-zh-Hans lang-zh-Hans-clone">常见问题</span></a>
 <a href="/pages/our-culture.html" class="px-2 py-2 text-nav-text font-label-sm text-[13px] hover:text-coral transition-colors duration-200"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span><span class="lang-zh-Hans lang-zh-Hans-clone">关于我们</span></a>
 </nav>
 </div>
 <div class="flex items-center gap-2">
 <div class="relative" id="langSwitcher">
-  <button id="langBtn" class="flex items-center gap-1.5 px-2.5 py-2 text-nav-text font-label-sm text-[13px] border border-nav-divider rounded-md bg-white hover:text-coral transition-colors duration-200" aria-label="Language" aria-expanded="false" aria-haspopup="listbox">
+  <button id="langBtn" class="flex items-center gap-1.5 px-2.5 py-2 text-nav-text font-label-sm text-[13px] border border-nav-divider rounded-md bg-white hover:text-coral transition-colors duration-200" aria-label="Language" data-aria-label-en="Language" data-aria-label-zh="語言" data-aria-label-hans="语言" aria-expanded="false" aria-haspopup="listbox">
     <span id="langFlag">🇬🇧</span>
     <span id="langLabel">EN</span>
     <span class="material-symbols-outlined text-[16px] transition-transform duration-200">expand_more</span>
@@ -657,7 +660,7 @@
 <span class="material-symbols-outlined text-[20px]">call</span>
 </a>
 </div>
-<button class="lg:hidden text-nav-text" id="menuToggle" aria-label="Toggle menu">
+<button class="lg:hidden text-nav-text" id="menuToggle" aria-label="Toggle menu" data-aria-label-en="Toggle menu" data-aria-label-zh="開啟或關閉選單" data-aria-label-hans="开启或关闭菜单">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
@@ -668,12 +671,12 @@
 <div class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl lg:hidden overflow-y-auto" id="mobileMenu">
 <div class="flex justify-between items-center p-4 border-b">
 <span class="font-headline-sm text-nav-text"><span class="lang-en">Menu</span><span class="lang-zh">選單</span><span class="lang-zh-Hans lang-zh-Hans-clone">选单</span></span>
-<button class="text-nav-text" id="menuClose" aria-label="Close menu"><span class="material-symbols-outlined">close</span></button>
+<button class="text-nav-text" id="menuClose" aria-label="Close menu" data-aria-label-en="Close menu" data-aria-label-zh="關閉選單" data-aria-label-hans="关闭菜单"><span class="material-symbols-outlined">close</span></button>
 </div>
 <div class="p-4 space-y-1">
 <div class="py-2 flex items-center justify-between gap-3">
 <a href="/pages/incorporation-locals.html" class="flex-1 py-2.5 text-nav-text font-label-md"><span class="lang-en">Incorporation</span><span class="lang-zh">公司註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司注册</span></a>
-<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open incorporation submenu"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open incorporation submenu" data-aria-label-en="Open incorporation submenu" data-aria-label-zh="開啟公司註冊子選單" data-aria-label-hans="开启公司注册子菜单"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
 </div>
 <div class="hidden pl-4 pb-2 space-y-2">
 <a href="/pages/incorporation-locals.html" class="block py-2 text-on-surface-variant font-body-md"><span class="lang-en">Incorporation for Hong Kong Residents</span><span class="lang-zh">香港人公司註冊</span><span class="lang-zh-Hans lang-zh-Hans-clone">香港人公司注册</span></a>
@@ -682,7 +685,7 @@
 </div>
 <div class="py-2 flex items-center justify-between gap-3">
 <a href="/pages/accounting.html" class="flex-1 py-2.5 text-nav-text font-label-md"><span class="lang-en">Accounting</span><span class="lang-zh">會計</span><span class="lang-zh-Hans lang-zh-Hans-clone">会计</span></a>
-<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open accounting submenu"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open accounting submenu" data-aria-label-en="Open accounting submenu" data-aria-label-zh="開啟會計子選單" data-aria-label-hans="开启会计子菜单"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
 </div>
 <div class="hidden pl-4 pb-2 space-y-2">
 <a href="/pages/accounting.html" class="block py-2 text-on-surface-variant font-body-md"><span class="lang-en">Accounting</span><span class="lang-zh">會計服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">会计服务</span></a>
@@ -692,13 +695,14 @@
 </div>
 <div class="py-2 flex items-center justify-between gap-3">
 <a href="/pages/corporate-secretary.html" class="flex-1 py-2.5 text-nav-text font-label-md"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司秘书</span></a>
-<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open corporate secretary submenu"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+<button type="button" class="mobile-sub-toggle shrink-0 p-2 text-nav-text" data-mobile-toggle aria-label="Open corporate secretary submenu" data-aria-label-en="Open corporate secretary submenu" data-aria-label-zh="開啟公司秘書子選單" data-aria-label-hans="开启公司秘书子菜单"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
 </div>
 <div class="hidden pl-4 pb-2 space-y-2">
 <a href="/pages/corporate-secretary.html" class="block py-2 text-on-surface-variant font-body-md"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司秘书服务</span></a>
 <a href="/pages/annual-return-filing.html" class="block py-2 text-on-surface-variant font-body-md"><span class="lang-en">Annual Return Filing</span><span class="lang-zh">周年申報</span><span class="lang-zh-Hans lang-zh-Hans-clone">周年申报</span></a>
 <a href="/pages/registered-office-address.html" class="block py-2 text-on-surface-variant font-body-md"><span class="lang-en">Registered Office Address</span><span class="lang-zh">註冊辦公地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址</span></a>
 </div>
+<a href="/pages/insights.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">Insights</span><span class="lang-zh">資訊</span><span class="lang-zh-Hans lang-zh-Hans-clone">资讯</span></a>
 <a href="/pages/faqs.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">FAQs</span><span class="lang-zh">常見問題</span><span class="lang-zh-Hans lang-zh-Hans-clone">常见问题</span></a>
 <a href="/pages/our-culture.html" class="block py-2.5 text-nav-text font-label-md"><span class="lang-en">About Us</span><span class="lang-zh">關於我們</span><span class="lang-zh-Hans lang-zh-Hans-clone">关于我们</span></a>
 <div class="pt-4 border-t space-y-2">
@@ -725,7 +729,7 @@
 </div>
 <div class="flex-1 relative w-full">
 <div class="rounded-[24px] overflow-hidden bg-gray-100 aspect-[4/3] max-w-[520px] ml-auto relative shadow-sm border border-gray-200">
-<img src="../images/Prestigious Registered Office Address in Tsim Sha Tsui.png" class="w-full h-full object-cover" alt="Tsim Sha Tsui"/ loading="lazy">
+<img src="../images/Prestigious Registered Office Address in Tsim Sha Tsui.png" class="w-full h-full object-cover" alt="Tsim Sha Tsui" data-alt-en="Tsim Sha Tsui" data-alt-zh="尖沙咀" data-alt-hans="尖沙咀" loading="lazy" decoding="async">
 </div>
 
 </div>
@@ -733,7 +737,7 @@
 
 <section class="bg-white py-14 px-6 border-t border-gray-100">
 <div class="max-w-6xl mx-auto">
-<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center"><span class="lang-en">The Leap Advantage</span><span class="lang-zh">溱柏 優勢</span><span class="lang-zh-Hans lang-zh-Hans-clone">溱柏 优势</span></h2>
+<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center leading-tight"><span class="lang-en">The Leap Advantage</span><span class="lang-zh">溱柏 優勢</span><span class="lang-zh-Hans lang-zh-Hans-clone">溱柏 优势</span></h2>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
 <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-7 text-center">
 <div class="w-14 h-14 rounded-xl bg-blue-50 mx-auto flex items-center justify-center mb-4">
@@ -766,17 +770,17 @@
 
 <section class="bg-white py-16 px-6">
 <div class="max-w-6xl mx-auto">
-<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center"><span class="lang-en">Lets get your registered office address</span><span class="lang-zh">讓我們獲取您的註冊辦公地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">让我们获取您的注册办公地址</span></h2>
+<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center leading-tight"><span class="lang-en">Lets get your registered office address</span><span class="lang-zh">讓我們獲取您的註冊辦公地址</span><span class="lang-zh-Hans lang-zh-Hans-clone">让我们获取您的注册办公地址</span></h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 items-stretch">
 <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm">
-<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1400&auto=format&fit=crop" alt="Map" class="w-full h-full object-cover"/ loading="lazy">
+<img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1400&auto=format&fit=crop" alt="Map" data-alt-en="Map" data-alt-zh="地圖" data-alt-hans="地图" class="w-full h-full object-cover" loading="lazy" decoding="async">
 </div>
 <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
 <div class="text-[16px] font-bold text-gray-900"><span class="lang-en">Registered Office Address & Digital Mailroom</span><span class="lang-zh">註冊辦公地址與數碼郵件室</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址与数码邮件室</span></div>
 <div class="text-[12px] text-gray-600 leading-relaxed mt-2"><span class="lang-en">A compliance-ready Hong Kong company address with digital mail access and simple management.</span><span class="lang-zh">合規就緒的香港公司地址，配備數碼郵件存取和簡單管理。</span><span class="lang-zh-Hans lang-zh-Hans-clone">合规就绪的香港公司地址，配备数码邮件存取和简单管理。</span></div>
 <div class="mt-6">
-<div class="text-[12px] text-gray-500"><span class="lang-en">From</span><span class="lang-zh">由</span><span class="lang-zh-Hans lang-zh-Hans-clone">由</span></div>
-<div class="text-[30px] font-bold text-gray-900 tracking-tight">HK$2,500/year</div>
+<div class="text-[12px] text-gray-600"><span class="lang-en">From</span><span class="lang-zh">由</span><span class="lang-zh-Hans lang-zh-Hans-clone">由</span></div>
+<div class="text-[30px] font-bold text-gray-900 tracking-tight">USD 2,500<span class="lang-en">/year</span><span class="lang-zh">／年</span><span class="lang-zh-Hans lang-zh-Hans-clone">／年</span></div>
 </div>
 <button type="button" onclick="openEnquireModal()" class="inline-flex items-center justify-center mt-6 px-7 py-2.5 rounded-md bg-[#0066FF] hover:bg-blue-700 text-white font-medium text-[13px] transition-colors cursor-pointer"><span class="lang-en">Enquire now</span><span class="lang-zh">立即查詢</span><span class="lang-zh-Hans lang-zh-Hans-clone">立即查询</span></button>
 <div class="mt-7 text-[12px] font-bold text-gray-900"><span class="lang-en">Includes:</span><span class="lang-zh">包括：</span><span class="lang-zh-Hans lang-zh-Hans-clone">包括：</span></div>
@@ -800,7 +804,7 @@
 </div>
 <div class="w-full md:w-[280px] flex justify-center">
 <div class="w-[220px] h-[220px] rounded-full overflow-hidden bg-white/30 border border-white/30 shadow-sm">
-<img src="../images/Registered%20Office%20Address%20Customer%20Support%20Portrait.png" class="w-full h-full object-cover" alt="Customer Support Portrait"/ loading="lazy">
+<img src="../images/Registered%20Office%20Address%20Customer%20Support%20Portrait.png" class="w-full h-full object-cover" alt="Customer Support Portrait" data-alt-en="Customer Support Portrait" data-alt-zh="客戶支援人員" data-alt-hans="客户支持人员" loading="lazy" decoding="async">
 </div>
 </div>
 </div>
@@ -811,7 +815,7 @@
 <section class="bg-white border-t border-gray-100">
 <div class="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 <div>
-<h2 class="text-[22px] md:text-[28px] font-bold text-gray-900 tracking-tight"><span class="lang-en">A Local Registered Office Address is essential in Hong Kong for Incorporation</span><span class="lang-zh">本地註冊辦公地址對香港公司註冊至關重要</span><span class="lang-zh-Hans lang-zh-Hans-clone">本地注册办公地址对香港公司注册至关重要</span></h2>
+<h2 class="text-[22px] md:text-[28px] font-bold text-gray-900 tracking-tight leading-tight"><span class="lang-en">A Local Registered Office Address is essential in Hong Kong for Incorporation</span><span class="lang-zh">本地註冊辦公地址對香港公司註冊至關重要</span><span class="lang-zh-Hans lang-zh-Hans-clone">本地注册办公地址对香港公司注册至关重要</span></h2>
 <div class="text-[13px] text-gray-600 leading-relaxed mt-4"><span class="lang-en">From the date of incorporation, every company must maintain a local registered office address. This address is recorded with the Companies Registry and appears on the public record.</span><span class="lang-zh">從註冊之日起，每家公司必須維持一個本地註冊辦公地址。該地址會在公司註冊處登記，並顯示在公開記錄中。</span><span class="lang-zh-Hans lang-zh-Hans-clone">从注册之日起，每家公司必须维持一个本地注册办公地址。该地址会在公司注册处登记，并显示在公开记录中。</span></div>
 <div class="text-[13px] text-gray-600 leading-relaxed mt-4"><span class="lang-en">A compliant registered office address in Hong Kong must:</span><span class="lang-zh">香港合規的註冊辦公地址必須：</span><span class="lang-zh-Hans lang-zh-Hans-clone">香港合规的注册办公地址必须：</span></div>
 <ul class="mt-5 space-y-3 text-[13px] text-gray-800">
@@ -822,20 +826,20 @@
 <a href="/pages/contact.html" class="inline-flex items-center justify-center mt-8 px-7 py-2.5 rounded-md bg-[#0066FF] hover:bg-blue-700 text-white font-medium text-[13px] transition-colors"><span class="lang-en">Book a free consultation</span><span class="lang-zh">預約免費諮詢</span><span class="lang-zh-Hans lang-zh-Hans-clone">预约免费咨询</span></a>
 </div>
 <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm">
-<img src="../images/A Local Registered Office Address is essential in Hong Kong for Incorporation .png" alt="A Local Registered Office Address is essential in Hong Kong for Incorporation" class="w-full h-full object-cover"/ loading="lazy">
+<img src="../images/A Local Registered Office Address is essential in Hong Kong for Incorporation .png" alt="A Local Registered Office Address is essential in Hong Kong for Incorporation" data-alt-en="A Local Registered Office Address is essential in Hong Kong for Incorporation" data-alt-zh="香港公司註冊需要本地註冊辦事處地址" data-alt-hans="香港公司注册需要本地注册办事处地址" class="w-full h-full object-cover" loading="lazy" decoding="async">
 </div>
 </div>
 </section>
 
 <section class="bg-[#FAFAFA] py-16 px-6">
 <div class="max-w-6xl mx-auto">
-<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center"><span class="lang-en">Frequently Asked Questions</span><span class="lang-zh">常見問題</span><span class="lang-zh-Hans lang-zh-Hans-clone">常见问题</span></h2>
+<h2 class="text-[22px] md:text-[31px] font-bold text-gray-900 text-center leading-tight"><span class="lang-en">Frequently Asked Questions</span><span class="lang-zh">常見問題</span><span class="lang-zh-Hans lang-zh-Hans-clone">常见问题</span></h2>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
 <div class="lg:col-span-2 space-y-2">
 <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn">
 <span><span class="lang-en">What is a registered office address in Hong Kong?</span><span class="lang-zh">什麼是香港的註冊辦公地址？</span><span class="lang-zh-Hans lang-zh-Hans-clone">什么是香港的注册办公地址？</span></span>
-<span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
+<span class="material-symbols-outlined text-gray-600 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
 </button>
 <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
 <p class="pb-4 text-[13px] text-gray-600 leading-relaxed"><span class="lang-en">It is the official address registered with the Companies Registry for receiving statutory mail and government notices.</span><span class="lang-zh">這是在公司註冊處登記的正式地址，用於接收法定郵件和政府通知。</span><span class="lang-zh-Hans lang-zh-Hans-clone">这是在公司注册处登记的正式地址，用于接收法定邮件和政府通知。</span></p>
@@ -844,7 +848,7 @@
 <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn">
 <span><span class="lang-en">Is a registered office address mandatory in Hong Kong?</span><span class="lang-zh">香港必須要有註冊辦公地址嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">香港必须要有注册办公地址吗？</span></span>
-<span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
+<span class="material-symbols-outlined text-gray-600 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
 </button>
 <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
 <p class="pb-4 text-[13px] text-gray-600 leading-relaxed"><span class="lang-en">Yes. Every Hong Kong company must maintain a local registered office address from the date of incorporation.</span><span class="lang-zh">是的。每家香港公司從註冊之日起必須維持一個本地註冊辦公地址。</span><span class="lang-zh-Hans lang-zh-Hans-clone">是的。每家香港公司从注册之日起必须维持一个本地注册办公地址。</span></p>
@@ -853,7 +857,7 @@
 <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn">
 <span><span class="lang-en">Can I use my residential address as my registered office?</span><span class="lang-zh">我可以使用住宅地址作為註冊辦公地址嗎？</span><span class="lang-zh-Hans lang-zh-Hans-clone">我可以使用住宅地址作为注册办公地址吗？</span></span>
-<span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
+<span class="material-symbols-outlined text-gray-600 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
 </button>
 <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
 <p class="pb-4 text-[13px] text-gray-600 leading-relaxed"><span class="lang-en">You can, but it becomes public record. Many founders choose a service to protect privacy and ensure proper mail handling.</span><span class="lang-zh">可以，但這會成為公開記錄。許多創業者選擇使用服務來保護隱私並確保郵件得到妥善處理。</span><span class="lang-zh-Hans lang-zh-Hans-clone">可以，但这会成为公开记录。许多创业者选择使用服务来保护隐私并确保邮件得到妥善处理。</span></p>
@@ -862,7 +866,7 @@
 <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn">
 <span><span class="lang-en">What is the difference between a registered office address and a business address?</span><span class="lang-zh">註冊辦公地址和營業地址有什麼區別？</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址和营业地址有什么区别？</span></span>
-<span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
+<span class="material-symbols-outlined text-gray-600 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
 </button>
 <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
 <p class="pb-4 text-[13px] text-gray-600 leading-relaxed"><span class="lang-en">A registered office address is for official correspondence and statutory records. A business address is where you operate day to day.</span><span class="lang-zh">註冊辦公地址用於官方通訊和法定記錄。營業地址是您日常運營的地點。</span><span class="lang-zh-Hans lang-zh-Hans-clone">注册办公地址用于官方通讯和法定记录。营业地址是您日常运营的地点。</span></p>
@@ -871,7 +875,7 @@
 <div class="bg-[#F0F6FF] rounded-lg overflow-hidden">
 <button class="w-full flex justify-between items-center p-6 text-left font-bold text-[15px] sm:text-[17px] md:text-[18px] text-gray-900 faq-btn">
 <span><span class="lang-en">How does the mail handling work?</span><span class="lang-zh">郵件處理如何運作？</span><span class="lang-zh-Hans lang-zh-Hans-clone">邮件处理如何运作？</span></span>
-<span class="material-symbols-outlined text-gray-500 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
+<span class="material-symbols-outlined text-gray-600 text-[22px] sm:text-[26px] md:text-[28px]">add</span>
 </button>
 <div class="faq-content px-6 bg-[#F0F6FF] max-h-0 overflow-hidden transition-all duration-300">
 <p class="pb-4 text-[13px] text-gray-600 leading-relaxed"><span class="lang-en">We receive your mail, digitise key items, and provide scan/forward options based on your preferences.</span><span class="lang-zh">我們接收您的郵件，將重要項目數碼化，並根據您的偏好提供掃描/轉寄選項。</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们接收您的邮件，将重要项目数码化，并根据您的偏好提供扫描/转寄选项。</span></p>
@@ -899,43 +903,25 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <a href="/pages/corporate-secretary.html" class="bg-white rounded-xl border border-gray-200 p-5 hover:border-[#0066FF] hover:shadow-md transition-all group">
         <h3 class="text-[16px] font-semibold text-gray-900 group-hover:text-[#0066FF] transition-colors"><span class="lang-en">Corporate Secretary</span><span class="lang-zh">公司秘書服務</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司秘书服务</span></h3>
-        <p class="text-[13px] text-gray-500 mt-1"><span class="lang-en">Annual returns and compliance</span><span class="lang-zh">年度申報及合規</span><span class="lang-zh-Hans lang-zh-Hans-clone">年度申报及合规</span></p>
+        <p class="text-[13px] text-gray-600 mt-1"><span class="lang-en">Annual returns and compliance</span><span class="lang-zh">年度申報及合規</span><span class="lang-zh-Hans lang-zh-Hans-clone">年度申报及合规</span></p>
       </a>
       <a href="/pages/annual-return-filing.html" class="bg-white rounded-xl border border-gray-200 p-5 hover:border-[#0066FF] hover:shadow-md transition-all group">
         <h3 class="text-[16px] font-semibold text-gray-900 group-hover:text-[#0066FF] transition-colors"><span class="lang-en">Annual Return Filing</span><span class="lang-zh">年度申報</span><span class="lang-zh-Hans lang-zh-Hans-clone">年度申报</span></h3>
-        <p class="text-[13px] text-gray-500 mt-1"><span class="lang-en">NAR1 filing and CR compliance</span><span class="lang-zh">NAR1 申報及公司註冊處合規</span><span class="lang-zh-Hans lang-zh-Hans-clone">NAR1 申报及公司注册处合规</span></p>
+        <p class="text-[13px] text-gray-600 mt-1"><span class="lang-en">NAR1 filing and CR compliance</span><span class="lang-zh">NAR1 申報及公司註冊處合規</span><span class="lang-zh-Hans lang-zh-Hans-clone">NAR1 申报及公司注册处合规</span></p>
       </a>
       <a href="company-setup.html" class="bg-white rounded-xl border border-gray-200 p-5 hover:border-[#0066FF] hover:shadow-md transition-all group">
         <h3 class="text-[16px] font-semibold text-gray-900 group-hover:text-[#0066FF] transition-colors"><span class="lang-en">Company Setup</span><span class="lang-zh">公司設立</span><span class="lang-zh-Hans lang-zh-Hans-clone">公司设立</span></h3>
-        <p class="text-[13px] text-gray-500 mt-1"><span class="lang-en">Start your Hong Kong company</span><span class="lang-zh">開設您的香港公司</span><span class="lang-zh-Hans lang-zh-Hans-clone">开设您的香港公司</span></p>
+        <p class="text-[13px] text-gray-600 mt-1"><span class="lang-en">Start your Hong Kong company</span><span class="lang-zh">開設您的香港公司</span><span class="lang-zh-Hans lang-zh-Hans-clone">开设您的香港公司</span></p>
       </a>
     </div>
   </div>
 </section>
 
-<footer class="w-full bg-white border-t border-gray-200">
-<div class="max-w-container-max mx-auto px-gutter py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-<div class="flex-1 space-y-3">
-<div class="flex flex-wrap items-center gap-4 font-label-sm text-label-sm text-gray-500">
-<span><span class="lang-en">© 2024 Leap International Corporate Service Limited. All rights reserved.</span><span class="lang-zh">© 2024 溱柏國際商業服務。版權所有。</span><span class="lang-zh-Hans lang-zh-Hans-clone">© 2024 溱柏国际商业服务。版权所有。</span></span>
-<a href="/pages/privacy-policy.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Privacy Policy</span><span class="lang-zh">隱私政策</span><span class="lang-zh-Hans lang-zh-Hans-clone">隐私政策</span></a>
-<a href="/pages/terms-of-service.html" class="text-blue-600 underline hover:text-blue-800 transition-colors"><span class="lang-en">Terms of Service</span><span class="lang-zh">服務條款</span><span class="lang-zh-Hans lang-zh-Hans-clone">服务条款</span></a>
-</div>
-<p class="font-label-sm text-label-sm text-gray-500">
-<span class="lang-en">Room 908, Energy Plaza, 92 Granville Rd, Tsim Sha Tsui East</span><span class="lang-zh">尖沙咀東部加連威老道92號幸福中心908室</span><span class="lang-zh-Hans lang-zh-Hans-clone">尖沙咀东部加连威老道92号幸福中心908室</span> &nbsp;|&nbsp;
-<a href="tel:+85265550943" class="text-blue-600 underline hover:text-blue-800 transition-colors">+852 65550943</a>
-</p>
-<p class="font-label-sm text-label-sm text-gray-500">
-<span class="lang-en">Leap International Corporate Service Limited is registered as a Trust or Company Service Provider (TCSP Licence No. TC010100) under the Hong Kong Companies Ordinance (Cap. 622).</span><span class="lang-zh">Leap International Corporate Service Limited 根據香港《公司條例》（第622章）註冊為信託或公司服務提供者（牌照編號：TC010100）。</span><span class="lang-zh-Hans lang-zh-Hans-clone">Leap International Corporate Service Limited 根据香港《公司条例》（第622章）注册为信托或公司服务提供者（牌照编号：TC010100）。</span>
-</p>
-</div>
-
-</div>
-</footer>
+<footer data-site-footer></footer>
 <!-- Back to Top -->
 
 <!-- Success Toast -->
-<div class="success-toast" id="successToast"><span class="lang-en">✓ Message sent successfully!</span><span class="lang-zh">✓ 訊息發送成功！</span><span class="lang-zh-Hans lang-zh-Hans-clone">✓ 讯息发送成功！</span> We'll be in touch within 24 hours.</div>
+<div class="success-toast" id="successToast"><span class="lang-en">✓ Message sent successfully!</span><span class="lang-zh">✓ 訊息發送成功！</span><span class="lang-zh-Hans lang-zh-Hans-clone">✓ 讯息发送成功！</span> <span class="lang-en">We'll be in touch within 24 hours.</span><span class="lang-zh">我們會在 24 小時內與您聯絡。</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们会在 24 小时内与您联络。</span></div>
 <script>
 (function() {
   // ========== Language Switcher ==========
@@ -1176,23 +1162,9 @@ window.openEnquireModal = function() {
         document.getElementById('enquireSuccess').classList.remove('show');
     };
     window.submitEnquireForm = function(e) {
-        e.preventDefault();
-        var fields = ['enqFirstName','enqLastName','enqEmail','enqPhone','enqMessage'];
-        var valid = true;
-        fields.forEach(function(id) {
-            var el = document.getElementById(id);
-            if (!el.value.trim()) { el.classList.add('input-error'); valid = false; }
-            else { el.classList.remove('input-error'); }
-        });
-        if (!valid) return;
-        var emailEl = document.getElementById('enqEmail');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
-            emailEl.classList.add('input-error'); return;
-        }
-        document.getElementById('enquireForm').style.display = 'none';
-        document.getElementById('enquireSuccess').classList.add('show');
-        setTimeout(function() { closeEnquireModal(); }, 3000);
-    };
+    e.preventDefault();
+    return window.submitLeapEnquiry(e.target);
+};
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             var m = document.getElementById('enquireModal');
@@ -1209,42 +1181,27 @@ window.openEnquireModal = function() {
   "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leapcorpser.com/"}, {"@type": "ListItem", "position": 2, "name": "Registered Office Address"}]
 }
 </script>
-                <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
-                    <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
-                </div>
-                <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>
-            </form>
-            <div class="enquire-success-msg" id="enquireSuccess">
-                <div class="check-icon"><span>&#10003;</span></div>
-                <h3 class="text-[18px] font-bold text-gray-900 mb-2"><span class="lang-en">Message sent!</span><span class="lang-zh">訊息已送出！</span><span class="lang-zh-Hans lang-zh-Hans-clone">讯息已送出！</span></h3>
-                <p class="text-[14px] text-gray-600"><span class="lang-en">We'll be in touch within 24 hours.</span><span class="lang-zh">我們將在24小時內與您聯繫。</span><span class="lang-zh-Hans lang-zh-Hans-clone">我们将在24小时内与您联系。</span></p>
-            </div>
-        </div>
-    </div>
-
-
     <div class="enquire-modal-overlay" id="enquireModal" onclick="if(event.target===this)closeEnquireModal()">
         <div class="enquire-modal-content">
             <button class="enquire-modal-close" onclick="closeEnquireModal()">&times;</button>
             <h3 class="text-[17px] font-bold text-gray-900 mb-6 text-center"><span class="lang-en">Leave our friendly team a message and we'll be in touch in no time.</span><span class="lang-zh">給我們友善的團隊留言，我們會很快與您聯繫。</span><span class="lang-zh-Hans lang-zh-Hans-clone">给我们友善的团队留言，我们会很快与您联系。</span></h3>
             <form id="enquireForm" onsubmit="submitEnquireForm(event)">
                 <div class="enquire-form-group">
-                    <label><span class="lang-en">First name</span><span class="lang-zh">名字</span><span class="lang-zh-Hans lang-zh-Hans-clone">名字</span> <span class="required">*</span></label>
+                    <label for="enqFirstName"><span class="lang-en">First name</span><span class="lang-zh">名字</span><span class="lang-zh-Hans lang-zh-Hans-clone">名字</span> <span class="required">*</span></label>
                     <input id="enqFirstName" class="enquire-form-input" type="text" required>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class="lang-en">Last name</span><span class="lang-zh">姓氏</span><span class="lang-zh-Hans lang-zh-Hans-clone">姓氏</span> <span class="required">*</span></label>
+                    <label for="enqLastName"><span class="lang-en">Last name</span><span class="lang-zh">姓氏</span><span class="lang-zh-Hans lang-zh-Hans-clone">姓氏</span> <span class="required">*</span></label>
                     <input id="enqLastName" class="enquire-form-input" type="text" required>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class="lang-en">Email</span><span class="lang-zh">電子郵件</span><span class="lang-zh-Hans lang-zh-Hans-clone">电子邮件</span> <span class="required">*</span></label>
+                    <label for="enqEmail"><span class="lang-en">Email</span><span class="lang-zh">電子郵件</span><span class="lang-zh-Hans lang-zh-Hans-clone">电子邮件</span> <span class="required">*</span></label>
                     <input id="enqEmail" class="enquire-form-input" type="email" required>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class="lang-en">Phone number</span><span class="lang-zh">電話號碼</span><span class="lang-zh-Hans lang-zh-Hans-clone">电话号码</span> <span class="required">*</span></label>
+                    <label for="enqPhone"><span class="lang-en">Phone number</span><span class="lang-zh">電話號碼</span><span class="lang-zh-Hans lang-zh-Hans-clone">电话号码</span> <span class="required">*</span></label>
                     <div class="enquire-phone-row">
-                        <select id="enqPhoneCode" class="enquire-form-input">
+                        <select aria-label="Country calling code" data-aria-label-en="Country calling code" data-aria-label-zh="國際電話區號" data-aria-label-hans="国际电话区号" id="enqPhoneCode" class="enquire-form-input">
                             <option value="+852">+852 HK</option>
                             <option value="+86">+86 CN</option>
                             <option value="+65">+65 SG</option>
@@ -1265,7 +1222,7 @@ window.openEnquireModal = function() {
                     </div>
                 </div>
                 <div class="enquire-form-group">
-                    <label><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
+                    <label for="enqMessage"><span class='lang-en'>To assist you better, tell us your issues/requirements</span><span class='lang-zh'>為了更好地協助您，請告訴我們您的問題/需求</span><span class='lang-zh-Hans lang-zh-Hans-clone'>为了更好地协助您，请告诉我们您的问题/需求</span> <span class="required">*</span></label>
                     <textarea id="enqMessage" class="enquire-form-input enquire-form-textarea" required></textarea>
                 </div>
                 <button type="submit" class="enquire-submit-btn"><span class="lang-en">Send your message</span><span class="lang-zh">發送您的訊息</span><span class="lang-zh-Hans lang-zh-Hans-clone">发送您的讯息</span></button>
@@ -1279,6 +1236,9 @@ window.openEnquireModal = function() {
     </div>
 
 <script>if(!window.toggleMegaMenu){window.toggleMegaMenu=function(e){var p=e.closest(".mega-group");if(!p)return;var o=p.classList.contains("show");document.querySelectorAll(".mega-group").forEach(function(g){g.classList.remove("show")});if(!o)p.classList.add("show")}}</script>
-<a href="https://wa.me/85265550943?text=Hi%20Leap%20International%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a href="https://wa.me/85265550943?text=Hi%20Leap%20International%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp" data-aria-label-en="Chat on WhatsApp" data-aria-label-zh="透過 WhatsApp 聯絡" data-aria-label-hans="通过 WhatsApp 联系"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+<script src="/js/enquiry.js?v=20261105"></script>
+<script src="/js/metadata.js" defer></script>
+<script src="/js/accessibility.js" defer></script>
 </body></html>

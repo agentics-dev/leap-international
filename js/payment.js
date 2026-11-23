@@ -16,7 +16,7 @@
       wechatScanHint:'Open WeChat on your phone and scan this code to pay', qrOpenInstructions:'Open payment instructions', cancelPayment:'Cancel payment', qrValidFor:'Code valid for {t}', qrExpired:'The QR code has expired. Please return and pay again.',
       line_incorporation_local_starter:'Hong Kong company incorporation - Local Starter', line_incorporation_non_hk_starter:'Hong Kong company incorporation - Non-Hong Kong Starter',
       line_secretary_standard:'Company secretary - Standard', line_secretary_premium:'Company secretary - Premium', line_secretary_extra_shareholder:'Additional shareholder service',
-      line_registered_office:'Registered office address', line_audit_standard:'Audit package - Standard', line_audit_premium:'Audit package - Premium'
+      line_annual_return_remediation:'Historical Annual Return Remediation (per year)', line_registered_office:'Registered office address', line_audit_up_to_500k:'Audit & tax - annual revenue ≤ USD 500,000', line_audit_500k_to_2m:'Audit & tax - annual revenue USD 500,000–2,000,000', line_audit_2m_to_5m:'Audit & tax - annual revenue USD 2,000,000–5,000,000', line_secretary_standard_upgrade:'First-year Standard secretary (included)', line_secretary_premium_upgrade:'First-year Premium secretary upgrade'
     },
     'zh-Hant': {
       help:'需要協助？', secureCheckout:'安全結賬', title:'完成您的訂單', subtitle:'確認服務方案、填寫聯絡資料並安全付款。',
@@ -32,7 +32,7 @@
       wechatScanHint:'請使用手機微信掃描此二維碼付款', qrOpenInstructions:'開啟付款說明', cancelPayment:'取消付款', qrValidFor:'二維碼有效時間 {t}', qrExpired:'二維碼已過期，請返回重新付款。',
       line_incorporation_local_starter:'香港公司註冊 - 本地創業版', line_incorporation_non_hk_starter:'香港公司註冊 - 非香港居民創業版',
       line_secretary_standard:'公司秘書 - 標準版', line_secretary_premium:'公司秘書 - 高級版', line_secretary_extra_shareholder:'額外股東服務',
-      line_registered_office:'註冊辦公地址', line_audit_standard:'審計方案 - 標準版', line_audit_premium:'審計方案 - 高級版'
+      line_annual_return_remediation:'歷史周年申報補救（每年）', line_registered_office:'註冊辦公地址', line_audit_up_to_500k:'審計報稅 - 年營收 ≤ USD 500,000', line_audit_500k_to_2m:'審計報稅 - 年營收 USD 500,000–2,000,000', line_audit_2m_to_5m:'審計報稅 - 年營收 USD 2,000,000–5,000,000', line_secretary_standard_upgrade:'首年標準秘書服務（已包含）', line_secretary_premium_upgrade:'首年高級秘書服務升級'
     },
     'zh-Hans': {
       help:'需要协助？', secureCheckout:'安全结账', title:'完成您的订单', subtitle:'确认服务方案、填写联系资料并安全付款。',
@@ -48,7 +48,7 @@
       wechatScanHint:'请使用手机微信扫描此二维码付款', qrOpenInstructions:'开启付款说明', cancelPayment:'取消付款', qrValidFor:'二维码有效时间 {t}', qrExpired:'二维码已过期，请返回重新付款。',
       line_incorporation_local_starter:'香港公司注册 - 本地创业版', line_incorporation_non_hk_starter:'香港公司注册 - 非香港居民创业版',
       line_secretary_standard:'公司秘书 - 标准版', line_secretary_premium:'公司秘书 - 高级版', line_secretary_extra_shareholder:'额外股东服务',
-      line_registered_office:'注册办公地址', line_audit_standard:'审计方案 - 标准版', line_audit_premium:'审计方案 - 高级版'
+      line_annual_return_remediation:'历史周年申报补救（每年）', line_registered_office:'注册办公地址', line_audit_up_to_500k:'审计报税 - 年营收 ≤ USD 500,000', line_audit_500k_to_2m:'审计报税 - 年营收 USD 500,000–2,000,000', line_audit_2m_to_5m:'审计报税 - 年营收 USD 2,000,000–5,000,000', line_secretary_standard_upgrade:'首年标准秘书服务（已包含）', line_secretary_premium_upgrade:'首年高级秘书服务升级'
     }
   };
 
@@ -61,7 +61,7 @@
 
   var $ = function (id) { return document.getElementById(id); };
   function t(key) { return (translations[state.lang] && translations[state.lang][key]) || translations.en[key] || key; }
-  function money(value) { return new Intl.NumberFormat(state.lang === 'en' ? 'en-HK' : 'zh-HK', { style:'currency', currency:'HKD', maximumFractionDigits:0 }).format(Number(value) || 0); }
+  function money(value) { return new Intl.NumberFormat(state.lang === 'en' ? 'en-HK' : 'zh-HK', { style:'currency', currencyDisplay:'code', currency:'USD', maximumFractionDigits:0 }).format(Number(value) || 0); }
 
   function readJson(storage, key) {
     try { return JSON.parse(storage.getItem(key) || '{}') || {}; } catch (error) { return {}; }
@@ -78,16 +78,18 @@
       var csPlan = normalizePlan(cs.csPlan);
       if (csPlan !== 'standard' && csPlan !== 'premium') return null;
       var auditPlan = normalizePlan(cs.csAuditPlan);
+      var remediationYears = cs.csAnnualReturnsHelp === 'yes' && cs.csAnnualReturnsYears !== 'skipped' ? Number(cs.csAnnualReturnsYears || NaN) : 0;
       return {
         flow: 'company_secretary',
         secretary: { plan: csPlan, shareholders: Number(cs.csShareholders || 1) },
-        audit: auditPlan && auditPlan !== 'skipped' ? { plan: auditPlan } : null
+        remediationYears: remediationYears,
+        audit: auditPlan && auditPlan !== 'skipped' ? { revenueBand: cs.csAuditRevenueBand || '' } : null
       };
     }
 
     if (normalizePlan(inc.incorporationPlan) !== 'starter') return null;
     var source = normalizePlan(inc.incorporationSource);
-    var residency = source.indexOf('foreigner') !== -1 || Number(inc.incorporationPrice) === 8500 ? 'non_hk' : 'local';
+    var residency = source.indexOf('foreigner') !== -1 ? 'non_hk' : 'local';
     var secretaryPlan = normalizePlan(inc.secretaryPlan);
     var secretary = null;
     if (secretaryPlan === 'standard' || secretaryPlan === 'premium') {
@@ -97,7 +99,7 @@
       flow: 'incorporation',
       incorporation: { residency: residency, plan: 'starter' },
       secretary: secretary,
-      registeredOffice: inc.hasOfficeAddress === true || cs.hasOfficeAddress === true
+      registeredOffice: (cs.hasOfficeAddress ?? inc.hasOfficeAddress) === true
     };
   }
 
@@ -157,13 +159,19 @@
     $('email').placeholder = state.lang === 'en' ? 'name@example.com' : 'name@example.com';
     $('discountCode').placeholder = state.lang === 'en' ? 'Enter code' : state.lang === 'zh-Hant' ? '輸入折扣碼' : '输入折扣码';
     renderQuote();
+    if (state.orderErrorKey) showOrderError(state.orderErrorKey);
+    if (!$('paymentError').classList.contains('hidden') && state.paymentErrorKey) paymentError(state.paymentErrorKey);
+    if (!$('gatewayUnavailable').classList.contains('hidden')) $('gatewayUnavailable').textContent = t('paymentUnavailable');
+    if ($('discountMessage').textContent && $('discountMessage').dataset.errorKey) $('discountMessage').textContent = t($('discountMessage').dataset.errorKey);
+    $('summaryToggle').textContent = t($('summaryBody').classList.contains('collapsed') ? 'show' : 'hide');
     if (state.discountCode) $('discountAppliedText').textContent = t('discountApplied') + ' ' + state.discountCode;
   }
 
-  function showOrderError(message) {
+  function showOrderError(key) {
+    state.orderErrorKey = key;
     $('orderError').innerHTML = '';
     var text = document.createElement('span');
-    text.textContent = message;
+    text.textContent = t(key);
     var spacer = document.createTextNode(' ');
     var link = document.createElement('a');
     link.href = '/pages/pricing.html';
@@ -230,8 +238,9 @@
     updatePayLabels();
   }
 
-  function paymentError(message) {
-    $('paymentError').textContent = message || t('paymentFailed');
+  function paymentError(key) {
+    state.paymentErrorKey = key || 'paymentFailed';
+    $('paymentError').textContent = t(state.paymentErrorKey);
     $('paymentError').classList.remove('hidden');
   }
 
@@ -276,7 +285,7 @@
     });
     state.stripePaymentElement.on('loaderror', function () {
       $('paymentLoader').classList.add('hidden');
-      paymentError(t('paymentUnavailable'));
+      paymentError('paymentUnavailable');
     });
     state.stripePaymentElement.mount('#stripePaymentElement');
   }
@@ -317,7 +326,7 @@
     $('paymentLead').textContent = t('cybsInstruction');
     state.cyberMountStarted = true;
     state.cyberCheckout.mount('#cybersourcePaymentElement').then(completeCyberSource).catch(function (error) {
-      paymentError(error.message || t('paymentFailed'));
+      paymentError('paymentFailed');
     });
     setPayEnabled(false);
   }
@@ -333,7 +342,7 @@
       routePaymentResult(result);
     } catch (error) {
       setBusy(false);
-      paymentError(error.message || t('paymentFailed'));
+      paymentError('paymentFailed');
     }
   }
 
@@ -351,7 +360,7 @@
       else throw new Error(t('paymentUnavailable'));
     } catch (error) {
       $('paymentLoader').classList.add('hidden');
-      $('gatewayUnavailable').textContent = error.message || t('paymentUnavailable');
+      $('gatewayUnavailable').textContent = t('paymentUnavailable');
       $('gatewayUnavailable').classList.remove('hidden');
       setPayEnabled(false);
     }
@@ -391,7 +400,7 @@
       }
     } catch (error) {
       setBusy(false);
-      paymentError(error.message || t('paymentFailed'));
+      paymentError('paymentFailed');
     }
   }
 
@@ -447,7 +456,7 @@
   function expireWechatQr() {
     hideWechatQr();
     setBusy(false);
-    paymentError(t('qrExpired'));
+    paymentError('qrExpired');
   }
 
   function pollWechatPayment() {
@@ -461,7 +470,7 @@
         if (result.status === 'succeeded') { hideWechatQr(); routePaymentResult(result); return; }
         if (result.status === 'failed') {
           hideWechatQr(); setBusy(false);
-          paymentError(result.failure_message || t('paymentFailed'));
+          paymentError('paymentFailed');
           return;
         }
         // requires_action / processing：继续等待扫码
@@ -532,7 +541,8 @@
       renderQuote();
     } catch (error) {
       $('discountMessage').className = 'discount-message error';
-      $('discountMessage').textContent = error.message || t('invalidDiscount');
+      $('discountMessage').dataset.errorKey = 'invalidDiscount';
+      $('discountMessage').textContent = t('invalidDiscount');
     } finally {
       $('applyDiscount').disabled = state.step === 2;
     }
@@ -549,6 +559,7 @@
       renderQuote();
     } catch (error) {
       $('discountMessage').className = 'discount-message error';
+      $('discountMessage').dataset.errorKey = 'quoteUnavailable';
       $('discountMessage').textContent = t('quoteUnavailable');
     }
   }
@@ -567,7 +578,7 @@
     $('lastName').value = draft.lastName || '';
     $('email').value = draft.email || '';
     if (!state.order) {
-      showOrderError(t('orderMissing'));
+      showOrderError('orderMissing');
       return;
     }
     try {
@@ -579,7 +590,7 @@
         initializePayment();
       }
     } catch (error) {
-      showOrderError(error.message || t('quoteUnavailable'));
+      showOrderError('quoteUnavailable');
     }
   }
 

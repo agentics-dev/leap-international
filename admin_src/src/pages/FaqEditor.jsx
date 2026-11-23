@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Save, ArrowLeft } from 'lucide-react';
@@ -22,11 +22,8 @@ export default function FaqEditor() {
     question_zh: '', answer_zh: ''
   });
 
-  useEffect(() => {
-    if (id) fetchFaq();
-  }, [id]);
 
-  const fetchFaq = async () => {
+  const fetchFaq = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from('faqs')
@@ -34,9 +31,14 @@ export default function FaqEditor() {
       .eq('id', id)
       .single();
       
+    if (error) alert('Unable to load this record: ' + error.message);
     if (data) setFaq(data);
     setLoading(false);
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) fetchFaq();
+  }, [fetchFaq, id]);
 
   const stripHtml = (html) => {
     const tmp = document.createElement('DIV');
@@ -61,20 +63,18 @@ export default function FaqEditor() {
       return;
     }
 
-    if (id) {
-      await supabase.from('faqs').update(payload).eq('id', id);
-    } else {
-      const { data, error } = await supabase.from('faqs').insert([payload]).select().single();
-      if (data) {
-        navigate(`/faqs/edit/${data.id}`, { replace: true });
-      }
-      if (error) {
-        alert("Failed to save: " + error.message);
-      }
+    try {
+      const result = id
+        ? await supabase.from('faqs').update(payload).eq('id', id)
+        : await supabase.from('faqs').insert([payload]).select().single();
+      if (result.error) throw result.error;
+      if (!id && result.data) navigate(`/faqs/edit/${result.data.id}`, { replace: true });
+      alert('FAQ Saved successfully');
+    } catch (error) {
+      alert('Failed to save: ' + error.message);
+    } finally {
+      setSaving(false);
     }
-    
-    setSaving(false);
-    alert('FAQ Saved successfully');
   };
 
   if (loading) return <div className="p-8">Loading...</div>;

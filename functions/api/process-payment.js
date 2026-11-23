@@ -4,11 +4,13 @@ const { json, sendPaymentEmails } = require('../_stripe-shared');
 const { signReceipt, verifyReceipt } = require('../_receipt-token');
 
 function extractPaymentResult(payload) {
-  const amountDetails = payload && payload.orderInformation && payload.orderInformation.amountDetails;
-  const card = payload && payload.paymentInformation && payload.paymentInformation.card;
+  const details = payload.details || payload;
+  const amountDetails = details.orderInformation && details.orderInformation.amountDetails;
+  const card = details.paymentInformation && details.paymentInformation.card;
   return {
-    paymentId: String(payload && payload.id || ''),
-    status: String(payload && payload.status || 'UNKNOWN').toUpperCase(),
+    paymentId: String(payload.id || ''),
+    reference: details.clientReferenceInformation?.code,
+    status: String(payload.status || 'UNKNOWN').toUpperCase(),
     amount: Number(amountDetails && amountDetails.totalAmount),
     currency: String(amountDetails && amountDetails.currency || '').toUpperCase(),
     method: card ? `${card.type || card.brand || 'Card'} ****${card.last4 || ''}`.trim() : 'Card',
@@ -17,16 +19,21 @@ function extractPaymentResult(payload) {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
+  if (String(env.PAYMENT_GATEWAY || 'stripe').trim().toLowerCase() !== 'cybersource') {
+    return json(409, { error: 'CyberSource is not the active payment gateway' });
+  }
+  if (!env.CYBS_MERCHANT_ID || !env.PAYMENT_RECEIPT_SECRET) {
+    return json(503, { error: 'Payment verification is not configured' });
+  }
   let body;
   try {
     body = await request.json();
   } catch (error) {
     return json(400, { error: 'Invalid JSON body' });
   }
-  if (!body.completeResponse || typeof body.completeResponse !== 'string') {
+  if (!body || !body.completeResponse || typeof body.completeResponse !== 'string') {
     return json(400, { error: 'Missing completeResponse JWT' });
   }
-  if (!env.PAYMENT_RECEIPT_SECRET) return json(503, { error: 'Payment verification is not configured' });
 
   let checkout;
   try {
@@ -34,7 +41,8 @@ export async function onRequestPost(context) {
   } catch (error) {
     return json(400, { error: 'Checkout context could not be verified' });
   }
-  if (checkout.type !== 'checkout_context' || checkout.gateway !== 'cybersource') {
+  if (checkout.type !== 'checkout_context' || checkout.gateway !== 'cybersource' ||
+      checkout.merchantId !== env.CYBS_MERCHANT_ID || typeof checkout.reference !== 'string' || !checkout.reference) {
     return json(400, { error: 'Invalid checkout context' });
   }
   const quote = quoteOrder(checkout.order, checkout.discountCode, env);
@@ -52,7 +60,7 @@ export async function onRequestPost(context) {
   }
 
   const result = extractPaymentResult(payload);
-  if (!result.paymentId || result.currency !== quote.currency || result.amount !== quote.total) {
+  if (!result.paymentId || result.reference !== checkout.reference || result.currency !== quote.currency || result.amount !== quote.total) {
     return json(400, { error: 'Payment result does not match the server quote' });
   }
 
@@ -66,19 +74,23 @@ export async function onRequestPost(context) {
 
   let receiptToken = null;
   if (publicStatus === 'succeeded') {
-    if (!env.PAYMENT_RECEIPT_SECRET) return json(503, { error: 'Payment succeeded but receipt service is unavailable' });
-    await sendPaymentEmails({
-      env,
-      amount: result.amount,
-      currency: result.currency,
-      customerName,
-      customerEmail,
-      method: result.method,
-      paymentId: result.paymentId,
-      status: 'SUCCEEDED',
-      locale: body.locale || 'en',
-      gateway: 'CyberSource',
-    });
+    try {
+      await sendPaymentEmails({
+        env,
+        amount: result.amount,
+        currency: result.currency,
+        customerName,
+        customerEmail,
+        method: result.method,
+        paymentId: result.paymentId,
+        status: 'SUCCEEDED',
+        locale: checkout.locale || 'en',
+        gateway: 'CyberSource',
+        paymentTime: checkout.iat,
+      });
+    } catch {
+      console.error('CyberSource payment notification failed:', result.paymentId);
+    }
     receiptToken = await signReceipt({
       type: 'payment_receipt',
       gateway: 'cybersource',

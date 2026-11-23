@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { X } from 'lucide-react';
 import { format } from 'date-fns';
@@ -7,11 +7,8 @@ export default function FaqAuditLogs({ faqId, onClose }) {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchLogs();
-  }, [faqId]);
 
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     setLoading(true);
     let query = supabase.from('faq_audit_logs').select('*').order('created_at', { ascending: false });
     
@@ -22,7 +19,11 @@ export default function FaqAuditLogs({ faqId, onClose }) {
     const { data } = await query;
     if (data) setLogs(data);
     setLoading(false);
-  };
+  }, [faqId]);
+
+  useEffect(() => {
+    fetchLogs();
+  }, [fetchLogs, faqId]);
 
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-gray-900/50">

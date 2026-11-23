@@ -28,7 +28,7 @@
     h1 { margin:8px 0 10px; font-size:38px; line-height:1.18; letter-spacing:0; }
     .intro p { margin:0; color:var(--muted); line-height:1.6; }
     .steps { display:flex; align-items:center; max-width:520px; margin:0 0 34px; }
-    .step { display:flex; align-items:center; gap:9px; color:#8992a3; font-size:14px; font-weight:700; white-space:nowrap; }
+    .step { display:flex; align-items:center; gap:9px; color:#596579; font-size:14px; font-weight:700; white-space:nowrap; }
     .step-dot { width:30px; height:30px; display:grid; place-items:center; border-radius:50%; border:2px solid #bcc4d0; background:#fff; }
     .step.active { color:var(--ink); }
     .step.active .step-dot { color:#fff; border-color:var(--blue); background:var(--blue); }
@@ -56,7 +56,7 @@
     .summary-toggle { display:none; border:0; background:transparent; color:var(--blue); font-weight:700; cursor:pointer; }
     .summary-lines { border-top:1px solid var(--line); }
     .summary-row { display:flex; justify-content:space-between; gap:18px; padding:14px 0; border-bottom:1px solid #edf0f4; font-size:14px; }
-    .summary-row span:first-child { color:#475467; line-height:1.4; }
+    .summary-row span:first-child { min-width:0; overflow-wrap:anywhere; color:#475467; line-height:1.4; }
     .summary-row strong { white-space:nowrap; }
     .summary-totals { padding-top:15px; }
     .total-row { display:flex; justify-content:space-between; gap:16px; margin:8px 0; color:#475467; font-size:14px; }
@@ -87,7 +87,7 @@
       .header-link { display:none; }
       .page { padding:32px 18px 130px; }
       h1 { font-size:30px; }
-      .layout { grid-template-columns:1fr; gap:20px; }
+      .layout { grid-template-columns:minmax(0,1fr); gap:20px; }
       .summary { position:static; grid-row:1; padding:20px; }
       .summary-toggle { display:block; }
       .summary-body.collapsed { display:none; }
@@ -122,17 +122,20 @@
     .qr-hosted { display:block; margin:0 0 10px; font-size:13px; color:#145ddb; }
     .qr-cancel { width:100%; background:#fff; border:1px solid #cfd6df; color:#344054; font-weight:700; }
   </style>
+<script src="/js/pricing-catalog.js?v=20261104"></script>
+<link rel="stylesheet" href="/js/footer.css?v=20261105">
+<script src="/js/footer.js?v=20261105" defer></script>
 </head>
 <body>
   <header class="checkout-header">
     <div class="header-inner">
-      <a class="brand" href="/" aria-label="Leap International home">
+      <a class="brand" href="/" aria-label="Leap International home" data-aria-label-en="Leap International home" data-aria-label-zh="Leap International 首頁" data-aria-label-hans="Leap International 首页">
         <img src="/FOI_logo.png" alt="Leap International">
         <span>Leap International Corporate Service Limited</span>
       </a>
       <div class="header-actions">
         <a class="header-link" href="/pages/contact.html" data-i18n="help">Need help?</a>
-        <select id="languageSelect" class="language-select" aria-label="Language">
+        <select id="languageSelect" class="language-select" aria-label="Language" data-aria-label-en="Language" data-aria-label-zh="語言" data-aria-label-hans="语言">
           <option value="en">English</option>
           <option value="zh-Hant">繁體中文</option>
           <option value="zh-Hans">简体中文</option>
@@ -148,7 +151,7 @@
       <p data-i18n="subtitle">Review your service package, enter your contact details and pay securely.</p>
     </div>
 
-    <div class="steps" aria-label="Checkout progress">
+    <div class="steps" aria-label="Checkout progress" data-aria-label-en="Checkout progress" data-aria-label-zh="結賬進度" data-aria-label-hans="结账进度">
       <div class="step active" id="stepOne"><span class="step-dot">1</span><span data-i18n="details">Details</span></div>
       <div class="step-line"></div>
       <div class="step" id="stepTwo"><span class="step-dot">2</span><span data-i18n="payment">Payment</span></div>
@@ -229,6 +232,7 @@
       </aside>
     </div>
   </main>
+<footer data-site-footer></footer>
 
   <div id="mobilePaybar" class="mobile-paybar">
     <div class="amount"><small data-i18n="total">Total</small><strong id="mobileTotal">--</strong></div>
@@ -239,7 +243,7 @@
     <div class="qr-card">
       <div class="qr-brand" id="qrBrand">WeChat<span class="qr-brand-pay">Pay</span></div>
       <div class="qr-amount" id="qrAmount"></div>
-      <div class="qr-image-wrap"><img id="wechatQrImage" alt="WeChat Pay QR code"></div>
+      <div class="qr-image-wrap"><img id="wechatQrImage" alt="WeChat Pay QR code" data-alt-en="WeChat Pay QR code" data-alt-zh="微信支付二維碼" data-alt-hans="微信支付二维码"></div>
       <p class="qr-hint" data-i18n="wechatScanHint">Open WeChat on your phone and scan this code to pay</p>
       <p class="qr-timer" id="qrTimer" aria-live="polite"></p>
       <a id="qrHostedLink" class="qr-hosted hidden" target="_blank" rel="noopener" data-i18n="qrOpenInstructions">Open payment instructions</a>
@@ -247,6 +251,8 @@
     </div>
   </div>
 
-  <script src="/js/payment.js?v=20260822"></script>
+  <script src="/js/payment.js?v=20261105"></script>
+<script src="/js/metadata.js" defer></script>
+<script src="/js/accessibility.js" defer></script>
 </body>
 </html>

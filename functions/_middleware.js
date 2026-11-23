@@ -7,6 +7,7 @@
  * record to /api/crawl-log and serves the page normally.
  */
 
+const securityHeaders = require('./_security-headers');
 const KNOWN_BOTS = [
   'GPTBot', 'OAI-SearchBot', 'ChatGPT-User',
   'ClaudeBot', 'Claude-User', 'PerplexityBot', 'Bytespider',
@@ -40,5 +41,21 @@ export async function onRequest(context) {
     }
   }
 
-  return context.next();
+  const url = new URL(context.request.url);
+  // Only extensionless admin routes use the SPA shell. Missing JS/CSS stays 404.
+  const adminRoute = /^\/admin(?:\/[^.]*)?\/?$/.test(url.pathname);
+  let response;
+  if (adminRoute && ['GET', 'HEAD'].includes(context.request.method)) {
+    const shell = new URL('/admin/', url);
+    response = await context.env.ASSETS.fetch(new Request(shell, context.request));
+  } else {
+    response = await context.next();
+  }
+  response = new Response(response.body, response);
+  Object.entries(securityHeaders(url.protocol === 'https:')).forEach(([name, value]) => response.headers.set(name, value));
+  if (url.pathname === '/admin' || url.pathname.startsWith('/admin/')) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+    response.headers.set('Cache-Control', 'no-store');
+  }
+  return response;
 }

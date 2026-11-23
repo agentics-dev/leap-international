@@ -25,8 +25,13 @@
     "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.16",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"

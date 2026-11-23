@@ -55,7 +55,7 @@ export async function onRequestPost(context) {
 
     const status = publicStatus(data.status);
     const amount = (data.amount_received || data.amount || 0) / 100;
-    const currency = String(data.currency || 'hkd').toUpperCase();
+    const currency = String(data.currency || 'usd').toUpperCase();
     const metadata = data.metadata || {};
     const method = paymentMethodDescription(data);
 

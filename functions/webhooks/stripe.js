@@ -4,7 +4,7 @@
 //
 // 用 Web Crypto API 验签（Cloudflare Workers 无 Node crypto 模块）。
 
-const { json, sendPaymentEmails } = require('../_stripe-shared');
+const { json, sendPaymentEmails, sendResendEmail, toStripeAmount } = require('../_stripe-shared');
 
 // Stripe-Signature header 格式：t=时间戳,v1=签名[,v0=...]
 function parseSignature(header) {
@@ -57,6 +57,56 @@ async function verifySignature(payload, sigHeader, secret) {
   });
 }
 
+// Resend retains idempotency keys for 24 hours. Leave a margin for slow requests.
+const RESEND_RETRY_WINDOW_SECONDS = 23 * 60 * 60;
+
+async function stripeIntent(env, paymentId, metadata, idempotencyKey) {
+  const endpoint = `https://api.stripe.com/v1/payment_intents/${encodeURIComponent(paymentId)}`;
+  const headers = { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` };
+  const options = { headers, signal: AbortSignal.timeout(8000) };
+  let url = endpoint;
+  if (metadata) {
+    options.method = 'POST';
+    options.body = new URLSearchParams(Object.entries(metadata).map(([key, value]) => [`metadata[${key}]`, value]));
+    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    if (idempotencyKey) headers['Idempotency-Key'] = idempotencyKey;
+  } else {
+    url += '?' + new URLSearchParams({ 'expand[]': 'latest_charge' });
+  }
+
+  const response = await fetch(url, options);
+  if (!response.ok) throw new Error(`Stripe PaymentIntent HTTP ${response.status}`);
+  return response.json();
+}
+
+async function deliverOnce(env, intent, recipient, message, eventTime) {
+  const field = `leap_email_${recipient}`;
+  const state = intent.metadata[field];
+  if (state?.startsWith('sent:')) return;
+
+  const now = Math.floor(Date.now() / 1000);
+  // Legacy payments could already have been handled by a webhook that kept no marker.
+  if (!intent.metadata.leap_order && (!Number.isInteger(eventTime) || now - eventTime >= RESEND_RETRY_WINDOW_SECONDS)) {
+    throw new Error('Legacy payment notification requires manual reconciliation');
+  }
+
+  let started = state;
+  if (!started) {
+    const saved = await stripeIntent(env, intent.id, { [field]: String(now) }, `leap-${intent.id}-${recipient}-start`);
+    started = saved.metadata?.[field];
+  }
+
+  const attemptTime = Number(started);
+  const elapsed = Math.floor(Date.now() / 1000) - attemptTime;
+  if (!Number.isSafeInteger(attemptTime) || elapsed < 0 || elapsed >= RESEND_RETRY_WINDOW_SECONDS) {
+    throw new Error('Payment notification requires manual reconciliation');
+  }
+
+  const accepted = await sendResendEmail(message);
+  if (typeof accepted?.id !== 'string' || !accepted.id) throw new Error('Resend did not return a message ID');
+  await stripeIntent(env, intent.id, { [field]: `sent:${accepted.id}` });
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -89,38 +139,44 @@ export async function onRequestPost(context) {
     return json(400, { error: 'Invalid JSON' });
   }
 
-  // 4. 处理 payment_intent.succeeded
-  if (event.type === 'payment_intent.succeeded') {
-    const pi = event.data.object;
-    const meta = pi.metadata || {};
-    const amount = pi.amount_received ? pi.amount_received / 100 : (pi.amount / 100);
-    const currency = (pi.currency || 'hkd').toUpperCase();
+  if (event?.type !== 'payment_intent.succeeded') return json(200, { received: true });
+  const paymentId = event.data?.object?.id;
+  if (typeof paymentId !== 'string' || !/^pi_[A-Za-z0-9_]+$/.test(paymentId)) {
+    return json(400, { error: 'Invalid PaymentIntent' });
+  }
 
-    let method = 'Card';
-    const pmTypes = pi.payment_method_types || [];
-    if (pmTypes.includes('alipay')) method = 'Alipay 支付宝';
-    else if (pmTypes.includes('wechat_pay')) method = 'WeChat Pay 微信支付';
+  try {
+    const intent = await stripeIntent(env, paymentId);
+    const meta = intent.metadata || {};
+    if (meta.gateway !== 'stripe' || !meta.order_flow) return json(200, { received: true });
+    const received = intent.amount_received;
+    const currencyMatches = meta.order_currency
+      ? intent.currency === meta.order_currency : ['usd', 'hkd'].includes(intent.currency);
+    if (intent.id !== paymentId || intent.status !== 'succeeded' || !currencyMatches ||
+        !Number.isSafeInteger(received) || received < 1 || received !== toStripeAmount(meta.order_total)) {
+      throw new Error('Stripe payment does not match the order');
+    }
 
-    // 从 metadata 取客户信息发邮件（异步支付只能靠 webhook 发）
+    const charge = intent.latest_charge;
+    const type = charge?.payment_method_details?.type;
+    const method = type === 'alipay' ? 'Alipay 支付宝' : type === 'wechat_pay' ? 'WeChat Pay 微信支付' : type || 'Online payment';
     await sendPaymentEmails({
       env,
-      amount,
-      currency,
+      amount: received / 100,
+      currency: intent.currency.toUpperCase(),
       customerName: meta.customer_name || '',
       customerEmail: meta.customer_email || '',
       method,
-      paymentId: pi.id,
+      paymentId,
       status: 'SUCCEEDED',
       locale: meta.locale || 'en',
       gateway: 'Stripe',
-    });
+      paymentTime: charge?.created || intent.created,
+    }, (recipient, message) => deliverOnce(env, intent, recipient, message, event.created));
 
-    console.log(`Webhook processed: ${pi.id} - ${currency} ${amount}`);
-  } else {
-    // 其他事件类型，记录但不处理
-    console.log(`Webhook received (unhandled type): ${event.type}`);
+    return json(200, { received: true });
+  } catch (error) {
+    console.error('Stripe payment requires follow-up:', paymentId, error.message);
+    return json(503, { error: 'Payment notification could not be completed' });
   }
-
-  // 5. 必须快速返回 200，否则 Stripe 会重试
-  return json(200, { received: true });
 }

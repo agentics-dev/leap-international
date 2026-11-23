@@ -1,0 +1,1258 @@
+[
+  {
+    "slug": "verify-tcsp-licence",
+    "translations": {
+      "zh-Hant": {
+        "title": "查核 TCSP 牌照",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "名片、精美的網站或具說服力的推銷話術，都無法證明一家公司持有 TCSP 牌照。"
+          },
+          {
+            "type": "p",
+            "text": "更安全的做法是第一步先查核：公司註冊處的「信託或公司服務提供者持牌人名冊」——這是 TCSP 持牌人的官方公開名冊。"
+          },
+          {
+            "type": "h2",
+            "text": "🔍 3 步查核法："
+          },
+          {
+            "type": "ol",
+            "items": [
+              "前往官方 TCSP 名冊網站：tcsp.cr.gov.hk",
+              "按持牌人名稱或牌照號碼搜尋",
+              "確認該公司出現在名冊上"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "一家公司是否在官方名冊上，是判斷其是否合法及值得合作的關鍵一步。"
+          },
+          {
+            "type": "p",
+            "text": "如果您正在尋找香港公司秘書，請在討論任何合作之前先做這項查核。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKong #TCSP #CompanySecretaryHK #HongKongCompany #TCSPLicence"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "核查 TCSP 牌照",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "名片、精美的网站或具说服力的推销话术，都无法证明一家公司持有 TCSP 牌照。"
+          },
+          {
+            "type": "p",
+            "text": "更安全的做法是第一步先核查：公司注册处的“信托或公司服务提供者持牌人名册”——这是 TCSP 持牌人的官方公开名册。"
+          },
+          {
+            "type": "h2",
+            "text": "🔍 3 步核查法："
+          },
+          {
+            "type": "ol",
+            "items": [
+              "前往官方 TCSP 名册网站：tcsp.cr.gov.hk",
+              "按持牌人名称或牌照号码搜索",
+              "确认该公司出现在名册上"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "一家公司是否在官方名册上，是判断其是否合法及值得合作的关键一步。"
+          },
+          {
+            "type": "p",
+            "text": "如果您正在寻找香港公司秘书，请在讨论任何合作之前先做这项核查。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKong #TCSP #CompanySecretaryHK #HongKongCompany #TCSPLicence"
+          }
+        ]
+      },
+      "en": {
+        "title": "How to Verify a Licensed Company Secretary / TCSP in Hong Kong",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "A business card, a polished website or a convincing sales pitch doesn’t prove a firm holds a TCSP licence."
+          },
+          {
+            "type": "p",
+            "text": "The safer first step is to check the Companies Registry’s Register of Trust or Company Service Provider Licensees — the official public register for TCSP licensees."
+          },
+          {
+            "type": "h2",
+            "text": "🔍The 3-step check:"
+          },
+          {
+            "type": "ol",
+            "items": [
+              "Go to the official TCSP register at tcsp.cr.gov.hk",
+              "Search by licensee name or licence number",
+              "Confirm the firm appears in the register"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Whether a firm appears on the Official Register is a key step in determining if they are legitimate and worth pursuing."
+          },
+          {
+            "type": "p",
+            "text": "If you are looking for a Hong Kong company secretary, do this check first before discussing any engagement."
+          },
+          {
+            "type": "tags",
+            "text": "#HongKong #TCSP #CompanySecretaryHK #HongKongCompany #TCSPLicence"
+          }
+        ],
+        "pageTitle": "Hong Kong TCSP Licence Check",
+        "description": "Learn how to check a company secretary’s TCSP licence using the Hong Kong Companies Registry’s public register before discussing an engagement."
+      }
+    }
+  },
+  {
+    "slug": "annual-compliance-calendar",
+    "translations": {
+      "zh-Hant": {
+        "title": "香港公司年度合規行事曆",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "成立公司只是起步。錯過這些年度期限，您將面臨逾期費用、罰款甚至被除名。"
+          },
+          {
+            "type": "h2",
+            "text": "您的簡易行事曆："
+          },
+          {
+            "type": "h2",
+            "text": "📅 周年紀念日"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "在 42 天內提交周年申報表 (NAR1)",
+              "逾期罰款：1,020 至 4,080 港元"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 商業登記證 (BRC) 續期"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "到期前 1 個月內續期",
+              "逾期續期會影響銀行運作"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 年結日"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "財務報表 + 法定審計",
+              "保留記錄 7 年"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 利得稅"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "向稅務局提交年度報稅表",
+              "截止日期跟隨您的財務年結日"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 持續事項"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "股權變更時更新 SCR（重要控制人登記冊）",
+              "時刻保留本地指定代表"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "好消息：您無需身在香港。持牌公司秘書可以為您遠程處理一切。"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 為您管理全年合規事宜："
+          },
+          {
+            "type": "ul",
+            "items": [
+              "NAR1 申報 · BRC 續期 · 審計與稅務協調",
+              "SCR 維護 · 截止日期提醒"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 私訊 “CALENDAR” 獲取免費合規檢查"
+          },
+          {
+            "type": "note",
+            "text": "僅供一般參考，不構成法律建議。"
+          },
+          {
+            "type": "tags",
+            "text": "#HKCompanyCompliance #AnnualReturnNAR1 #CompanySecretaryHK"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "香港公司年度合规日历",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "成立公司只是起步。错过这些年度期限，您将面临逾期费用、罚款甚至被除名。"
+          },
+          {
+            "type": "h2",
+            "text": "您的简易日历："
+          },
+          {
+            "type": "h2",
+            "text": "📅 周年纪念日"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "在 42 天内提交周年申报表 (NAR1)",
+              "逾期罚款：1,020 至 4,080 港元"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 商业登记证 (BRC) 续期"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "到期前 1 个月内续期",
+              "逾期续期会影响银行运作"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 年结日"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "财务报表 + 法定审计",
+              "保留记录 7 年"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 利得税"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "向税务局提交年度报税表",
+              "截止日期跟随您的财务年结日"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 持续事项"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "股权变更时更新 SCR（重要控制人登记册）",
+              "时刻保留本地指定代表"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "好消息：您无需身在香港。持牌公司秘书可以为您远程处理一切。"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 为您管理全年合规事宜："
+          },
+          {
+            "type": "ul",
+            "items": [
+              "NAR1 申报 · BRC 续期 · 审计与税务协调",
+              "SCR 维护 · 截止日期提醒"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 私信 “CALENDAR” 获取免费合规检查"
+          },
+          {
+            "type": "note",
+            "text": "仅供一般参考，不构成法律建议。"
+          },
+          {
+            "type": "tags",
+            "text": "#HKCompanyCompliance #AnnualReturnNAR1 #CompanySecretaryHK"
+          }
+        ]
+      },
+      "en": {
+        "title": "Annual Compliance Calendar for Hong Kong Companies",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Incorporation is only the start. Miss these annual deadlines, and you’ll face late fees, penalties or strike-off."
+          },
+          {
+            "type": "h2",
+            "text": "Your simple calendar:"
+          },
+          {
+            "type": "h2",
+            "text": "📅 Anniversary date"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "File Annual Return (NAR1) within 42 days",
+              "Late penalties: HK$1,020 – HK$4,080"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 BRC renewal"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Renew 1 month before expiry",
+              "Late renewal disrupts bank operations"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 Year-end"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Financial statements + statutory audit",
+              "Keep records for 7 years"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 Profits tax"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "File annual return with Inland Revenue",
+              "Deadline follows your financial year-end"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "📅 Ongoing"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Update SCR on shareholding changes",
+              "Keep a local designated representative at all times"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Good news: You don't need to be in HK. A licensed company secretary handles it all remotely."
+          },
+          {
+            "type": "h2",
+            "text": "Leap manages your full year of compliance:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "NAR1 filing · BRC renewal · audit & tax coordination",
+              "SCR maintenance · deadline reminders"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 DM “CALENDAR” for a free compliance check"
+          },
+          {
+            "type": "note",
+            "text": "General information only, not legal advice."
+          }
+        ],
+        "pageTitle": "Hong Kong Annual Compliance Calendar",
+        "description": "A calendar for Hong Kong companies covering annual returns, business registration renewal, accounting records, profits tax and significant controllers."
+      }
+    }
+  },
+  {
+    "slug": "hong-kong-holding-company",
+    "translations": {
+      "zh-Hant": {
+        "title": "利用香港控股公司進入中國內地：運作模式",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "想進軍中國內地？相較於直接在內地設立公司，成立香港控股公司更具戰略優勢。"
+          },
+          {
+            "type": "h2",
+            "text": "原因如下："
+          },
+          {
+            "type": "h2",
+            "text": "🌏 CEPA 市場准入"
+          },
+          {
+            "type": "p",
+            "text": "在所有司法管轄區中，擁有進入內地服務市場最廣泛的通道——160 個 WTO 服務業分類中有 153 個開放。"
+          },
+          {
+            "type": "h2",
+            "text": "💰 優化股息匯回"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "內地股息預扣稅標準稅率：10%",
+              "符合資格的香港母公司可降至 5%",
+              "– 直接持股 ≥25%，且持有 12 個月以上",
+              "– 具備受益人身份 + 香港居民身份證明"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "💳 靈活的資金流動"
+          },
+          {
+            "type": "p",
+            "text": "香港沒有外匯管制。可自由將股息用於內地擴張、其他市場或全球總部。"
+          },
+          {
+            "type": "h2",
+            "text": "🛡️ 風險隔離"
+          },
+          {
+            "type": "p",
+            "text": "內地子公司的債務責任被隔離，保護您的控股實體。"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 支持您的香港控股架構："
+          },
+          {
+            "type": "ul",
+            "items": [
+              "公司註冊 + 持牌秘書 + 地址",
+              "合規記錄維護",
+              "內地子公司設立文件準備"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 私訊 “CHINA” 獲取免費架構諮詢"
+          },
+          {
+            "type": "note",
+            "text": "僅供一般參考，不構成法律/稅務建議。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongHoldingCompany #ChinaMarketEntry #CrossBorderBusiness"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "利用香港控股公司进入中国内地：运作模式",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "想进军中国内地？相较于直接在内地设立公司，成立香港控股公司更具战略优势。"
+          },
+          {
+            "type": "h2",
+            "text": "原因如下："
+          },
+          {
+            "type": "h2",
+            "text": "🌏 CEPA 市场准入"
+          },
+          {
+            "type": "p",
+            "text": "在所有司法管辖区中，拥有进入内地服务市场最广泛的通道——160 个 WTO 服务业分类中有 153 个开放。"
+          },
+          {
+            "type": "h2",
+            "text": "💰 优化股息汇回"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "内地股息预扣税标准税率：10%",
+              "符合资格的香港母公司可降至 5%",
+              "– 直接持股 ≥25%，且持有 12 个月以上",
+              "– 具备受益人身份 + 香港居民身份证明"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "💳 灵活的资金流动"
+          },
+          {
+            "type": "p",
+            "text": "香港没有外汇管制。可自由将股息用于内地扩张、其他市场或全球总部。"
+          },
+          {
+            "type": "h2",
+            "text": "🛡️ 风险隔离"
+          },
+          {
+            "type": "p",
+            "text": "内地子公司的债务责任被隔离，保护您的控股实体。"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 支持您的香港控股架构："
+          },
+          {
+            "type": "ul",
+            "items": [
+              "公司注册 + 持牌秘书 + 地址",
+              "合规记录维护",
+              "内地子公司设立文件准备"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 私信 “CHINA” 获取免费架构咨询"
+          },
+          {
+            "type": "note",
+            "text": "仅供一般参考，不构成法律/税务建议。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongHoldingCompany #ChinaMarketEntry #CrossBorderBusiness"
+          }
+        ]
+      },
+      "en": {
+        "title": "Hong Kong Holding Company for Entering Mainland China: How It Works",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Want to enter mainland China? A Hong Kong holding company is far more strategic than a direct mainland setup."
+          },
+          {
+            "type": "h2",
+            "text": "Here’s why:"
+          },
+          {
+            "type": "h2",
+            "text": "🌏 CEPA market access"
+          },
+          {
+            "type": "p",
+            "text": "Widest access to mainland services market of any jurisdiction — 153/160 WTO sectors open."
+          },
+          {
+            "type": "h2",
+            "text": "💰 Optimised dividend repatriation"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Standard mainland dividend withholding tax: 10%",
+              "Reduced to 5% for qualifying HK parent companies",
+              "– ≥25% direct shareholding, held 12+ months",
+              "– Beneficial owner status + HK Tax Residency Certificate"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "💳 Flexible capital flow"
+          },
+          {
+            "type": "p",
+            "text": "No FX controls in HK. Deploy dividends freely to mainland expansion, other markets or global HQ."
+          },
+          {
+            "type": "h2",
+            "text": "🛡️Risk isolation"
+          },
+          {
+            "type": "p",
+            "text": "Mainland subsidiary liabilities stay contained, protecting your holding entity."
+          },
+          {
+            "type": "h2",
+            "text": "Leap supports your HK holding structure:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Incorporation + licensed secretary + address",
+              "Compliance record maintenance",
+              "Documentation for mainland subsidiary setup"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "📩 DM “CHINA” for a free structure consultation"
+          },
+          {
+            "type": "note",
+            "text": "General information only, not legal/tax advice."
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongHoldingCompany #ChinaMarketEntry #CrossBorderBusiness"
+          }
+        ],
+        "pageTitle": "Hong Kong Holding Companies in China",
+        "description": "Explore how Hong Kong holding companies can support mainland market entry, dividend repatriation, capital management and separation of business risks."
+      }
+    }
+  },
+  {
+    "slug": "foreign-founder-mistakes",
+    "translations": {
+      "zh-Hant": {
+        "title": "外國創辦人成立首間香港公司常犯的 7 個錯誤",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在香港成立公司聽起來很簡單——但大多數首次來港的海外創辦人都會踩中一些本可避免的陷阱。"
+          },
+          {
+            "type": "h2",
+            "text": "以下是 7 個最常見的錯誤："
+          },
+          {
+            "type": "p",
+            "text": "❌ 僱用無牌的廉價秘書 → 合規風險與官方罰款"
+          },
+          {
+            "type": "p",
+            "text": "❌ 忽略 SCR（重要控制人登記冊） → 罰款與執法行動"
+          },
+          {
+            "type": "p",
+            "text": "❌ 沒有進行適當審計的「零申報」 → 不合規，日後修正成本高昂"
+          },
+          {
+            "type": "p",
+            "text": "❌ 沒有業務實質就申請銀行賬戶 → 被拒的第 1 大原因"
+          },
+          {
+            "type": "p",
+            "text": "❌ 使用郵政信箱作為註冊辦事處 → 被公司註冊處拒絕"
+          },
+          {
+            "type": "p",
+            "text": "❌ 唯一董事同時兼任公司秘書 → 違反《公司條例》"
+          },
+          {
+            "type": "p",
+            "text": "❌ 沒有保留 7 年會計記錄 → 檢查時面臨重罰"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 幫您避開所有這些問題："
+          },
+          {
+            "type": "p",
+            "text": "✅ 持牌 TCSP 公司秘書"
+          },
+          {
+            "type": "p",
+            "text": "✅ SCR 維護與指定代表"
+          },
+          {
+            "type": "p",
+            "text": "✅ 年度合規、審計與簿記"
+          },
+          {
+            "type": "p",
+            "text": "✅ 銀行開戶申請支援"
+          },
+          {
+            "type": "p",
+            "text": "📩 私訊 “MISTAKES” 獲取免費合規審查"
+          },
+          {
+            "type": "note",
+            "text": "僅供一般參考，不構成法律建議。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany #CompanySecretaryHK #CrossBorderBusiness #HKCompliance"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "外国创办人成立首间香港公司常犯的 7 个错误",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在香港成立公司听起来很简单——但大多数首次来港的海外创办人都会踩中一些本可避免的陷阱。"
+          },
+          {
+            "type": "h2",
+            "text": "以下是 7 个最常见的错误："
+          },
+          {
+            "type": "p",
+            "text": "❌ 雇用无牌的廉价秘书 → 合规风险与官方罚款"
+          },
+          {
+            "type": "p",
+            "text": "❌ 忽略 SCR（重要控制人登记册） → 罚款与执法行动"
+          },
+          {
+            "type": "p",
+            "text": "❌ 没有进行适当审计的“零申报” → 不合规，日后修正成本高昂"
+          },
+          {
+            "type": "p",
+            "text": "❌ 没有业务实质就申请银行账户 → 被拒的第 1 大原因"
+          },
+          {
+            "type": "p",
+            "text": "❌ 使用邮政信箱作为注册办事处 → 被公司注册处拒绝"
+          },
+          {
+            "type": "p",
+            "text": "❌ 唯一董事同时兼任公司秘书 → 违反《公司条例》"
+          },
+          {
+            "type": "p",
+            "text": "❌ 没有保留 7 年会计记录 → 检查时面临重罚"
+          },
+          {
+            "type": "h2",
+            "text": "Leap 帮您避开所有这些问题："
+          },
+          {
+            "type": "p",
+            "text": "✅ 持牌 TCSP 公司秘书"
+          },
+          {
+            "type": "p",
+            "text": "✅ SCR 维护与指定代表"
+          },
+          {
+            "type": "p",
+            "text": "✅ 年度合规、审计与簿记"
+          },
+          {
+            "type": "p",
+            "text": "✅ 银行开户申请支援"
+          },
+          {
+            "type": "p",
+            "text": "📩 私信 “MISTAKES” 获取免费合规审查"
+          },
+          {
+            "type": "note",
+            "text": "仅供一般参考，不构成法律建议。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany #CompanySecretaryHK #CrossBorderBusiness #HKCompliance"
+          }
+        ]
+      },
+      "en": {
+        "title": "7 Common Mistakes Foreign Founders Make With Their First Hong Kong Company",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Setting up a HK company sounds simple — but most first-time overseas founders hit avoidable pitfalls."
+          },
+          {
+            "type": "h2",
+            "text": "Here are the 7 most common mistakes:"
+          },
+          {
+            "type": "p",
+            "text": "❌ Hiring an unlicensed cheap secretary → compliance risks & official penalties"
+          },
+          {
+            "type": "p",
+            "text": "❌ Ignoring the SCR (Significant Controllers Register) → fines & enforcement action"
+          },
+          {
+            "type": "p",
+            "text": "❌ “Zero filing” without a proper audit → non-compliant, costly to fix later"
+          },
+          {
+            "type": "p",
+            "text": "❌ Applying for bank account with no business substance → #1 reason for rejection"
+          },
+          {
+            "type": "p",
+            "text": "❌ Using a PO box as registered office → rejected by Companies Registry"
+          },
+          {
+            "type": "p",
+            "text": "❌ Sole director also acting as company secretary → against Companies Ordinance"
+          },
+          {
+            "type": "p",
+            "text": "❌ Not keeping 7-year accounting records → heavy penalties on inspection"
+          },
+          {
+            "type": "h2",
+            "text": "Leap helps you avoid all these:"
+          },
+          {
+            "type": "p",
+            "text": "✅ TCSP-licensed company secretary"
+          },
+          {
+            "type": "p",
+            "text": "✅ SCR maintenance & designated representative"
+          },
+          {
+            "type": "p",
+            "text": "✅ Annual compliance, audit & bookkeeping"
+          },
+          {
+            "type": "p",
+            "text": "✅ Bank application support"
+          },
+          {
+            "type": "p",
+            "text": "📩 DM “MISTAKES” for a free compliance review"
+          },
+          {
+            "type": "note",
+            "text": "General information only, not legal advice."
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany CompanySecretaryHK CrossBorderBusiness HKCompliance"
+          }
+        ],
+        "pageTitle": "Seven Mistakes Foreign Founders Make",
+        "description": "Review seven common mistakes foreign founders make when setting up their first Hong Kong company, from appointing a secretary to keeping accounting records."
+      }
+    }
+  },
+  {
+    "slug": "corporate-bank-account",
+    "translations": {
+      "zh-Hant": {
+        "title": "香港企業銀行賬戶：海外老闆需知",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "註冊香港公司只需幾個工作日即可完成。然而，開立企業銀行賬戶可能需要數月時間——甚至被拒絕。以下是海外企業東主真正需要準備的事項。"
+          },
+          {
+            "type": "h2",
+            "text": "📋 三類文件"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "公司文件：CI（公司註冊證書）、BR（商業登記證）、組織章程細則、NNC1/NAR1、董事會決議。",
+              "個人文件（董事、持股 ≥25% 的股東、UBO 最終受益人）：護照、3 個月內的住址證明。",
+              "業務實質證明：合約、發票、業務計劃書。這是最多申請被拒的地方。"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "常見被拒原因"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "股權結構不透明",
+              "缺乏合理的業務關聯",
+              "文件未經適當認證",
+              "資金來源無法核實"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "Leap 全程為您提供支持"
+          },
+          {
+            "type": "p",
+            "text": "我們會根據您的文件和業務性質，協助客戶選擇最合適的銀行，以最大化賬戶獲批的機會。"
+          },
+          {
+            "type": "p",
+            "text": "我們為您準備完整的申請文件包：文件認證、業務計劃書撰寫、KYC 準備及銀行引薦。"
+          },
+          {
+            "type": "p",
+            "text": "銀行審批取決於銀行內部的風險評估。任何第三方均無法保證最終結果。"
+          },
+          {
+            "type": "p",
+            "text": "📩 私訊 “LEAP” 進行開戶條件評估。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongBankAccount #CrossBorderBusiness #LeapGlobal #HKCompany"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "香港企业银行账户：海外老板需知",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "注册香港公司只需几个工作日即可完成。然而，开立企业银行账户可能需要数月时间——甚至被拒绝。以下是海外企业东主真正需要准备的事项。"
+          },
+          {
+            "type": "h2",
+            "text": "📋 三类文件"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "公司文件：CI（公司注册证书）、BR（商业登记证）、组织章程细则、NNC1/NAR1、董事会决议。",
+              "个人文件（董事、持股 ≥25% 的股东、UBO 最终受益人）：护照、3 个月内的住址证明。",
+              "业务实质证明：合同、发票、业务计划书。这是最多申请被拒的地方。"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "常见被拒原因"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "股权结构不透明",
+              "缺乏合理的业务关联",
+              "文件未经适当认证",
+              "资金来源无法核实"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "Leap 全程为您提供支持"
+          },
+          {
+            "type": "p",
+            "text": "我们会根据您的文件和业务性质，协助客户选择最合适的银行，以最大化账户获批的机会。"
+          },
+          {
+            "type": "p",
+            "text": "我们为您准备完整的申请文件包：文件认证、业务计划书撰写、KYC 准备及银行引荐。"
+          },
+          {
+            "type": "p",
+            "text": "银行审批取决于银行内部的风险评估。任何第三方均无法保证最终结果。"
+          },
+          {
+            "type": "p",
+            "text": "📩 私信 “LEAP” 进行开户条件评估。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongBankAccount #CrossBorderBusiness #LeapGlobal #HKCompany"
+          }
+        ]
+      },
+      "en": {
+        "title": "Hong Kong Corporate Bank Account: What Overseas Owners Need to Know",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Setting up a Hong Kong company can be completed within a few working days. Getting a corporate bank account, however, may take months — or get rejected. Here is what overseas business owners really need to prepare."
+          },
+          {
+            "type": "h2",
+            "text": "📋 Three document categories"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Corporate documents: CI, BR, Articles of Association, NNC1/NAR1, board resolution.",
+              "Individual documents (directors, shareholders holding ≥25% stake, UBO - Ultimate Beneficial Owner): passport, 3-month residential address proof.",
+              "Business substance proof: contracts, invoices, business plan. This is where most applications get rejected."
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "Common rejection triggers"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Opaque ownership structure",
+              "Lack of reasonable business connection",
+              "Documents without proper certification",
+              "Unverifiable source of funds"
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "Leap supports you throughout the process"
+          },
+          {
+            "type": "p",
+            "text": "Based on your documents and nature of business, we help clients select the most suitable bank to maximise the chance of account approval."
+          },
+          {
+            "type": "p",
+            "text": "We prepare your full application package: document certification, business plan drafting, KYC preparation and bank introductions."
+          },
+          {
+            "type": "p",
+            "text": "Bank approval is subject to the bank’s internal risk assessment. No third party can guarantee the final outcome."
+          },
+          {
+            "type": "p",
+            "text": "📩 DM \"LEAP\" for a readiness check."
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongBankAccount #CrossBorderBusiness #LeapGlobal #HKCompany"
+          }
+        ],
+        "pageTitle": "Hong Kong Corporate Bank Accounts",
+        "description": "Prepare a Hong Kong corporate bank account application with a guide to company records, owner identification, business evidence and reasons for rejection."
+      }
+    }
+  },
+  {
+    "slug": "non-resident-incorporation",
+    "translations": {
+      "zh-Hant": {
+        "title": "非香港居民可以在香港成立公司嗎？—— 當然可以！",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "✅ 可以——而且您不需要飛到香港來辦理註冊。✈️"
+          },
+          {
+            "type": "p",
+            "text": "誤解：「我必須親自到香港。」"
+          },
+          {
+            "type": "p",
+            "text": "事實：根據《公司條例》（第 622 章），香港私人公司對董事或股東沒有國籍、居留權、簽證或本地合夥人的要求。私人公司需要至少一名自然人董事，但該董事可以是非居民。您可以在世界任何地方擔任唯一董事並 100% 持股。"
+          },
+          {
+            "type": "h2",
+            "text": "必須留在香港的事項："
+          },
+          {
+            "type": "p",
+            "text": "✅ 公司秘書——香港居民，或持牌 TCSP 法團秘書。如果您是唯一董事，您不能同時擔任公司秘書。"
+          },
+          {
+            "type": "p",
+            "text": "✅ 註冊辦事處——香港的實體地址；不接受郵政信箱。"
+          },
+          {
+            "type": "p",
+            "text": "✅ 指定代表——用於重要控制人登記冊（SCR）。"
+          },
+          {
+            "type": "h2",
+            "text": "您不需要的事項："
+          },
+          {
+            "type": "p",
+            "text": "❌ 註冊時無需香港簽證或親自到港"
+          },
+          {
+            "type": "p",
+            "text": "❌ 無需本地董事/股東"
+          },
+          {
+            "type": "p",
+            "text": "❌ 沒有最低實繳資本要求——但必須發行至少一股"
+          },
+          {
+            "type": "p",
+            "text": "註冊流程可以遠程完成。銀行開戶則是另一回事：大多數銀行要求董事/實益擁有人進行 KYC，具體取決於銀行，可能需要視像通話或親身辦理。"
+          },
+          {
+            "type": "p",
+            "text": "Leap 一站式套餐：公司註冊 + 持牌公司秘書 + 註冊地址，以及持續合規支援。"
+          },
+          {
+            "type": "p",
+            "text": "私訊 “HK” 獲取免費諮詢及明細報價。"
+          },
+          {
+            "type": "note",
+            "text": "僅供一般參考，不構成法律建議。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany #NonResidentFounder #CompanyFormation #TCSP #HongKongBusiness"
+          }
+        ]
+      },
+      "zh-Hans": {
+        "title": "非香港居民可以在香港成立公司吗？—— 当然可以！",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "✅ 可以——而且您不需要飞到香港来办理注册。✈️"
+          },
+          {
+            "type": "p",
+            "text": "误解：“我必须亲自到香港。”"
+          },
+          {
+            "type": "p",
+            "text": "事实：根据《公司条例》（第 622 章），香港私人公司对董事或股东没有国籍、居留权、签证或本地合伙人的要求。私人公司需要至少一名自然人董事，但该董事可以是非居民。您可以在世界任何地方担任唯一董事并 100% 持股。"
+          },
+          {
+            "type": "h2",
+            "text": "必须留在香港的事项："
+          },
+          {
+            "type": "p",
+            "text": "✅ 公司秘书——香港居民，或持牌 TCSP 法团秘书。如果您是唯一董事，您不能同时担任公司秘书。"
+          },
+          {
+            "type": "p",
+            "text": "✅ 注册办事处——香港的实体地址；不接受邮政信箱。"
+          },
+          {
+            "type": "p",
+            "text": "✅ 指定代表——用于重要控制人登记册（SCR）。"
+          },
+          {
+            "type": "h2",
+            "text": "您不需要的事项："
+          },
+          {
+            "type": "p",
+            "text": "❌ 注册时无需香港签证或亲自到港"
+          },
+          {
+            "type": "p",
+            "text": "❌ 无需本地董事/股东"
+          },
+          {
+            "type": "p",
+            "text": "❌ 没有最低实缴资本要求——但必须发行至少一股"
+          },
+          {
+            "type": "p",
+            "text": "注册流程可以远程完成。银行开户则是另一回事：大多数银行要求董事/实益拥有人进行 KYC，具体取决于银行，可能需要视频通话或亲身办理。"
+          },
+          {
+            "type": "p",
+            "text": "Leap 一站式套餐：公司注册 + 持牌公司秘书 + 注册地址，以及持续合规支援。"
+          },
+          {
+            "type": "p",
+            "text": "私信 “HK” 获取免费咨询及明细报价。"
+          },
+          {
+            "type": "note",
+            "text": "仅供一般参考，不构成法律建议。"
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany #NonResidentFounder #CompanyFormation #TCSP #HongKongBusiness"
+          }
+        ]
+      },
+      "en": {
+        "title": "Set up a Hong Kong company as a non-Hong Kong resident – Is it possible?",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "✅Yes — and you don’t need to fly to Hong Kong to incorporate.✈️"
+          },
+          {
+            "type": "p",
+            "text": "Myth: “I must be there in person.”"
+          },
+          {
+            "type": "p",
+            "text": "Fact: Under the Companies Ordinance (Cap. 622), Hong Kong private companies have no nationality, residency, visa or local-partner requirement for directors or shareholders. A private company needs at least one natural-person director, but that director can be a non-resident. You can be the sole director and 100% shareholder from anywhere."
+          },
+          {
+            "type": "h2",
+            "text": "What must stay in Hong Kong:"
+          },
+          {
+            "type": "p",
+            "text": "✅ Company secretary — an HK resident, or a TCSP-licensed corporate secretary. If you are the sole director, you cannot also act as company secretary."
+          },
+          {
+            "type": "p",
+            "text": "✅ Registered office — a physical HK address; PO box not accepted."
+          },
+          {
+            "type": "p",
+            "text": "✅ Designated representative — for the Significant Controllers Register."
+          },
+          {
+            "type": "h2",
+            "text": "What you don’t need:"
+          },
+          {
+            "type": "p",
+            "text": "❌ HK visa or travel for incorporation"
+          },
+          {
+            "type": "p",
+            "text": "❌ Local director/shareholder"
+          },
+          {
+            "type": "p",
+            "text": "❌ Minimum paid-up capital — but at least one share must be issued"
+          },
+          {
+            "type": "p",
+            "text": "The incorporation process can be completed remotely. Bank account opening is separate: most banks require director/beneficial owner KYC, by video call or in person, depending on the bank."
+          },
+          {
+            "type": "p",
+            "text": "Leap one-stop package: company registration + licensed company secretary + registered address, plus ongoing compliance support."
+          },
+          {
+            "type": "p",
+            "text": "DM “HK” for a free consultation and an itemised quote."
+          },
+          {
+            "type": "note",
+            "text": "General information only, not legal advice."
+          },
+          {
+            "type": "tags",
+            "text": "#HongKongCompany #NonResidentFounder #CompanyFormation #TCSP #HongKongBusiness"
+          }
+        ],
+        "pageTitle": "Non-Resident Hong Kong Incorporation",
+        "description": "Learn which Hong Kong incorporation steps non-resident founders can complete remotely and which local roles and addresses a company needs to maintain."
+      }
+    }
+  }
+]

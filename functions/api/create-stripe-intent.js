@@ -38,9 +38,11 @@ export async function onRequestPost(context) {
   params.append('metadata[discount_code]', quote.discountCode);
   params.append('metadata[discount_amount]', String(quote.discountAmount));
   params.append('metadata[order_flow]', quote.order.flow);
+  params.append('metadata[leap_order]', JSON.stringify(quote.order));
   params.append('metadata[order_total]', String(quote.total));
+  params.append('metadata[order_currency]', quote.currency.toLowerCase());
   params.append('metadata[gateway]', 'stripe');
-  params.append('description', `Leap International Corporate Service - HKD ${quote.total}`);
+  params.append('description', `Leap International Corporate Service - ${quote.currency} ${quote.total}`);
 
   const idempotencyKey = /^[A-Za-z0-9_-]{8,128}$/.test(String(body.idempotency_key || ''))
     ? `checkout-${body.idempotency_key}`

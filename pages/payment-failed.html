@@ -7,20 +7,25 @@
   <style>
     *{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#142033;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:0}.header{height:74px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #dfe4ec;background:#fff}.header img{width:76px;height:48px;object-fit:contain}.wrap{min-height:calc(100vh - 74px);display:grid;place-items:center;padding:34px 18px}.card{width:min(560px,100%);padding:38px;border:1px solid #dfe4ec;border-radius:8px;background:#fff}.icon{width:54px;height:54px;display:grid;place-items:center;margin-bottom:20px;border-radius:50%;color:#b42318;background:#fef3f2;font-size:28px;font-weight:900}h1{margin:0 0 10px;font-size:30px;letter-spacing:0}.lead{margin:0 0 22px;color:#667085;line-height:1.6}.reason{padding:14px;border-radius:6px;color:#8a3418;background:#fff4ed;line-height:1.5;overflow-wrap:anywhere}.amount{margin-top:16px;color:#475467}.actions{display:flex;gap:10px;margin-top:26px}.button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;padding:0 18px;border:1px solid #c8d0db;border-radius:6px;color:#344054;background:#fff;font-weight:800;text-decoration:none}.button.primary{border-color:#145ddb;color:#fff;background:#145ddb}@media(max-width:500px){.card{padding:26px 20px}.actions{flex-direction:column}}
   </style>
+<link rel="stylesheet" href="/js/footer.css?v=20261105">
+<script src="/js/footer.js?v=20261105" defer></script>
 </head>
 <body>
-  <header class="header"><a href="/" aria-label="Leap International home"><img src="/FOI_logo.png" alt="Leap International"></a></header>
+  <header class="header"><a href="/" aria-label="Leap International home" data-aria-label-en="Leap International home" data-aria-label-zh="Leap International 首頁" data-aria-label-hans="Leap International 首页"><img src="/FOI_logo.png" alt="Leap International"></a></header>
   <main class="wrap"><section class="card">
     <div class="icon" aria-hidden="true">!</div><h1 id="title"></h1><p id="lead" class="lead"></p><div id="reason" class="reason" role="alert"></div><p id="amount" class="amount"></p>
     <div class="actions"><a id="retry" class="button primary" href="/pages/payment.html"></a><a id="help" class="button" href="/pages/contact.html"></a></div>
   </section></main>
+<footer data-site-footer></footer>
   <script>
     (function(){
       var params=new URLSearchParams(location.search);var lang=params.get('lang');try{lang=lang||localStorage.getItem('leap-lang')||'en'}catch(e){lang=lang||'en'};if(lang!=='en'&&lang!=='zh-Hant'&&lang!=='zh-Hans')lang='en';try{var _u=new URL(location.href);_u.searchParams.set('lang',lang);history.replaceState({},'',_u)}catch(e){}
       var copy={en:{title:'Payment was not completed',lead:'No successful payment was recorded. You can review your details and try again.',fallback:'The payment provider declined or could not complete this transaction.',amount:'Attempted amount:',retry:'Try again',help:'Contact support'},'zh-Hant':{title:'付款未完成',lead:'系統未記錄成功付款。您可檢查資料後重試。',fallback:'付款服務商拒絕或未能完成此交易。',amount:'嘗試付款金額：',retry:'重新嘗試',help:'聯絡支援'},'zh-Hans':{title:'付款未完成',lead:'系统未记录成功付款。您可以检查资料后重试。',fallback:'付款服务商拒绝或未能完成此交易。',amount:'尝试付款金额：',retry:'重新尝试',help:'联系支持'}};var tr=copy[lang]||copy.en;
-      document.documentElement.lang=lang==='zh-Hant'?'zh-HK':lang==='zh-Hans'?'zh-CN':'en';document.getElementById('title').textContent=tr.title;document.getElementById('lead').textContent=tr.lead;document.getElementById('reason').textContent=params.get('reason')||tr.fallback;document.getElementById('retry').textContent=tr.retry;document.getElementById('help').textContent=tr.help;
-      var amount=Number(params.get('amount'));document.getElementById('amount').textContent=amount>0?tr.amount+' '+new Intl.NumberFormat(lang==='en'?'en-HK':'zh-HK',{style:'currency',currency:'HKD'}).format(amount):'';
+      document.documentElement.lang=lang==='zh-Hant'?'zh-HK':lang==='zh-Hans'?'zh-CN':'en';document.getElementById('title').textContent=tr.title;document.getElementById('lead').textContent=tr.lead;document.getElementById('reason').textContent=tr.fallback;document.getElementById('retry').textContent=tr.retry;document.getElementById('help').textContent=tr.help;
+      var amount=Number(params.get('amount'));document.getElementById('amount').textContent=amount>0?tr.amount+' '+new Intl.NumberFormat(lang==='en'?'en-HK':'zh-HK',{style:'currency',currencyDisplay:'code',currency:'USD'}).format(amount):'';
     })();
   </script>
+<script src="/js/metadata.js" defer></script>
+<script src="/js/accessibility.js" defer></script>
 </body>
 </html>

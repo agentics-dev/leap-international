@@ -4,9 +4,9 @@ function json(res, status, payload) {
   res.end(JSON.stringify(payload));
 }
 
-function getSupabaseConfig() {
-  const url = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-  const anonKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+function getSupabaseConfig(env) {
+  const url = env.SUPABASE_URL || env.VITE_SUPABASE_URL;
+  const anonKey = env.SUPABASE_ANON_KEY || env.VITE_SUPABASE_ANON_KEY;
   if (!url || !anonKey) {
     throw new Error('Supabase public API credentials are not configured');
   }
@@ -42,7 +42,7 @@ async function fetchNews(url, anonKey, select, offset, pageSize) {
   });
 }
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, env = process.env) => {
   if (req.method !== 'GET') {
     return json(res, 405, { error: 'Method not allowed' });
   }
@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     const page = clampInt(req.query.page, 0, 0, 1000);
     const pageSize = clampInt(req.query.pageSize, 9, 1, 24);
     const offset = page * pageSize;
-    const { url, anonKey } = getSupabaseConfig();
+    const { url, anonKey } = getSupabaseConfig(env);
 
     let response = await fetchNews(url, anonKey, EXTENDED_SELECT, offset, pageSize);
     if (response.status === 400) {

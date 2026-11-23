@@ -22,7 +22,7 @@ function safeTargetOrigin(request, env) {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-  if (String(env.PAYMENT_GATEWAY || 'stripe').toLowerCase() !== 'cybersource') {
+  if (String(env.PAYMENT_GATEWAY || 'stripe').trim().toLowerCase() !== 'cybersource') {
     return json(409, { error: 'CyberSource is not the active payment gateway' });
   }
   if (!env.CYBS_MERCHANT_ID || !env.CYBS_API_KEY || !env.CYBS_SECRET_KEY) {
@@ -36,6 +36,7 @@ export async function onRequestPost(context) {
   } catch (error) {
     return json(400, { error: 'Invalid JSON body' });
   }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) return json(400, { error: 'Invalid request body' });
   const quote = quoteOrder(body.order, body.discount_code, env);
   if (!quote.valid) return json(400, { error: quote.reason, code: quote.code });
   const customer = normalizeCustomer(body.customer);
@@ -43,12 +44,14 @@ export async function onRequestPost(context) {
 
   try {
     const locale = String(body.locale || 'en');
+    const reference = crypto.randomUUID();
     const captureContextRequest = {
       targetOrigins: [safeTargetOrigin(request, env)],
       country: 'HK',
       locale: (locale === 'zh' || locale === 'zh-Hant') ? 'zh_HK' : locale === 'zh-Hans' ? 'zh_CN' : 'en_US',
       completeMandate: { type: 'CAPTURE', consumerAuthentication: '3DS', decisionManager: true },
       data: {
+        clientReferenceInformation: { code: reference },
         orderInformation: {
           amountDetails: { totalAmount: `${quote.total}.00`, currency: quote.currency },
         },
@@ -65,6 +68,9 @@ export async function onRequestPost(context) {
     const checkoutToken = await signReceipt({
       type: 'checkout_context',
       gateway: 'cybersource',
+      reference,
+      merchantId: env.CYBS_MERCHANT_ID,
+      locale,
       order: quote.order,
       discountCode: quote.discountCode,
       amount: quote.total,

@@ -14,21 +14,7 @@ export default function ArticlePreviewDialog({ article, onClose }) {
     [article, lang]
   );
   
-  // Try to use the first image's crop if available, else original URL
-  let coverStyle = {};
-  let coverUrl = article.cover_image_url;
-  
-  if (article.images && article.images.length > 0) {
-    const firstImg = article.images[0];
-    coverUrl = firstImg.url;
-    if (firstImg.cropData) {
-      const { crop, zoom } = firstImg.cropData;
-      // In a real advanced implementation, we would apply CSS transform here based on the percentage
-      // For the preview, we'll approximate it with object-position if possible, 
-      // but react-easy-crop gives us pixel values which are harder to map to CSS without knowing container size.
-      // We'll just show the image with object-cover for this preview.
-    }
-  }
+  const coverUrl = article.images?.[0]?.url || article.cover_image_url;
 
   const deviceStyles = {
     desktop: 'max-w-5xl w-full',

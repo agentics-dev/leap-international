@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './lib/supabase';
 import Login from './pages/Login';
 import DashboardLayout from './components/DashboardLayout';
-import NewsList from './pages/NewsList';
-import NewsEditor from './pages/NewsEditor';
+const NewsList = lazy(() => import('./pages/NewsList'));
+const NewsEditor = lazy(() => import('./pages/NewsEditor'));
 
-import FaqList from './pages/FaqList';
-import FaqEditor from './pages/FaqEditor';
-import AuthorList from './pages/AuthorList';
-import AuthorEditor from './pages/AuthorEditor';
-import ComparisonList from './pages/ComparisonList';
-import ComparisonEditor from './pages/ComparisonEditor';
-import CaseStudyList from './pages/CaseStudyList';
-import CaseStudyEditor from './pages/CaseStudyEditor';
-import AiCrawlerActivity from './pages/AiCrawlerActivity';
+const FaqList = lazy(() => import('./pages/FaqList'));
+const FaqEditor = lazy(() => import('./pages/FaqEditor'));
+const AuthorList = lazy(() => import('./pages/AuthorList'));
+const AuthorEditor = lazy(() => import('./pages/AuthorEditor'));
+const ComparisonList = lazy(() => import('./pages/ComparisonList'));
+const ComparisonEditor = lazy(() => import('./pages/ComparisonEditor'));
+const CaseStudyList = lazy(() => import('./pages/CaseStudyList'));
+const CaseStudyEditor = lazy(() => import('./pages/CaseStudyEditor'));
+const AiCrawlerActivity = lazy(() => import('./pages/AiCrawlerActivity'));
 
 function App() {
   const [session, setSession] = useState(null);
@@ -41,6 +41,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/admin">
+      <Suspense fallback={<div role="status" className="p-8">Loading...</div>}>
       <Routes>
         <Route 
           path="/login" 
@@ -69,6 +70,7 @@ function App() {
           <Route path="ai-crawlers" element={<AiCrawlerActivity />} />
         </Route>
       </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

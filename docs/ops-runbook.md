@@ -101,3 +101,10 @@ entity off-site; this checklist builds that footprint. Ordered by leverage:
 ### 5.6 Entity-consistency rule (applies to everything above)
 Every off-site mention must use the **exact same** legal name, address, phone and
 apex URL `https://leapcorpser.com` — inconsistent NAP is how entity verification fails.
+
+## Stripe payment notification recovery
+
+- Use the PaymentIntent ID from the webhook error to check the paid amount, currency and `leap_order` metadata. Older payments may only have `order_flow` and `order_total`.
+- `leap_email_business` and `leap_email_customer` record the first attempt time or `sent:<Resend message ID>`. A completed delivery marker means Resend accepted the message. Check Resend for actual delivery.
+- For a failed webhook within 23 hours of the first attempt (or event creation for older payments), check the failure and use Stripe's event resend if needed. The webhook skips completed messages.
+- After 23 hours with an unresolved attempt, reconcile the intended recipient and transaction with Resend before sending any missing notification manually. Record the verified or manually sent message ID in the corresponding PaymentIntent metadata as `sent:<Resend message ID>` before replaying the event. Retain the original PaymentIntent and order records.

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
-import { Edit, Trash2, Plus, Globe } from 'lucide-react';
+import { Edit, Trash2, Plus } from 'lucide-react';
 
 export default function NewsList() {
   const [news, setNews] = useState([]);

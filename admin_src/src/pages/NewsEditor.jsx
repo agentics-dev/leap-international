@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { supabase } from '../lib/supabase';
-import { Image as ImageIcon, Save, ArrowLeft, Eye, LayoutTemplate } from 'lucide-react';
+import { Image as ImageIcon, Save, ArrowLeft, Eye } from 'lucide-react';
 import clsx from 'clsx';
 import DraggableImageList from '../components/DraggableImageList';
 import ImageCropperDialog from '../components/ImageCropperDialog';
@@ -42,16 +42,13 @@ export default function NewsEditor() {
   const [sourcesText, setSourcesText] = useState('[]');
   const [keyStatsText, setKeyStatsText] = useState('[]');
 
-  useEffect(() => {
-    if (id) fetchArticle();
-  }, [id]);
 
   useEffect(() => {
     supabase.from('authors').select('id,name,title').eq('is_active', true).order('name')
       .then(({ data, error }) => { if (!error && data) setAuthors(data); });
   }, []);
 
-  const fetchArticle = async () => {
+  const fetchArticle = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from('news_activities')
@@ -59,11 +56,12 @@ export default function NewsEditor() {
       .eq('id', id)
       .single();
       
+    if (error) alert('Unable to load this record: ' + error.message);
     if (data) {
       let images = [];
       try {
         images = typeof data.images_metadata === 'string' ? JSON.parse(data.images_metadata) : data.images_metadata || [];
-      } catch(e) {}
+      } catch { /* Invalid stored image metadata uses an empty image list. */ }
       
       setArticle({
         ...data,
@@ -74,7 +72,11 @@ export default function NewsEditor() {
       setKeyStatsText(JSON.stringify(data.key_stats || [], null, 2));
     }
     setLoading(false);
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) fetchArticle();
+  }, [fetchArticle, id]);
 
   const handleSave = async () => {
     setSaving(true);
@@ -107,7 +109,7 @@ export default function NewsEditor() {
         sources: JSON.parse(sourcesText || '[]'),
         key_stats: JSON.parse(keyStatsText || '[]'),
       };
-    } catch (e) {
+    } catch {
       setSaving(false);
       alert('Sources / Key Stats contain invalid JSON. Fix or clear them before saving.');
       return;

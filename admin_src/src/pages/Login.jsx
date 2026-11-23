@@ -20,7 +20,7 @@ export default function Login() {
         setError(`Too many attempts. Please try again in ${waitMin} minute(s).`);
         return;
       }
-    } catch (err) { /* 忽略损坏的锁定记录 */ }
+    } catch { /* 忽略损坏的锁定记录 */ }
 
     setLoading(true);
     setError(null);
@@ -42,7 +42,7 @@ export default function Login() {
           // 统一错误信息，避免账号枚举
           setError('Invalid email or password.');
         }
-      } catch (err) {
+      } catch {
         setError('Invalid email or password.');
       }
     }
@@ -69,11 +69,13 @@ export default function Login() {
               </div>
             )}
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
               </label>
               <div className="mt-1">
                 <input
+                  id="email"
+                  autoComplete="username"
                   type="email"
                   required
                   value={email}
@@ -84,11 +86,13 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <div className="mt-1">
                 <input
+                  id="password"
+                  autoComplete="current-password"
                   type="password"
                   required
                   value={password}

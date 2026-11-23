@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var navVersion = '20260813-5';
+  var navVersion = '20261106-1';
   if (window.__leapNavVersion === navVersion) return;
   window.__leapNavBound = true;
   window.__leapNavVersion = navVersion;
@@ -42,30 +42,7 @@
     btn.setAttribute('aria-expanded', String(open));
   }
 
-  function navigateMenuLink(event) {
-    var link = event.target.closest('header a[href], .mega-dropdown a[href], #mobileMenu a[href]');
-    if (!link) return false;
-    var href = link.getAttribute('href');
-    if (!href || href === '#' || href.startsWith('tel:') || href.startsWith('mailto:')) return false;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    window.location.assign(link.href);
-    return true;
-  }
-
-  document.addEventListener('pointerdown', function (event) {
-    if (event.button && event.button !== 0) return;
-    navigateMenuLink(event);
-  }, true);
-
-  document.addEventListener('pointerup', function (event) {
-    if (event.button && event.button !== 0) return;
-    navigateMenuLink(event);
-  }, true);
-
   document.addEventListener('click', function (event) {
-    if (navigateMenuLink(event)) return;
-
     var langBtn = event.target.closest('#langBtn');
     if (langBtn) {
       event.preventDefault();
